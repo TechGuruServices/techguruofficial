@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="css/main.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="TechGuru Services - Scalable Cloud, DevOps, AI, Automation solutions for startups." />
@@ -38,6 +37,7 @@
   </header>
 
   <main>
+    <!  <main>
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="particle-background"></div>
@@ -430,7 +430,7 @@
 <!-- Copilot: Chat Button & Modal End -->
 <!-- Place scripts here, after all HTML including chat modal -->
 <script src="js/main.js"></script>
-<script type="module" src=` u"js/services.js"></script>
+<script type="module" src= u"js/services.js"></script>
 </body>
 </html><!-- Copilot: Chat UI fix -->
 <button id="tg-chat-btn" aria-label="Open TechGuru Chat">
@@ -462,3 +462,46 @@
   </form>
 </div>
 <!-- Copilot: End Chat UI fix -->
+
+
+-- Hero Section -->
+    … 
+    <!-- (All your existing sections go here; no changes needed) -->
+    …
+  </main>
+
+  <!-- Footer -->
+  … 
+  <!-- (Your footer code goes here) -->
+  …
+
+  <!-- Chat Button & Modal -->
+  <button id="tg-chat-btn" aria-label="Open TechGuru Chat" class="tg-chat-button">
+    <img src="images/techguru-robot.png" alt="TechGuru Chat Assistant" />
+  </button>
+  <div id="tg-chat-modal" class="tg-chat-modal" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="tg-chat-header">
+      <img src="images/techguru-robot.png" alt="TechGuru Bot" class="tg-chat-avatar" />
+      <span class="tg-chat-title">TechGuru AI Assistant</span>
+      <button id="tg-chat-close" aria-label="Close chat" class="tg-chat-close">&times;</button>
+    </div>
+    <div class="tg-chat-body" id="tg-chat-body" tabindex="0" aria-live="polite"></div>
+    <div id="tg-chat-spinner" class="tg-chat-spinner" aria-live="polite">
+      <span class="spinner"></span>
+    </div>
+    <div id="tg-chat-error" class="tg-chat-error" role="alert"></div>
+    <form class="tg-chat-form" id="tg-chat-form" autocomplete="off">
+      <button type="button" id="tg-chat-attach" class="tg-chat-attach" aria-label="Attach file">
+        <i class="fas fa-paperclip"></i>
+      </button>
+      <input type="file" id="tg-chat-file" style="display:none" tabindex="-1" aria-hidden="true" />
+      <input id="tg-chat-input" type="text" placeholder="Type your message…" autocomplete="off" aria-label="Type your message" required />
+      <button type="submit" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script type="module" src="js/services.js"></script>
+</body>
+</html>
