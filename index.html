@@ -1,509 +1,598 @@
-
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>TechGuru</title>
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="navbar-container container">
-      <a href="/" class="logo"><img src="logo.svg" alt="TechGuru"></a>
-      <nav class="main-nav">
-        <a href="#hero">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="nav-controls">
-        <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
-        <button class="hamburger" aria-label="Menu">☰</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero, Services, About, FAQ, Testimonials, Contact Sections... -->
-
-  <button class="chat-toggle" aria-label="Toggle chat">💬</button>
-  <div class="chatbox">
-    <div class="chatbox-header">
-      <img src="bot-avatar.png" class="chatbox-bot-avatar" alt="Bot">
-      <span>TechGuru Agent</span>
-      <button aria-label="Close chat">×</button>
-    </div>
-    <div class="chatbox-body"></div>
-    <form class="chatbox-form">
-      <input type="text" placeholder="Type a message…" aria-label="Message">
-      <button type="submit">Send</button>
-    </form>
-  </div>
-
-  <script src="main.js"></script>
-</body>
-</html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="description" content="TechGuru Services - Scalable Cloud, DevOps, AI, Automation solutions for startups." />
+  <meta name="author" content="Lucas Thompson" />
   <meta name="keywords" content="TechGuru, cloud, DevOps, AI, automation, startup tech solutions" />
   <meta name="robots" content="index, follow" />
-  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
+  <link rel="icon" href="{{ url_for('static', filename='images/techguru-logo-icon.png') }}" type="image/png" sizes="32x32">
+  <link rel="icon" href="{{ url_for('static', filename='images/techguru-logo-icon.png') }}" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/techguru-logo-icon.png') }}" sizes="180x180">
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
   <title>TechGuru | Pack. Optimize. Deploy. Scale Up.</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/modern-saas.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/visual-enhancements.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/high-resolution-fixes.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot-enhanced.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced-color-harmony.css') }}">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="preload" href="{{ url_for('static', filename='chat-avatar.png') }}" as="image" />
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="navbar-container">
-      <img src="images/techguru-logo-full.png" alt="TechGuru Logo" class="logo" />
-      <nav class="main-nav" id="main-nav">
-        <a href="#hero">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="nav-controls">
-        <button id="theme-toggle" aria-label="Toggle theme">
-          <i id="theme-toggle-icon" class="fas fa-moon"></i>
-        </button>
-        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-          <i class="fas fa-bars"></i>
-        </button>
-        <a href="#contact" class="btn-cta">Get Started</a>
-      </div>
+<header class="site-header">
+  <div class="navbar-container">
+    <img src="{{ url_for('static', filename='images/techguru-logo-full.png') }}" alt="TechGuru Logo" class="logo" width="200" height="60" loading="lazy" />
+    <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+      <a href="#hero">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-controls">
+      <button id="theme-toggle" aria-label="Toggle dark/light theme">
+        <i id="theme-toggle-icon" class="fas fa-moon"></i>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="#contact" class="btn-cta btn-pulse">Let's Get Started</a>
     </div>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-      <div class="particle-background"></div>
+  </div>
+</header>
+<main>
+    <section id="hero" class="hero circuit-bg">
       <div class="container">
-        <div class="hero-content">
-          <h1>PACK. OPTIMIZE. DEPLOY. <span class="scale-up">SCALE UP.</span></h1>
-          <p class="subtitle">Your one-man army for scalable tech systems.</p>
+        <div class="hero-content animate-fade-in-up scan-line">
+          <h1>AI Automation That Actually <span class="text-gradient">Works</span></h1>
+          <p class="subtitle terminal-text">Transform your business with custom AI assistants, automated workflows, and seamless integrations. From $299 to full enterprise solutions.</p>
           <div class="cta-buttons">
-            <a href="#contact" class="btn btn-primary">Launch My AI Assistant</a>
-            <a href="#services" class="btn btn-secondary">Learn More</a>
+            <a href="#contact" class="cyber-btn">Start Your Automation</a>
+            <a href="#pricing" class="cyber-btn">View Packages</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">250+</span>
+              <span class="stat-label">Projects Delivered</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">48-72h</span>
+              <span class="stat-label">Fast Delivery</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">Client Satisfaction</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
+    <div class="section-divider-enhanced"></div>
+
+    <section id="services">
       <div class="container">
-        <h2>Our Services</h2>
-        <div class="services-intro">
-          <p>Unlock your startup’s potential with TechGuru’s expert support, systems, and resources. Explore our core offerings below.</p>
+        <div class="section-header">
+          <h2>Our Services</h2>
+          <p>Comprehensive solutions to automate your business and scale efficiently</p>
         </div>
-        <div class="services-grid">
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/ai-assistant.png"
-                alt="AI Assistant Setup & Support icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
+        <div class="service-grid animate-stagger">
+          {% for service in services %}
+          {% if service.is_active %}
+          <div class="service-card holo-card hud-element">
+            <div class="service-icon neon-glow">
+              <i class="{{ service.icon }}"></i>
             </div>
-            <h3>AI Assistant Setup & Support</h3>
-            <p class="service-summary">Personalized AI assistant integration, onboarding, and ongoing support for your business.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-1">Details</button>
-            <div class="details-content" id="details-1" hidden>
-              <ul>
-                <li>Custom AI assistant configuration</li>
-                <li>Team onboarding & training</li>
-                <li>Ongoing support & optimization</li>
-              </ul>
+            <div class="card-header">
+              <h3 class="card-title glitch-text" data-text="{{ service.name }}">{{ service.name }}</h3>
+              <p class="card-description terminal-text">{{ service.description }}</p>
             </div>
+            {% if service.details %}
+            <ul class="service-details">
+              {% for detail in service.details %}
+              <li>{{ detail }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
           </div>
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/techguru-docs.png"
-                alt="TechGuru Docs: SOPs & Templates icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
-            </div>
-            <h3>TechGuru Docs: SOPs & Templates</h3>
-            <p class="service-summary">Access a library of proven SOPs, templates, and guides tailored for startups and small teams.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-2">Details</button>
-            <div class="details-content" id="details-2" hidden>
-              <ul>
-                <li>Ready-to-use SOPs & checklists</li>
-                <li>Editable business templates</li>
-                <li>Continuous content updates</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/startup-systems.png"
-                alt="Startup-Ready Systems Support icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
-            </div>
-            <h3>Startup-Ready Systems Support</h3>
-            <p class="service-summary">Get expert help setting up, automating, and maintaining your essential business systems.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-3">Details</button>
-            <div class="details-content" id="details-3" hidden>
-              <ul>
-                <li>System setup & automation</li>
-                <li>Process optimization</li>
-                <li>Ongoing tech support</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/branding-design.png"
-                alt="Branding & Asset Design (Add-On) icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
-            </div>
-            <h3>Branding & Asset Design (Add-On)</h3>
-            <p class="service-summary">Professional branding, logo, and asset design services to elevate your business identity.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-4">Details</button>
-            <div class="details-content" id="details-4" hidden>
-              <ul>
-                <li>Logo & brand asset design</li>
-                <li>Custom graphics & templates</li>
-                <li>Brand guidelines</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/live-training.png"
-                alt="Live Training & Workshops (Add-On) icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
-            </div>
-            <h3>Live Training & Workshops (Add-On)</h3>
-            <p class="service-summary">Interactive live training sessions and workshops for your team, led by TechGuru experts.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-5">Details</button>
-            <div class="details-content" id="details-5" hidden>
-              <ul>
-                <li>Live virtual workshops</li>
-                <li>Team Q&A sessions</li>
-                <li>Hands-on learning</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Copilot: Service Card -->
-          <div class="service-card">
-            <!-- Copilot: Service Icon -->
-            <div class="service-icon">
-              <img
-                src="icons/discounts.png"
-                alt="Discounts icon"
-                width="100"
-                height="100"
-                aria-hidden="true"
-              />
-            </div>
-            <h3>Discounts</h3>
-            <p class="service-summary">Exclusive partner discounts on top SaaS tools, software, and business services.</p>
-            <button class="details-toggle" aria-expanded="false" aria-controls="details-6">Details</button>
-            <div class="details-content" id="details-6" hidden>
-              <ul>
-                <li>Partner SaaS discounts</li>
-                <li>Business service deals</li>
-                <li>Early access offers</li>
-              </ul>
-            </div>
-          </div>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </section>
 
-    <!-- Copilot: Pricing Section -->
+    <div class="section-divider-enhanced"></div>
+
     <section id="pricing">
       <div class="container">
-        <h2>Pricing</h2>
-        <div class="services-grid pricing-grid">
-          <!-- Copilot: AI Assistant Setup Card -->
-          <div class="service-card pricing-card">
-            <h3><i class="fas fa-robot mr-2"></i>AI Assistant Setup</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Get a turnkey, branded chatbot in under a week—so you can engage leads 24/7 without writing a single line of code.</div>
-            <ul class="pricing-list">
-              <li>Starter — $299 — 48–72 h</li>
-              <li>Business — $599 — 3–5 business days</li>
-              <li>Elite — $849 — 5–7 business days</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+        <div class="section-header">
+          <h2>Choose Your Plan</h2>
+          <p>Transparent pricing for every stage of your business growth</p>
+        </div>
+        <div class="pricing-grid animate-stagger">
+          {% for plan in pricing_plans %}
+          {% if plan.is_active %}
+          <div class="pricing-card holo-card hud-element {{ 'featured' if plan.is_featured }}">
+            {% if plan.is_featured %}
+            <div class="popular-badge neon-glow">Most Popular</div>
+            {% endif %}
+            <div class="plan-header">
+              <h3 class="glitch-text" data-text="{{ plan.name }}">{{ plan.name }}</h3>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="amount">{{ plan.price.replace('$', '').split('/')[0] if '/' in plan.price else plan.price.replace('$', '') }}</span>
+                <span class="period">/month</span>
+              </div>
+            </div>
+            <div class="plan-features">
+              {% if plan.features %}
+              <ul>
+                {% for feature in plan.features %}
+                <li>{{ feature }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+            <div class="plan-action">
+              {% if plan.button_text and plan.button_link %}
+              <a href="{{ plan.button_link }}" class="cyber-btn">{{ plan.button_text }}</a>
+              {% endif %}
+            </div>
           </div>
-          <!-- Copilot: TechGuru Docs Card (Most Popular) -->
-          <div class="service-card pricing-card most-popular" style="position:relative;">
-            <!-- Copilot: Most Popular Badge -->
-            <div class="badge-popular">★ Most Popular</div>
-            <h3><i class="fas fa-book mr-2"></i>TechGuru Docs</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Standardize your workflows with clear SOPs and templates, reducing onboarding time and eliminating process confusion.</div>
-            <ul class="pricing-list">
-              <li>Mini Docs — $149 — 3 days</li>
-              <li>Team Docs — $299 — 5 days</li>
-              <li>Full Ops Kit — $499 — 7 days</li>
-            </ul>
-            <!-- Copilot: Select CTA -->
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section id="stats">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Impact</h2>
+          <p>Results that speak for themselves</p>
+        </div>
+        <div class="stats-grid animate-stagger">
+          {% for stat in stats %}
+          {% if stat.is_active %}
+          <div class="stat-card">
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
           </div>
-          <!-- Copilot: Startup-Ready Systems Support Card -->
-          <div class="service-card pricing-card">
-            <h3><i class="fas fa-cogs mr-2"></i>Startup-Ready Systems Support</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Automate critical tools in a single sprint so your workflows run on autopilot.</div>
-            <ul class="pricing-list">
-              <li>Basic Setup — $399 — 5 business days</li>
-              <li>Pro Setup — $799 — 10 business days</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-header">
+          <h2>How We Work</h2>
+          <p>A proven process that delivers results every time</p>
+        </div>
+        <div class="grid grid-2 animate-stagger">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-comments"></i> Discovery</h3>
+              <p class="card-description">Understanding your needs and current setup</p>
+            </div>
           </div>
-          <!-- Copilot: Branding & Asset Design Card (Add-On) -->
-          <div class="service-card pricing-card">
-            <h3><i class="fas fa-paint-brush mr-2"></i>Branding & Asset Design (Add-On)</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Get custom avatars & brand packs so your AI assistant feels like part of your team.</div>
-            <ul class="pricing-list">
-              <li>Avatar Design — $199 — 3 days</li>
-              <li>Brand Pack — $349 — 5 days</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-drafting-compass"></i> Planning</h3>
+              <p class="card-description">Strategic roadmap and architecture design</p>
+            </div>
           </div>
-          <!-- Copilot: Live Training & Workshops Card (Add-On) -->
-          <div class="service-card pricing-card">
-            <h3><i class="fas fa-chalkboard-teacher mr-2"></i>Live Training & Workshops (Add-On)</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Hands-on sessions that turn new tools into daily habits for maximum ROI.</div>
-            <ul class="pricing-list">
-              <li>1:1 Training — $149 — 2 h</li>
-              <li>Team Workshop — $399 — 4 h</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-code"></i> Implementation</h3>
+              <p class="card-description">Hands-on development with daily updates</p>
+            </div>
           </div>
-          <!-- Copilot: Discounts Card -->
-          <div class="service-card pricing-card">
-            <h3><i class="fas fa-tag mr-2"></i>Discounts</h3>
-            <div class="pricing-benefit text-sm text-gray-300 mb-4">Save up to 20% when you bundle services or qualify as a nonprofit.</div>
-            <ul class="pricing-list">
-              <li>Bundle & Save — Up to 20% off</li>
-              <li>Nonprofit Discount — Apply for special rates</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary w-full mt-4">Select</a>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-rocket"></i> Launch</h3>
+              <p class="card-description">Deployment and ongoing support</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2>About TechGuru</h2>
-        <p>We are your one-stop solution for scalable cloud, DevOps, AI, and automation services. Our mission is to empower startups with the tech expertise they need to succeed. From building custom AI assistants to automating your workflows, we handle the tech so you can focus on your business.</p>
-        <div class="about-stats">
-          <div class="stat">
-            <span class="stat-number" data-number="300">0</span>
-            <span class="stat-label">Projects Completed</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number" data-number="150">0</span>
-            <span class="stat-label">Happy Clients</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number" data-number="500">0</span>
-            <span class="stat-label">Hours of Expertise</span>
-          </div>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-      </div>
-    </section>
+    <div class="section-divider-enhanced"></div>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="faq">
+    <section id="about">
       <div class="container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-          <div class="faq-question">
-            <i class="fas fa-plus"></i>
-            <span>What is TechGuru?</span>
-          </div>
-          <div class="faq-answer">
-            <p>TechGuru is a service that provides scalable cloud, DevOps, AI, and automation solutions, specifically designed for startups. We help you pack, optimize, deploy, and scale up your tech systems.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <i class="fas fa-plus"></i>
-            <span>How quickly can I get my AI assistant?</span>
-          </div>
-          <div class="faq-answer">
-            <p>Our AI Assistant Setup can deliver a turnkey, branded chatbot in under a week. Choose from different packages based on your needs and get started within 48 hours.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <i class="fas fa-plus"></i>
-            <span>What do the discounts include?</span>
-          </div>
-          <div class="faq-answer">
-            <p>We offer discounts of up to 20% when you bundle services or if you qualify as a nonprofit. Contact us for more details on our pricing plans.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <i class="fas fa-plus"></i>
-            <span>Can I customize my service package?</span>
-          </div>
-          <div class="faq-answer">
-            <p>Absolutely! We understand that every startup has unique needs. That's why we offer customizable service packages. Contact us to discuss your requirements, and we'll create a tailored solution for you.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <i class="fas fa-plus"></i>
-            <span>How do I get started?</span>
-          </div>
-          <div class="faq-answer">
-            <p>Getting started is easy! Just click the "Get Started" button on our website, fill out the form, and our team will get in touch with you to discuss your project and provide a free consultation.</p>
-          </div>
+        <div class="section-header">
+          <h2>About TechGuru</h2>
+          <p>Founded by Lucas Thompson, delivering enterprise-grade DevOps, AI & cloud automation for startups and solo founders.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <div class="section-divider-enhanced"></div>
+
+    <section id="testimonials">
       <div class="container">
-        <h2>Contact Us</h2>
-        <p>Ready to take your startup to the next level? Contact us today for a free consultation!</p>
-        <form id="contact-form" class="contact-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required />
+        <div class="section-header">
+          <h2>What Our Clients Say</h2>
+          <p>Real feedback from real businesses we've helped scale</p>
+        </div>
+        <div class="testimonial-grid animate-stagger">
+          {% for testimonial in testimonials %}
+          {% if testimonial.is_active %}
+          <div class="testimonial-card">
+            <div class="testimonial-content">"{{ testimonial.content }}"</div>
+            <div class="testimonial-author">{{ testimonial.author }}</div>
+            {% if testimonial.company %}
+            <div class="testimonial-company">{{ testimonial.company }}</div>
+            {% endif %}
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-enhanced"></div>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about working with TechGuru</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do I need to know code to use TechGuru?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Not at all. Everything is done for you by our expert team.</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How quick is setup?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Setup time varies by plan: Starter (48-72 hours), Business (3-5 days), Elite (5-7 days).</p>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Which platforms do you support?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We support all major platforms: websites, mobile apps, Slack, Discord, Telegram, WhatsApp, and more.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can I upgrade my plan later?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, you can upgrade at any time by paying the difference between plans.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do you offer ongoing support?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, all plans include comprehensive documentation and ongoing support to ensure your success.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is this a subscription service?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>No—it's a one-time setup.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do I get training and documentation?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, all plans include comprehensive documentation. Elite plans also include live training sessions.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What's your refund policy?</span>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We offer a full refund within 12 hours if work hasn't begun on your project.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider-enhanced"></div>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>Get Started Today</h2>
+          <p>Ready to transform your business? Let's build something amazing together.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Contact Information</h3>
+              <p class="card-description">Reach out directly or schedule a consultation</p>
+            </div>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+17866369964">+1 (786) 636-9964</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('contact') }}" method="POST" class="contact-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-textarea" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-logo">
-        <img src="images/techguru-logo.png" alt="TechGuru Logo" />
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="{{ url_for('static', filename='images/techguru-logo-icon.png') }}" alt="TechGuru" class="footer-logo" style="height: 48px; margin-bottom: 1rem;">
+          <p>Enterprise-grade DevOps, AI & cloud automation for startups and solo founders.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul class="footer-links">
+            <li><a href="/terms">Terms & Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a></li>
+            <li><a href="tel:+17866369964">+1 (786) 636-9964</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="#hero">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="footer-social">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      </div>
-      <div class="footer-copyright">
-        <p>&copy; 2023 TechGuru. All rights reserved.</p>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechGuru. All rights reserved. Built with modern SaaS design principles.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Copilot: Chat Button & Modal Start -->
-<button id="tg-chat-btn" aria-label="Open TechGuru Chat" style="background:transparent;border:none;position:fixed;bottom:32px;right:32px;z-index:1001;padding:0;cursor:pointer;width:180px;height:180px;animation:tg-float 2.5s ease-in-out infinite;">
-  <img src="images/techguru-robot.png" alt="TechGuru Chat Assistant" style="width:180px;height:180px;object-fit:contain;pointer-events:none;" />
-</button>
-<div id="tg-chat-modal" class="tg-chat-modal" aria-hidden="true" tabindex="-1" role="dialog" aria-modal="true" aria-label="TechGuru AI Chat Assistant">
-  <div class="tg-chat-header">
-    <img src="images/techguru-robot.png" alt="TechGuru Bot" class="tg-chat-avatar" style="width:180px;height:180px;" />
-    <span class="tg-chat-title">TechGuru AI Assistant</span>
-    <button id="tg-chat-close" aria-label="Close chat">&times;</button>
+  <!-- Enhanced AI Chatbot -->
+  <div id="chatbot-toggle" onclick="toggleChatbox()" aria-label="Open AI Assistant Chat">
+    <img src="{{ url_for('static', filename='chat-avatar.png') }}" alt="AI Assistant" class="chatbot-avatar" />
+    <div class="chatbot-notification" id="chatbot-notification">
+      <div class="notification-content">
+        <strong>Hi there! 👋</strong>
+        <span>Need help with AI automation or cloud solutions?</span>
+      </div>
+    </div>
   </div>
-  <div class="tg-chat-body" id="tg-chat-body" tabindex="0" aria-live="polite"></div>
-  <!-- Copilot: Chat UI fix - Spinner and error -->
-  <div id="tg-chat-spinner" class="tg-chat-spinner" style="display:none;" aria-live="polite">
-    <span class="spinner"></span>
-  </div>
-  <div id="tg-chat-error" class="tg-chat-error" style="display:none;" role="alert"></div>
-  <form class="tg-chat-form" id="tg-chat-form" autocomplete="off">
-    <!-- Copilot: Chat UI fix - Attachment button and file input -->
-    <button type="button" id="tg-chat-attach" class="tg-chat-attach" aria-label="Attach file">
-      <i class="fas fa-paperclip"></i>
-    </button>
-    <input type="file" id="tg-chat-file" style="display:none" tabindex="-1" aria-hidden="true" />
-    <input id="tg-chat-input" type="text" placeholder="Type your message..." autocomplete="off" aria-label="Type your message" required />
-    <button type="submit" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
-  </form>
-</div>
-<!-- Copilot: Chat Button & Modal End -->
-<!-- Place scripts here, after all HTML including chat modal -->
-<script src="js/main.js"></script>
-<script type="module" src=` u"js/services.js"></script>
-</body>
-</html><!-- Copilot: Chat UI fix -->
-<button id="tg-chat-btn" aria-label="Open TechGuru Chat">
-  <img src="assets/chatbot-avatar.png" alt="Chatbot" />
-</button>
 
-<div id="techguru-chat-modal" class="tg-chat-modal" aria-modal="true" role="dialog" tabindex="-1">
-  <div class="tg-chat-header">
-    <img class="tg-chat-avatar" src="assets/chatbot-avatar.png" alt="TechGuru AI" />
-    <span class="tg-chat-title">TechGuru AI Assistant</span>
-    <button id="tg-chat-close" aria-label="Close Chat">&times;</button>
+  <div id="chatbox" class="chatbox-popout" aria-hidden="true">
+    <div class="chatbox-header">
+      <img src="{{ url_for('static', filename='chat-avatar.png') }}" alt="AI Assistant" class="chatbox-bot-avatar" />
+      <div class="chatbox-header-info">
+        <strong>TechGuru AI Assistant</strong>
+        <div class="chatbox-header-status">
+          <span class="status-indicator"></span>Online - typically replies instantly
+        </div>
+      </div>
+      <button onclick="toggleChatbox()" class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+
+    <div class="chatbox-body">
+      <div id="chatbox-messages" class="chatbox-messages">
+        <div class="message ai">
+          <strong>TechGuru AI Assistant</strong><br>
+          Hello! I'm here to help you with AI automation, cloud solutions, and technical questions. What can I assist you with today?
+        </div>
+      </div>
+
+      <div id="typing-indicator" class="typing-indicator" style="display: none;">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span>AI Assistant is typing...</span>
+      </div>
+    </div>
+
+    <div class="chatbox-form">
+      <input 
+        type="text" 
+        id="chat-input" 
+        placeholder="Ask about our AI, cloud, or DevOps services..." 
+        aria-label="Type your message"
+        autocomplete="off"
+      />
+      <button onclick="sendMessage()" aria-label="Send message">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
   </div>
-  <div class="tg-chat-body" id="tg-chat-body" tabindex="0" aria-live="polite"></div>
-  <form class="tg-chat-form" id="tg-chat-form" autocomplete="off">
-    <button type="button" class="tg-chat-attach" id="tg-chat-attach" aria-label="Attach file">
-      <!-- Paperclip SVG -->
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M21 12.3V17a5 5 0 0 1-10 0V7a3 3 0 0 1 6 0v9a1 1 0 0 1-2 0V8" />
-      </svg>
-    </button>
-    <input type="file" id="tg-chat-file" style="display:none" multiple />
-    <input id="tg-chat-input" type="text" placeholder="Type your message..." autocomplete="off" required />
-    <button type="submit" aria-label="Send">
-      <!-- Send SVG -->
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M22 2L11 13" /><path d="M22 2L15 22L11 13L2 9L22 2Z" />
-      </svg>
-    </button>
-  </form>
-</div>
-<!-- Copilot: End Chat UI fix -->
+
+  <script>
+    // Apply theme immediately to prevent flash
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.documentElement.classList.add(savedTheme + '-theme');
+      document.body.classList.add(savedTheme + '-theme');
+
+      // Update icon immediately
+      const themeIcon = document.getElementById('theme-toggle-icon');
+      if (themeIcon) {
+        if (savedTheme === 'dark') {
+          themeIcon.className = 'fas fa-sun';
+          themeIcon.style.color = '#fbbf24';
+        } else {
+          themeIcon.className = 'fas fa-moon';
+          themeIcon.style.color = '#475569';
+        }
+      }
+    })();
+  </script>
+  <script>
+    // Modern SaaS functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // FAQ functionality
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const item = this.parentElement;
+          const isActive = item.classList.contains('active');
+
+          // Close all other FAQ items
+          document.querySelectorAll('.faq-item').forEach(faqItem => {
+            faqItem.classList.remove('active');
+            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          });
+
+          // Toggle current item
+          if (!isActive) {
+            item.classList.add('active');
+            this.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Add scroll-based animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements with animation classes
+      document.querySelectorAll('.animate-fade-in-up, .animate-stagger > *').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+
+      // Mobile menu toggle with proper null checks
+      const hamburger = document.getElementById('hamburger');
+      const mainNav = document.querySelector('.main-nav');
+      if (hamburger && mainNav) {
+        hamburger.addEventListener('click', function() {
+          mainNav.classList.toggle('mobile-active');
+          this.setAttribute('aria-expanded', 
+            this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+          );
+        });
+      }
+
+      // Additional null check for any other potential issues
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        // Theme toggle is handled by scripts.js, just ensure it exists
+        console.log('Theme toggle found and working');
+      }
+    });
+  </script>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/particles-config.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/chatbot-enhancements.js') }}"></script>
+
+</body>
+</html>
