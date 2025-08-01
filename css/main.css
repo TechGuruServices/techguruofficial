@@ -3,7 +3,7 @@
 
 /* CSS Variables */
 :root,
-[data-theme="dark"], 
+[data-theme="dark"],
 .dark-theme {
   --bg: linear-gradient(135deg, #0a0f1c 0%, #1a1b3a 25%, #2d1b69 50%, #3b1065 75%, #0f0a1e 100%);
   --bg-alt: rgba(42, 42, 42, 0.2);
@@ -22,7 +22,7 @@
   --neon-green: #00e6a8;
 }
 
-[data-theme="light"], 
+[data-theme="light"],
 .light-theme {
   --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #94a3b8 75%, #f1f5f9 100%);
   --bg-alt: rgba(248, 250, 252, 0.3);
@@ -215,8 +215,6 @@ body {
   margin-bottom: 1.5rem;
   color: var(--heading-color);
   line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .hero .subtitle {
@@ -224,7 +222,6 @@ body {
   margin-bottom: 2.5rem;
   color: var(--text-muted);
   font-weight: 500;
-  letter-spacing: 0.01em;
 }
 
 .cta-buttons {
@@ -244,8 +241,6 @@ body {
   border: none;
   cursor: pointer;
   display: inline-block;
-  letter-spacing: 0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
@@ -263,7 +258,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   border: 2px solid var(--accent);
-  backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
@@ -283,9 +277,6 @@ body {
   font-size: 3rem;
   margin-bottom: 4rem;
   color: var(--heading-color);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .services-grid {
@@ -299,7 +290,7 @@ body {
   border-radius: 20px;
   padding: 3rem 2.5rem;
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s ease;
   backdrop-filter: blur(15px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   border: 2px solid #ff0080;
@@ -323,26 +314,15 @@ body {
   border-color: rgba(99, 102, 241, 0.3);
 }
 
-.service-card i {
-  font-size: 4rem;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
-}
-
 .service-card h3 {
   font-size: 1.75rem;
   margin-bottom: 1.5rem;
   color: var(--heading-color);
-  font-weight: 700;
-  letter-spacing: -0.01em;
 }
 
 .service-card p {
   color: var(--text-muted);
-  line-height: 1.7;
   font-size: 1.1rem;
-  font-weight: 400;
 }
 
 /* About Section */
@@ -364,34 +344,21 @@ body {
   color: var(--text-muted);
 }
 
-/* Stats Grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+.about-stats {
+  display: flex;
   gap: 2rem;
-  margin-top: 3rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.stat-item {
+.stat {
   text-align: center;
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  border: 2px solid #ff0080;
-  animation: borderColorShift 20s ease-in-out infinite;
 }
 
-.stat-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
-}
-
-.stat-value {
+.stat-number {
   font-size: 2.5rem;
   font-weight: 900;
   color: var(--accent);
-  margin-bottom: 0.5rem;
 }
 
 .stat-label {
@@ -445,62 +412,6 @@ body {
   padding: 1.2rem;
 }
 
-/* Testimonials Section */
-.testimonials {
-  padding: 5rem 0;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.testimonials h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: var(--heading-color);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.testimonial-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 2px solid #ff0080;
-  animation: borderColorShift 8s ease-in-out infinite;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
-}
-
-.testimonial-card p {
-  font-style: italic;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.testimonial-author {
-  text-align: center;
-}
-
-.testimonial-author strong {
-  color: var(--heading-color);
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.testimonial-author span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
 /* Contact Section */
 .contact {
   padding: 3rem 0;
@@ -539,9 +450,6 @@ body {
   background: var(--card-bg);
   color: var(--text);
   font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 
@@ -552,206 +460,141 @@ body {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.contact-info {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-
-.contact-info p {
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-}
-
-.contact-info a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
 /* Footer */
-.footer {
+.site-footer {
   background: rgba(0, 0, 0, 0.5);
   padding: 3rem 0;
   text-align: center;
   color: var(--text-muted);
 }
 
-.footer p {
-  margin-bottom: 1rem;
-}
-
-.footer a {
+.site-footer a {
   color: var(--accent);
   text-decoration: none;
 }
 
-.footer a:hover {
+.site-footer a:hover {
   text-decoration: underline;
 }
 
-/* Chat Toggle Button */
-.chat-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+/* Chat UI */
+.tg-chat-button {
+  background: transparent;
   border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-  transition: all 0.3s ease;
-  z-index: 1001;
-}
-
-.chat-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-}
-
-/* Chatbox */
-.chatbox {
   position: fixed;
-  bottom: 90px;
-  right: 20px;
-  width: 320px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 15px;
+  bottom: 32px;
+  right: 32px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
   z-index: 1000;
-  transform: translateY(20px);
+}
+
+.tg-chat-modal {
+  position: fixed;
+  bottom: 120px;
+  right: 32px;
+  width: 320px;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
 }
 
-.chatbox.open {
-  transform: translateY(0);
+.tg-chat-modal.open {
+  max-height: 480px;
   opacity: 1;
-  visibility: visible;
 }
 
-.chatbox-header {
-  padding: 1rem;
-  background: var(--accent);
-  color: white;
-  border-radius: 15px 15px 0 0;
+.tg-chat-header,
+.tg-chat-form {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.tg-chat-header {
+  border-bottom: 1px solid var(--card-border);
   justify-content: space-between;
 }
 
-.chatbox-bot-avatar {
-  width: 30px;
-  height: 30px;
+.tg-chat-avatar {
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
+  margin-right: 0.5rem;
 }
 
-.chatbox-body {
+.tg-chat-title {
+  flex: 1;
+  font-weight: 700;
+}
+
+.tg-chat-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.tg-chat-body {
   padding: 1rem;
-  max-height: 200px;
+  max-height: 240px;
   overflow-y: auto;
   color: var(--text);
 }
 
-.chatbox-form {
-  display: flex;
-  padding: 1rem;
-  border-top: 1px solid var(--card-border);
-  gap: 0.5rem;
-}
-
-.chatbox-form input {
-  flex: 1;
+.tg-chat-spinner {
+  text-align: center;
   padding: 0.5rem;
+  display: none;
+}
+
+.tg-chat-error {
+  color: red;
+  padding: 0.5rem;
+  display: none;
+}
+
+.tg-chat-form input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
   border: 1px solid var(--card-border);
-  border-radius: 20px;
-  background: var(--card-bg);
-  color: var(--text);
+  border-radius: 4px;
+  margin: 0 0.5rem;
 }
 
-.chatbox-form button {
-  background: var(--accent);
-  color: white;
+.tg-chat-form button {
+  background: var(--primary);
+  color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.chatbox-header button {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.25rem;
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--primary);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
 }
 
-/* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes gradientShift {
-  0% { 
-    background-position: 0% 50%;
-  }
-  25% { 
-    background-position: 25% 50%;
-  }
-  50% { 
-    background-position: 50% 50%;
-  }
-  75% { 
-    background-position: 75% 50%;
-  }
-  100% { 
-    background-position: 100% 50%;
-  }
-}
-
-.particle {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* High-DPI and Retina Display Support */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .service-card i {
-    transform: scale(1);
-    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.2));
-  }
-}
-
-/* Enhanced Responsive Design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
+  html { font-size: 16px; }
+  .hamburger { display: block; }
   .main-nav {
     position: absolute;
     top: 100%;
@@ -766,210 +609,20 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(20px);
   }
-
   .main-nav.mobile-open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-
-  .hero h1 {
-    font-size: 3rem;
-    line-height: 1.1;
-  }
-
-  .hero .subtitle {
-    font-size: 1.3rem;
-  }
-
-  .services h2 {
-    font-size: 2.5rem;
-  }
-
-  .service-card {
-    padding: 2.5rem 2rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .chatbox {
-    width: 300px;
-    right: 15px;
-    bottom: 15px;
-  }
+  .hero h1 { font-size: 3rem; }
+  .hero .subtitle { font-size: 1.3rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .tg-chat-modal { width: 300px; right: 15px; bottom: 15px; }
 }
 
 @media (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero .subtitle {
-    font-size: 1.2rem;
-  }
-
-  .services h2 {
-    font-size: 2rem;
-  }
-
-  .service-card {
-    padding: 2rem 1.5rem;
-  }
-
-  .service-card i {
-    font-size: 3rem;
-  }
-
-  .btn {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-  }
-
-  .navbar-container {
-    padding: 1rem;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-
-  .chatbox {
-    width: 280px;
-    right: 10px;
-    bottom: 10px;
-  }
+  html { font-size: 14px; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero .subtitle { font-size: 1.2rem; }
+  .tg-chat-modal { width: 280px; right: 10px; bottom: 10px; }
 }
-
-.particle-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
-    z-index: 0; /* Ensure it stays behind the content */
-    opacity: 0.8; /* Adjust visibility */
-}
-
-/* Particles.js Integration */
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-
-particlesJS("particles-js", {
-  particles: {
-    number: {
-      value: 80,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    },
-    color: {
-      value: "#6366f1"
-    },
-    shape: {
-      type: "circle",
-      stroke: {
-        width: 0,
-        color: "#000000"
-      },
-      polygon: {
-        nb_sides: 5
-      }
-    },
-    opacity: {
-      value: 0.5,
-      random: false,
-      anim: {
-        enable: false,
-        speed: 1,
-        opacity_min: 0.1,
-        sync: false
-      }
-    },
-    size: {
-      value: 3,
-      random: true,
-      anim: {
-        enable: false,
-        speed: 40,
-        size_min: 0.1,
-        sync: false
-      }
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#6366f1",
-      opacity: 0.4,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 6,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false,
-      attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200
-      }
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: {
-        enable: true,
-        mode: "repulse"
-      },
-      onclick: {
-        enable: true,
-        mode: "push"
-      },
-      resize: true
-    },
-    modes: {
-      grab: {
-        distance: 400,
-        line_linked: {
-          opacity: 1
-        }
-      },
-      bubble: {
-        distance: 400,
-        size: 40,
-        duration: 2,
-        opacity: 8,
-        speed: 3
-      },
-      repulse: {
-        distance: 200,
-        duration: 0.4
-      },
-      push: {
-        particles_nb: 4
-      },
-      remove: {
-        particles_nb: 2
-      }
-    }
-  },
-  retina_detect: true
-});
