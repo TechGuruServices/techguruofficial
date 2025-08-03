@@ -81,7 +81,8 @@ Steps to deploy:
 
 📸 Preview
 
-<!-- Optional preview screenshot -->
+<img width="4095" height="14320" alt="image" src="https://github.com/user-attachments/assets/4fe0a30c-97e2-43ae-823d-459b82e3ef9c" />
+
 🛡 License
 
 Licensed under the MIT License – See LICENSE
