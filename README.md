@@ -6,8 +6,7 @@ Welcome to the official **TECHGURU** website repository — a modern, high-perfo
 ---
 
 ## 🌐 Live Site  
-🔗 [https://yourusername.github.io/techguru](techguruofficial.us)
-
+🔗 https://techguruofficial.us
 ---
 
 ## 📁 Project Structure
