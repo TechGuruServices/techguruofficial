@@ -80,7 +80,8 @@ Steps to deploy:
     GitHub Pages (Static Hosting)
 
 📸 Preview
-<img width="4096" height="11128" alt="image" src="https://github.com/user-attachments/assets/be0f45db-fd0e-4a46-8401-a0e1a9eb6b20" />
+<img width="4096" height="11128" alt="image" src="https://github.com/user-attachments/assets/0a8b7de6-7c3e-40a3-8296-b7a7d629c25d" />
+
 
 
 🛡 License
