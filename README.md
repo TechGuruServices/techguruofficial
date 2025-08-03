@@ -1,4 +1,4 @@
-# ```markdown
+
 # ⚙️ TECHGURU – Pack. Optimize. Deploy. Scale Up.
 
 Welcome to the official **TECHGURU** website repository — a modern, high-performance static site built for showcasing AI, automation, DevOps, and scalable startup systems. Built and maintained by **L|T**, this site powers TechGuru’s mission to simplify and scale businesses through cutting-edge technology.
