@@ -1,40 +1,37 @@
-
 # ⚙️ TECHGURU – Pack. Optimize. Deploy. Scale Up.
 
-Welcome to the official **TECHGURU** website repository — a modern, high-performance static site built for showcasing AI, automation, DevOps, and scalable startup systems. Built and maintained by **L|T**, this site powers TechGuru’s mission to simplify and scale businesses through cutting-edge technology.
+Welcome to the official **TECHGURU** website repository — a sleek, high-performance static site showcasing automation, DevOps, AI assistants, and scalable startup systems. Created and maintained by **L|T**, this site represents TechGuru’s mission to streamline and scale businesses with powerful, modern technology.
 
 ---
 
 ## 🌐 Live Site  
 🔗 https://techguruofficial.us
+
 ---
 
 ## 📁 Project Structure
 
-```
+/css/ → Main stylesheets
+/js/ → Vanilla JS for interactivity
+/images/ → Logos, icons, visuals
+/icons/ → Service card icons
+index.html → Homepage (auto-redirects to splash on first load)
+splash.html → 7-sec splash screen with autoplay video
+README.md → This file
 
-/css/               → Main stylesheets
-/js/                → Vanilla JS for interactivity
-/images/            → Logos, icons, visuals
-/icons/             → Service card icons
-index.html          → Homepage (auto-redirects to splash on first load)
-splash.html         → 7-sec splash screen with autoplay video
-README.md           → This file
-
-````
 
 ---
 
 ## 🚀 Features
 
-- 🎥 **Splash Screen Intro**: Autoplay branding animation on first visit  
-- 🧠 **AI Assistant Chat UI**: Integrated branded chat widget  
-- 💻 **Startup-Ready Services**: Full service cards with toggled detail views  
-- 🎨 **Dark/Light Theme Toggle**: Seamless UX toggle with persistent state  
-- 📱 **Fully Responsive**: Mobile-first, cross-device compatibility  
-- 🖼️ **Font Awesome + Google Fonts**  
-- 🧾 **Transparent Pricing Sections**  
-- 📊 **Animated Stats, CTA Buttons, and FAQ Accordion**
+- 🎥 Splash Screen Intro – Autoplay branding animation (first visit only)  
+- 🧠 AI Assistant Chat UI – Branded embedded chatbot interface  
+- 💻 Startup-Ready Services – Toggleable feature-rich service cards  
+- 🎨 Dark/Light Theme Toggle – Persistent theme switcher  
+- 📱 Fully Responsive – Optimized for mobile, tablet, and desktop  
+- 🖼️ Font Awesome + Google Fonts for clean UI  
+- 🧾 Transparent Pricing Tables  
+- 📊 Animated Stats, CTAs, and FAQ Accordion
 
 ---
 
@@ -42,82 +39,60 @@ README.md           → This file
 
 ### 🔧 Local Development
 
-1. Clone the repo:
+1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/techguru.git
    cd techguru
-````
 
-2. Serve locally:
+    Serve the project locally:
 
-   ```bash
-   npx serve
-   ```
+npx serve
 
-3. Open in browser:
+Visit the site:
 
-   ```
-   http://localhost:3000/
-   ```
+    http://localhost:3000/
 
-> ⚠️ *You must have Node.js and `npx` installed for local server testing.*
+    ⚠️ Requires Node.js with npx installed.
 
----
+🌍 Deployment – GitHub Pages
 
-## 🌍 Deployment
+This static site is deployable instantly via GitHub Pages.
+Steps to deploy:
 
-This site is 100% static and built for deployment via **GitHub Pages**.
+    Commit all files to the main branch
 
-### To Deploy:
+    Go to Repository → Settings → Pages
 
-1. Commit changes to the `main` branch.
-2. Go to **Repo Settings → Pages**.
-3. Choose `main` branch and `/root` as source.
-4. Your site will be live at:
+    Select main as the source, /root directory
 
-   ```
-   https://yourusername.github.io/techguru/
-   ```
+    Your site will be available at:
 
----
+    https://yourusername.github.io/techguru/
 
-## 🧠 Tech Stack
+🧠 Tech Stack
 
-* HTML5 / CSS3 / Vanilla JS
-* Google Fonts (Inter)
-* Font Awesome 6
-* GitHub Pages (Static Hosting)
+    HTML5 / CSS3 / JavaScript (no frameworks)
 
----
+    Google Fonts (Inter)
 
-## 📸 Preview
+    Font Awesome 6
 
-![TechGuru Screenshot](images/techguru-preview.png) <!-- Optional preview image -->
+    GitHub Pages (Static Hosting)
 
----
+📸 Preview
 
-## 🛡 License
+<!-- Optional preview screenshot -->
+🛡 License
 
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+Licensed under the MIT License – See LICENSE
+🔧 Built with 🔥 by L|T
 
----
+    “Tech is your superpower. I’m just the one who activates it.”
 
-## 🔧 Built With 🔥 by L|T
+📬 Contact
 
-> "Tech is your superpower. I’m just the one who activates it."
+    Website: techguruofficial.us
 
----
+    Email: info@techguruofficial.us
 
-## 📬 Contact
-
-**Website:** [techguruofficial.us](https://techguruofficial.us)
-**Email:** [info@techguruofficial.us](mailto:info@techguruofficial.us)
-**Phone:** +1 (786) 636-9964
-
-```
-
-🧠 Copy-paste this `README.md` into your root project folder and push it.  
-If you need auto-preview image, drop a screenshot in `/images/techguru-preview.png`.
-
-Let me know if you want a version for private repos, Docker setup, or CI/CD integration.
-```
+    Phone: +1 (786) 636-9964
