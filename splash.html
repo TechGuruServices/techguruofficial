@@ -98,12 +98,13 @@
 <body>
   <!-- Splash Screen -->
   <div id="splash-overlay">
-    <video id="splash-video" autoplay muted playsinline>
+    <video id="splash-video" playsinline autoplay muted>
       <source src="splash.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <button id="skip-btn">Skip</button>
   </div>
+
   <!-- Main Site Content -->
   <header>
     <h1>Welcome to TechGuru</h1>
@@ -115,44 +116,23 @@
   <footer>
     <p>&copy; 2025 TechGuru. All rights reserved.</p>
   </footer>
+
+  <!-- Script -->
   <script>
-    (function() {
-      const overlay = document.getElementById('splash-overlay');
-      const video = document.getElementById('splash-video');
-      const skipBtn = document.getElementById('skip-btn');
-      const DURATION = 7;
-      function hideSplash() {
-        overlay.classList.add('hide');
-        setTimeout(() => { overlay.style.display = 'none'; }, 400);
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("splash-video");
+      const skipBtn = document.getElementById("skip-btn");
+
+      function exitSplash() {
+        localStorage.setItem("splashPlayed", "true");
+        const isLocal = location.protocol === "file:" || location.hostname === "localhost";
+        window.location.href = isLocal ? "./index.html" : "/";
       }
-      if (!localStorage.getItem('splashPlayed')) {
-        overlay.style.display = 'flex';
-        let timedOut = false;
-        video.addEventListener('loadedmetadata', function() {
-          video.currentTime = 0;
-          video.play();
-          setTimeout(function() {
-            timedOut = true;
-            localStorage.setItem('splashPlayed', 'true');
-            hideSplash();
-          }, DURATION * 1000);
-        });
-        video.addEventListener('ended', function() {
-          if (!timedOut) {
-            localStorage.setItem('splashPlayed', 'true');
-            hideSplash();
-          }
-        });
-        skipBtn.addEventListener('click', function() {
-          localStorage.setItem('splashPlayed', 'true');
-          hideSplash();
-        });
-        // Fallback hide if video fails to load in 10s
-        setTimeout(function() {
-          if (overlay.style.display !== 'none') hideSplash();
-        }, 10000);
-      }
-    })();
+
+      skipBtn.addEventListener("click", exitSplash);
+      setTimeout(exitSplash, 7000);
+      video.addEventListener("ended", exitSplash);
+    });
   </script>
 </body>
 </html>
