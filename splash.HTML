@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TechGuru – Home with Splash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+    }
+    #splash-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: opacity 0.4s;
+    }
+    #splash-overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #splash-video {
+      display: block;
+      max-width: 90vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+      background: #111;
+    }
+    #skip-btn {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: rgba(0,0,0,0.74);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      font-size: 1rem;
+      border-radius: 7px;
+      cursor: pointer;
+      z-index: 10001;
+      letter-spacing: 0.01em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      transition: background 0.2s;
+      outline: none;
+    }
+    #skip-btn:active,
+    #skip-btn:focus {
+      background: #222;
+    }
+    #skip-btn:hover {
+      background: rgba(30,30,30,0.93);
+    }
+    header, footer {
+      background: #0a1f44;
+      color: #fff;
+      padding: 16px;
+    }
+    main { padding: 20px; }
+    @media (max-width: 600px) {
+      #splash-video {
+        max-width: 100vw;
+        max-height: 100vw;
+        border-radius: 0;
+      }
+      #skip-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 14px;
+        font-size: 0.95rem;
+      }
+    }
+    @media (max-height: 500px) {
+      #splash-video {
+        max-height: 80vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-overlay">
+    <video id="splash-video" autoplay muted playsinline>
+      <source src="splash.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button id="skip-btn">Skip</button>
+  </div>
+  <!-- Main Site Content -->
+  <header>
+    <h1>Welcome to TechGuru</h1>
+  </header>
+  <main>
+    <p>This is the homepage content for your static website.</p>
+    <p>Add your sections, articles, and other content here.</p>
+  </main>
+  <footer>
+    <p>&copy; 2025 TechGuru. All rights reserved.</p>
+  </footer>
+  <script>
+    (function() {
+      const overlay = document.getElementById('splash-overlay');
+      const video = document.getElementById('splash-video');
+      const skipBtn = document.getElementById('skip-btn');
+      const DURATION = 7;
+      function hideSplash() {
+        overlay.classList.add('hide');
+        setTimeout(() => { overlay.style.display = 'none'; }, 400);
+      }
+      if (!localStorage.getItem('splashPlayed')) {
+        overlay.style.display = 'flex';
+        let timedOut = false;
+        video.addEventListener('loadedmetadata', function() {
+          video.currentTime = 0;
+          video.play();
+          setTimeout(function() {
+            timedOut = true;
+            localStorage.setItem('splashPlayed', 'true');
+            hideSplash();
+          }, DURATION * 1000);
+        });
+        video.addEventListener('ended', function() {
+          if (!timedOut) {
+            localStorage.setItem('splashPlayed', 'true');
+            hideSplash();
+          }
+        });
+        skipBtn.addEventListener('click', function() {
+          localStorage.setItem('splashPlayed', 'true');
+          hideSplash();
+        });
+        // Fallback hide if video fails to load in 10s
+        setTimeout(function() {
+          if (overlay.style.display !== 'none') hideSplash();
+        }, 10000);
+      }
+    })();
+  </script>
+</body>
+</html>
