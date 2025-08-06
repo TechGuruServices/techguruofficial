@@ -275,26 +275,26 @@
     </div>
   </footer>
 
-  <!-- Chatbox -->
-  <div class="chatbox" id="chatbox">
-    <div class="chatbox-header">
-      <img src="images/techguru-logo-icon.png" alt="TechGuru Assistant" class="chatbox-bot-avatar" />
-      <span>TechGuru Chat</span>
-      <button type="button" onclick="toggleChatbox()" aria-label="Close chat">✖</button>
-    </div>
-    <div class="chatbox-body">
-      <p>Hello! Need help? Send us a message using the contact form above.</p>
-    </div>
-    <div class="chatbox-form">
-      <input type="text" placeholder="Type a message..." aria-label="Type your message here" />
-      <button type="button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" aria-label="Scroll to contact section">Contact</button>
-    </div>
-  </div>
-
   <!-- Chat Toggle Button -->
   <button class="chat-toggle" onclick="toggleChatbox()" aria-label="Open or close chat">
     <i class="fas fa-comments" aria-hidden="true"></i>
   </button>
+
+  <!-- Chat Modal -->
+  <div class="chatbox" id="chatbox" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+    <div class="chatbox-header">
+      <img src="images/techguru-logo-icon.png" alt="TechGuru Assistant" class="chatbox-bot-avatar" />
+      <span class="chatbox-title">TechGuru Chat</span>
+      <button type="button" class="chatbox-close" onclick="toggleChatbox()" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-body" id="chatbox-body" tabindex="0" aria-live="polite">
+      <p>Hello! Need help? Send us a message using the contact form above.</p>
+    </div>
+    <form class="chatbox-form" id="chatbox-form" autocomplete="off">
+      <input type="text" id="chatbox-input" placeholder="Type a message..." aria-label="Type your message here" />
+      <button type="submit" aria-label="Send message">Send</button>
+    </form>
+  </div>
 
   <!-- Theme Application Script -->
   <script>
