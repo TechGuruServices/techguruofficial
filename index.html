@@ -6,12 +6,11 @@
   <meta name="description" content="TechGuru Services - Scalable Cloud, DevOps, AI, Automation solutions for startups." />
   <meta name="keywords" content="TechGuru, cloud, DevOps, AI, automation, startup tech solutions" />
   <meta name="robots" content="index, follow" />
-  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.ico" sizes="any" />
   <title>TechGuru | Pack. Optimize. Deploy. Scale Up.</title>
   <link rel="stylesheet" href="css/main.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="TechGuru | Pack. Optimize. Deploy. Scale Up." />
   <meta property="og:description" content="TechGuru Services - Scalable Cloud, DevOps, AI, Automation solutions for startups." />
@@ -20,9 +19,8 @@
   <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
-
-<!-- Header -->
-<header class="site-header">
+  <!-- Header -->
+  <header class="site-header">
     <div class="navbar-container">
       <img src="images/techguru-logo-full.png" alt="TechGuru Logo" class="logo" />
       <nav class="main-nav" id="main-nav">
@@ -47,8 +45,7 @@
   <main>
     <!-- Hero Section -->
     <section id="hero" class="hero">
-      <div class="particle-background"></div>
-      <div id="particles-js"></div> <!-- <-- Injected here as per your request -->
+      <div id="particles-js"></div>
       <div class="container">
         <div class="hero-content">
           <h1>PACK. OPTIMIZE. DEPLOY. <span class="scale-up">SCALE UP.</span></h1>
@@ -105,7 +102,7 @@
       <div class="container">
         <h2>About TechGuru</h2>
         <p>Founded by Lucas Thompson, delivering enterprise-grade DevOps, AI & cloud automation for startups and solo founders. We specialize in creating scalable, efficient solutions that grow with your business.</p>
-        
+
         <div class="stats-grid">
           <div class="stat-item">
             <div class="stat-value">50+</div>
@@ -141,7 +138,7 @@
               <p>We offer AI automation, cloud infrastructure, DevOps solutions, and custom software development tailored for startups and small businesses.</p>
             </div>
           </div>
-          
+
           <div class="faq-item">
             <div class="faq-question">
               <span>How quickly can you start a project?</span>
@@ -151,7 +148,7 @@
               <p>Most projects can be started within 24-48 hours. We pride ourselves on quick turnaround times and efficient delivery.</p>
             </div>
           </div>
-          
+
           <div class="faq-item">
             <div class="faq-question">
               <span>Do you offer ongoing support?</span>
@@ -161,7 +158,7 @@
               <p>Yes, we offer comprehensive support and maintenance packages to ensure your systems run smoothly and continue to scale.</p>
             </div>
           </div>
-          
+
           <div class="faq-item">
             <div class="faq-question">
               <span>What's your pricing model?</span>
@@ -210,26 +207,26 @@
       <div class="container">
         <h2>Get In Touch</h2>
         <p>Ready to transform your business? Let's discuss your project.</p>
-        
+
         <form id="contact-form" class="contact-form">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required />
           </div>
-          
+
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required />
           </div>
-          
+
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" required></textarea>
           </div>
-          
+
           <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
-        
+
         <div class="contact-info">
           <p>Email: <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a></p>
           <p>Phone: <a href="tel:+17866369964">+1 (786) 636-9964</a></p>
@@ -243,7 +240,7 @@
     <div class="container">
       <p>&copy; 2025 TechGuru. All rights reserved.</p>
       <p>
-        <a href="terms.html">Terms of Service</a> | 
+        <a href="terms.html">Terms of Service</a> |
         <a href="privacy.html">Privacy Policy</a>
       </p>
       <div class="social-links">
@@ -263,20 +260,16 @@
   <!-- Chatbox -->
   <div class="chatbox" id="chatbox">
     <div class="chatbox-header">
-      <img src="images/techguru-logo-icon.png" alt="TechGuru Assistant" class="chatbox-bot-avatar">
+      <img src="images/techguru-logo-icon.png" alt="TechGuru Assistant" class="chatbox-bot-avatar" />
       <span>TechGuru Chat</span>
-      <button type="button" onclick="toggleChatbox()" aria-label="Close chat">
-        ✖
-      </button>
+      <button type="button" onclick="toggleChatbox()" aria-label="Close chat">✖</button>
     </div>
     <div class="chatbox-body">
       <p>Hello! Need help? Send us a message using the contact form above.</p>
     </div>
     <div class="chatbox-form">
       <input type="text" placeholder="Type a message..." aria-label="Type your message here" />
-      <button type="button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" aria-label="Scroll to contact section">
-        Contact
-      </button>
+      <button type="button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" aria-label="Scroll to contact section">Contact</button>
     </div>
   </div>
 
@@ -287,20 +280,13 @@
 
   <!-- Theme Application Script -->
   <script>
-  // Apply theme immediately to prevent flash
-  (function() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  })();
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
   </script>
 
-  <!-- Main JavaScript -->
   <script src="js/main.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js" defer></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    initParticles();
-  });
-  </script>
 </body>
 </html>
