@@ -2,6 +2,10 @@
 // Consolidated and optimized functionality
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply saved theme immediately on page load
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
     initThemeToggle();
     initNavigation();
     initContactForm();
@@ -15,9 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Theme Toggle
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-toggle-icon');
-    
-    if (!themeToggle || !themeIcon) return;
+    if (!themeToggle) return;
 
     themeToggle.addEventListener('click', function(e) {
         e.preventDefault();
@@ -27,19 +29,22 @@ function initThemeToggle() {
         applyTheme(newTheme);
         localStorage.setItem('theme', newTheme);
     });
+}
 
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        document.documentElement.className = theme + '-theme';
-        document.body.className = theme + '-theme';
-        
-        if (theme === 'dark') {
-            themeIcon.className = 'fas fa-sun';
-            themeIcon.style.color = '#fbbf24';
-        } else {
-            themeIcon.className = 'fas fa-moon';
-            themeIcon.style.color = '#475569';
-        }
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.className = theme + '-theme';
+    document.body.className = theme + '-theme';
+    
+    const themeIcon = document.getElementById('theme-toggle-icon');
+    if (!themeIcon) return;
+
+    if (theme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+        themeIcon.style.color = '#fbbf24';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+        themeIcon.style.color = '#475569';
     }
 }
 
@@ -180,14 +185,14 @@ function initParticles() {
     particlesJS("particles-js", {
       particles: {
         number: {
-          value: 120, // Increased particle count for a richer background
+          value: 120,
           density: {
             enable: true,
-            value_area: 1000 // Expanded area for better distribution
+            value_area: 1000
           }
         },
         color: {
-          value: ["#6366f1", "#8b5cf6", "#10b981"] // Added gradient-like colors
+          value: ["#6366f1", "#8b5cf6", "#10b981"]
         },
         shape: {
           type: "circle",
@@ -196,12 +201,12 @@ function initParticles() {
             color: "#000000"
           },
           polygon: {
-            nb_sides: 6 // Changed to hexagon for variety
+            nb_sides: 6
           }
         },
         opacity: {
-          value: 0.7, // Increased opacity for better visibility
-          random: true, // Randomized opacity for dynamic effect
+          value: 0.7,
+          random: true,
           anim: {
             enable: true,
             speed: 2,
@@ -210,7 +215,7 @@ function initParticles() {
           }
         },
         size: {
-          value: 4, // Slightly larger particles
+          value: 4,
           random: true,
           anim: {
             enable: true,
@@ -221,16 +226,16 @@ function initParticles() {
         },
         line_linked: {
           enable: true,
-          distance: 120, // Reduced distance for tighter connections
+          distance: 120,
           color: "#6366f1",
           opacity: 0.5,
-          width: 1.5 // Slightly thicker lines
+          width: 1.5
         },
         move: {
           enable: true,
-          speed: 4, // Reduced speed for smoother movement
+          speed: 4,
           direction: "none",
-          random: true, // Randomized movement for dynamic effect
+          random: true,
           straight: false,
           out_mode: "out",
           bounce: false,
@@ -246,11 +251,11 @@ function initParticles() {
         events: {
           onhover: {
             enable: true,
-            mode: "bubble" // Changed to bubble for interactive effect
+            mode: "bubble"
           },
           onclick: {
             enable: true,
-            mode: "repulse" // Changed to repulse for click interaction
+            mode: "repulse"
           },
           resize: true
         },
@@ -288,7 +293,6 @@ function initParticles() {
 function initCyberpunkEffects() {
     console.log('Cyberpunk effects initialized');
     
-    // Add glow effect to buttons on hover
     const buttons = document.querySelectorAll('.btn, .cta-button');
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function() {
