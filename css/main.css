@@ -1,21 +1,3 @@
-/* Updated CSS with a subtler scale-up effect */
-
-.hero-content h1 {
-  font-weight: 900;
-  font-size: 3.5rem;
-  background: linear-gradient(90deg, #6b52ff, #3b82f6, #ec4899, #f97316);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 4s ease infinite;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-family: 'Inter', sans-serif;
-  user-select: none;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 800px;
-}
 .hero-content h1 .scale-up {
   display: inline-block;
   font-weight: 800; /* Slightly lighter */
@@ -35,8 +17,6 @@
     text-shadow: 0 0 10px rgba(249, 115, 22, 0.8), 0 0 18px rgba(249, 115, 22, 0.6);
   }
 }
-
-
 
 /* CSS Variables */
 :root,
@@ -685,6 +665,7 @@ body {
   position: relative;
   z-index: 1;
 }
+
 
 
 
