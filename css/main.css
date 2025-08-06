@@ -1,5 +1,54 @@
 /* TechGuru Website - Main Styles */
-/* Consolidated and optimized styling */
+/* Consolidated and optimized styling *//* Add this CSS to your main.css */
+
+.hero-content h1 {
+  font-weight: 900;
+  font-size: 3.5rem;
+  background: linear-gradient(90deg, #6b52ff, #3b82f6, #ec4899, #f97316);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  user-select: none;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.hero-content h1 .scale-up {
+  /* Optional: add scale-up effect on last word */
+  display: inline-block;
+  animation: scaleUpPulse 2s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes scaleUpPulse {
+  0%, 100% {
+    transform: scale(1);
+    color: #f97316;
+    text-shadow: 0 0 10px #f97316, 0 0 20px #f97316;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #ec4899;
+    text-shadow: 0 0 20px #ec4899, 0 0 30px #ec4899;
+  }
+}
+
 
 /* CSS Variables */
 :root,
@@ -648,5 +697,6 @@ body {
   position: relative;
   z-index: 1;
 }
+
 
 
