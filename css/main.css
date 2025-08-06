@@ -629,4 +629,24 @@ body {
   .tg-chat-modal { width: 280px; right: 10px; bottom: 10px; }
 }
 
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#particles-js {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
 
