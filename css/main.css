@@ -16,38 +16,26 @@
   margin: 0 auto;
   max-width: 800px;
 }
-
 .hero-content h1 .scale-up {
   display: inline-block;
-  animation: scaleUpPulseSubtle 3s ease-in-out infinite;
+  font-weight: 800; /* Slightly lighter */
+  letter-spacing: 0.15em; /* More spacing */
   color: #f97316;
-  text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
+  text-shadow: 0 0 6px rgba(249, 115, 22, 0.6), 0 0 12px rgba(249, 115, 22, 0.4);
+  animation: scaleUpSmooth 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes scaleUpPulseSubtle {
+@keyframes scaleUpSmooth {
   0%, 100% {
     transform: scale(1);
-    color: #f97316;
-    text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
+    text-shadow: 0 0 6px rgba(249, 115, 22, 0.6), 0 0 12px rgba(249, 115, 22, 0.4);
   }
   50% {
-    transform: scale(1);
-    color: #f97316;
-    text-shadow: 0 0 0px #f97316, 0 0 0px #f97316;
+    transform: scale(1.03);
+    text-shadow: 0 0 10px rgba(249, 115, 22, 0.8), 0 0 18px rgba(249, 115, 22, 0.6);
   }
 }
+
 
 
 /* CSS Variables */
@@ -697,6 +685,7 @@ body {
   position: relative;
   z-index: 1;
 }
+
 
 
 
