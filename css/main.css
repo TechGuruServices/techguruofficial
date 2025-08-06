@@ -1,5 +1,4 @@
-/* TechGuru Website - Main Styles */
-/* Consolidated and optimized styling *//* Add this CSS to your main.css */
+/* Updated CSS with a subtler scale-up effect */
 
 .hero-content h1 {
   font-weight: 900;
@@ -19,9 +18,10 @@
 }
 
 .hero-content h1 .scale-up {
-  /* Optional: add scale-up effect on last word */
   display: inline-block;
-  animation: scaleUpPulse 2s ease-in-out infinite;
+  animation: scaleUpPulseSubtle 3s ease-in-out infinite;
+  color: #f97316;
+  text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
 }
 
 @keyframes gradientShift {
@@ -36,16 +36,16 @@
   }
 }
 
-@keyframes scaleUpPulse {
+@keyframes scaleUpPulseSubtle {
   0%, 100% {
     transform: scale(1);
     color: #f97316;
-    text-shadow: 0 0 10px #f97316, 0 0 20px #f97316;
+    text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
   }
   50% {
-    transform: scale(1.1);
-    color: #ec4899;
-    text-shadow: 0 0 20px #ec4899, 0 0 30px #ec4899;
+    transform: scale(1.05);
+    color: #f97316;
+    text-shadow: 0 0 12px #f97316, 0 0 20px #f97316;
   }
 }
 
@@ -697,6 +697,7 @@ body {
   position: relative;
   z-index: 1;
 }
+
 
 
 
