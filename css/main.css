@@ -17,6 +17,56 @@
     text-shadow: 0 0 10px rgba(249, 115, 22, 0.8), 0 0 18px rgba(249, 115, 22, 0.6);
   }
 }
+/* Updated CSS with a subtler scale-up effect */
+
+.hero-content h1 {
+  font-weight: 900;
+  font-size: 3.5rem;
+  background: linear-gradient(90deg, #6b52ff, #3b82f6, #ec4899, #f97316);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  user-select: none;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.hero-content h1 .scale-up {
+  display: inline-block;
+  animation: scaleUpPulseSubtle 3s ease-in-out infinite;
+  color: #f97316;
+  text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes scaleUpPulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+    color: #f97316;
+    text-shadow: 0 0 8px #f97316, 0 0 15px #f97316;
+  }
+  50% {
+    transform: scale(1.05);
+    color: #f97316;
+    text-shadow: 0 0 12px #f97316, 0 0 20px #f97316;
+  }
+}
 
 /* CSS Variables */
 :root,
@@ -665,6 +715,7 @@ body {
   position: relative;
   z-index: 1;
 }
+
 
 
 
