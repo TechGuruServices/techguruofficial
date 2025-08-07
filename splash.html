@@ -1,132 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TechGuru – Home with Splash</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechGuru – Splash</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      height: 100%;
       width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
     }
-    body {
-      min-height: 100vh;
-      min-width: 100vw;
-    }
-    #splash-overlay {
+    #splash-container {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      transition: opacity 0.4s;
     }
     #splash-video {
-      display: block;
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
-      background: #111;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     #skip-btn {
       position: absolute;
-      top: 22px;
-      right: 22px;
-      background: rgba(0,0,0,0.74);
-      color: #fff;
-      border: none;
-      padding: 12px 22px;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 10px 20px;
       font-size: 1rem;
-      border-radius: 7px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      z-index: 10001;
-      letter-spacing: 0.01em;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-      transition: background 0.2s;
-      outline: none;
-    }
-    #skip-btn:active,
-    #skip-btn:focus {
-      background: #222;
     }
     #skip-btn:hover {
-      background: rgba(30,30,30,0.93);
-    }
-    header, footer {
-      background: #0a1f44;
-      color: #fff;
-      padding: 16px;
-    }
-    main { padding: 20px; }
-    @media (max-width: 600px) {
-      #splash-video {
-        max-width: 100vw;
-        max-height: 100vw;
-        border-radius: 0;
-      }
-      #skip-btn {
-        top: 10px;
-        right: 10px;
-        padding: 8px 14px;
-        font-size: 0.95rem;
-      }
-    }
-    @media (max-height: 500px) {
-      #splash-video {
-        max-height: 80vh;
-      }
+      background: rgba(0, 0, 0, 0.8);
     }
   </style>
 </head>
 <body>
-  <!-- Splash Screen -->
-  <div id="splash-overlay">
+  <div id="splash-container">
     <video id="splash-video" autoplay muted playsinline>
-      <source src="splash.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      <source src="splash.mp4" type="video/mp4" />
+      Your browser does not support video.
     </video>
     <button id="skip-btn">Skip</button>
   </div>
-  <!-- Main Site Content -->
-  <header>
-    <h1>Welcome to TechGuru</h1>
-  </header>
-  <main>
-    <p>This is the homepage content for your static website.</p>
-    <p>Add your sections, articles, and other content here.</p>
-  </main>
-  <footer>
-    <p>&copy; 2025 TechGuru. All rights reserved.</p>
-  </footer>
-  
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const video = document.getElementById("splash-video");
-    const skipBtn = document.getElementById("skip-btn");
+  <script>
+    (function() {
+      const video = document.getElementById('splash-video');
+      const skipBtn = document.getElementById('skip-btn');
 
-    function exitSplash() {
-      localStorage.setItem("splashPlayed", "true");
-      window.location.href = "index.html";
-    }
+      function exitSplash() {
+        localStorage.setItem('splashPlayed', 'true');
+        window.location.replace('index.html');
+      }
 
-    skipBtn.addEventListener("click", exitSplash);
-    setTimeout(exitSplash, 7000);
-    video.addEventListener("ended", exitSplash);
-  });
-</script>
+      video.addEventListener('ended', exitSplash);
+      skipBtn.addEventListener('click', exitSplash);
+    })();
+  </script>
 </body>
 </html>
-
-
