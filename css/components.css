@@ -1,0 +1,457 @@
+/* ==========================================================================
+   TECHGURU — COMPONENTS  (rebuilt 2026-09-15)
+   Reusable primitives: buttons, icons, chips, forms, cards, modals, popups,
+   a11y utilities. Page structure lives in styles.css, the grid/rhythm system
+   in layout-v2.css (loaded last).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid transparent;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-family: var(--font-body);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%);
+    opacity: 0;
+    transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.btn:hover::after { opacity: 1; }
+
+.btn-primary { box-shadow: var(--shadow-glow-primary); }
+
+.btn-secondary {
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    color: var(--color-text);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: none;
+}
+
+.btn-secondary:hover { border-color: rgba(100, 222, 223, .4); }
+
+.btn-ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--color-text-muted);
+    box-shadow: none;
+}
+
+.btn-ghost:hover { color: var(--color-accent); }
+
+.btn-lg { padding: 1rem 1.9rem; font-size: 1.02rem; }
+.btn-sm { padding: .55rem 1.05rem; font-size: .84rem; }
+
+.btn:disabled,
+.btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+
+/* attention pulse on primary CTAs */
+.btn-pulse { animation: tg-pulse 2.6s var(--ease-out) infinite; }
+
+@keyframes tg-pulse {
+
+    0%,
+    100% { box-shadow: var(--shadow-glow-primary), 0 0 0 0 rgba(74, 108, 247, .45); }
+
+    55% { box-shadow: var(--shadow-glow-primary), 0 0 0 14px rgba(74, 108, 247, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   Icon sizing system (used all over the markup)
+   -------------------------------------------------------------------------- */
+.tg-icon { display: inline-block; vertical-align: middle; flex: none; }
+.tg-icon-sm { width: 18px; height: 18px; }
+.tg-icon-md { width: 24px; height: 24px; }
+.tg-icon-lg { width: 42px; height: 42px; }
+.tg-icon-xl { width: 68px; height: 68px; }
+
+.check-icon { width: 15px; height: 15px; color: var(--color-success); flex: none; }
+
+/* glassy icon tile */
+.glass-icon {
+    color: #fff;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), var(--shadow-sm);
+}
+
+body.light-theme .glass-icon { color: #fff; }
+
+/* --------------------------------------------------------------------------
+   Chips / labels / section furniture
+   -------------------------------------------------------------------------- */
+.section-label,
+.process-label {
+    font-family: var(--font-body);
+    color: var(--color-accent);
+}
+
+.section-subtitle { color: var(--color-text-muted); }
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+.form-group { margin-bottom: 1.05rem; }
+
+.form-label { color: var(--color-text); }
+
+.form-label .required { color: var(--color-accent); margin-left: .15rem; }
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: rgba(8, 10, 15, .5);
+    border: 1px solid var(--glass-border);
+    transition: border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+
+body.light-theme input[type="text"],
+body.light-theme input[type="email"],
+body.light-theme input[type="tel"],
+body.light-theme select,
+body.light-theme textarea { background: rgba(255, 255, 255, .85); }
+
+input::placeholder,
+textarea::placeholder { color: var(--color-text-faint); }
+
+select option { background: var(--color-bg-raised); color: var(--color-text); }
+
+/* JS injects .form-message with inline styles; give it a sane box */
+.form-message {
+    margin-top: .9rem;
+    border-radius: var(--radius-sm);
+    font-size: .9rem;
+}
+
+.privacy-note,
+.response-time { color: var(--color-text-faint); }
+
+/* honeypot — keep out of sight and out of layout */
+.hidden,
+input[name="botcheck"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Cards (shared surface; layout-v2 adds the grid + hover language)
+   -------------------------------------------------------------------------- */
+.why-card,
+.service-card,
+.feature-card,
+.step-card,
+.faq-item,
+.portfolio-card,
+.contact-info,
+.contact-form,
+.about-side-card,
+.footer-cta {
+    background: var(--gradient-glass);
+    border: 1px solid var(--glass-border-soft);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+}
+
+body.light-theme .why-card,
+body.light-theme .service-card,
+body.light-theme .feature-card,
+body.light-theme .step-card,
+body.light-theme .faq-item,
+body.light-theme .portfolio-card,
+body.light-theme .contact-info,
+body.light-theme .contact-form,
+body.light-theme .about-side-card {
+    background: var(--gradient-glass);
+    box-shadow: var(--shadow-md);
+}
+
+/* --------------------------------------------------------------------------
+   Mockup stack (lead magnet)
+   -------------------------------------------------------------------------- */
+.mockup-item { backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); }
+
+.mockup-1 { transform: rotate(-2deg); border-color: rgba(74, 108, 247, .35); }
+.mockup-2 { transform: rotate(1.5deg) translateX(14px); border-color: rgba(100, 222, 223, .35); }
+.mockup-3 { transform: rotate(-1deg) translateX(-10px); border-color: rgba(162, 116, 255, .35); }
+
+/* --------------------------------------------------------------------------
+   Booking modal (Cal.com)
+   -------------------------------------------------------------------------- */
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-med) var(--ease-out), visibility var(--dur-med);
+}
+
+.booking-modal[hidden] { display: none; }
+
+.booking-modal.active { opacity: 1; visibility: visible; }
+
+.booking-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.booking-modal-content {
+    position: relative;
+    width: min(100%, 720px);
+    max-height: min(86vh, 780px);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-raised);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(14px) scale(.98);
+    transition: transform var(--dur-med) var(--ease-out);
+    overflow: hidden;
+}
+
+.booking-modal.active .booking-modal-content { transform: none; }
+
+.booking-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.35rem;
+    border-bottom: 1px solid var(--glass-border-soft);
+    background: var(--glass-bg-light);
+}
+
+.booking-modal-header h2 {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: 0;
+    font-size: 1.12rem;
+    font-family: var(--font-display);
+}
+
+.modal-icon { color: var(--color-accent); }
+
+.booking-modal-close {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xs);
+    background: var(--glass-bg);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
+}
+
+.booking-modal-close:hover { color: #fff; border-color: rgba(248, 113, 113, .5); transform: rotate(90deg); }
+
+.booking-modal-body { padding: 1.25rem 1.35rem 1.5rem; overflow: auto; }
+
+.cal-embed-container {
+    position: relative;
+    min-height: 480px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+    overflow: hidden;
+}
+
+.cal-loading {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: .9rem;
+    color: var(--color-text-muted);
+    font-size: .9rem;
+}
+
+.cal-spinner {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--color-accent);
+    animation: tg-spin .9s linear infinite;
+}
+
+@keyframes tg-spin { to { transform: rotate(360deg); } }
+
+.booking-modal-fallback {
+    margin: 1rem 0 0;
+    font-size: .85rem;
+    color: var(--color-text-faint);
+    text-align: center;
+}
+
+.booking-modal-fallback a { color: var(--color-accent); }
+
+/* --------------------------------------------------------------------------
+   Exit-intent popup
+   -------------------------------------------------------------------------- */
+.exit-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-popup);
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-med) var(--ease-out), visibility var(--dur-med);
+}
+
+.exit-popup-overlay.active { opacity: 1; visibility: visible; }
+
+.exit-popup {
+    position: relative;
+    width: min(100%, 460px);
+    padding: 2.1rem 1.9rem 1.7rem;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    background: var(--gradient-glass), var(--color-bg-raised);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-accent);
+    text-align: center;
+    transform: translateY(16px) scale(.97);
+    transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.exit-popup-overlay.active .exit-popup { transform: none; }
+
+.exit-popup h3 {
+    margin: 0 0 .6rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: -.015em;
+}
+
+.exit-popup p { margin: 0 0 1.1rem; color: var(--color-text-muted); font-size: .94rem; line-height: 1.65; }
+
+.exit-popup form { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+.exit-popup input[type="email"] {
+    flex: 1 1 180px;
+    min-width: 0;
+    padding: .8rem .95rem;
+    border-radius: var(--radius-pill);
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    background: var(--glass-bg);
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--dur-fast), transform var(--dur-fast);
+}
+
+.exit-popup-close:hover { color: #fff; transform: rotate(90deg); }
+
+.exit-popup-note { margin: .8rem 0 0 !important; font-size: .76rem !important; color: var(--color-text-faint) !important; }
+
+/* --------------------------------------------------------------------------
+   Accessibility utilities
+   -------------------------------------------------------------------------- */
+.sr-only,
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.skip-to-content {
+    position: fixed;
+    top: -100px;
+    left: 1rem;
+    z-index: calc(var(--z-progress) + 1);
+    padding: .7rem 1.1rem;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--gradient-primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: .9rem;
+    text-decoration: none;
+    transition: top var(--dur-fast) var(--ease-out);
+}
+
+.skip-to-content:focus-visible { top: 0; }
+
+/* --------------------------------------------------------------------------
+   Scrollbars (webkit + firefox)
+   -------------------------------------------------------------------------- */
+* { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .18) transparent; }
+
+body.light-theme * { scrollbar-color: rgba(11, 14, 22, .25) transparent; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .16);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover { background-color: rgba(100, 222, 223, .45); }
+
+/* --------------------------------------------------------------------------
+   Legacy horizontal scroll container (pre-layout-v2 fallback)
+   -------------------------------------------------------------------------- */
+.horizontal-scroll-container {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.horizontal-scroll-container > * { scroll-snap-align: start; }

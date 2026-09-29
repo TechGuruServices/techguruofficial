@@ -1,0 +1,131 @@
+/* ==========================================================================
+   TECHGURU — DESIGN TOKENS  (rebuilt 2026-09-15)
+   Single source of truth for colour, type, space, elevation, motion.
+   Custom-property names match what the markup already references
+   (--glass-bg-light, --glass-border, --color-text-muted, --color-accent …).
+   Dark theme is the default (scripts.js adds body.dark-theme);
+   body.light-theme flips the same tokens.
+   ========================================================================== */
+
+:root {
+    /* ---- Brand ---- */
+    --color-primary: #4a6cf7;
+    --color-primary-soft: #6b8cff;
+    --color-secondary: #a274ff;
+    --color-accent: #64dedf;
+    --color-gold: #fbbf24;
+    --color-gold-deep: #d97706;
+    --color-success: #34d399;
+    --color-success-deep: #059669;
+    --color-danger: #f87171;
+
+    /* ---- Surfaces (dark, default) ---- */
+    --color-bg: #080a0f;
+    --color-bg-soft: #0b0e16;
+    --color-bg-raised: #10131d;
+    --color-surface: rgba(255, 255, 255, .04);
+    --glass-bg: rgba(255, 255, 255, .05);
+    --glass-bg-light: rgba(255, 255, 255, .03);
+    --glass-bg-strong: rgba(255, 255, 255, .08);
+    --glass-border: rgba(255, 255, 255, .1);
+    --glass-border-soft: rgba(255, 255, 255, .06);
+    --glass-border-strong: rgba(255, 255, 255, .16);
+    --glass-blur: blur(16px) saturate(150%);
+    --navbar-bg: rgba(8, 10, 15, .72);
+    --navbar-bg-scrolled: rgba(8, 10, 15, .88);
+    --overlay-bg: rgba(4, 6, 10, .72);
+
+    /* ---- Text ---- */
+    --color-text: #f2f4fa;
+    --color-text-light: #f2f4fa;
+    --color-text-muted: rgba(242, 244, 250, .68);
+    --color-text-faint: rgba(242, 244, 250, .5);
+    --color-text-inverse: #0b0e16;
+
+    /* ---- Gradients ---- */
+    --gradient-primary: linear-gradient(135deg, #4a6cf7 0%, #a274ff 100%);
+    --gradient-accent: linear-gradient(90deg, #64dedf 0%, #4a6cf7 100%);
+    --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+    --gradient-success: linear-gradient(180deg, #34d399 0%, #059669 100%);
+    --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .018));
+    --gradient-page: radial-gradient(1100px 520px at 12% -6%, rgba(74, 108, 247, .16), transparent 62%),
+        radial-gradient(900px 480px at 88% 4%, rgba(162, 116, 255, .13), transparent 64%),
+        radial-gradient(1200px 700px at 50% 108%, rgba(100, 222, 223, .07), transparent 60%);
+
+    /* ---- Type ---- */
+    --font-display: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    /* ---- Layout ---- */
+    --nav-height: 76px;
+    --container-width: 1200px;
+    --container-narrow: 820px;
+    --gutter: clamp(1.15rem, 3.6vw, 2.5rem);
+    --section-y: clamp(4rem, 7.5vw, 6.75rem);
+
+    /* ---- Radius ---- */
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 28px;
+    --radius-pill: 999px;
+
+    /* ---- Elevation ---- */
+    --shadow-sm: 0 6px 18px -10px rgba(0, 0, 0, .8);
+    --shadow-md: 0 18px 44px -30px rgba(0, 0, 0, .95);
+    --shadow-lg: 0 30px 70px -34px rgba(0, 0, 0, 1);
+    --shadow-glow-primary: 0 16px 34px -18px rgba(74, 108, 247, .95);
+    --shadow-glow-accent: 0 0 0 1px rgba(100, 222, 223, .16), 0 20px 46px -28px rgba(100, 222, 223, .55);
+    --ring-focus: 0 0 0 3px rgba(100, 222, 223, .35);
+
+    /* ---- Motion ---- */
+    --ease-out: cubic-bezier(.2, .7, .3, 1);
+    --ease-spring: cubic-bezier(.34, 1.4, .44, 1);
+    --dur-fast: .18s;
+    --dur-med: .32s;
+    --dur-slow: .6s;
+
+    /* ---- Z index ---- */
+    --z-decor: 0;
+    --z-content: 1;
+    --z-nav: 1200;
+    --z-popup: 1400;
+    --z-chat: 1500;
+    --z-modal: 1600;
+    --z-progress: 2000;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME — same tokens, flipped (scripts.js toggles body.light-theme)
+   -------------------------------------------------------------------------- */
+body.light-theme {
+    --color-bg: #f4f6fb;
+    --color-bg-soft: #eceff7;
+    --color-bg-raised: #ffffff;
+    --color-surface: rgba(11, 14, 22, .04);
+    --glass-bg: rgba(255, 255, 255, .8);
+    --glass-bg-light: rgba(255, 255, 255, .6);
+    --glass-bg-strong: rgba(255, 255, 255, .92);
+    --glass-border: rgba(11, 14, 22, .1);
+    --glass-border-soft: rgba(11, 14, 22, .07);
+    --glass-border-strong: rgba(11, 14, 22, .16);
+    --navbar-bg: rgba(244, 246, 251, .78);
+    --navbar-bg-scrolled: rgba(244, 246, 251, .92);
+    --overlay-bg: rgba(20, 24, 36, .45);
+
+    --color-text: #131722;
+    --color-text-light: #131722;
+    --color-text-muted: rgba(19, 23, 34, .72);
+    --color-text-faint: rgba(19, 23, 34, .55);
+    --color-text-inverse: #f2f4fa;
+
+    --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .6));
+    --gradient-page: radial-gradient(1100px 520px at 12% -6%, rgba(74, 108, 247, .12), transparent 62%),
+        radial-gradient(900px 480px at 88% 4%, rgba(162, 116, 255, .1), transparent 64%);
+
+    --shadow-sm: 0 6px 18px -12px rgba(19, 23, 34, .25);
+    --shadow-md: 0 18px 44px -30px rgba(19, 23, 34, .3);
+    --shadow-lg: 0 30px 70px -34px rgba(19, 23, 34, .35);
+}

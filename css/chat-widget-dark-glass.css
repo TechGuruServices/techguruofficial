@@ -1,0 +1,488 @@
+/* ==========================================================================
+   TECHGURU — CHAT WIDGET · DARK GLASS  (rebuilt 2026-09-15)
+   Skins every element js/chat-widget.js drives:
+     #chat-toggle .chat-toggle / .chat-avatar
+     #chat-window .chat-window  +  .chat-window--open
+     .chat-header / .chat-header-brand / .chat-header-status (.status-dot)
+     .chat-suggestions .suggestion-chip
+     #chat-messages .chat-messages > .chat-message--user|--assistant > .chat-bubble
+     #chat-typing .chat-typing-indicator / .chat-typing-hidden
+     #chat-form .chat-form / .chat-input-* / .chat-send-btn
+     #chat-file-preview / .chat-floating-ctas (display controlled by JS)
+   ========================================================================== */
+
+.chat-widget-container {
+    position: fixed;
+    right: clamp(.9rem, 2vw, 1.5rem);
+    bottom: clamp(.9rem, 2vw, 1.5rem);
+    z-index: var(--z-chat, 1500);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Floating quick-contact CTAs (JS toggles inline display)
+   -------------------------------------------------------------------------- */
+.chat-floating-ctas {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .55rem;
+}
+
+.chat-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem .95rem;
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, .12));
+    border-radius: 999px;
+    background: rgba(12, 15, 24, .82);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    color: var(--color-text, #f2f4fa);
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .9);
+    transition: transform .22s cubic-bezier(.2, .7, .3, 1), border-color .22s, background .22s;
+}
+
+.chat-cta-btn:hover { transform: translateY(-2px); border-color: rgba(100, 222, 223, .45); }
+
+.chat-cta-btn.whatsapp .chat-cta-icon { color: #34d399; }
+.chat-cta-btn.schedule .chat-cta-icon { color: #64dedf; }
+
+/* --------------------------------------------------------------------------
+   Toggle bubble
+   -------------------------------------------------------------------------- */
+/* Transparent launcher: just the robot, floating gracefully.
+   No disc, no border, no ring — the avatar art already carries its own
+   transparency, so we only add a smooth bob + soft depth shadow. */
+.chat-toggle {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    overflow: visible;
+    will-change: transform;
+    animation: chat-float 3.2s ease-in-out infinite;
+}
+
+/* hover/focus breathe on the art, not the button (button owns the float) */
+.chat-toggle:hover .chat-avatar,
+.chat-toggle:focus-visible .chat-avatar { transform: scale(1.08); }
+
+@keyframes chat-float {
+    0%,
+    100% { transform: translateY(0); }
+
+    50% { transform: translateY(-10px); }
+}
+
+.chat-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
+    filter: drop-shadow(0 10px 22px rgba(74, 108, 247, .45));
+}
+
+/* --------------------------------------------------------------------------
+   Window shell
+   -------------------------------------------------------------------------- */
+.chat-window {
+    position: absolute;
+    right: 0;
+    bottom: 96px;
+    width: min(392px, calc(100vw - 1.6rem));
+    height: min(600px, calc(100vh - 7.5rem));
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(16, 19, 29, .92), rgba(9, 11, 17, .95));
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 1), 0 0 0 1px rgba(100, 222, 223, .08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px) scale(.97);
+    transform-origin: 100% 100%;
+    transition: opacity .3s cubic-bezier(.2, .7, .3, 1), transform .3s cubic-bezier(.2, .7, .3, 1), visibility .3s;
+    overflow: hidden;
+}
+
+.chat-window--open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+/* resize handles are decorative */
+.resize-handle { display: none; }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .09);
+    background: linear-gradient(90deg, rgba(74, 108, 247, .22), rgba(162, 116, 255, .16));
+}
+
+.chat-header-brand { display: flex; align-items: center; gap: .65rem; min-width: 0; }
+
+.chat-header-logo { width: 36px; height: 36px; border-radius: 10px; flex: none; }
+
+.chat-header-info h3 {
+    margin: 0;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: #fff;
+}
+
+.chat-header-status {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: .1rem 0 0;
+    font-size: .74rem;
+    color: rgba(242, 244, 250, .72);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, .55);
+    animation: chat-status 2.2s ease-out infinite;
+}
+
+@keyframes chat-status {
+
+    0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, .5); }
+
+    70% { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+
+    100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.chat-header-actions { display: flex; align-items: center; gap: .4rem; }
+
+.chat-action-btn,
+.chat-close {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .05);
+    color: rgba(242, 244, 250, .75);
+    cursor: pointer;
+    transition: color .18s, border-color .18s, background .18s, transform .18s;
+}
+
+.chat-action-btn:hover,
+.chat-close:hover { color: #fff; border-color: rgba(100, 222, 223, .45); background: rgba(100, 222, 223, .12); }
+
+.chat-close span { font-size: 1.15rem; line-height: 1; }
+
+/* --------------------------------------------------------------------------
+   Suggestion chips
+   -------------------------------------------------------------------------- */
+.chat-suggestions {
+    display: flex;
+    gap: .45rem;
+    padding: .7rem .85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.chat-suggestions::-webkit-scrollbar { display: none; }
+
+.suggestion-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    flex: none;
+    padding: .42rem .8rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .05);
+    color: rgba(242, 244, 250, .85);
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .18s, background .18s, color .18s, transform .18s;
+}
+
+.suggestion-chip:hover {
+    border-color: rgba(100, 222, 223, .5);
+    background: rgba(100, 222, 223, .12);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.chip-icon { width: 14px; height: 14px; color: #64dedf; }
+
+/* --------------------------------------------------------------------------
+   Messages
+   -------------------------------------------------------------------------- */
+.chat-messages {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 1rem .9rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    scroll-behavior: smooth;
+}
+
+.chat-message { display: flex; flex-direction: column; max-width: 86%; }
+
+.chat-message--assistant { align-self: flex-start; align-items: flex-start; }
+
+.chat-message--user { align-self: flex-end; align-items: flex-end; }
+
+.chat-bubble {
+    padding: .68rem .9rem;
+    border-radius: 16px;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: var(--color-text, #f2f4fa);
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.chat-message--assistant .chat-bubble {
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-bottom-left-radius: 6px;
+    background: rgba(255, 255, 255, .06);
+}
+
+.chat-message--user .chat-bubble {
+    border: 1px solid rgba(74, 108, 247, .45);
+    border-bottom-right-radius: 6px;
+    background: linear-gradient(135deg, rgba(74, 108, 247, .85), rgba(122, 92, 255, .8));
+    color: #fff;
+    box-shadow: 0 10px 24px -14px rgba(74, 108, 247, .9);
+}
+
+.chat-bubble a { color: #64dedf; }
+
+.chat-bubble strong { color: #fff; }
+
+.chat-timestamp {
+    margin-top: .28rem;
+    font-size: .66rem;
+    letter-spacing: .04em;
+    color: rgba(242, 244, 250, .45);
+}
+
+/* --------------------------------------------------------------------------
+   Typing indicator
+   -------------------------------------------------------------------------- */
+.chat-typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: 0 .95rem .55rem;
+}
+
+.chat-typing-hidden { display: none; }
+
+.typing-avatar { width: 26px; height: 26px; border-radius: 8px; }
+
+.typing-dots { display: inline-flex; gap: .28rem; }
+
+.typing-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(100, 222, 223, .85);
+    animation: chat-typing 1.15s ease-in-out infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: .15s; }
+.typing-dots span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes chat-typing {
+
+    0%,
+    100% { transform: translateY(0); opacity: .45; }
+
+    50% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Composer
+   -------------------------------------------------------------------------- */
+.chat-form {
+    display: flex;
+    align-items: flex-end;
+    gap: .5rem;
+    padding: .7rem .8rem .8rem;
+    border-top: 1px solid rgba(255, 255, 255, .09);
+    background: rgba(255, 255, 255, .03);
+}
+
+.chat-input-wrapper { flex: 1 1 auto; min-width: 0; }
+
+.chat-input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: .3rem;
+    padding: .3rem .35rem;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 16px;
+    background: rgba(8, 10, 15, .6);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.chat-input-container:focus-within {
+    border-color: rgba(100, 222, 223, .55);
+    box-shadow: 0 0 0 3px rgba(100, 222, 223, .14);
+}
+
+.chat-input-btn {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(242, 244, 250, .6);
+    cursor: pointer;
+    transition: color .18s, background .18s;
+}
+
+.chat-input-btn:hover { color: #64dedf; background: rgba(100, 222, 223, .1); }
+
+.chat-input-btn svg { width: 17px; height: 17px; }
+
+#chat-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-height: 120px;
+    padding: .55rem .35rem;
+    border: 0;
+    background: transparent;
+    color: var(--color-text, #f2f4fa);
+    font-family: var(--font-body, inherit);
+    font-size: .9rem;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+}
+
+#chat-input::placeholder { color: rgba(242, 244, 250, .38); }
+
+.chat-input-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .35rem .3rem 0;
+}
+
+.char-count,
+.input-hint { font-size: .66rem; color: rgba(242, 244, 250, .4); }
+
+.chat-send-btn {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex: none;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #4a6cf7, #a274ff);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 12px 26px -14px rgba(74, 108, 247, 1);
+    transition: transform .2s cubic-bezier(.2, .7, .3, 1), box-shadow .2s, opacity .2s;
+}
+
+.chat-send-btn:hover { transform: translateY(-2px); }
+.chat-send-btn svg { width: 18px; height: 18px; }
+
+/* --------------------------------------------------------------------------
+   Attached-file preview strip (children built by JS)
+   -------------------------------------------------------------------------- */
+.chat-file-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    padding: 0 .9rem;
+}
+
+.chat-file-preview:empty { display: none; }
+
+.chat-file-preview > * {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    max-width: 100%;
+    padding: .32rem .65rem;
+    border: 1px solid rgba(100, 222, 223, .3);
+    border-radius: 999px;
+    background: rgba(100, 222, 223, .1);
+    color: rgba(242, 244, 250, .85);
+    font-size: .72rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .chat-window {
+        position: fixed;
+        right: .6rem;
+        left: .6rem;
+        bottom: .6rem;
+        width: auto;
+        height: min(72vh, 620px);
+        transform-origin: 50% 100%;
+    }
+
+    .chat-widget-container { right: .8rem; bottom: .8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chat-toggle,
+    .chat-toggle::after,
+    .status-dot,
+    .typing-dots span { animation: none !important; }
+
+    .chat-window,
+    .chat-toggle,
+    .chat-cta-btn { transition-duration: .001ms !important; }
+}
+
+/* Insurance: highest-specificity float rule, last in file — guarantees the
+   bob stays active even if a stray merged block ever precedes it. */
+.chat-widget-container .chat-toggle {
+    animation: chat-float 3.2s ease-in-out infinite;
+}

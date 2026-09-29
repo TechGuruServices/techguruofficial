@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://techguruofficial.us/sitemap.xml
+
+# Allow all favicons and manifest
+Allow: /favicon-*.png
+Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
+Allow: /favicon.ico
+
+# Disallow admin/private areas (add if needed)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl delay (optional)
+Crawl-delay: 0

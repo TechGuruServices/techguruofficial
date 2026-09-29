@@ -1,0 +1,222 @@
+/* ==========================================================================
+   TECHGURU — CINEMATIC SCROLL-STORYTELLING LAYER  (added 2026-09-25)
+   Sits on top of the directional reveal system (layout-v2.css §19) and adds:
+     1. Ken Burns "breathing" on the hero media reel
+     2. Progress dots for the hero video CTA playlist
+     3. Line-mask reveals on section headlines
+     4. Scroll-linked word lighting on the About statement (.about-lead)
+     5. Clip-path wipe-in on portfolio shots
+     6. Parallax brand glow orbs (injected by js/cinematic.js)
+     7. Chapter rail — a left-edge story navigator
+   Every effect is gated behind html.js-cine, which js/cinematic.js sets ONLY
+   when prefers-reduced-motion is not set — so content is never hidden for
+   reduced-motion users or when JS fails (never-stay-invisible failsafe).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. KEN BURNS — active hero slide slowly breathes inward
+   -------------------------------------------------------------------------- */
+.js-cine .hero-slide.active {
+    animation: tg-kenburns 9s linear forwards;
+}
+
+@keyframes tg-kenburns {
+    from { transform: scale(1.001); }
+    to   { transform: scale(1.075); }
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO REEL DOTS — playlist position + manual control
+   -------------------------------------------------------------------------- */
+.hero-rotator-dots {
+    position: relative;
+    margin: 12px auto 0;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(8, 10, 15, .58);
+    border: 1px solid rgba(255, 255, 255, .12);
+    backdrop-filter: blur(8px);
+    z-index: 4;
+}
+
+.hero-dot {
+    width: 20px;
+    height: 6px;
+    border: 0;
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .28);
+    cursor: pointer;
+    transition: width .35s var(--ease-out), background-color .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+
+.hero-dot:hover { background: rgba(255, 255, 255, .55); }
+
+.hero-dot.active {
+    width: 34px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    box-shadow: 0 0 12px rgba(100, 222, 223, .5);
+}
+
+body.light-theme .hero-dot { background: rgba(11, 14, 22, .3); }
+body.light-theme .hero-dot:hover { background: rgba(11, 14, 22, .5); }
+body.light-theme .hero-dot.active {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    box-shadow: 0 0 12px rgba(74, 108, 247, .4);
+}
+
+/* --------------------------------------------------------------------------
+   3. LINE-MASK HEADLINE REVEAL — text rises out of its own clipping line
+   -------------------------------------------------------------------------- */
+.js-cine .tg-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: .1em;
+    margin-bottom: -.1em;
+}
+
+.js-cine .tg-mask-inner {
+    display: block;
+    transform: translate3d(0, 115%, 0);
+    transition: transform .95s cubic-bezier(.16, 1, .3, 1);
+    will-change: transform;
+}
+
+.js-cine .mask-in .tg-mask-inner { transform: translate3d(0, 0, 0); }
+
+/* --------------------------------------------------------------------------
+   4. STATEMENT WORD LIGHTING — the About manifesto ignites as you scroll
+   -------------------------------------------------------------------------- */
+.js-cine .about-lead .tg-word {
+    opacity: .2;
+    filter: saturate(.5);
+    transition: opacity .4s linear, filter .4s linear;
+}
+
+.js-cine .about-lead .tg-word.lit {
+    opacity: 1;
+    filter: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. PORTFOLIO CLIP-WIPE — shots uncover bottom-to-top as cards land
+   -------------------------------------------------------------------------- */
+.js-cine .portfolio-card .portfolio-shot img,
+.js-cine .portfolio-card .portfolio-shot video {
+    clip-path: inset(0 0 101% 0);
+    transition: clip-path 1.15s cubic-bezier(.16, 1, .3, 1) .12s;
+}
+
+.js-cine .portfolio-card.is-in .portfolio-shot img,
+.js-cine .portfolio-card.is-in .portfolio-shot video {
+    clip-path: inset(0 0 0% 0);
+}
+
+/* --------------------------------------------------------------------------
+   6. PARALLAX GLOW ORBS — brand-coloured depth layers behind chapters
+   -------------------------------------------------------------------------- */
+.tg-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .55;
+    filter: blur(64px);
+    will-change: transform;
+}
+
+body.light-theme .tg-orb { opacity: .3; }
+
+/* --------------------------------------------------------------------------
+   7. CHAPTER RAIL — left-edge story navigator (desktop only)
+   -------------------------------------------------------------------------- */
+.tg-rail {
+    position: fixed;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tg-rail-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    outline-offset: 4px;
+}
+
+.tg-rail-dot {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(242, 244, 250, .22);
+    border: 1px solid rgba(242, 244, 250, .4);
+    transition: transform .3s var(--ease-out), background-color .3s var(--ease-out), box-shadow .3s var(--ease-out);
+}
+
+body.light-theme .tg-rail-dot {
+    background: rgba(19, 23, 34, .22);
+    border-color: rgba(19, 23, 34, .4);
+}
+
+.tg-rail-label {
+    position: absolute;
+    left: 20px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    background: var(--navbar-bg-scrolled);
+    border: 1px solid var(--glass-border);
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate3d(-6px, 0, 0);
+    transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+    pointer-events: none;
+    backdrop-filter: var(--glass-blur);
+}
+
+.tg-rail-item:hover .tg-rail-label,
+.tg-rail-item:focus-visible .tg-rail-label,
+.tg-rail-item.is-active .tg-rail-label {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.tg-rail-item.is-active .tg-rail-dot {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px rgba(100, 222, 223, .16), 0 0 14px rgba(100, 222, 223, .55);
+}
+
+@media (max-width: 1280px) {
+    .tg-rail { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — hard kill-switch for every cinematic effect
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .js-cine .hero-slide.active { animation: none !important; }
+    .js-cine .tg-mask-inner { transform: none !important; transition: none !important; }
+    .js-cine .about-lead .tg-word { opacity: 1 !important; filter: none !important; transition: none !important; }
+    .js-cine .portfolio-card .portfolio-shot img,
+    .js-cine .portfolio-card .portfolio-shot video { clip-path: none !important; transition: none !important; }
+    .tg-orb { display: none !important; }
+    .tg-rail-dot, .tg-rail-label { transition: none !important; }
+}
