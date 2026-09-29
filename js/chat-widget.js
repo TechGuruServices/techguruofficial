@@ -209,7 +209,7 @@ RULES:
      GREETING
   ───────────────────────────────────────────── */
   function sendBotGreeting() {
-    const greeting = "Hey there! 👋 I'm the TechGuru AI assistant. I'm here to help you explore how we can automate and elevate your business.\n\nTo get started — what's your name?";
+    const greeting = "Hey there! 👋 I'm the TechGuru AI assistant. I'm here to help you explore how we can automate and elevate your business.\n\n⚡ Solo shop = fast answers: most replies land the same day, 7 days a week.\n\nTo get started — what's your name?";
     appendMessage("assistant", greeting);
 
     // Record that we've asked for their name

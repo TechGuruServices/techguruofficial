@@ -366,6 +366,18 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', () => {
       hasSubmittedContactForm = true;
     });
+
+    // Pricing fit-check: reveal the price-floor note for sub-$500 budgets
+    const budgetSel = document.getElementById('contact-budget');
+    const budgetNote = document.getElementById('budget-note');
+    const budgetAckBox = document.getElementById('budget-ack');
+    if (budgetSel && budgetNote && budgetAckBox) {
+      budgetSel.addEventListener('change', () => {
+        const low = budgetSel.value === 'under-500';
+        budgetNote.hidden = !low;
+        budgetAckBox.required = low;
+      });
+    }
   }
 
   // Show popup only when user clicks outside contact form after interacting with it
@@ -514,6 +526,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const phone = document.getElementById('contact-phone')?.value || '';
       const service = document.getElementById('contact-service')?.value || '';
       const message = document.getElementById('contact-message')?.value || '';
+      const budget = document.getElementById('contact-budget')?.value || '';
+      const timeline = document.getElementById('contact-timeline')?.value || '';
+      const currentTools = document.getElementById('contact-tools')?.value || '';
+      const needs = Array.from(contactForm.querySelectorAll('input[name="needs"]:checked')).map(c => c.value);
+      const budgetAck = document.getElementById('budget-ack');
       const button = contactForm.querySelector('button[type="submit"]');
       const originalText = button.textContent;
 
@@ -521,6 +538,19 @@ document.addEventListener('DOMContentLoaded', () => {
         showFormMessage(contactForm, 'Please fill out all required fields.', 'error');
         return;
       }
+
+      /* pricing fit-check: low-budget leads must acknowledge the price floor */
+      if (budget === 'under-500' && budgetAck && !budgetAck.checked) {
+        showFormMessage(contactForm, 'Please confirm the budget note below the fit-check (or pick another range).', 'error');
+        return;
+      }
+
+      /* compose the fit-check into the message so it reaches email with zero Worker changes */
+      const fitLine = '[Fit-check] Budget: ' + (budget || '—') +
+        ' | Timeline: ' + (timeline || '—') +
+        ' | Needs: ' + (needs.join(', ') || '—') +
+        ' | Current tools: ' + (currentTools || '—');
+      const composedMessage = (fitLine + '\n---\n' + message).slice(0, 4900);
 
       button.textContent = 'Sending...';
       button.disabled = true;
@@ -532,7 +562,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ 
-            name, email, company, phone, service, message,
+            name, email, company, phone, service,
+            message: composedMessage,
+            budget, timeline, needs: needs.join(', '), current_tools: currentTools,
             source: 'contact-form'
           })
         });

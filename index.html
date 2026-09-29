@@ -3118,6 +3118,60 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <option value="other">Other / Not Sure</option>
                         </select>
                     </div>
+                    <div class="form-group tg-fitcheck">
+                        <span class="form-label tg-fitcheck-title">Quick fit-check — 20 seconds, helps me quote faster</span>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-budget" class="form-label">Project budget</label>
+                                <select id="contact-budget" name="budget">
+                                    <option value="" disabled selected>Select a range</option>
+                                    <option value="under-500">Under $500</option>
+                                    <option value="500-1000">$500 – $1,000</option>
+                                    <option value="1000-2500">$1,000 – $2,500</option>
+                                    <option value="2500-plus">$2,500+</option>
+                                    <option value="not-sure">Not sure yet</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-timeline" class="form-label">Target timeline</label>
+                                <select id="contact-timeline" name="timeline">
+                                    <option value="" disabled selected>Select a timeline</option>
+                                    <option value="asap">ASAP (2–4 weeks)</option>
+                                    <option value="1-2-months">1–2 months</option>
+                                    <option value="exploring">3+ months / just exploring</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">What do you need? <span class="tg-hint">(pick any)</span></span>
+                            <div class="tg-needs" role="group" aria-label="What do you need?">
+                                <label class="tg-need"><input type="checkbox" name="needs" value="New Website"><span>New Website</span></label>
+                                <label class="tg-need"><input type="checkbox" name="needs" value="AI Chat Widget"><span>AI Chat Widget</span></label>
+                                <label class="tg-need"><input type="checkbox" name="needs" value="Logo &amp; Branding"><span>Logo &amp; Branding</span></label>
+                                <label class="tg-need"><input type="checkbox" name="needs" value="Custom Tool / CRM"><span>Custom Tool / CRM</span></label>
+                                <label class="tg-need"><input type="checkbox" name="needs" value="Care Plan"><span>Care Plan</span></label>
+                                <label class="tg-need"><input type="checkbox" name="needs" value="Not sure"><span>Not sure</span></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-tools" class="form-label">How do you track customers &amp; jobs today?</label>
+                            <select id="contact-tools" name="current_tools">
+                                <option value="" disabled selected>Select…</option>
+                                <option value="paper">Paper / notebook</option>
+                                <option value="spreadsheets">Spreadsheets (Excel / Google Sheets)</option>
+                                <option value="generic-software">Generic software (QuickBooks, Jobber, etc.)</option>
+                                <option value="custom-system">Another custom system</option>
+                                <option value="nothing">Nothing yet — that's the problem</option>
+                            </select>
+                        </div>
+                        <div class="tg-budget-note" id="budget-note" hidden>
+                            <p><strong>Quick heads-up:</strong> paid projects start at <strong>$350</strong> (branding) and
+                                <strong>$900</strong> (websites). Under $500? The fastest wins are a <strong>Care Plan from
+                                    $75/mo</strong> or the free Local Web Starter Kit — no pressure either way.</p>
+                            <label class="tg-ack"><input type="checkbox" id="budget-ack"> I understand paid projects start
+                                at $350+ — I'd still like a quote</label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="contact-message" class="form-label">Tell me about your project <span
                                 class="required">*</span></label>
@@ -3389,6 +3443,13 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
                             <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
                         </svg> Services
+                    </button>
+                    <button class="suggestion-chip" data-message="How fast is your turnaround?" type="button">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg> Turnaround
                     </button>
                     <button class="suggestion-chip" data-message="I'd like to get a quote" type="button">
                         <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
