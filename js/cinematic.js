@@ -121,6 +121,7 @@
         });
       }
 
+      var processLine = document.querySelector('.process-line');
       var litCount = -1;
       function paintStatement() {
         if (!lead || !words.length) { return; }
@@ -140,12 +141,13 @@
          ------------------------------------------------------------------ */
       var chapters = [
         ['why',       '01 · The Why'],
-        ['process',   '02 · The Process'],
-        ['services',  '03 · Services'],
-        ['portfolio', '04 · The Proof'],
-        ['about',     '05 · The Guru'],
-        ['faq',       '06 · Answers'],
-        ['contact',   '07 · Start']
+        ['portfolio', '02 · The Proof'],
+        ['features',  '03 · The Basics'],
+        ['services',  '04 · Services'],
+        ['process',   '05 · Process'],
+        ['about',     '06 · The Guru'],
+        ['faq',       '07 · Answers'],
+        ['contact',   '08 · Start']
       ];
       var railItems = [];
       var rail = document.createElement('nav');
@@ -187,6 +189,24 @@
       }
 
       /* ------------------------------------------------------------------
+         5b. PORTFOLIO HOVER OVERLAYS — blur + mask + case-study button
+         ------------------------------------------------------------------ */
+      Array.prototype.slice.call(document.querySelectorAll('.portfolio-media')).forEach(function (media) {
+        var card = media.closest('.portfolio-card');
+        if (!card) { return; }
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'shot-overlay-btn';
+        btn.innerHTML = '<span>View Case Study →</span>';
+        btn.setAttribute('aria-label', 'View case study details');
+        btn.addEventListener('click', function () {
+          var body = card.querySelector('.portfolio-body');
+          if (body) { body.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        });
+        media.appendChild(btn);
+      });
+
+      /* ------------------------------------------------------------------
          SCROLL LOOP — one rAF-throttled pass for all depth effects
          ------------------------------------------------------------------ */
       var ticking = false;
@@ -201,6 +221,15 @@
             t.el.style.transform = 'translate3d(0,' + (delta * -t.f).toFixed(1) + 'px,0)';
           }
           paintStatement();
+          if (processLine) {
+            var pr = processLine.closest('section');
+            if (pr) {
+              var rr = pr.getBoundingClientRect();
+              var pp = (vh * 0.75 - rr.top) / (rr.height * 0.85);
+              pp = pp < 0 ? 0 : (pp > 1 ? 1 : pp);
+              processLine.style.setProperty('--p', pp.toFixed(3));
+            }
+          }
           ticking = false;
         });
       }

@@ -367,17 +367,32 @@ document.addEventListener('DOMContentLoaded', () => {
       hasSubmittedContactForm = true;
     });
 
-    // Pricing fit-check: reveal the price-floor note for sub-$500 budgets
-    const budgetSel = document.getElementById('contact-budget');
-    const budgetNote = document.getElementById('budget-note');
-    const budgetAckBox = document.getElementById('budget-ack');
-    if (budgetSel && budgetNote && budgetAckBox) {
-      budgetSel.addEventListener('change', () => {
-        const low = budgetSel.value === 'under-500';
-        budgetNote.hidden = !low;
-        budgetAckBox.required = low;
+    // Pricing fit-check: conditional "something else" select + step completion states
+    const otherWrap = document.getElementById('service-other-wrap');
+    const qSteps = Array.from(contactForm.querySelectorAll('.q-step'));
+    const refreshQ = () => {
+      const rv = contactForm.querySelector('input[name="service"]:checked');
+      if (otherWrap) {
+        const showOther = !!(rv && rv.value === 'other');
+        otherWrap.hidden = !showOther;
+        const sel = otherWrap.querySelector('select');
+        if (sel) { sel.required = showOther; }
+      }
+      qSteps.forEach(st => {
+        let ok = false;
+        if (st.dataset.step === '1') {
+          ok = !!rv && (rv.value !== 'other' || !!(otherWrap && otherWrap.querySelector('select').value));
+        } else if (st.dataset.step === '3') {
+          ok = st.querySelectorAll('input:checked').length > 0;
+        } else {
+          const el = st.querySelector('select');
+          ok = !!(el && el.value);
+        }
+        st.classList.toggle('done', ok);
       });
-    }
+    };
+    contactForm.addEventListener('change', refreshQ);
+    refreshQ();
   }
 
   // Show popup only when user clicks outside contact form after interacting with it
@@ -524,33 +539,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('contact-email')?.value || '';
       const company = document.getElementById('contact-company')?.value || '';
       const phone = document.getElementById('contact-phone')?.value || '';
-      const service = document.getElementById('contact-service')?.value || '';
-      const message = document.getElementById('contact-message')?.value || '';
+      const serviceRadio = contactForm.querySelector('input[name="service"]:checked');
+      const otherSel = document.getElementById('contact-service');
+      const service = serviceRadio
+        ? (serviceRadio.value === 'other' ? (otherSel ? otherSel.value : '') : serviceRadio.value)
+        : '';
+      const notes = document.getElementById('contact-message')?.value || '';
       const budget = document.getElementById('contact-budget')?.value || '';
       const timeline = document.getElementById('contact-timeline')?.value || '';
-      const currentTools = document.getElementById('contact-tools')?.value || '';
-      const needs = Array.from(contactForm.querySelectorAll('input[name="needs"]:checked')).map(c => c.value);
-      const budgetAck = document.getElementById('budget-ack');
+      const infra = Array.from(contactForm.querySelectorAll('input[name="infra"]:checked')).map(c => c.value);
       const button = contactForm.querySelector('button[type="submit"]');
       const originalText = button.textContent;
 
-      if (!name || !email || !service || !message) {
-        showFormMessage(contactForm, 'Please fill out all required fields.', 'error');
-        return;
-      }
-
-      /* pricing fit-check: low-budget leads must acknowledge the price floor */
-      if (budget === 'under-500' && budgetAck && !budgetAck.checked) {
-        showFormMessage(contactForm, 'Please confirm the budget note below the fit-check (or pick another range).', 'error');
+      if (!name || !email || !service || !timeline || !budget) {
+        showFormMessage(contactForm, 'Please complete fit-check steps 1, 2 and 4, plus your name and email.', 'error');
         return;
       }
 
       /* compose the fit-check into the message so it reaches email with zero Worker changes */
-      const fitLine = '[Fit-check] Budget: ' + (budget || '—') +
-        ' | Timeline: ' + (timeline || '—') +
-        ' | Needs: ' + (needs.join(', ') || '—') +
-        ' | Current tools: ' + (currentTools || '—');
-      const composedMessage = (fitLine + '\n---\n' + message).slice(0, 4900);
+      const fitLine = '[Fit-check] Service: ' + service +
+        ' | Timeline: ' + timeline +
+        ' | Budget: ' + budget +
+        ' | Infrastructure: ' + (infra.join('; ') || '—');
+      const composedMessage = (fitLine + (notes ? '\nNotes: ' + notes : '')).slice(0, 4900);
 
       button.textContent = 'Sending...';
       button.disabled = true;
@@ -564,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify({ 
             name, email, company, phone, service,
             message: composedMessage,
-            budget, timeline, needs: needs.join(', '), current_tools: currentTools,
+            budget, timeline, infrastructure: infra.join('; '),
             source: 'contact-form'
           })
         });
