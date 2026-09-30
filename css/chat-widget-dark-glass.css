@@ -74,12 +74,33 @@
     cursor: pointer;
     overflow: visible;
     will-change: transform;
-    animation: chat-float 3.2s ease-in-out infinite;
+    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
+    /* premium entrance: spring pop-in, backwards fill so hover owns transform after */
+    animation: chat-enter .9s cubic-bezier(.34, 1.56, .44, 1) .3s backwards;
 }
 
-/* hover/focus breathe on the art, not the button (button owns the float) */
-.chat-toggle:hover .chat-avatar,
-.chat-toggle:focus-visible .chat-avatar { transform: scale(1.08); }
+.chat-toggle:hover,
+.chat-toggle:focus-visible { transform: scale(1.06); }
+
+/* The robot itself: slow noticeable float + gentle fade breathe + a shadow that
+   shrinks as he rises (the classic premium levitation cue). Three synced layers. */
+.chat-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+    animation:
+        chat-float 4.2s ease-in-out infinite,
+        chat-breathe 4.2s ease-in-out -2.1s infinite,
+        chat-shadow 4.2s ease-in-out infinite;
+}
+
+@keyframes chat-enter {
+    0% { opacity: 0; transform: scale(.55) translateY(18px); }
+    60% { opacity: 1; }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
 
 @keyframes chat-float {
     0%,
@@ -88,12 +109,18 @@
     50% { transform: translateY(-10px); }
 }
 
-.chat-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
-    filter: drop-shadow(0 10px 22px rgba(74, 108, 247, .45));
+@keyframes chat-breathe {
+    0%,
+    100% { opacity: 1; }
+
+    50% { opacity: .84; }
+}
+
+@keyframes chat-shadow {
+    0%,
+    100% { filter: drop-shadow(0 14px 26px rgba(74, 108, 247, .48)); }
+
+    50% { filter: drop-shadow(0 5px 12px rgba(74, 108, 247, .28)); }
 }
 
 /* --------------------------------------------------------------------------
@@ -473,16 +500,27 @@
 @media (prefers-reduced-motion: reduce) {
     .chat-toggle,
     .chat-toggle::after,
+    .chat-avatar,
     .status-dot,
     .typing-dots span { animation: none !important; }
+
+    .chat-avatar { filter: drop-shadow(0 10px 22px rgba(74, 108, 247, .45)); opacity: 1; }
 
     .chat-window,
     .chat-toggle,
     .chat-cta-btn { transition-duration: .001ms !important; }
 }
 
-/* Insurance: highest-specificity float rule, last in file — guarantees the
-   bob stays active even if a stray merged block ever precedes it. */
+/* Insurance: highest-specificity rules, last in file — guarantee the entrance
+   and the float/breathe/shadow stack stay active even if a stray merged block
+   ever precedes them. */
 .chat-widget-container .chat-toggle {
-    animation: chat-float 3.2s ease-in-out infinite;
+    animation: chat-enter .9s cubic-bezier(.34, 1.56, .44, 1) .3s backwards;
+}
+
+.chat-widget-container .chat-avatar {
+    animation:
+        chat-float 4.2s ease-in-out infinite,
+        chat-breathe 4.2s ease-in-out -2.1s infinite,
+        chat-shadow 4.2s ease-in-out infinite;
 }
