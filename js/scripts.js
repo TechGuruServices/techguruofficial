@@ -630,23 +630,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let ticking = false;
 
   const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-
-    // Toggle glass effect
-    if (currentScrollY > 10) {
-      navbar.classList.add('navbar-scrolled');
-    } else {
-      navbar.classList.remove('navbar-scrolled');
-    }
-
-    // Toggle visibility (Smart Sticky)
-    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    const y = Math.max(window.scrollY, 0);
+    const menu = document.getElementById('nav-menu');
+    navbar.classList.toggle('navbar-scrolled', y > 10);
+    const delta = y - lastScrollY;
+    // never hide while the mobile menu is open, a nav control has focus, or near the top
+    if ((menu && menu.classList.contains('active')) || navbar.matches(':focus-within') || y <= 80) {
+      navbar.classList.remove('navbar-hidden');
+    } else if (delta > 6) {
       navbar.classList.add('navbar-hidden');
-    } else {
+    } else if (delta < -6) {
       navbar.classList.remove('navbar-hidden');
     }
-
-    lastScrollY = currentScrollY;
+    lastScrollY = y;
     ticking = false;
   };
 
@@ -655,15 +651,17 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(handleScroll);
       ticking = true;
     }
-  });
+  }, { passive: true });
 
   // ============================================
   // SMOOTH SCROLL FOR ANCHOR LINKS
   // ============================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+      const id = this.getAttribute('href');
+      if (!id || id.length < 2) return; // bare "#" would throw in querySelector
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const target = document.querySelector(id);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
