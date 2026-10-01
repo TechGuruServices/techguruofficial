@@ -806,3 +806,14 @@ section.features .feature-icon svg { width: 46px; height: 46px; stroke-width: 1.
 /* Secondary CTA: elegant outline */
 .btn.btn-secondary { background: transparent; border-color: rgba(255, 255, 255, .22); }
 .btn.btn-secondary:hover { border-color: rgba(255, 255, 255, .55); background: rgba(255, 255, 255, .06); }
+
+/* Service-area strip (local SEO, visible to crawlers & customers) */
+.footer-areas {
+    padding: 1.1rem var(--gutter);
+    text-align: center;
+    font-size: .82rem;
+    line-height: 1.7;
+    color: var(--color-text-faint);
+    border-top: 1px solid var(--glass-border-soft);
+}
+.footer-areas strong { color: var(--color-text-muted); font-weight: 600; }
