@@ -52,8 +52,8 @@ PROCESS: Discovery Call (30 min free) → Strategy & Scope (2-3 days) → Build 
 
 CONTACT:
 - Email: info@techguruofficial.us
-- Phone: +1 786-636-9964
-- WhatsApp: https://wa.me/17866369964
+- Phone: +1 (406) 284-5523
+- WhatsApp: https://wa.me/14062845523
 - Book a call: https://cal.com/techguru/strategy-call
 
 YOUR JOB:
@@ -377,7 +377,7 @@ RULES:
       console.error("[TechGuru Chat] API error:", err);
       appendMessage(
         "assistant",
-        "I'm having a bit of trouble connecting right now. You can reach us directly at **info@techguruofficial.us** or call **+1 786-636-9964** — we respond within 24 hours! 🚀"
+        "I'm having a bit of trouble connecting right now. You can reach us directly at **info@techguruofficial.us** or call **+1 (406) 284-5523** — we respond within 24 hours! 🚀"
       );
     }
   }
