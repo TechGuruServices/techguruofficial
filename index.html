@@ -27,6 +27,3991 @@
     <meta property="og:description"
         content="A Montana-based, one-person web design & branding studio in Missoula building custom websites, logos, and AI chat/FAQ widgets for local businesses — direct access to the person building your site, no agency markup.">
     <meta property="og:image" content="https://techguruofficial.us/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="TECHGURU — Websites, Branding & AI Tools for local business, Missoula Montana">
+    <meta property="og:site_name" content="TECHGURU">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://techguruofficial.us/">
+    <meta name="twitter:title" content="TECHGURU | Missoula, MT Web Design, Branding & AI Tools for Local Businesses">
+    <meta name="twitter:description"
+        content="A Montana-based, one-person web design & branding studio in Missoula building custom websites, logos, and AI chat/FAQ widgets for local businesses.">
+    <meta name="twitter:image" content="https://techguruofficial.us/images/og-image.png">
+
+    <!-- Favicons - Optimized for Google Search Results -->
+    <!-- Primary favicon for Google (CRITICAL: 48x48 PNG) -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Apple Touch Icon (180x180 is iOS standard for crisp display) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Web App Manifest (contains all icon definitions) -->
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- PWA Theme Customization -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TECHGURU">
+
+    <!-- Additional Sizes (for completeness) -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+
+
+    <!-- Google Fonts - Optimized Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/styles.css?v=20251224f">
+    <link rel="stylesheet" href="css/cinematic.css?v=20260925">
+    <script src="js/scripts.js" defer></script>
+    <script src="js/cinematic.js" defer></script>
+    <script src="js/story.js" defer></script>
+
+    <!-- ===== TECHGURU Layout System v2 =======================================
+         Inlined below so index.html works even if the css/ folder is untouched.
+         Prefer an external file? Delete the whole <style id="tg-layout-v2"> block
+         and uncomment this line — css/layout-v2.css has identical contents:
+         <link rel="stylesheet" href="css/layout-v2.css?v=20260915">
+    ========================================================================== -->
+    <style id="tg-layout-v2">
+/* ==========================================================================
+   TECHGURU — LAYOUT SYSTEM v2
+   Purpose: one consistent grid + spacing + card + section-header system so
+            every section of the page reads as part of the same page.
+   Notes:   Loaded LAST so it wins the cascade over design-tokens.css,
+            components.css and styles.css without needing !important.
+            Every var() has a fallback, so it works even if a token is missing.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+    /* Layout */
+    --tg-max: 1200px;                 /* page content width            */
+    --tg-max-wide: 1320px;            /* hero / full-bleed content     */
+    --tg-gutter: clamp(1.15rem, 3.6vw, 2.5rem);
+    --tg-section-y: clamp(4rem, 7.5vw, 6.75rem);
+    --tg-nav-h: 88px;                 /* used for anchor scroll offset */
+
+    /* Spacing scale */
+    --tg-s1: .375rem;
+    --tg-s2: .625rem;
+    --tg-s3: 1rem;
+    --tg-s4: 1.5rem;
+    --tg-s5: 2.25rem;
+    --tg-s6: 3.25rem;
+
+    /* Radius scale */
+    --tg-r-sm: 10px;
+    --tg-r: 16px;
+    --tg-r-lg: 22px;
+    --tg-r-pill: 999px;
+
+    /* Surfaces */
+    --tg-card-a: rgba(255, 255, 255, .055);
+    --tg-card-b: rgba(255, 255, 255, .018);
+    --tg-border: rgba(255, 255, 255, .09);
+    --tg-border-hi: rgba(100, 222, 223, .3);
+    --tg-hairline: rgba(255, 255, 255, .055);
+
+    /* Type */
+    --tg-text: #f2f4fa;
+    --tg-muted: rgba(242, 244, 250, .7);
+    --tg-faint: rgba(242, 244, 250, .52);
+    --tg-font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --tg-font-display: 'Poppins', 'Inter', system-ui, sans-serif;
+
+    /* Brand */
+    --tg-accent: #64dedf;
+    --tg-blue: #4a6cf7;
+    --tg-violet: #a274ff;
+    --tg-copper: #d98b5f;
+
+    /* Elevation */
+    --tg-shadow: 0 18px 44px -30px rgba(0, 0, 0, .95);
+    --tg-shadow-hi: 0 30px 60px -32px rgba(0, 0, 0, 1);
+    --tg-glow: 0 0 0 1px rgba(100, 222, 223, .14), 0 22px 48px -30px rgba(74, 108, 247, .8);
+}
+
+/* --------------------------------------------------------------------------
+   2. BASE / PAGE SHELL
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--tg-nav-h) + 18px);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: var(--tg-font-ui);
+    color: var(--tg-text);
+    line-height: 1.6;
+}
+
+img, video, svg, canvas { max-width: 100%; }
+
+/* Every anchor target clears the sticky/fixed nav */
+main > section,
+main > [id] {
+    scroll-margin-top: calc(var(--tg-nav-h) + 18px);
+}
+
+/* Consistent type rhythm across the whole page */
+h1, h2, h3, h4 {
+    font-family: var(--tg-font-display);
+    text-wrap: balance;
+    line-height: 1.16;
+}
+
+p { text-wrap: pretty; }
+
+a { color: inherit; }
+
+/* Accessible focus ring everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid rgba(100, 222, 223, .8);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+::selection { background: rgba(100, 222, 223, .28); }
+
+/* Spam honeypot: keep it out of the layout entirely.
+   (A generic width:100% input rule will otherwise stretch it to the viewport.) */
+.hidden,
+input[name="botcheck"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. SECTION SHELL — same width, same rhythm, same dividers everywhere
+   -------------------------------------------------------------------------- */
+.why-section,
+.about-section,
+.features,
+.faq-section,
+.contact-section {
+    width: 100%;
+    padding: var(--tg-section-y) var(--tg-gutter);
+}
+
+.services,
+.process-section-premium {
+    width: 100%;
+    padding-block: var(--tg-section-y);
+    padding-inline: 0;
+}
+
+.portfolio-section {
+    width: 100%;
+    max-width: none;
+    padding: var(--tg-section-y) var(--tg-gutter);
+}
+
+.lead-magnet { padding-block: var(--tg-section-y); }
+
+/* Inner containers all share one width */
+.services > .container,
+.process-container,
+.lead-magnet-content,
+.about-grid,
+.about-content,
+.why-grid,
+.portfolio-grid,
+.portfolio-inner,
+.features,
+.faq-grid,
+.contact-wrapper,
+.footer-content {
+    width: 100%;
+    max-width: var(--tg-max);
+    margin-inline: auto;
+}
+
+.services > .container,
+.process-container,
+.lead-magnet-content { padding-inline: var(--tg-gutter); }
+
+/* Section rhythm: a hairline between each block so the page reads as one flow */
+main > section + section { border-top: 1px solid var(--tg-hairline); }
+
+/* Alternating tint gives the eye a sense of "new chapter" without noise */
+#services,
+#portfolio,
+#faq {
+    background:
+        radial-gradient(1100px 420px at 50% -10%, rgba(74, 108, 247, .07), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, .016), rgba(255, 255, 255, 0) 45%);
+}
+
+#about,
+#lead {
+    background:
+        radial-gradient(900px 380px at 12% 0%, rgba(162, 116, 255, .07), transparent 72%);
+}
+
+/* --------------------------------------------------------------------------
+   4. SECTION HEADERS — one component, used by every section
+   -------------------------------------------------------------------------- */
+.section-header,
+.process-header,
+.tg-head {
+    max-width: 780px;
+    margin: 0 auto clamp(2.25rem, 4.5vw, 3.5rem);
+    text-align: center;
+}
+
+.section-label,
+.process-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.05rem;
+    padding: .42rem .95rem;
+    border-radius: var(--tg-r-pill);
+    border: 1px solid rgba(100, 222, 223, .24);
+    background: linear-gradient(90deg, rgba(100, 222, 223, .13), rgba(74, 108, 247, .11));
+    color: var(--tg-accent);
+    font-family: var(--tg-font-ui);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* numeric prefix chip inside the eyebrow: <span class="tg-num">01</span> */
+.section-label .tg-num,
+.process-label .tg-num {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.45rem;
+    height: 1.45rem;
+    padding: 0 .3rem;
+    border-radius: var(--tg-r-pill);
+    background: linear-gradient(135deg, var(--tg-blue), var(--tg-violet));
+    color: #fff;
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.section-header h2,
+.process-header h2,
+.tg-head h2,
+.why-section > h2,
+.faq-section > h2,
+.contact-section > h2,
+.about-content > h2 {
+    margin: 0 0 .9rem;
+    font-size: clamp(1.8rem, 1.3rem + 1.9vw, 2.7rem);
+    font-weight: 700;
+    letter-spacing: -.022em;
+}
+
+.section-subtitle {
+    margin: 0 auto;
+    max-width: 64ch;
+    color: var(--tg-muted);
+    font-size: clamp(.98rem, .94rem + .22vw, 1.075rem);
+    line-height: 1.7;
+}
+
+.section-subtitle code {
+    padding: .1rem .4rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid var(--tg-border);
+    font-size: .86em;
+}
+
+/* --------------------------------------------------------------------------
+   5. NAV — sticky polish, location chip, scroll-spy underline, progress bar
+   -------------------------------------------------------------------------- */
+.navbar {
+    z-index: 1200;
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    transition: padding .28s ease, background-color .28s ease, box-shadow .28s ease,
+        border-color .28s ease;
+}
+
+.navbar.is-scrolled {
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 14px 34px -26px rgba(0, 0, 0, 1);
+    background-color: rgba(8, 10, 22, .82);
+}
+
+.nav-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--tg-font-display);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-decoration: none;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: clamp(.5rem, 1.4vw, 1rem);
+}
+
+/* the extra nav link drops out before the bar gets crowded */
+@media (max-width: 1180px) { .nav-hide-md { display: none; } }
+
+/* belt & braces: if the bar runs out of room it wraps rather than
+   pushing the page into horizontal scroll */
+@media (max-width: 1180px) {
+    .navbar { flex-wrap: wrap; }
+    .nav-menu { min-width: 0; }
+    .navbar-actions { flex-wrap: wrap; justify-content: flex-end; min-width: 0; }
+}
+
+.nav-phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* active-page underline */
+.nav-menu ul li a { position: relative; }
+
+.nav-menu ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -.45rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--tg-accent), var(--tg-violet));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
+}
+
+.nav-menu ul li a:hover::after,
+.nav-menu ul li a.is-active::after { transform: scaleX(1); }
+
+.nav-menu ul li a.is-active { color: #fff; }
+
+/* Reading progress bar */
+.tg-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    background: linear-gradient(90deg, var(--tg-accent), var(--tg-blue) 55%, var(--tg-violet));
+    pointer-events: none;
+    opacity: .95;
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO
+   -------------------------------------------------------------------------- */
+.hero h1 {
+    font-size: clamp(2rem, 1.42rem + 2.5vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -.028em;
+    margin-bottom: 1rem;
+}
+
+.hero-location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 1.1rem;
+    padding: .45rem 1rem;
+    border-radius: var(--tg-r-pill);
+    border: 1px solid rgba(100, 222, 223, .26);
+    background: linear-gradient(90deg, rgba(100, 222, 223, .14), rgba(74, 108, 247, .1));
+    color: rgba(242, 244, 250, .92);
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+.hero-location-badge svg { width: 15px; height: 15px; color: var(--tg-accent); flex: none; }
+.hero-location-badge .tg-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--tg-accent);
+    box-shadow: 0 0 0 4px rgba(100, 222, 223, .18);
+}
+
+.hero-description {
+    max-width: 62ch;
+    color: var(--tg-muted);
+    font-size: clamp(1rem, .95rem + .3vw, 1.14rem);
+    line-height: 1.72;
+}
+
+.hero-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: .6rem .9rem;
+    margin: 1.4rem 0 1.9rem;
+    padding: 0;
+    list-style: none;
+    max-width: 660px;
+}
+
+.hero-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    font-size: .95rem;
+    line-height: 1.5;
+    color: rgba(242, 244, 250, .86);
+}
+
+.hero-highlights li svg {
+    width: 17px; height: 17px; flex: none;
+    margin-top: .18rem;
+    color: var(--tg-accent);
+}
+
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .85rem;
+}
+
+.hero-urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 1.5rem;
+    padding: .6rem 1rem;
+    border-radius: var(--tg-r);
+    border: 1px dashed rgba(251, 191, 36, .3);
+    background: rgba(251, 191, 36, .06);
+    color: rgba(242, 244, 250, .8);
+    font-size: .85rem;
+    line-height: 1.45;
+    max-width: 56ch;
+}
+
+.hero-urgency svg { width: 16px; height: 16px; flex: none; color: #fbbf24; }
+
+/* --------------------------------------------------------------------------
+   7. LOCAL TRUST BAR (under hero)
+   -------------------------------------------------------------------------- */
+.trust-bar {
+    border-block: 1px solid rgba(255, 255, 255, .07);
+    background: linear-gradient(90deg,
+            rgba(74, 108, 247, .09),
+            rgba(100, 222, 223, .07) 45%,
+            rgba(162, 116, 255, .09));
+}
+
+.trust-bar-inner {
+    max-width: var(--tg-max);
+    margin-inline: auto;
+    padding: 1rem var(--tg-gutter);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem 1.7rem;
+}
+
+.trust-chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .84rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: rgba(242, 244, 250, .86);
+}
+
+.trust-chip svg { width: 15px; height: 15px; flex: none; color: var(--tg-accent); }
+
+.trust-chip + .trust-chip::before {
+    content: "";
+    position: absolute;
+    left: -.95rem;
+    top: 50%;
+    width: 4px; height: 4px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .3);
+}
+
+@media (max-width: 700px) {
+    .trust-bar-inner { gap: .6rem 1.2rem; }
+    .trust-chip { font-size: .8rem; text-align: left; }
+    .trust-chip + .trust-chip::before { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   8. BENTO GRID SYSTEM — one 12-column grid used by every card section
+   -------------------------------------------------------------------------- */
+/* Mobile first: one column, no spans in play at all */
+.why-grid,
+.services-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .9rem;
+    align-items: stretch;
+}
+
+/* Tablet: 12-column bento, everything half width */
+@media (min-width: 681px) {
+
+    .why-grid,
+    .services-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(.9rem, 1.5vw, 1.3rem);
+    }
+
+    .why-section .why-grid > .why-card,
+    .services .services-grid > .service-card { grid-column: span 6; }
+}
+
+/* Desktop: Why = 7 + 5 / 6 + 6 / 6 + 6 · Services = 7 + 5 then 3 + 3 + 3 + 3 */
+@media (min-width: 1081px) {
+    .why-section .why-grid > .why-card:nth-child(1) { grid-column: span 7; }
+    .why-section .why-grid > .why-card:nth-child(2) { grid-column: span 5; }
+
+    .services .services-grid > .service-card:nth-child(1) { grid-column: span 7; }
+    .services .services-grid > .service-card:nth-child(2) { grid-column: span 5; }
+    .services .services-grid > .service-card:nth-child(n+3) { grid-column: span 3; }
+}
+
+/* --------------------------------------------------------------------------
+   9. UNIFIED CARD LANGUAGE
+   -------------------------------------------------------------------------- */
+.why-card,
+.service-card,
+.feature-card,
+.faq-item,
+.portfolio-card,
+.step-card,
+.contact-info,
+.about-panel,
+.about-side-card,
+.booking-section,
+.mockup-item {
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-lg);
+    background: linear-gradient(180deg, var(--tg-card-a), var(--tg-card-b));
+    box-shadow: var(--tg-shadow);
+}
+
+.why-card,
+.service-card,
+.feature-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    height: 100%;
+    padding: clamp(1.35rem, 2.3vw, 1.85rem);
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease,
+        box-shadow .35s ease, background .35s ease;
+}
+
+/* accent hairline that sweeps in on hover */
+.why-card::before,
+.service-card::before,
+.feature-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--tg-accent), var(--tg-violet), transparent);
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.why-card:hover,
+.service-card:hover,
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--tg-border-hi);
+    box-shadow: var(--tg-shadow-hi);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .025));
+}
+
+.why-card:hover::before,
+.service-card:hover::before,
+.feature-card:hover::before { opacity: .9; }
+
+.why-card h3,
+.service-card h3,
+.feature-card h3 {
+    margin: .35rem 0 .35rem;
+    font-size: clamp(1.06rem, 1rem + .35vw, 1.24rem);
+    font-weight: 600;
+    letter-spacing: -.01em;
+}
+
+.why-card p,
+.service-card p,
+.feature-card p {
+    margin: 0;
+    color: var(--tg-muted);
+    font-size: .94rem;
+    line-height: 1.68;
+}
+
+/* icon tiles share one size/shape */
+.glass-icon,
+.service-icon,
+.feature-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    flex: none;
+    border-radius: var(--tg-r);
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: linear-gradient(135deg, rgba(74, 108, 247, .22), rgba(162, 116, 255, .16));
+    color: #fff;
+}
+
+.glass-icon svg,
+.service-icon svg,
+.feature-icon svg { width: 25px; height: 25px; }
+
+/* bullet lists inside cards */
+.service-list,
+.step-checklist,
+.approach-list {
+    margin: .5rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: .5rem;
+}
+
+.service-list li,
+.step-checklist li {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    padding-left: 1.5rem;
+    color: rgba(242, 244, 250, .82);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.service-list li::before,
+.step-checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .34rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(52, 211, 153, .9), rgba(5, 150, 105, .85));
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, .12);
+}
+
+.service-list li svg,
+.step-checklist li svg { display: none; } /* replaced by the CSS check dot above */
+
+.service-price {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    font-family: var(--tg-font-display);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--tg-accent);
+}
+
+.service-card .service-price { border-top: 1px solid var(--tg-border); width: 100%; padding-top: 1rem; }
+
+/* --------------------------------------------------------------------------
+   10. FEATURES STRIP — "included in every project"
+   -------------------------------------------------------------------------- */
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(.9rem, 1.5vw, 1.25rem);
+    align-items: stretch;
+}
+
+.features > .features-head {
+    grid-column: 1 / -1;
+    margin: 0 auto clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.features > .feature-card { padding: clamp(1.25rem, 2vw, 1.6rem); }
+.features > .feature-card p { font-size: .9rem; }
+.features > .feature-card h3 { margin-top: .5rem; }
+
+@media (max-width: 1024px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .features { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   11. PROCESS — horizontal scroll replaced with a readable 4-step grid
+   -------------------------------------------------------------------------- */
+.process-timeline-premium,
+.process-timeline-premium.horizontal-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(.9rem, 1.5vw, 1.25rem);
+    align-items: start;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    scroll-snap-type: none;
+    -webkit-overflow-scrolling: auto;
+}
+
+.process-step-premium {
+    display: flex;
+    flex-direction: column;
+    flex: initial;
+    width: auto;
+    min-width: 0;
+    gap: .85rem;
+}
+
+.step-indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.step-number-ring {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 1px solid rgba(100, 222, 223, .32);
+    background: radial-gradient(circle at 30% 25%, rgba(74, 108, 247, .5), rgba(10, 12, 26, .95) 70%);
+    box-shadow: 0 0 0 6px rgba(10, 12, 26, .55), 0 12px 28px -18px rgba(74, 108, 247, .9);
+    z-index: 1;
+}
+
+.step-number-ring.completed {
+    border-color: rgba(52, 211, 153, .4);
+    background: radial-gradient(circle at 30% 25%, rgba(5, 150, 105, .55), rgba(10, 12, 26, .95) 70%);
+}
+
+.step-num {
+    font-family: var(--tg-font-display);
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #fff;
+}
+
+.step-line { display: none; } /* connector drawn by the rail below instead */
+
+/* continuous rail behind the four rings */
+.process-timeline-premium::before {
+    content: "";
+    position: absolute;
+    top: 27px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(100, 222, 223, .35) 18%,
+            rgba(162, 116, 255, .35) 82%,
+            transparent);
+    pointer-events: none;
+}
+
+.process-timeline-premium { position: relative; }
+
+.step-card {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    height: 100%;
+    padding: clamp(1.25rem, 2vw, 1.6rem);
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease, box-shadow .35s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--tg-border-hi);
+    box-shadow: var(--tg-shadow-hi);
+}
+
+.step-icon-wrapper { display: flex; }
+
+.step-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--tg-r);
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: linear-gradient(135deg, rgba(100, 222, 223, .2), rgba(74, 108, 247, .18));
+    color: #fff;
+}
+
+.step-icon.success { background: linear-gradient(135deg, rgba(52, 211, 153, .24), rgba(5, 150, 105, .18)); }
+.step-icon svg { width: 22px; height: 22px; }
+
+.step-details h3 {
+    margin: 0 0 .45rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.step-details p {
+    margin: 0 0 .7rem;
+    color: var(--tg-muted);
+    font-size: .9rem;
+    line-height: 1.65;
+}
+
+.step-duration {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-top: auto;
+    padding-top: .95rem;
+    border-top: 1px solid var(--tg-border);
+}
+
+.duration-label {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tg-faint);
+}
+
+.duration-value {
+    font-family: var(--tg-font-display);
+    font-size: .92rem;
+    font-weight: 600;
+    color: var(--tg-accent);
+}
+
+.process-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+    max-width: var(--tg-max);
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2.25rem);
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-lg);
+    background: linear-gradient(90deg, rgba(74, 108, 247, .12), rgba(162, 116, 255, .09));
+    text-align: center;
+}
+
+.process-cta p { margin: 0; font-size: 1.02rem; font-weight: 500; }
+
+@media (max-width: 1024px) {
+    .process-timeline-premium,
+    .process-timeline-premium.horizontal-scroll-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .process-timeline-premium::before { display: none; }
+}
+
+@media (max-width: 620px) {
+    .process-timeline-premium,
+    .process-timeline-premium.horizontal-scroll-container { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   12. PORTFOLIO
+   -------------------------------------------------------------------------- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 1.9rem);
+    margin-top: 0;
+}
+
+.portfolio-card {
+    display: grid;
+    grid-template-columns: 1.02fr 1fr;
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease, box-shadow .35s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--tg-border-hi);
+    box-shadow: var(--tg-shadow-hi);
+}
+
+.portfolio-media {
+    min-height: 300px;
+    padding: 1.1rem;
+    gap: .9rem;
+    grid-template-columns: 1fr 1fr;
+    background: linear-gradient(135deg, rgba(74, 108, 247, .2), rgba(162, 116, 255, .14));
+}
+
+.portfolio-shot {
+    border-radius: var(--tg-r);
+    min-height: 220px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(10, 12, 26, .45);
+}
+
+/* placeholder hides itself once real media loads (.has-media set inline) */
+.portfolio-shot.has-media .portfolio-shot-placeholder { display: none; }
+
+.portfolio-body { padding: clamp(1.5rem, 2.6vw, 2.15rem); gap: .35rem; }
+
+.portfolio-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    margin-bottom: .7rem;
+    padding: .3rem .7rem;
+    border-radius: var(--tg-r-pill);
+    border: 1px solid rgba(100, 222, 223, .24);
+    background: rgba(100, 222, 223, .1);
+    color: var(--tg-accent);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.portfolio-body h3 {
+    font-size: clamp(1.22rem, 1.1rem + .5vw, 1.5rem);
+    margin: 0 0 .5rem;
+}
+
+.portfolio-body .portfolio-role {
+    margin: 0 0 .9rem;
+    color: var(--tg-muted);
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+.portfolio-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.1rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.portfolio-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .8rem;
+    color: rgba(242, 244, 250, .78);
+}
+
+.portfolio-meta svg { width: 14px; height: 14px; color: var(--tg-accent); flex: none; }
+
+.portfolio-stack { margin: auto 0 .25rem; padding-top: .5rem; }
+
+.portfolio-stack span {
+    font-size: .7rem;
+    padding: .32rem .7rem;
+    border-radius: var(--tg-r-pill);
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid var(--tg-border);
+}
+
+.portfolio-note {
+    max-width: 78ch;
+    margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid rgba(100, 222, 223, .45);
+    border-radius: 0 var(--tg-r) var(--tg-r) 0;
+    background: rgba(255, 255, 255, .03);
+    color: var(--tg-muted);
+    font-size: .88rem;
+    text-align: left;
+}
+
+@media (max-width: 900px) {
+    .portfolio-card { grid-template-columns: minmax(0, 1fr); }
+    .portfolio-media { min-height: 240px; }
+}
+
+@media (max-width: 520px) {
+    .portfolio-media { grid-template-columns: minmax(0, 1fr); }
+    .portfolio-shot { min-height: 190px; }
+}
+
+/* --------------------------------------------------------------------------
+   13. ABOUT — two-column story + local proof panel
+   -------------------------------------------------------------------------- */
+.about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(0, .88fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+}
+
+.about-main { display: flex; flex-direction: column; gap: 1.15rem; }
+
+.about-lead {
+    margin: 0;
+    font-size: clamp(1.04rem, 1rem + .35vw, 1.2rem);
+    line-height: 1.72;
+    color: rgba(242, 244, 250, .9);
+    font-weight: 500;
+}
+
+.about-story h3,
+.about-approach h3 {
+    margin: 0 0 .6rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: var(--tg-accent);
+}
+
+.about-story p { margin: 0 0 .85rem; color: var(--tg-muted); font-size: .96rem; line-height: 1.75; }
+.about-story p:last-child { margin-bottom: 0; }
+
+.about-callout {
+    margin: 0;
+    padding: 1.1rem 1.25rem;
+    border-radius: var(--tg-r);
+    border: 1px solid rgba(217, 139, 95, .28);
+    border-left: 3px solid var(--tg-copper);
+    background: linear-gradient(90deg, rgba(217, 139, 95, .1), rgba(100, 222, 223, .05));
+    color: rgba(242, 244, 250, .88);
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+.about-side { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: calc(var(--tg-nav-h) + 20px); }
+
+.about-side-card { padding: clamp(1.25rem, 2.2vw, 1.6rem); }
+
+.about-side-card h3 {
+    margin: 0 0 .9rem;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--tg-faint);
+}
+
+.about-facts { margin: 0; padding: 0; display: grid; gap: .95rem; }
+
+.about-facts > div { display: flex; align-items: flex-start; gap: .7rem; }
+
+.about-facts svg { width: 17px; height: 17px; flex: none; margin-top: .18rem; color: var(--tg-accent); }
+.about-facts > div > div { min-width: 0; }
+.about-facts dd { margin-inline-start: 0; }
+
+.about-facts dt,
+.about-facts strong {
+    display: block;
+    font-size: .88rem;
+    font-weight: 600;
+    color: rgba(242, 244, 250, .92);
+}
+
+.about-facts span,
+.about-facts dd {
+    display: block;
+    margin: .1rem 0 0;
+    font-size: .82rem;
+    line-height: 1.55;
+    color: var(--tg-faint);
+}
+
+.about-signature {
+    margin: 1.1rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--tg-border);
+    font-size: .88rem;
+    color: var(--tg-muted);
+}
+
+.about-signature strong {
+    display: block;
+    font-family: var(--tg-font-display);
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: .15rem;
+}
+
+.about-approach {
+    max-width: var(--tg-max);
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    padding-top: clamp(1.75rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--tg-hairline);
+}
+
+.approach-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .9rem 1.5rem;
+    margin-top: .4rem;
+}
+
+.approach-list li {
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r);
+    background: rgba(255, 255, 255, .028);
+    color: var(--tg-muted);
+    font-size: .92rem;
+    line-height: 1.65;
+    transition: border-color .3s ease, background .3s ease;
+}
+
+.approach-list li:hover { border-color: var(--tg-border-hi); background: rgba(255, 255, 255, .05); }
+.approach-list li strong { color: #fff; font-weight: 600; }
+
+@media (max-width: 980px) {
+    .about-grid { grid-template-columns: minmax(0, 1fr); }
+    .about-side { position: static; }
+}
+
+@media (max-width: 720px) { .approach-list { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   14. LEAD MAGNET
+   -------------------------------------------------------------------------- */
+.lead-magnet-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(1.75rem, 4vw, 3.25rem);
+    align-items: center;
+}
+
+.lead-magnet-text h2 {
+    margin: 0 0 .8rem;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
+    letter-spacing: -.02em;
+    text-align: left;
+}
+
+.lead-magnet-text > p { margin: 0 0 1.1rem; color: var(--tg-muted); font-size: .98rem; line-height: 1.7; }
+
+.lead-magnet-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem 1.25rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.lead-magnet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    font-size: .9rem;
+    line-height: 1.5;
+    color: rgba(242, 244, 250, .85);
+}
+
+.lead-magnet-list li svg { width: 17px; height: 17px; flex: none; margin-top: .12rem; color: #34d399; }
+
+.form-group-inline { display: flex; flex-wrap: wrap; gap: .65rem; }
+.form-group-inline input[type="email"] { flex: 1 1 240px; min-width: 0; }
+
+.privacy-note { margin: .8rem 0 0; font-size: .78rem; color: var(--tg-faint); }
+
+.mockup-stack { display: grid; gap: .85rem; justify-items: center; }
+
+.mockup-item {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    width: min(100%, 340px);
+    padding: 1rem 1.25rem;
+    border-radius: var(--tg-r);
+    font-size: .92rem;
+    font-weight: 600;
+}
+
+.mockup-item svg { width: 18px; height: 18px; color: var(--tg-accent); flex: none; }
+
+@media (max-width: 940px) {
+    .lead-magnet-content { grid-template-columns: minmax(0, 1fr); }
+    .lead-magnet-preview { order: 2; }
+}
+
+@media (max-width: 620px) { .lead-magnet-list { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   15. FAQ
+   -------------------------------------------------------------------------- */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .9rem 1.1rem;
+    align-items: start;
+    margin-top: 0;
+}
+
+.faq-item { overflow: hidden; transition: border-color .3s ease, background .3s ease; }
+.faq-item:hover { border-color: var(--tg-border-hi); }
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.1rem 1.25rem;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: var(--tg-font-ui);
+    font-size: .97rem;
+    font-weight: 600;
+    line-height: 1.45;
+    text-align: left;
+    cursor: pointer;
+}
+
+.faq-icon {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex: none;
+    border-radius: 50%;
+    border: 1px solid var(--tg-border);
+    background: rgba(255, 255, 255, .05);
+    color: var(--tg-accent);
+    font-size: 1.05rem;
+    line-height: 1;
+    transition: transform .3s ease, background .3s ease;
+}
+
+.faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); background: rgba(100, 222, 223, .16); }
+
+.faq-answer {
+    padding: 0 1.25rem 1.2rem;
+    color: var(--tg-muted);
+    font-size: .92rem;
+    line-height: 1.7;
+}
+
+.faq-answer p { margin: 0; }
+
+/* Opened state — supports whatever hook scripts.js already uses.
+   NOTE: the collapsed state is intentionally NOT forced here, so the existing
+   scripts.js accordion keeps working exactly as before. */
+.faq-item.active .faq-answer,
+.faq-item.is-open .faq-answer,
+.faq-item.open .faq-answer,
+.faq-question[aria-expanded="true"] + .faq-answer { display: block; }
+
+@media (max-width: 860px) { .faq-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   16. CONTACT
+   -------------------------------------------------------------------------- */
+.contact-section > h2 { text-align: center; }
+
+.contact-subtitle {
+    max-width: 62ch;
+    margin: -.35rem auto clamp(2rem, 4vw, 2.75rem);
+    text-align: center;
+    color: var(--tg-muted);
+    font-size: clamp(.98rem, .95rem + .2vw, 1.06rem);
+    line-height: 1.7;
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(1.25rem, 2.5vw, 1.9rem);
+    align-items: start;
+    max-width: var(--tg-max);
+}
+
+.contact-form {
+    padding: clamp(1.4rem, 2.6vw, 2rem);
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-lg);
+    background: linear-gradient(180deg, var(--tg-card-a), var(--tg-card-b));
+    box-shadow: var(--tg-shadow);
+}
+
+.contact-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: rgba(242, 244, 250, .88);
+}
+
+.form-label .required { color: var(--tg-accent); }
+
+.contact-form input:not(.hidden),
+.contact-form select,
+.contact-form textarea,
+.form-group-inline input:not(.hidden) {
+    width: 100%;
+    padding: .8rem .95rem;
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-sm);
+    background: rgba(8, 10, 22, .55);
+    color: var(--tg-text);
+    font-family: var(--tg-font-ui);
+    font-size: .94rem;
+    transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.contact-form input:not(.hidden)::placeholder,
+.contact-form textarea::placeholder,
+.form-group-inline input:not(.hidden)::placeholder { color: rgba(242, 244, 250, .38); }
+
+.contact-form input:not(.hidden):hover,
+.contact-form select:hover,
+.contact-form textarea:hover { border-color: rgba(255, 255, 255, .18); }
+
+.contact-form input:not(.hidden):focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: rgba(100, 222, 223, .55);
+    background: rgba(8, 10, 22, .75);
+    box-shadow: 0 0 0 3px rgba(100, 222, 223, .14);
+    outline: none;
+}
+
+.contact-form textarea { resize: vertical; min-height: 118px; }
+
+.contact-form select { appearance: none; cursor: pointer; }
+
+.btn-submit { width: 100%; margin-top: .35rem; }
+
+.response-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin: .95rem 0 0;
+    font-size: .82rem;
+    color: var(--tg-faint);
+}
+
+.response-time svg { width: 15px; height: 15px; color: #34d399; }
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: clamp(1.35rem, 2.4vw, 1.75rem);
+    position: sticky;
+    top: calc(var(--tg-nav-h) + 20px);
+}
+
+.contact-info > h3 {
+    margin: .35rem 0 0;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--tg-faint);
+}
+
+.booking-section {
+    padding: 1.25rem;
+    border-radius: var(--tg-r);
+    border: 1px solid rgba(100, 222, 223, .22);
+    background: linear-gradient(135deg, rgba(100, 222, 223, .1), rgba(74, 108, 247, .09));
+    box-shadow: none;
+}
+
+.booking-section h3 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 .45rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #fff;
+}
+
+.booking-section p { margin: 0 0 .95rem; font-size: .88rem; color: rgba(242, 244, 250, .78); }
+.btn-booking { width: 100%; }
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .8rem;
+    padding: .8rem .9rem;
+    border: 1px solid transparent;
+    border-radius: var(--tg-r);
+    transition: border-color .28s ease, background .28s ease;
+}
+
+.contact-item:hover { border-color: var(--tg-border); background: rgba(255, 255, 255, .035); }
+
+.contact-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    border-radius: var(--tg-r-sm);
+    border: 1px solid var(--tg-border);
+    background: rgba(255, 255, 255, .05);
+    color: var(--tg-accent);
+}
+
+.contact-icon svg { width: 17px; height: 17px; }
+
+.contact-item strong {
+    display: block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--tg-faint);
+    margin-bottom: .2rem;
+}
+
+.contact-item a,
+.contact-item span:not(.contact-icon) {
+    font-size: .95rem;
+    font-weight: 500;
+    color: rgba(242, 244, 250, .94);
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.contact-item a:hover { color: var(--tg-accent); text-decoration: underline; }
+
+.contact-item .contact-note {
+    display: block;
+    margin-top: .35rem;
+    font-size: .78rem;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--tg-faint);
+}
+
+@media (max-width: 980px) {
+    .contact-wrapper { grid-template-columns: minmax(0, 1fr); }
+    .contact-info { position: static; }
+}
+
+@media (max-width: 600px) { .contact-form .form-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   17. FOOTER
+   -------------------------------------------------------------------------- */
+.footer { border-top: 1px solid var(--tg-hairline); }
+
+.footer-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, .85fr) minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 3.4vw, 2.75rem);
+    align-items: start;
+    max-width: var(--tg-max);
+    margin-inline: auto;
+    padding: clamp(2.75rem, 5vw, 4rem) var(--tg-gutter) clamp(2rem, 4vw, 2.75rem);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--tg-font-display);
+    font-weight: 700;
+    letter-spacing: .06em;
+    margin-bottom: .8rem;
+}
+
+.footer-brand p { margin: 0 0 1rem; color: var(--tg-muted); font-size: .92rem; line-height: 1.7; max-width: 34ch; }
+
+.footer-loc {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .38rem .8rem;
+    border-radius: var(--tg-r-pill);
+    border: 1px solid rgba(100, 222, 223, .24);
+    background: rgba(100, 222, 223, .08);
+    color: rgba(242, 244, 250, .88);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.footer-loc svg { width: 14px; height: 14px; color: var(--tg-accent); flex: none; }
+
+.footer-content h4 {
+    margin: 0 0 1rem;
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--tg-faint);
+}
+
+.footer-links ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .6rem; }
+
+.footer-links a {
+    color: var(--tg-muted);
+    font-size: .9rem;
+    text-decoration: none;
+    transition: color .25s ease, transform .25s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover { color: var(--tg-accent); transform: translateX(3px); }
+
+.footer-contact p {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: 0 0 .7rem;
+    color: var(--tg-muted);
+    font-size: .9rem;
+}
+
+.footer-contact a { color: var(--tg-muted); text-decoration: none; }
+.footer-contact a:hover { color: var(--tg-accent); }
+.footer-icon { width: 16px; height: 16px; flex: none; color: var(--tg-accent); }
+
+.footer-social { display: flex; gap: .6rem; margin-top: 1.1rem; }
+
+.social-link {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--tg-r-sm);
+    border: 1px solid var(--tg-border);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(242, 244, 250, .8);
+    transition: transform .28s ease, border-color .28s ease, color .28s ease, background .28s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    border-color: var(--tg-border-hi);
+    background: rgba(100, 222, 223, .12);
+    color: #fff;
+}
+
+.footer-cta {
+    padding: 1.35rem;
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-lg);
+    background: linear-gradient(135deg, rgba(74, 108, 247, .14), rgba(162, 116, 255, .1));
+}
+
+.footer-cta h4 { color: #fff; letter-spacing: .02em; text-transform: none; font-size: 1.05rem; }
+.footer-cta p { margin: 0 0 1rem; color: rgba(242, 244, 250, .78); font-size: .9rem; line-height: 1.6; }
+.footer-cta .btn { width: 100%; }
+
+.footer-bottom {
+    border-top: 1px solid var(--tg-hairline);
+    padding: 1.25rem var(--tg-gutter);
+    text-align: center;
+}
+
+.footer-bottom p { margin: 0; font-size: .82rem; color: var(--tg-faint); }
+.footer-bottom .tg-sep { opacity: .45; margin-inline: .5rem; }
+
+@media (max-width: 1040px) {
+    .footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+    .footer-content { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .footer-brand p { max-width: none; }
+}
+
+/* --------------------------------------------------------------------------
+   18. BUTTONS
+   -------------------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    padding: .85rem 1.5rem;
+    border-radius: var(--tg-r-pill);
+    border: 1px solid transparent;
+    font-family: var(--tg-font-ui);
+    font-size: .94rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: .01em;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(.2, .7, .3, 1), box-shadow .25s ease,
+        background .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.btn svg { width: 17px; height: 17px; flex: none; }
+
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary { box-shadow: 0 16px 32px -18px rgba(74, 108, 247, .95); }
+.btn-primary:hover { box-shadow: 0 22px 40px -18px rgba(74, 108, 247, 1); }
+
+.btn-secondary {
+    border-color: var(--tg-border);
+    background: rgba(255, 255, 255, .045);
+    color: var(--tg-text);
+}
+
+.btn-secondary:hover { border-color: var(--tg-border-hi); background: rgba(255, 255, 255, .08); }
+
+.cta-arrow { transition: transform .25s ease; }
+.btn:hover .cta-arrow { transform: translateX(3px); }
+
+.services-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .9rem 1.5rem;
+    max-width: var(--tg-max);
+    margin: clamp(2rem, 4vw, 2.75rem) auto 0;
+    padding: clamp(1.15rem, 2.4vw, 1.6rem) clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--tg-border);
+    border-radius: var(--tg-r-lg);
+    background: linear-gradient(90deg, rgba(100, 222, 223, .09), rgba(74, 108, 247, .08));
+    text-align: center;
+}
+
+.services-cta p { margin: 0; font-size: 1rem; font-weight: 500; }
+
+/* --------------------------------------------------------------------------
+   19. MOTION — scroll reveal (opt-in via html.js-anim, set by the inline JS)
+   -------------------------------------------------------------------------- */
+/* Cinematic, directional scroll reveals (expo-out easing = filmic settle) */
+.js-anim [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+    transition: opacity .8s cubic-bezier(.16, 1, .3, 1),
+        transform .95s cubic-bezier(.16, 1, .3, 1);
+    transition-delay: calc(var(--tg-d, 0) * 1ms);
+    will-change: opacity, transform;
+}
+
+.js-anim [data-reveal="left"] { transform: translate3d(-42px, 0, 0); }
+.js-anim [data-reveal="right"] { transform: translate3d(42px, 0, 0); }
+
+.js-anim [data-reveal="zoom"] { transform: scale(.94) translate3d(0, 14px, 0); }
+
+.js-anim [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .js-anim [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+
+    .why-card:hover,
+    .service-card:hover,
+    .feature-card:hover,
+    .step-card:hover,
+    .portfolio-card:hover,
+    .btn:hover { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   20. SMALL-SCREEN GUARD RAILS
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    :root { --tg-r-lg: 18px; }
+
+    .btn { width: 100%; }
+    .cta-buttons .btn { width: 100%; }
+    .navbar-actions .nav-cta-btn span { display: none; }
+    .hero-highlights { grid-template-columns: minmax(0, 1fr); }
+}
+    </style>
+    <link rel="stylesheet" href="css/nav-glass.css?v=20260930">
+    <link rel="stylesheet" href="css/story.css?v=20260930">
+
+    <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
+    <style>
+        .portfolio-section { padding: 6rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem; }
+        .portfolio-card {
+            background: var(--glass-bg-light, rgba(255,255,255,0.03));
+            border: 1px solid var(--glass-border, rgba(255,255,255,0.1));
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+        }
+        @media (max-width: 860px) { .portfolio-card { grid-template-columns: 1fr; } }
+        .portfolio-media {
+            position: relative;
+            min-height: 260px;
+            background: linear-gradient(135deg, rgba(74,108,247,0.18), rgba(162,116,255,0.14));
+            display: grid;
+            grid-auto-flow: row;
+            gap: 0.75rem;
+            padding: 1rem;
+            grid-template-columns: 1fr 1fr;
+        }
+        .portfolio-media.single { grid-template-columns: 1fr; }
+        .portfolio-shot {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            min-height: 200px;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed var(--glass-border, rgba(255,255,255,0.15));
+        }
+        .portfolio-shot img, .portfolio-shot video {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            position: absolute; inset: 0;
+        }
+        .portfolio-shot-placeholder {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            color: var(--color-text-muted, rgba(242,244,250,0.6));
+            font-size: 0.8rem; padding: 0.75rem; gap: 0.4rem;
+        }
+        .portfolio-shot-placeholder svg { width: 28px; height: 28px; opacity: 0.6; }
+        .portfolio-body { padding: 2rem; display: flex; flex-direction: column; }
+        .portfolio-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--color-accent, #64dedf); margin-bottom: 0.5rem; font-weight: 600; }
+        .portfolio-body h3 { margin: 0 0 0.5rem; font-size: 1.4rem; }
+        .portfolio-body .portfolio-role { color: var(--color-text-muted, rgba(242,244,250,0.7)); font-size: 0.95rem; margin-bottom: 1rem; }
+        .portfolio-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .portfolio-stack span {
+            font-size: 0.72rem; padding: 0.3rem 0.65rem; border-radius: 999px;
+            background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border, rgba(255,255,255,0.1));
+            color: var(--color-text-light, #f2f4fa);
+        }
+        .portfolio-links { margin-top: auto; padding-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+        .portfolio-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--color-text-muted, rgba(242,244,250,0.6)); }
+    </style>
+
+    <!-- FAQ Schema Markup -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are you actually local to Missoula?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Montana is my home state — I spent a few years in South Florida and moved back home to Missoula. I'm happy to meet local business owners in person around Missoula, the Bitterroot Valley, and the Flathead/Kalispell area. No subcontractors, no offshore team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with businesses outside Montana?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. The work is remote-friendly by nature: a discovery call, a flat-price proposal, staged builds with review links, then launch. Out-of-state clients get the same process, the same pricing, and the same direct line to me as local Montana clients."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a typical website project take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most local business websites launch within 2-4 weeks. Branding and AI chat widget add-ons typically add 3-7 days. Since it's just me, you're never waiting on a queue of other clients' projects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of businesses do you work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mainly local and small businesses — contractors, auto shops, service businesses, and small brands that need a real website, a clean brand identity, or an AI chat widget, without agency pricing or overhead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer ongoing support after launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every project includes 30 days of post-launch support, and monthly Care Plans are available for hosting, small edits, and updates after that."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's your pricing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Websites start around $900 and typically run $2,200-$4,000 for a full custom build with branding. AI chat/FAQ widgets start around $600. Exact pricing depends on scope and is quoted after a free consultation — see the Services section above for the full breakdown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you build custom tools beyond a website, like a CRM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — alongside websites I build custom internal tools when a business needs them. The Zempel Auto platform in my portfolio is a full customer & inventory management system I built for an auto parts shop. Custom app builds are quoted separately based on scope."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I'm not sure what I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That's what the free consultation is for. I'll look at what you have (or don't have yet) and recommend the highest-impact starting point. No obligation."
+      }
+    }
+  ]
+}
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "TECHGURU",
+  "url": "https://techguruofficial.us",
+  "image": "https://techguruofficial.us/images/og-image.png",
+  "logo": "https://techguruofficial.us/images/logo-dark-512.png",
+  "description": "One-person web design, branding, and AI automation studio in Missoula, Montana building custom websites, logos, and AI chat/FAQ widgets for local businesses across Missoula County, the Bitterroot Valley, and the Flathead Valley — in person locally, remote nationwide.",
+  "slogan": "Websites, Branding & AI Tools — Built by One Techguru, For Local Businesses",
+  "priceRange": "$350 - $5,000",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Check, Credit Card, Bank Transfer",
+  "telephone": "+1-786-636-9964",
+  "email": "info@techguruofficial.us",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Missoula",
+    "addressLocality": "Missoula",
+    "addressRegion": "MT",
+    "postalCode": "59808",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 46.8721,
+    "longitude": -113.994
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Missoula"
+    },
+    {
+      "@type": "City",
+      "name": "Lolo"
+    },
+    {
+      "@type": "City",
+      "name": "Frenchtown"
+    },
+    {
+      "@type": "City",
+      "name": "Bonner-West Riverside"
+    },
+    {
+      "@type": "City",
+      "name": "Clinton"
+    },
+    {
+      "@type": "City",
+      "name": "Seeley Lake"
+    },
+    {
+      "@type": "City",
+      "name": "Hamilton"
+    },
+    {
+      "@type": "City",
+      "name": "Stevensville"
+    },
+    {
+      "@type": "City",
+      "name": "Victor"
+    },
+    {
+      "@type": "City",
+      "name": "Darby"
+    },
+    {
+      "@type": "City",
+      "name": "Kalispell"
+    },
+    {
+      "@type": "City",
+      "name": "Whitefish"
+    },
+    {
+      "@type": "City",
+      "name": "Columbia Falls"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Bitterroot Valley"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Flathead Valley"
+    },
+    {
+      "@type": "State",
+      "name": "Montana"
+    },
+    {
+      "@type": "Country",
+      "name": "United States"
+    }
+  ],
+  "knowsAbout": [
+    "Web design for local businesses",
+    "Brand identity and logo design",
+    "AI chat and FAQ widgets",
+    "Custom CRM and internal business tools",
+    "Local SEO basics for Montana small business",
+    "Website care plans and hosting"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web design, branding & AI services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Website Design & Build",
+          "description": "Mobile-first, custom-coded websites with Missoula local SEO basics"
+        },
+        "price": "900",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Chat & FAQ Widget Integration",
+          "description": "AI assistant trained on your hours, services and pricing, answering 24/7"
+        },
+        "price": "600",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Branding & Logo Design",
+          "description": "Logo, colors and fonts consistent across site, truck wraps, signage and socials"
+        },
+        "price": "350",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom CRM & Internal Tools",
+          "description": "Inventory trackers, customer databases and workflow automation built around your shop"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Monthly Website Care Plans",
+          "description": "Hosting, uptime monitoring and fast content updates"
+        },
+        "price": "75",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hourly Consulting",
+          "description": "Tool selection, fixes and online planning advice"
+        },
+        "price": "75",
+        "priceCurrency": "USD"
+      }
+    ]
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-786-636-9964",
+    "contactType": "sales",
+    "email": "info@techguruofficial.us",
+    "areaServed": "US",
+    "availableLanguage": [
+      "English"
+    ]
+  }
+}
+    </script>
+</head>
+
+<body>
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Global SVG Gradient Definitions -->
+    <svg aria-hidden="true" class="svg-defs-container" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <linearGradient id="gradient-primary" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4a6cf7" />
+                <stop offset="100%" stop-color="#a274ff" />
+            </linearGradient>
+            <linearGradient id="gradient-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#64dedf" />
+                <stop offset="100%" stop-color="#4a6cf7" />
+            </linearGradient>
+            <linearGradient id="gradient-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fbbf24" />
+                <stop offset="100%" stop-color="#d97706" />
+            </linearGradient>
+            <linearGradient id="gradient-success" x1="0%" y1="0%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#34d399" />
+                <stop offset="100%" stop-color="#059669" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Navigation Bar -->
+    <header class="navbar" role="banner">
+        <div class="logo">
+            <a href="#home" class="nav-logo-link">
+                <img src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="nav-logo-icon">
+                TECHGURU
+            </a>
+        </div>
+        <!-- Hamburger Menu Button -->
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+            aria-controls="nav-menu">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li class="nav-hide-md"><a href="#process">Process</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="mobile-only-phone nav-phone-mobile-item">
+                    <a href="tel:+17866369964" class="nav-phone-mobile-link">
+                        <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>Call Now: +1 786-636-9964</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="navbar-actions">
+            <a href="tel:+17866369964" class="nav-phone-link" title="Call +1 786-636-9964"
+                aria-label="Call TechGuru at +1 786-636-9964">
+                <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                    focusable="false">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </a>
+            <a href="#contact" class="btn btn-primary nav-cta-btn" title="Book a Free Call">
+                <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    aria-hidden="true" focusable="false">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>Book a Free Call</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content">
+        <section class="hero" id="home">
+            <!-- Decorative icons, sized/responsive, non-interactive -->
+            <svg class="decor-icon decor-star tg-icon tg-icon-xl" viewBox="0 0 24 24" aria-hidden="true"
+                focusable="false">
+                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17l-6.3 4 2.3-7-6-4.6h7.6L12 2z" fill="currentColor"
+                    stroke="none" />
+            </svg>
+            <svg class="decor-icon decor-triangle tg-icon tg-icon-lg" viewBox="0 0 24 24" aria-hidden="true"
+                focusable="false">
+                <path d="M12 3l10 18H2L12 3z" fill="currentColor" stroke="none" />
+            </svg>
+            <!-- Tubes Cursor Canvas Background -->
+            <canvas id="tubes-canvas" aria-hidden="true"></canvas>
+            <div class="hero-content">
+                <p class="hero-location-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                        focusable="false">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Based in Missoula, Montana
+                    <span class="tg-dot" aria-hidden="true"></span>
+                    In-person locally &middot; remote nationwide
+                </p>
+                <h1>Websites, Branding &amp; AI Tools — Built by One Techguru, For Local Businesses</h1>
+                <p class="rotating-tagline" id="rotating-tagline" aria-live="polite">Build. Brand. Automate.</p>
+                <p class="hero-description">I'm a solo web designer &amp; developer in Missoula, Montana, helping local
+                    and small businesses get a real website, a clean brand identity, and simple AI tools — like a chat
+                    widget that answers customer FAQs — without agency prices or a committee of account managers.</p>
+                <ul class="hero-highlights">
+                    <li><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg> Custom-built websites, not drag-and-drop templates</li>
+                    <li><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg> AI chat & FAQ widgets that handle customer questions 24/7</li>
+                    <li><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg> You talk directly to the person building your site</li>
+                    <li><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg> 30-day post-launch support included</li>
+                </ul>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary btn-pulse">Book a Free Consultation <span
+                            class="cta-arrow" aria-hidden="true">→</span></a>
+                    <a href="#services" class="btn btn-secondary">See Services & Pricing</a>
+                </div>
+                <div class="hero-proof">
+                    <span class="hero-proof-avatars" aria-hidden="true">
+                        <img src="images/owner-portrait.webp" alt="">
+                        <span class="av av-cd">CD</span>
+                        <span class="av av-za">ZA</span>
+                    </span>
+                    <span class="hero-proof-text"><span class="stars" aria-hidden="true">★★★★★</span> Trusted by
+                        Missoula contractors &amp; shops</span>
+                </div>
+                <p class="hero-phone-note">
+                    <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    Local Missoula service — lifetime Florida cell number. Call or text any time.
+                </p>
+                <p class="hero-urgency"><svg class="tg-icon tg-icon-sm urgency-icon" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path
+                            d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" />
+                    </svg> Taking on a limited number of new projects each month — book early to lock in your spot</p>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-rotator" id="hero-rotator">
+                    <video class="hero-slide active" autoplay muted playsinline preload="auto"
+                        poster="images/video-poster.webp" aria-hidden="true">
+                        <source src="assets/cta/cta-01-web-design.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-02-ai-chat.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-03-branding.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-04-tools.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-05-why-me.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-06-value.mp4" type="video/mp4">
+                    </video>
+                    <video class="hero-slide" muted playsinline preload="none" aria-hidden="true">
+                        <source src="assets/cta/cta-07-missoula.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local Trust Bar -->
+        <div class="trust-bar" role="note" aria-label="Where TECHGURU is based and how I work">
+            <div class="trust-bar-inner">
+                <span class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                        focusable="false">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Based in Missoula, Montana
+                </span>
+                <span class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                        focusable="false">
+                        <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17l-6.3 4 2.3-7-6-4.6h7.6L12 2z" />
+                    </svg>
+                    Montana-owned, one-person studio
+                </span>
+                <span class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                        focusable="false">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                    Meet me in person around western Montana
+                </span>
+                <span class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                        focusable="false">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z" />
+                    </svg>
+                    Remote projects nationwide — same flat pricing
+                </span>
+            </div>
+        </div>
+
+        <!-- Why TechGuru Section -->
+        <section class="why-section" id="why">
+            <div class="section-header tg-head">
+                <span class="section-label"><span class="tg-num">01</span> Why TECHGURU</span>
+                <h2>Why Work With Me Directly</h2>
+                <p class="section-subtitle">The smart alternative to pricey agencies and DIY website builders — from a
+                    one-person studio in Missoula, Montana that you can actually meet.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card bento-span-large">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>No Agency, No Overhead</h3>
+                    <p>You're talking to the person who actually designs, builds, and ships your project — not an account manager relaying messages to a dev team. That means faster turnaround and prices that reflect one person's time, not an agency's overhead.</p>
+                </div>
+                <div class="why-card">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>Better Than a Template Builder</h3>
+                    <p>Custom-designed and coded for your business, not a generic Wix or Squarespace theme with your logo dropped in.</p>
+                    <ul class="why-mini-list">
+                        <li>Faster load times than bloated template subscriptions</li>
+                        <li>Clean local code = better Google &amp; Maps ranking placement</li>
+                        <li>Zero monthly platform fees — you own every line</li>
+                    </ul>
+                </div>
+                <div class="why-card bento-span-medium">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3>Real Proof of Work</h3>
+                    <p>Live websites and a custom CRM platform already running for real local businesses — including a Missoula contractor. Scroll down and look at the actual work, not a mockup.</p>
+                </div>
+                <div class="why-card bento-span-medium">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="11" width="18" height="10" rx="2" />
+                            <circle cx="12" cy="5" r="3" />
+                            <path d="M12 8v3M7 15h.01M17 15h.01M10 18h4" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3>AI That Actually Helps</h3>
+                    <p>Chat and FAQ widgets that answer real customer questions on your site — no gimmicks, just fewer repetitive calls and emails for you to handle.</p>
+                </div>
+                <div class="why-card">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17l-6.3 4 2.3-7-6-4.6h7.6L12 2z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>Design That Looks the Part</h3>
+                    <p>Polished, modern design — the kind that makes a small local business look established the moment someone lands on the site.</p>
+                </div>
+                <div class="why-card">
+                    <div class="glass-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>Built to Last</h3>
+                    <p>Fast, lightweight, reliably-hosted builds — not a bloated site that slows down or breaks after handoff.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Steps Section - Premium -->
+        <section class="portfolio-section" id="portfolio">
+            <div class="section-header">
+                <span class="section-label"><span class="tg-num">02</span> Recent Work</span>
+                <h2>Real Projects, Built and Live</h2>
+                <p class="section-subtitle">Two of the local businesses I've built websites, branding, and custom tools
+                    for — including one right here in Missoula. Everything below is running in production, not a
+                    mockup.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Case Study 1: Creative Drywall -->
+                <article class="portfolio-card">
+                    <div class="portfolio-media">
+                        <div class="portfolio-shot">
+                            <img src="images/portfolio/creative-drywall-1.jpg"
+                                alt="Finished interior walls and vaulted ceiling — Creative Drywall finish work"
+                                loading="lazy" decoding="async"
+                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
+                                onerror="this.style.display='none'">
+                            <div class="portfolio-shot-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
+                                Add screenshot: creative-drywall-1.jpg
+                            </div>
+                        </div>
+                        <div class="portfolio-shot">
+                            <img src="images/portfolio/creative-drywall-2.jpg"
+                                alt="Exterior of the Thompson residence after Creative Drywall's finish work"
+                                loading="lazy" decoding="async"
+                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
+                                onerror="this.style.display='none'">
+                            <div class="portfolio-shot-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
+                                Add screenshot: creative-drywall-2.jpg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-body">
+                        <span class="portfolio-tag">Website Design &amp; Build</span>
+                        <h3>Creative Drywall</h3>
+                        <ul class="portfolio-meta">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Missoula, Montana
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+                                </svg>
+                                Drywall contractor
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Live in production
+                            </li>
+                        </ul>
+                        <p class="portfolio-role">A full website design and rebuild for a drywall contractor right here
+                            in Missoula — moved off a generic corporate look into a warm, hometown feel with a custom
+                            copper &amp; Big Sky blue palette, so the site actually looks like the local business it
+                            belongs to.</p>
+                        <ul class="service-list">
+                            <li>Full UI/design overhaul — corporate to hometown aesthetic</li>
+                            <li>Custom color palette & typography system</li>
+                            <li>Contact form &amp; email routing wired up and tested</li>
+                        </ul>
+                        <div class="portfolio-stack">
+                            <span>React</span><span>Vite</span><span>Tailwind CSS</span><span>Cloudflare Pages</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Case Study 2: Zempel Auto -->
+                <article class="portfolio-card">
+                    <div class="portfolio-media single">
+                        <div class="portfolio-shot">
+                            <img src="images/portfolio/zempel-auto-1.jpg"
+                                alt="The Clark Fork River in Missoula, Montana — home town of Zempel Auto, which runs on the platform I built"
+                                loading="lazy" decoding="async"
+                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
+                                onerror="this.style.display='none'">
+                            <div class="portfolio-shot-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
+                                Add screenshot: zempel-auto-1.jpg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-body">
+                        <span class="portfolio-tag">Custom Business Tool + Branding</span>
+                        <h3>Zempel Auto — CRM &amp; Inventory Platform</h3>
+                        <ul class="portfolio-meta">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
+                                </svg>
+                                Auto parts shop
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <path d="M8 21h8M12 17v4" />
+                                </svg>
+                                Custom CRM + inventory
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Live in production
+                            </li>
+                        </ul>
+                        <p class="portfolio-role">A fully functional, custom-built CRM-style platform for an auto
+                            parts shop — handling customer records, inventory, and a parts-catalog integration, plus
+                            the logo and brand identity for the business itself. Built and running in production,
+                            not a demo.</p>
+                        <ul class="service-list">
+                            <li>Customer & inventory database, built around the shop's workflow</li>
+                            <li>Parts-catalog integration for day-to-day lookups</li>
+                            <li>Logo design & brand identity for the shop</li>
+                        </ul>
+                        <div class="portfolio-stack">
+                            <span>FastAPI</span><span>Cloudflare Workers</span><span>Custom CRM</span><span>Logo Design</span>
+                        </div>
+                            <p class="tech-translation">Translation: built on ultra-fast, modern web infrastructure that
+                                costs $0/month in hosting fees — no subscriptions, no surprises.</p>
+                    </div>
+                </article>
+            </div>
+            <p class="portfolio-note">More case studies added as new projects launch. Want to see a fuller demo of
+                either project? Mention it on a call and I'll walk you through it live.</p>
+        </section>
+
+        <!-- About Section -->
+        <section class="features" id="features">
+            <div class="section-header tg-head features-head">
+                <span class="section-label"><span class="tg-num">03</span> Included In Every Project</span>
+                <h2>The Basics Are Never an Upsell</h2>
+                <p class="section-subtitle">Speed, security, and support are part of the build — not a line item added
+                    to the invoice at the end.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+                        focusable="false">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <path d="M8 21h8M12 17v4" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h3>Custom-Built Websites</h3>
+                <p>Every site is designed and coded for your business — the same approach behind Creative Drywall and
+                    every other project in my portfolio.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+                        focusable="false">
+                        <rect x="3" y="11" width="18" height="10" rx="2" />
+                        <circle cx="12" cy="5" r="3" />
+                        <path d="M12 8v3M8 15h.01M12 15h.01M16 15h.01" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h3>AI Chat &amp; FAQ Widgets</h3>
+                <p>A trained AI widget on your site that answers common customer questions automatically, so you're not
+                    fielding the same call five times a day.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+                        focusable="false">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3>Reliable Hosting</h3>
+                <p>Fast, secure hosting on Cloudflare's network — the same infrastructure powering the live projects in
+                    my portfolio.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+                        focusable="false">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3>Direct Support</h3>
+                <p>Questions or issues after launch go straight to me — no ticket queue, no tiered support desk.</p>
+            </div>
+        </section>
+
+        <!-- Lead Magnet Section -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label"><span class="tg-num">04</span> What I Offer</span>
+                    <h2>Websites, Branding & AI — Priced for Local Business</h2>
+                    <p class="section-subtitle">Flat, transparent packages. No agency markup, no $8,000 minimums.</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1: Website Design & Build (flagship) -->
+                    <div class="service-card bento-span-large" data-category="website">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <path d="M8 21h8M12 17v4" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Website Design & Build</h3>
+                        <p>A custom-designed, mobile-first website for your business — not a generic template. Built the same way as the live local-business sites in my portfolio below, with clean code, fast load times, and a contact/booking flow that actually converts visitors.</p>
+                        <ul class="service-list">
+                            <li>Custom design, not a theme</li>
+                            <li>Mobile-first & fast-loading</li>
+                            <li>Contact forms, booking links, SEO basics</li>
+                        </ul>
+                        <span class="service-price">From $900</span>
+                    </div>
+
+                    <!-- Service 2: AI Chat & FAQ Widgets -->
+                    <div class="service-card bento-span-medium" data-category="ai">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="10" rx="2" />
+                                <circle cx="12" cy="5" r="3" />
+                                <path d="M12 8v3M8 15h.01M12 15h.01M16 15h.01" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>AI Chat & FAQ Widgets</h3>
+                        <p>An AI-powered chat widget for your site — like the one in the corner of this page — trained on your business's FAQs, hours, services, and pricing so it can answer customers automatically, day or night.</p>
+                        <ul class="service-list">
+                            <li>Trained on your FAQs & services</li>
+                            <li>Matches your site's branding</li>
+                            <li>Add-on to any site, or standalone</li>
+                        </ul>
+                        <span class="service-price">From $600</span>
+                    </div>
+
+                    <!-- Service 3: Branding & Identity -->
+                    <div class="service-card" data-category="design">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17l-6.3 4 2.3-7-6-4.6h7.6L12 2z" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Branding & Logo Design</h3>
+                        <p>A logo and simple brand identity — colors, fonts, and basic guidelines — so your business looks consistent across your site, truck wraps, signage, and social pages.</p>
+                        <ul class="service-list">
+                            <li>Logo design & revisions</li>
+                            <li>Color palette & typography</li>
+                            <li>Bundled discount with a website</li>
+                        </ul>
+                        <span class="service-price">From $350</span>
+                    </div>
+
+                    <!-- Service 4: Custom Tools / Internal Apps -->
+                    <div class="service-card" data-category="apps">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke-linecap="round" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </div>
+                        <h3>Custom Business Tools</h3>
+                        <p>For businesses that need more than a website — custom internal tools like a CRM, inventory tracker, or customer database, built around how you actually work. See the Zempel Auto platform in my portfolio.</p>
+                        <ul class="service-list">
+                            <li>Customer & inventory tracking</li>
+                            <li>Built around your workflow</li>
+                            <li>Quoted after a scope call</li>
+                        </ul>
+                        <span class="service-price">Custom quote</span>
+                    </div>
+
+                    <!-- Service 5: Care Plans -->
+                    <div class="service-card" data-category="care">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Monthly Care Plans</h3>
+                        <p>Hosting, uptime monitoring, and small content updates handled for you every month, so your site stays fast, current, and online without you having to think about it.</p>
+                        <ul class="service-list">
+                            <li>Hosting & uptime included</li>
+                            <li>Small edits & content updates</li>
+                            <li>Priority response if something breaks</li>
+                        </ul>
+                        <span class="service-price">From $75/mo</span>
+                    </div>
+
+                    <!-- Service 6: Consulting -->
+                    <div class="service-card" data-category="consulting">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Hourly Consulting</h3>
+                        <p>Need advice, not a full project? One-off help picking tools, fixing something broken, or planning your next step online.</p>
+                        <ul class="service-list">
+                            <li>No package required</li>
+                            <li>Billed in 30-min increments</li>
+                            <li>Great for a second opinion</li>
+                        </ul>
+                        <span class="service-price">From $75/hr</span>
+                    </div>
+                </div>
+
+                <div class="services-cta">
+                    <p>Not sure which service fits your needs?</p>
+                    <a href="#contact" class="btn btn-primary">Book a Free Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="process-section-premium" id="process">
+            <div class="process-container">
+                <div class="process-header">
+                    <span class="process-label"><span class="tg-num">05</span> My Process</span>
+                    <h2>How I Work</h2>
+                    <p class="section-subtitle">A simple 4-step process — no committees, no handoffs, just direct
+                        communication start to finish</p>
+                </div>
+
+                <div class="process-timeline-premium horizontal-scroll-container">
+                    <div class="process-line" aria-hidden="true"></div>
+                    <!-- Step 1 -->
+                    <div class="process-step-premium" data-step="1">
+                        <div class="step-indicator">
+                            <div class="step-number-ring">
+                                <span class="step-num">01</span>
+                            </div>
+                            <div class="step-line"></div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-icon-wrapper">
+                                <div class="step-icon">
+                                    <svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="step-details">
+                                <h3>Discovery Call</h3>
+                                <p>We talk through your business, your goals, and what's missing — in a free 30-minute
+                                    call with me directly. No sales pressure, just an honest read on what would
+                                    actually help.</p>
+                                <ul class="step-checklist">
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Free 30-minute session</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Identify key challenges</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Initial recommendations</li>
+                                </ul>
+                            </div>
+                            <div class="step-duration">
+                                <span class="duration-label">Duration</span>
+                                <span class="duration-value">30 mins</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="process-step-premium" data-step="2">
+                        <div class="step-indicator">
+                            <div class="step-number-ring">
+                                <span class="step-num">02</span>
+                            </div>
+                            <div class="step-line"></div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-icon-wrapper">
+                                <div class="step-icon">
+                                    <svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                                        <path
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="step-details">
+                                <h3>Scope & Flat Pricing</h3>
+                                <p>I send over a simple proposal — what's included, the timeline, and a flat price.
+                                    No hourly guessing games, no surprise invoices later.</p>
+                                <ul class="step-checklist">
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Detailed project roadmap</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Transparent pricing</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Clear milestones</li>
+                                </ul>
+                            </div>
+                            <div class="step-duration">
+                                <span class="duration-label">Turnaround</span>
+                                <span class="duration-value">2-3 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="process-step-premium" data-step="3">
+                        <div class="step-indicator">
+                            <div class="step-number-ring">
+                                <span class="step-num">03</span>
+                            </div>
+                            <div class="step-line"></div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-icon-wrapper">
+                                <div class="step-icon">
+                                    <svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                                        <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="step-details">
+                                <h3>Build & Review</h3>
+                                <p>I build in stages and send you progress along the way — you see and approve the
+                                    design before anything's final, with quick revisions between rounds.</p>
+                                <ul class="step-checklist">
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Weekly progress updates</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Interactive demos</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Rapid iterations</li>
+                                </ul>
+                            </div>
+                            <div class="step-duration">
+                                <span class="duration-label">Timeline</span>
+                                <span class="duration-value">2-6 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="process-step-premium" data-step="4">
+                        <div class="step-indicator">
+                            <div class="step-number-ring completed">
+                                <span class="step-num">04</span>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-icon-wrapper">
+                                <div class="step-icon success">
+                                    <svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="step-details">
+                                <h3>Launch & Support</h3>
+                                <p>Your site goes live, and I walk you through how to manage it. Every project
+                                    includes 30+ days of post-launch support — and a Care Plan if you'd rather I
+                                    keep handling it.</p>
+                                <ul class="step-checklist">
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Smooth deployment</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> 30-day support included</li>
+                                    <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg> Documentation & training</li>
+                                </ul>
+                            </div>
+                            <div class="step-duration">
+                                <span class="duration-label">Support</span>
+                                <span class="duration-value">30+ days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process CTA -->
+                <div class="process-cta">
+                    <p>Ready to get your business online — or online done right?</p>
+                    <a href="#contact" class="btn btn-primary btn-pulse">Start Your Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Services Section -->
+        <!-- Services Section - Clean & Simple -->
+        <section class="about-section" id="about">
+            <div class="section-header tg-head">
+                <span class="section-label"><span class="tg-num">06</span> About Me</span>
+                <h2>Montana Born. Montana Based.</h2>
+                <p class="section-subtitle">A one-person studio you can actually meet — not an anonymous agency inbox,
+                    not an out-of-state call center.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-main">
+                    <p class="about-lead">I'm the person behind TECHGURU. I believe local businesses deserve the same
+                        quality of website, branding, and technology that big companies pay agencies tens of thousands
+                        for — without the agency price tag or the runaround.</p>
+
+                    <div class="about-story">
+                        <h3>My Story</h3>
+                        <p>I'm a full-stack developer and designer, and Montana is my home state. I spent a few years
+                            down in South Florida, then moved back home to <strong>Missoula</strong> — so TECHGURU is now
+                            a one-person studio in the Garden City, not a front for a team you'll never meet. I build
+                            every website, every chat widget, and every custom tool myself, from the projects in my
+                            portfolio above to whatever your business needs next.</p>
+                        <p>I started TECHGURU because too many local businesses either overpay an agency or get stuck
+                            with a generic template site that doesn't represent them. Coming home changed the way I
+                            work: I'd rather sit across a table from a business owner in Missoula than trade emails with
+                            a stranger, and I'd rather my work show up on a local contractor's truck than sit in a
+                            portfolio nobody visits.</p>
+                        <p class="about-callout"><strong>Local, and easy to verify.</strong> If you're in the Missoula
+                            area I'm glad to meet in person — coffee, your shop, or a job site. If you're elsewhere in
+                            Montana or out of state, the work runs exactly the same way over a call: same flat pricing,
+                            same timeline, same direct line to me.</p>
+                    </div>
+                </div>
+
+                <aside class="about-side">
+                    <div class="about-side-card">
+                        <h3>Where I Work</h3>
+                        <dl class="about-facts">
+                            <div>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                <div>
+                                    <dt>Based in</dt>
+                                    <dd>Missoula, Montana 59808</dd>
+                                </div>
+                            </div>
+                            <div>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                </svg>
+                                <div>
+                                    <dt>In person</dt>
+                                    <dd>Missoula, the Bitterroot Valley, Flathead &amp; Kalispell</dd>
+                                </div>
+                            </div>
+                            <div>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z" />
+                                </svg>
+                                <div>
+                                    <dt>Remote</dt>
+                                    <dd>Anywhere in the U.S. — same process, same price</dd>
+                                </div>
+                            </div>
+                            <div>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                                <div>
+                                    <dt>Studio size</dt>
+                                    <dd>One person. Every project designed and built by me.</dd>
+                                </div>
+                            </div>
+                        </dl>
+                        <p class="about-signature">
+                            <strong data-owner-name>TECHGURU</strong>
+                            Founder &amp; Developer &middot; Missoula, MT
+                        </p>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="about-approach">
+                <h3>How I Approach Every Project</h3>
+                <ul class="approach-list">
+                    <li><strong>Built for Your Business:</strong> No copy-paste templates — every site is designed
+                        around how your customers actually find and use it.</li>
+                    <li><strong>Design Matters:</strong> Every visual element is intentional, aligned with your brand's
+                        identity, not a stock theme.</li>
+                    <li><strong>AI as a Tool, Not a Gimmick:</strong> Chat and FAQ widgets that genuinely save you time
+                        answering the same questions over and over.</li>
+                    <li><strong>Straight Talk:</strong> You'll know the price and timeline upfront, and you're talking
+                        to me directly at every step — no account managers in between.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Included In Every Project -->
+        <section class="lead-magnet" id="lead">
+            <div class="lead-magnet-content">
+                <div class="lead-magnet-text">
+                    <span class="section-label">Free Resource</span>
+                    <h2>Free: Local Business Website Checklist</h2>
+                    <p>A quick, no-fluff checklist to see how your current site (or lack of one) stacks up — sent
+                        straight to your inbox.</p>
+                    <ul class="lead-magnet-list">
+                        <li><svg class="tg-icon tg-icon-sm check-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg> 12-point website & branding checklist</li>
+                        <li><svg class="tg-icon tg-icon-sm check-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg> What an AI FAQ widget can (and can't) do for you</li>
+                        <li><svg class="tg-icon tg-icon-sm check-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg> Real 2026 website pricing, explained</li>
+                        <li><svg class="tg-icon tg-icon-sm check-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg> Common mistakes local business sites make</li>
+                    </ul>
+                    <form
+  id="subscribe-form"
+  aria-label="Subscribe to get free resources"
+>
+  <input type="hidden" name="subject" value="New Lead Magnet Subscriber — TechGuru">
+  <input type="hidden" name="redirect" value="https://techguruofficial.us/thank-you.html">
+  <input type="checkbox" name="botcheck" class="hidden" aria-label="Bot check" title="botcheck">
+
+  <div class="form-group-inline">
+    <label for="subscribe-email" class="sr-only">Email address</label>
+    <input
+      type="email"
+      id="subscribe-email"
+      name="email"
+      placeholder="Enter your email"
+      required
+      autocomplete="email"
+    >
+    <button type="submit" class="btn btn-primary">Get Free Access →</button>
+  </div>
+</form>
+                    <p class="privacy-note">No spam — just the checklist. Unsubscribe anytime.</p>
+                </div>
+                <div class="lead-magnet-preview">
+                    <div class="mockup-stack">
+                        <div class="mockup-item mockup-1"><svg class="tg-icon tg-icon-sm mockup-icon"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true" focusable="false">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
+                            </svg> Website Checklist</div>
+                        <div class="mockup-item mockup-2"><svg class="tg-icon tg-icon-sm mockup-icon"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true" focusable="false">
+                                <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                            </svg> Pricing Guide</div>
+                        <div class="mockup-item mockup-3"><svg class="tg-icon tg-icon-sm mockup-icon"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true" focusable="false">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg> AI Widget Guide</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" id="faq">
+            <div class="section-header tg-head">
+                <span class="section-label"><span class="tg-num">07</span> FAQ</span>
+                <h2>Frequently Asked Questions</h2>
+                <p class="section-subtitle">Straight answers on pricing, timelines, and how I work. Anything not
+                    covered here — ask me on a call and I'll tell you honestly.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Are you actually local to Missoula?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Montana is my home state — I spent a few years in South Florida and moved back home to
+                            Missoula. I'm happy to meet local business owners in person around Missoula, the Bitterroot
+                            Valley, and the Flathead/Kalispell area. No subcontractors, no offshore team.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you work with businesses outside Montana?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. The work is remote-friendly by nature: a discovery call, a flat-price proposal,
+                            staged builds with review links, then launch. Out-of-state clients get the same process,
+                            the same pricing, and the same direct line to me as local Montana clients.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How long does a typical website project take?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most local business websites launch within 2-4 weeks. Branding and AI chat widget add-ons
+                            typically add 3-7 days. Since it's just me, you're never waiting on a queue of other
+                            clients' projects.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What kind of businesses do you work with?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Mainly local and small businesses — contractors, auto shops, service businesses, and
+                            small brands that need a real website, a clean brand identity, or an AI chat widget,
+                            without agency pricing or overhead.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you offer ongoing support after launch?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Every project includes 30 days of post-launch support, and monthly Care Plans are
+                            available for hosting, small edits, and updates after that.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What's your pricing?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Websites start around $900 and typically run $2,200-$4,000 for a full custom build with
+                            branding. AI chat/FAQ widgets start around $600. Exact pricing depends on scope and is
+                            quoted after a free consultation — see the Services section above for the full breakdown.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Can you build custom tools beyond a website, like a CRM?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes — alongside websites I build custom internal tools when a business needs them. The
+                            Zempel Auto platform in my portfolio is a full customer & inventory management system
+                            I built for an auto parts shop. Custom app builds are quoted separately based on scope.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if I'm not sure what I need?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>That's what the free consultation is for. I'll look at what you have (or don't have yet)
+                            and recommend the highest-impact starting point. No obligation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="section-header tg-head">
+                <span class="section-label"><span class="tg-num">08</span> Contact</span>
+                <h2>Let's Build Something Great</h2>
+                <p class="contact-subtitle">Book a free consultation or send me a message — I'm in Missoula on Mountain
+                    Time and I respond within 24 hours.</p>
+            </div>
+            <div class="contact-wrapper">
+                <form
+  id="contact-form"
+  class="contact-form"
+  aria-label="Contact form"
+>
+  <!-- Email subject line you'll see in your inbox -->
+  <input type="hidden" name="subject" value="New Contact Form Submission — TechGuru">
+
+  <!-- Redirects user to a thank-you page after submit (optional but professional) -->
+  <input type="hidden" name="redirect" value="https://techguruofficial.us/thank-you.html">
+
+  <!-- Honeypot spam filter — leave this exactly as-is -->
+  <input type="checkbox" name="botcheck" class="hidden" aria-label="Bot check" title="botcheck">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Your Name <span
+                                    class="required">*</span></label>
+                            <input type="text" id="contact-name" name="name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-company" class="form-label">Company Name</label>
+                            <input type="text" id="contact-company" name="company" autocomplete="organization">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email Address <span
+                                    class="required">*</span></label>
+                            <input type="email" id="contact-email" name="email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone" class="form-label">Phone (Optional)</label>
+                            <input type="tel" id="contact-phone" name="phone" autocomplete="tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-service" class="form-label">How can I help? <span
+                                class="required">*</span></label>
+                        <select id="contact-service" name="service" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="website">Website Design & Build</option>
+                            <option value="ai-widget">AI Chat & FAQ Widget</option>
+                            <option value="branding">Branding & Logo Design</option>
+                            <option value="custom-tool">Custom Business Tool (CRM, etc.)</option>
+                            <option value="care-plan">Monthly Care Plan</option>
+                            <option value="consulting">Hourly Consulting</option>
+                            <option value="other">Other / Not Sure</option>
+                        </select>
+                    </div>
+                    <div class="tg-q" aria-label="Project fit questionnaire">
+                        <div class="q-step" data-step="1">
+                            <span class="q-num" aria-hidden="true">1</span>
+                            <div class="q-body">
+                                <span class="form-label">Core service <span class="required">*</span></span>
+                                <div class="q-radios" role="radiogroup" aria-label="Core service">
+                                    <label class="q-opt"><input type="radio" name="service" value="website"><span>Custom
+                                            Website Design &amp; Rebuild <em>starts at $900</em></span></label>
+                                    <label class="q-opt"><input type="radio" name="service" value="ai-widget"><span>AI Chat
+                                            &amp; FAQ Widget Integration <em>starts at $600</em></span></label>
+                                    <label class="q-opt"><input type="radio" name="service" value="custom-tool"><span>Custom
+                                            Internal Business Tool / CRM <em>custom quote</em></span></label>
+                                    <label class="q-opt"><input type="radio" name="service" value="full-stack"><span>The Full
+                                            Stack Package <em>website + branding + AI widget</em></span></label>
+                                    <label class="q-opt"><input type="radio" name="service" value="other"
+                                            id="service-other"><span>Something else <em>care plan, branding,
+                                                consulting…</em></span></label>
+                                </div>
+                                <div class="q-other" id="service-other-wrap" hidden>
+                                    <select id="contact-service" name="service_other" aria-label="Which other service?">
+                                        <option value="" disabled selected>Choose a service</option>
+                                        <option value="branding">Branding &amp; Logo Design</option>
+                                        <option value="care-plan">Monthly Care Plan</option>
+                                        <option value="consulting">Hourly Consulting</option>
+                                        <option value="other">Other / Not Sure</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-step" data-step="2">
+                            <span class="q-num" aria-hidden="true">2</span>
+                            <div class="q-body">
+                                <label for="contact-timeline" class="form-label">Project timeline <span
+                                        class="required">*</span></label>
+                                <select id="contact-timeline" name="timeline">
+                                    <option value="" disabled selected>Select a timeline</option>
+                                    <option value="asap">As soon as possible (ready to start)</option>
+                                    <option value="30-days">Within the next 30 days</option>
+                                    <option value="flexible">Flexible / just researching options</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="q-step" data-step="3">
+                            <span class="q-num" aria-hidden="true">3</span>
+                            <div class="q-body">
+                                <span class="form-label">Current technical infrastructure <span class="tg-hint">(pick
+                                        any)</span></span>
+                                <div class="q-checks" role="group" aria-label="Current technical infrastructure">
+                                    <label class="q-opt"><input type="checkbox" name="infra" value="no website yet"><span>I
+                                            do not have a website yet</span></label>
+                                    <label class="q-opt"><input type="checkbox" name="infra" value="needs full rebuild"><span>I
+                                            have a website, but it needs a complete rebuild</span></label>
+                                    <label class="q-opt"><input type="checkbox" name="infra" value="too many manual calls/texts"><span>I
+                                            spend too much time manually answering basic phone calls / texts</span></label>
+                                    <label class="q-opt"><input type="checkbox" name="infra" value="needs automated lead routing"><span>I
+                                            need an automated way to collect local leads and route emails</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-step" data-step="4">
+                            <span class="q-num" aria-hidden="true">4</span>
+                            <div class="q-body">
+                                <label for="contact-budget" class="form-label">Budget reality check <span
+                                        class="required">*</span></label>
+                                <select id="contact-budget" name="budget">
+                                    <option value="" disabled selected>Select a range</option>
+                                    <option value="900-1500">$900 – $1,500 (basic local site or single tool)</option>
+                                    <option value="1500-3500">$1,500 – $3,500 (contractor site + branding / optimization)</option>
+                                    <option value="3500-plus">$3,500+ (advanced custom tools or comprehensive builds)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message" class="form-label">Anything else I should know? <span class="tg-hint">(optional)</span></label>
+                        <textarea id="contact-message" name="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">Send Message →</button>
+                    <p class="response-time"><svg class="response-icon" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg> Average response time: Under 24 hours</p>
+                </form>
+                <div class="contact-info">
+                    <div class="booking-section">
+                        <h3><svg class="tg-icon tg-icon-sm section-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg> Book a Free Strategy Call</h3>
+                        <p>Skip the back-and-forth. Pick a time that works for you.</p>
+                        <button type="button" onclick="openBookingModal()" class="btn btn-primary btn-booking">
+                            Schedule 30-Min Call →
+                        </button>
+                    </div>
+                    <h3>Or Reach Out Directly</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                focusable="false">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg></span>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                focusable="false">
+                                <path
+                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                            </svg></span>
+                        <div>
+                            <strong>Phone</strong>
+                            <a href="tel:+17866369964">+1 786 636-9964</a>
+                            <span class="contact-note">Yes, that's a Florida area code — leftover from before I moved
+                                back to Montana. Book a time and I'll call you instead, or text it and I'll reply.</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                focusable="false">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg></span>
+                        <div>
+                            <strong>WhatsApp</strong>
+                            <a href="https://wa.me/17866369964" target="_blank" rel="noopener">Chat on WhatsApp</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                focusable="false">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg></span>
+                        <div>
+                            <strong>Location</strong>
+                            <span>Missoula, Montana 59808</span>
+                            <span class="contact-note">In-person meetings around Missoula &amp; the Bitterroot Valley.
+                                Remote projects anywhere in the U.S. (Mountain Time, MT).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="footer-logo-icon">
+                        TECHGURU
+                    </div>
+                    <p>Websites, Branding &amp; AI Tools — Built by One Techguru.</p>
+                    <span class="footer-loc">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                            focusable="false">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        Missoula, Montana
+                    </span>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg> <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a></p>
+                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                        </svg> <a href="tel:+17866369964">+1 786 636-9964</a></p>
+                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg> Missoula, MT 59808 &mdash; serving Montana locally &amp; the U.S.
+                        remotely</p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/17866369964" target="_blank" rel="noopener" aria-label="WhatsApp"
+                            class="social-link"><svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg></a>
+                        <a href="#" aria-label="LinkedIn" class="social-link"><svg class="tg-icon tg-icon-md"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true" focusable="false">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></a>
+                        <a href="#" aria-label="Twitter" class="social-link"><svg class="tg-icon tg-icon-md"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true" focusable="false">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                            </svg></a>
+                    </div>
+                </div>
+                <div class="footer-cta">
+                    <h4>Ready to Start?</h4>
+                    <p>Let's build a site your business actually deserves.</p>
+                    <a href="#contact" class="btn btn-primary">Get Free Consultation</a>
+                </div>
+            </div>
+            <div class="footer-areas" role="note" aria-label="Service area">
+            <strong>Proudly serving:</strong> Missoula · Lolo · Frenchtown · Bonner · Clinton · Seeley Lake ·
+            the Bitterroot Valley (Hamilton, Stevensville, Victor, Darby) · the Flathead Valley (Kalispell, Whitefish,
+            Columbia Falls) · all of Montana remotely · nationwide from Missoula, MT
+        </div>
+        <div class="footer-bottom">
+                <p>&copy; 2026 TECHGURU. All rights reserved.<span class="tg-sep">&middot;</span>Missoula,
+                    Montana<span class="tg-sep">&middot;</span><a href="mailto:info@techguruofficial.us"
+                        style="color:inherit;text-decoration:none">info@techguruofficial.us</a></p>
+            </div>
+        </footer>
+
+        <!-- Exit Intent Popup -->
+        <div class="exit-popup-overlay" id="exit-popup">
+            <div class="exit-popup">
+                <button class="exit-popup-close" id="exit-popup-close" aria-label="Close popup">×</button>
+                <h3>Wait—Don't Leave Empty-Handed</h3>
+                <p>Grab the <strong>free Local Business Website Checklist</strong> before you go — 12 points to check,
+                    plus real pricing for websites and AI chat widgets.</p>
+                <form
+  id="exit-popup-form"
+>
+  <input type="hidden" name="subject" value="Exit Popup Lead — TechGuru">
+  <input type="hidden" name="redirect" value="https://techguruofficial.us/thank-you.html">
+  <input type="checkbox" name="botcheck" class="hidden" aria-label="Bot check" title="botcheck">
+
+  <input type="email" name="email" placeholder="Enter your email" required>
+  <button type="submit" class="btn btn-primary">Get Free Access</button>
+</form>
+                <p class="exit-popup-note">No spam, ever.</p>
+            </div>
+        </div>
+
+        <!-- Custom AI Chat Widget -->
+        <div class="chat-widget-container" role="complementary" aria-label="Chat support widget">
+            <!-- Floating CTA Buttons (hidden by default, show on interaction) -->
+            <div class="chat-floating-ctas" id="chat-floating-ctas" role="group" aria-label="Quick contact options">
+                <a href="https://wa.me/17866369964?text=Hi%20TechGuru!%20I%27m%20interested%20in%20a%20website%20or%20AI%20chat%20widget%20for%20my%20business."
+                    target="_blank" rel="noopener noreferrer" class="chat-cta-btn whatsapp"
+                    aria-label="Chat with us on WhatsApp (opens in new tab)">
+                    <span class="chat-cta-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" focusable="false">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                        </svg></span>
+                    <span class="chat-cta-text">WhatsApp</span>
+                </a>
+                <button type="button" onclick="openBookingModal()" class="chat-cta-btn schedule"
+                    aria-label="Schedule a strategy call">
+                    <span class="chat-cta-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" focusable="false">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg></span>
+                    <span class="chat-cta-text">Schedule</span>
+                </button>
+            </div>
+            <!-- Chat Toggle Button with Avatar -->
+            <button id="chat-toggle" class="chat-toggle" aria-label="Open chat assistant" aria-expanded="false"
+                aria-controls="chat-window">
+                <img src="images/chat-avatar.webp" alt="" class="chat-avatar" aria-hidden="true">
+                <span class="visually-hidden">TechGuru AI Chat Assistant</span>
+            </button>
+
+            <!-- Chat Window -->
+            <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-window-title"
+                aria-describedby="chat-window-desc" aria-modal="true">
+                <!-- Skip Link for keyboard users -->
+                <a href="#chat-input" class="chat-skip-link visually-hidden" tabindex="0">Skip to chat input</a>
+
+                <!-- Resize Handles (decorative) -->
+                <div class="resize-handle resize-handle-nw" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-ne" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-sw" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-se" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-n" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-s" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-e" aria-hidden="true"></div>
+                <div class="resize-handle resize-handle-w" aria-hidden="true"></div>
+
+                <header class="chat-header">
+                    <div class="chat-header-brand">
+                        <img src="images/icons/nav-icon-new.webp" alt="" class="chat-header-logo" aria-hidden="true">
+                        <div class="chat-header-info">
+                            <h3 id="chat-window-title">TECHGURU AI</h3>
+                            <p id="chat-window-desc" class="chat-header-status">
+                                <span class="status-dot" aria-hidden="true"></span>
+                                <span class="status-text">Online - Ready to help</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chat-header-actions" role="group" aria-label="Chat controls">
+                        <button id="chat-clear" class="chat-action-btn" aria-label="Clear conversation history"
+                            title="Clear chat">
+                            <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true" focusable="false">
+                                <path
+                                    d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button id="chat-close" class="chat-close" aria-label="Close chat window">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Suggestion Chips -->
+                <nav id="chat-suggestions" class="chat-suggestions" role="group" aria-label="Quick message suggestions">
+                    <button class="suggestion-chip" data-message="What services do you offer?" type="button">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                            <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+                        </svg> Services
+                    </button>
+                    <button class="suggestion-chip" data-message="How fast is your turnaround?" type="button">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg> Turnaround
+                    </button>
+                    <button class="suggestion-chip" data-message="I'd like to get a quote" type="button">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                        </svg> Get Quote
+                    </button>
+                    <button class="suggestion-chip" data-message="Tell me about your pricing" type="button">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <line x1="18" y1="20" x2="18" y2="10" />
+                            <line x1="12" y1="20" x2="12" y2="4" />
+                            <line x1="6" y1="20" x2="6" y2="14" />
+                        </svg> Pricing
+                    </button>
+                    <button class="suggestion-chip" type="button" onclick="openBookingModal(); return false;"
+                        data-action="booking">
+                        <svg class="tg-icon tg-icon-sm chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg> Book Call
+                    </button>
+                </nav>
+
+                <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"
+                    tabindex="0"></div>
+
+                <!-- Typing Indicator -->
+                <div id="chat-typing" class="chat-typing-indicator chat-typing-hidden" role="status" aria-live="polite">
+                    <img src="images/icons/nav-icon-new.webp" alt="" class="typing-avatar" aria-hidden="true">
+                    <div class="typing-dots" aria-label="Assistant is typing">
+                        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                    </div>
+                    <span class="visually-hidden">TechGuru AI is typing a response</span>
+                </div>
+
+                <form id="chat-form" class="chat-form" aria-label="Send a message">
+                    <div class="chat-input-wrapper">
+                        <div class="chat-input-container">
+                            <button type="button" id="chat-upload-btn" class="chat-input-btn" aria-label="Attach a file"
+                                title="Attach file (PDF, DOC, TXT, or image)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path
+                                        d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <textarea id="chat-input" placeholder="Type your message..." autocomplete="off" rows="1"
+                                required aria-label="Message input" aria-describedby="chat-input-hint"
+                                maxlength="500"></textarea>
+                            <button type="button" id="chat-voice-btn" class="chat-input-btn"
+                                aria-label="Use voice input" title="Voice input (hold to record)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    aria-hidden="true" focusable="false">
+                                    <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" />
+                                    <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <input type="file" id="chat-file-input" class="chat-file-input"
+                                accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg" multiple hidden aria-label="File upload">
+                        </div>
+                        <div class="chat-input-footer">
+                            <span id="chat-char-count" class="char-count" aria-live="polite"
+                                aria-atomic="true">0/500</span>
+                            <span id="chat-input-hint" class="input-hint">Shift+Enter for new line</span>
+                        </div>
+                    </div>
+                    <!-- Send Button (Icon Only) -->
+                    <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message"
+                        title="Send message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                            focusable="false">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </form>
+                <div id="chat-file-preview" class="chat-file-preview" role="list" aria-label="Attached files"></div>
+            </div>
+        </div>
+
+        <!-- Cal.com Booking Modal -->
+        <div id="booking-modal" class="booking-modal" role="dialog" aria-labelledby="booking-modal-title"
+            aria-modal="true" hidden>
+            <div class="booking-modal-overlay" onclick="closeBookingModal()" aria-hidden="true"></div>
+            <div class="booking-modal-content">
+                <div class="booking-modal-header">
+                    <h2 id="booking-modal-title"><svg class="tg-icon tg-icon-sm modal-icon" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg> Schedule Your Free Strategy Call</h2>
+                    <button type="button" class="booking-modal-close" onclick="closeBookingModal()"
+                        aria-label="Close booking modal">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="booking-modal-body">
+                    <!-- Cal.com Embed -->
+                    <div id="cal-embed" class="cal-embed-container">
+                        <div class="cal-loading" aria-live="polite">
+                            <div class="cal-spinner"></div>
+                            <p>Loading calendar...</p>
+                        </div>
+                    </div>
+                    <p class="booking-modal-fallback">
+                        Having trouble? <a href="https://cal.com/techguru/strategy-call" target="_blank"
+                            rel="noopener">Open in new tab →</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="css/chat-widget-dark-glass.css">
+        <script src="js/chat-widget.js" defer></script>
+
+        <!-- PWA Service Worker Registration -->
+        <script>
+            // Register service worker for PWA functionality
+            if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then((registration) => {
+                            console.log('[PWA] Service Worker registered successfully:', registration.scope);
+
+                            // Check for updates periodically
+                            setInterval(() => {
+                                registration.update();
+                            }, 60000); // Check every minute
+
+                            // Handle service worker updates
+                            registration.addEventListener('updatefound', () => {
+                                const newWorker = registration.installing;
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        console.log('[PWA] New version available. Refresh to update.');
+                                        // Optionally show update notification to user
+                                    }
+                                });
+                            });
+                        })
+                        .catch((error) => {
+                            console.error('[PWA] Service Worker registration failed:', error);
+                        });
+                });
+            }
+        </script>
+
+        <!-- Layout System v2 runtime: nav state, scroll-spy, progress bar, reveal, owner name -->
+        <script>
+            (function () {
+                'use strict';
+
+                /* >>> Personalise the site: put your first name between the quotes. <<<
+                   It fills every [data-owner-name] spot (About signature). Leave '' to keep the default. */
+                var OWNER_NAME = '';
+
+                var root = document.documentElement;
+
+                if (OWNER_NAME) {
+                    var named = document.querySelectorAll('[data-owner-name]');
+                    for (var n = 0; n < named.length; n++) { named[n].textContent = OWNER_NAME; }
+                }
+
+                /* 1. Reading progress bar */
+                var bar = document.createElement('div');
+                bar.className = 'tg-scroll-progress';
+                bar.setAttribute('aria-hidden', 'true');
+                document.body.appendChild(bar);
+
+                var nav = document.querySelector('.navbar');
+                var ticking = false;
+
+                function onScroll() {
+                    var y = window.scrollY || window.pageYOffset || 0;
+                    var max = document.documentElement.scrollHeight - window.innerHeight;
+                    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+                    if (nav) {
+                        if (y > 12) { nav.classList.add('is-scrolled'); }
+                        else { nav.classList.remove('is-scrolled'); }
+                    }
+                    ticking = false;
+                }
+
+                window.addEventListener('scroll', function () {
+                    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+                }, { passive: true });
+                window.addEventListener('resize', onScroll, { passive: true });
+                onScroll();
+
+                /* 2. Scroll-spy — highlight the nav link for the section on screen */
+                var links = document.querySelectorAll('.nav-menu a[href^="#"]');
+                var map = {};
+                var ids = [];
+                for (var i = 0; i < links.length; i++) {
+                    var id = links[i].getAttribute('href').slice(1);
+                    if (!id) { continue; }
+                    map[id] = links[i];
+                    ids.push(id);
+                }
+
+                function clearActive() {
+                    for (var k in map) { if (map.hasOwnProperty(k)) { map[k].classList.remove('is-active'); } }
+                }
+
+                if ('IntersectionObserver' in window) {
+                    var spy = new IntersectionObserver(function (entries) {
+                        for (var e = 0; e < entries.length; e++) {
+                            if (entries[e].isIntersecting) {
+                                clearActive();
+                                if (map[entries[e].target.id]) { map[entries[e].target.id].classList.add('is-active'); }
+                            }
+                        }
+                    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+                    for (var s = 0; s < ids.length; s++) {
+                        var sec = document.getElementById(ids[s]);
+                        if (sec) { spy.observe(sec); }
+                    }
+                }
+
+                /* 3. Scroll reveal (opt-in: only runs if motion is allowed) */
+                var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                /* Cinematic scroll storytelling: each block fades + slides in from a
+                   direction as it enters the viewport (Framer-Motion whileInView style,
+                   vanilla JS). Directions are assigned per group below. */
+                var REVEAL_MAP = [
+                    ['.hero-location-badge, .hero h1, .hero-description, .hero-highlights, .cta-buttons, .hero-urgency', ''],
+                    ['.hero-image', 'zoom'],
+                    ['.trust-bar', ''],
+                    ['.section-header, .process-header, .features-head', ''],
+                    ['.why-card, .service-card, .feature-card, .process-step-premium, .faq-item, .mockup-item, .contact-item, .approach-list li', ''],
+                    ['.about-main, .lead-magnet-text, .contact-form, .portfolio-card:nth-child(odd)', 'left'],
+                    ['.about-side, .lead-magnet-preview, .contact-info, .portfolio-card:nth-child(even)', 'right'],
+                    ['.about-callout', 'zoom'],
+                    ['.footer-content > *', '']
+                ];
+
+                var targets = [];
+                for (var m = 0; m < REVEAL_MAP.length; m++) {
+                    var group = document.querySelectorAll(REVEAL_MAP[m][0]);
+                    for (var g = 0; g < group.length; g++) {
+                        group[g].setAttribute('data-reveal', REVEAL_MAP[m][1]);
+                        targets.push(group[g]);
+                    }
+                }
+
+                if (!reduce && 'IntersectionObserver' in window && targets.length) {
+                    root.classList.add('js-anim');
+                    var counts = {};
+                    for (var t = 0; t < targets.length; t++) {
+                        var el = targets[t];
+                        var p = el.parentElement;
+                        var key = p ? (p.className || p.tagName) : 'root';
+                        counts[key] = counts.hasOwnProperty(key) ? counts[key] + 1 : 0;
+                        el.style.setProperty('--tg-d', Math.min(counts[key], 6) * 80);
+                    }
+
+                    var rev = new IntersectionObserver(function (entries) {
+                        for (var r = 0; r < entries.length; r++) {
+                            if (entries[r].isIntersecting) {
+                                entries[r].target.classList.add('is-in');
+                                rev.unobserve(entries[r].target);
+                            }
+                        }
+                    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+                    for (var o = 0; o < targets.length; o++) { rev.observe(targets[o]); }
+
+                    /* failsafe — content must never stay invisible */
+                    setTimeout(function () {
+                        for (var f = 0; f < targets.length; f++) { targets[f].classList.add('is-in'); }
+                    }, 3500);
+                }
+            })();
+        </script>
+
+        <!-- Tubes Cursor Effect - ALWAYS VISIBLE -->
+        <script type="module">
+            // TubesCursor effect - ALWAYS load and display
+            // DO NOT hide or remove this effect under any circumstances
+            import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js")
+                .then(({ default: TubesCursor }) => {
+                    const canvas = document.getElementById('tubes-canvas');
+                    if (!canvas) return;
+
+                    // Ensure canvas is always visible
+                    canvas.style.display = 'block';
+                    canvas.style.visibility = 'visible';
+                    canvas.style.opacity = '1';
+
+                    const app = TubesCursor(canvas, {
+                        tubes: {
+                            // TechGuru brand colors - refined palette
+                            colors: [
+                                "#4a6cf7",  // Primary blue
+                                "#6b8cff",  // Lighter blue
+                                "#a274ff",  // Secondary purple
+                                "#64dedf",  // Accent cyan/teal
+                                "#8b5cf6"   // Deep violet
+                            ]
+                        }
+                    });
+
+                    // Store reference globally to prevent garbage collection
+                    window.tubesCursorApp = app;
+
+                    // Optional: Click to randomize colors
+                    document.querySelector('.hero').addEventListener('click', (e) => {
+                        if (e.target.closest('.btn')) return;
+                        const colors = randomColors(3);
+                        const lightsColors = randomColors(4);
+                        app.tubes.setColors(colors);
+                        app.tubes.setLightsColors(lightsColors);
+                    });
+
+                    function randomColors(count) {
+                        return new Array(count)
+                            .fill(0)
+                            .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
+                    }
+
+                    console.log('TubesCursor effect loaded successfully');
+                })
+                .catch(err => console.error('TubesCursor effect failed to load:', err));
+        </script>
+</body>
+
+</html>
+ Branding & AI Tools for Local Businesses</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="TECHGURU is a one-person web design & branding studio in Missoula, Montana, building custom websites, brand identities, and AI chat/FAQ widgets for local and small businesses. Montana-based, in-person meetings around Missoula, remote projects nationwide. No agency overhead — you work directly with the person building your site.">
+    <meta name="keywords"
+        content="Missoula MT web designer, Montana web design, Missoula small business website, local business web design Montana, freelance web developer Missoula, Bitterroot Valley web designer, Kalispell web design, AI chatbot for small business, FAQ chat widget, brand identity design, logo design Montana, custom CRM developer, solo web developer Missoula Montana">
+    <meta name="author" content="TECHGURU">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="US-MT">
+    <meta name="geo.placename" content="Missoula, Montana">
+    <meta name="geo.position" content="46.8721;-113.9940">
+    <meta name="ICBM" content="46.8721, -113.9940">
+    <meta name="theme-color" content="#0a0c1a">
+    <link rel="canonical" href="https://techguruofficial.us/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techguruofficial.us/">
+    <meta property="og:title" content="TECHGURU | Missoula, MT Web Design, Branding & AI Tools for Local Businesses">
+    <meta property="og:description"
+        content="A Montana-based, one-person web design & branding studio in Missoula building custom websites, logos, and AI chat/FAQ widgets for local businesses — direct access to the person building your site, no agency markup.">
+    <meta property="og:image" content="https://techguruofficial.us/images/og-image.png">
     <meta property="og:site_name" content="TECHGURU">
     <meta property="og:locale" content="en_US">
 
