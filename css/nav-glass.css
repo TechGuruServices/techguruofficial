@@ -61,3 +61,54 @@ main > section { overflow-x: clip; }                                 /* tg-orb g
 /* hero location badge: was wrapping into a cramped 4-line pill */
 .hero-location-badge { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .3rem .7rem; padding: .6rem 1.1rem; border-radius: 18px; line-height: 1.35; }
 .hero-location-badge > svg { flex: none; }
+
+/* the [hidden] attribute lost to .social-link's display rule */
+.social-link[hidden] { display: none !important; }
+
+/* trust strip: absolute-positioned bullets orphaned themselves at the start of a wrapped line; chips are already separated by icons */
+.trust-chip + .trust-chip::before { display: none; }
+
+/* ============================================================================
+   TECHGURU — desktop navbar overlap guard
+   Prevents oversized menu from overflowing columns on desktop viewports.
+   ========================================================================== */
+@media (min-width: 993px) {
+  /* 1 — menu box == its grid column, always */
+  .navbar .nav-menu {
+    justify-self: stretch;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  /* 2 — link row centers in the space that exists, and may shrink */
+  .navbar .nav-menu ul {
+    min-width: 0;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  /* 3 — links give back padding before anything can collide */
+  .navbar .nav-menu ul li a {
+    white-space: nowrap;
+    padding-inline: clamp(.45rem, .85vw, .95rem);
+  }
+
+  /* 4 — tight band (993-1180): shave type a touch and drop the logo wordmark
+         to the icon so all six links AND the full CTA label keep fitting. */
+  @media (max-width: 1180px) {
+    .navbar { width: calc(100% - 1.5rem); }
+    .navbar .nav-menu ul li a {
+      font-size: .85rem;
+      padding-inline: .5rem;
+    }
+    .navbar .nav-logo-link { font-size: 0; }
+    .navbar .nav-logo-link .nav-logo-icon { width: 40px; height: 40px; }
+  }
+  @media (max-width: 1060px) {
+    .navbar .nav-menu ul li a { font-size: .8rem; padding-inline: .45rem; }
+  }
+}

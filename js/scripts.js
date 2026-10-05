@@ -235,24 +235,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('nav-menu');
 
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
+    const setMenu = (open) => {
+      navToggle.classList.toggle('active', open);
+      navMenu.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
 
     // Close menu when clicking a link
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
-    });
+    navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) setMenu(false);
+    });
+
+    // Close on Escape and hand focus back to the toggle
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        setMenu(false);
+        navToggle.focus();
       }
     });
   }

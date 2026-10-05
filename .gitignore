@@ -1,0 +1,8 @@
+# Local backups
+backup_before_cleanup/
+
+# OS / Editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
