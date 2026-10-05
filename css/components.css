@@ -159,9 +159,11 @@ input[name="botcheck"] {
 
 /* --------------------------------------------------------------------------
    Cards (shared surface; layout-v2 adds the grid + hover language)
+   .service-card removed from this shared list (2026-10-04) — it now has its
+   own fully self-contained look in css/service-cards.css, light + dark both
+   handled there so it isn't split across two files.
    -------------------------------------------------------------------------- */
 .why-card,
-.service-card,
 .feature-card,
 .step-card,
 .faq-item,
@@ -177,7 +179,6 @@ input[name="botcheck"] {
 }
 
 body.light-theme .why-card,
-body.light-theme .service-card,
 body.light-theme .feature-card,
 body.light-theme .step-card,
 body.light-theme .faq-item,

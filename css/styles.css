@@ -344,8 +344,7 @@ main > section { position: relative; }
 .service-card p { color: var(--color-text-muted); }
 
 .service-list li { color: var(--color-text-muted); }
-
-.service-price { color: var(--color-accent); }
+/* .service-price removed (2026-10-04) — see css/service-cards.css */
 
 .services-cta p { color: var(--color-text); }
 
@@ -611,50 +610,7 @@ main > section { position: relative; }
    ROUND-7 UI UPLIFT — bento hierarchy, depth, device frames, stepper, FAQ glide
    ========================================================================== */
 
-/* Bento: both flagships span half the grid; rest quarter */
-#services .services-grid > .service-card:nth-child(1),
-#services .services-grid > .service-card:nth-child(2) { grid-column: span 6; }
-#services .services-grid > .service-card:nth-child(n+3) { grid-column: span 3; }
-@media (max-width: 1024px) {
-    #services .services-grid > .service-card:nth-child(n+3) { grid-column: span 6; }
-}
-@media (max-width: 640px) {
-    #services .services-grid > .service-card { grid-column: span 12 !important; }
-}
-
-/* Interactive lift */
-section.services .service-card {
-    position: relative;
-    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s var(--ease-out);
-}
-section.services .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 26px 60px -30px rgba(74, 108, 247, .55);
-    border-color: rgba(100, 222, 223, .35);
-}
-
-/* Floating price micro-badge (top-right pill) */
-section.services .service-card .service-price {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: auto;
-    margin: 0;
-    padding: .38rem .7rem;
-    border: 0;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    color: #fff;
-    font-family: var(--font-mono);
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    box-shadow: 0 8px 20px -10px rgba(74, 108, 247, .9);
-}
-
-/* Crisp SVG check bullets */
-section.services .service-list li::before,
+/* Crisp SVG check bullets (still used by the process section's step list) */
 section.services .step-checklist li::before {
     content: "";
     position: absolute;

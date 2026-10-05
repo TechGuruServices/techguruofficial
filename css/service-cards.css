@@ -1,0 +1,353 @@
+/* ==========================================================================
+   TECHGURU — SERVICE CARDS v2  (2026-10-04)
+   Scope:   .service-card only. Nothing here touches .why-card, .feature-card,
+            .step-card, .portfolio-card, or any other card type — those keep
+            their existing look.
+   Loaded:  last (see index.html <head>), so it wins the cascade cleanly over
+            design-tokens.css / components.css / styles.css / layout-v2.css
+            without a single !important.
+   Concept: a layered "frame + cutout" card — a blurred colour glow sits
+            behind a subtle dot-grid panel; the service icon pops forward as
+            a large "cutout" glyph in the top-right corner; a slim gradient
+            frame wraps the card with its top-right corner intentionally
+            left open, so the icon reads as if it's breaking through the
+            frame. On pointer-fine devices the whole stack tilts gently
+            toward the cursor (see js/service-cards.js); everywhere else
+            (touch, prefers-reduced-motion) it simply renders flat and
+            fully readable — content is never hidden behind a hover state.
+   Fonts:   headings/price/CTA use var(--tg-font-display) → Sora (see
+            css/fonts.css); body copy uses the page's normal Inter stack.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Grid — uniform 3-up, replaces the old bento spans for this section only
+   -------------------------------------------------------------------------- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.1rem, 2.2vw, 1.6rem);
+}
+
+@media (max-width: 980px) {
+    .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .services-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   Card shell
+   -------------------------------------------------------------------------- */
+.service-card {
+    --rx: 0deg;             /* set by js/service-cards.js on pointer-fine devices */
+    --ry: 0deg;
+    --sc-a: var(--tg-blue, #4a6cf7);   /* per-card gradient pair, set inline per card */
+    --sc-b: var(--tg-violet, #a274ff);
+    position: relative;
+    display: block;
+    min-height: 25rem;
+    border-radius: var(--tg-r-lg, 22px);
+    perspective: 70rem;
+    isolation: isolate;
+}
+
+@media (max-width: 640px) { .service-card { min-height: 0; } }
+
+.service-card::before {
+    /* the actual visible shell — kept separate from .service-card itself so
+       border-radius/overflow clipping never fights the absolutely
+       positioned layers inside */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(165deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)),
+        var(--tg-card-a, rgba(255, 255, 255, .055));
+    border: 1px solid var(--tg-border, rgba(255, 255, 255, .09));
+    transition: border-color .4s ease, transform .4s cubic-bezier(.2, .7, .3, 1);
+}
+
+.service-card:hover::before,
+.service-card:focus-within::before {
+    border-color: rgba(255, 255, 255, .18);
+    transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-card::before { transition: border-color .4s ease; }
+    .service-card:hover::before, .service-card:focus-within::before { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Layer 1 — ambient colour glow (tight, low-opacity; not a generic halo)
+   -------------------------------------------------------------------------- */
+.service-card-shadow {
+    position: absolute;
+    inset: -18%;
+    z-index: 1;
+    border-radius: inherit;
+    background: rgba(74, 108, 247, .22); /* fallback for browsers without color-mix() */
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-a) 55%, transparent), transparent 72%);
+    filter: blur(2.2rem);
+    opacity: .22;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 1rem, -3rem);
+    transition: opacity .4s ease;
+    pointer-events: none;
+}
+
+.service-card:hover .service-card-shadow,
+.service-card:focus-within .service-card-shadow { opacity: .38; }
+
+/* --------------------------------------------------------------------------
+   Layer 2 — dot-grid backing panel, faded toward the bottom
+   -------------------------------------------------------------------------- */
+.service-card-panel {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 0);
+    transition: transform .1s linear;
+}
+
+.service-card-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .1) 1px, transparent 0);
+    background-size: 18px 18px;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .85), transparent 75%);
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, .85), transparent 75%);
+}
+
+.service-card-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(74, 108, 247, .14); /* fallback */
+    background: linear-gradient(150deg, color-mix(in srgb, var(--sc-a) 22%, transparent), transparent 55%);
+}
+
+/* --------------------------------------------------------------------------
+   Layer 3 — gradient frame, open at the top-right so the icon can "break"
+   through it. Crisp 1.5px stroke via the mask trick, no blur.
+   -------------------------------------------------------------------------- */
+.service-card-frame {
+    position: absolute;
+    inset: .8rem;
+    z-index: 3;
+    border-radius: 14px;
+    pointer-events: none;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 2.1rem);
+    transition: transform .1s linear;
+}
+
+.service-card-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: var(--sc-a); /* fallback */
+    background: linear-gradient(135deg, var(--sc-a), var(--sc-b));
+    opacity: .5;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: opacity .4s ease;
+}
+
+.service-card:hover .service-card-frame::before,
+.service-card:focus-within .service-card-frame::before { opacity: .9; }
+
+/* the open corner — the frame ring is clipped (no patch, no seam) so the
+   icon reads as breaking through it; notch matches the icon's footprint */
+.service-card-frame {
+    -webkit-clip-path: polygon(0 0, calc(100% - 64px) 0, calc(100% - 64px) 64px, 100% 64px, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, calc(100% - 64px) 0, calc(100% - 64px) 64px, 100% 64px, 100% 100%, 0 100%);
+}
+
+@media (max-width: 640px) {
+    .service-card-frame {
+        -webkit-clip-path: polygon(0 0, calc(100% - 52px) 0, calc(100% - 52px) 52px, 100% 52px, 100% 100%, 0 100%);
+        clip-path: polygon(0 0, calc(100% - 52px) 0, calc(100% - 52px) 52px, 100% 52px, 100% 100%, 0 100%);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Layer 4 — the icon "cutout": pops furthest forward, top-right corner
+   -------------------------------------------------------------------------- */
+.service-card .service-icon {
+    position: absolute;
+    top: 1.1rem;
+    right: 1rem;
+    z-index: 5;
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--sc-a) 32%, transparent), color-mix(in srgb, var(--sc-b) 22%, transparent));
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: #fff;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 3.6rem);
+    transition: transform .1s linear;
+}
+
+.service-card .service-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+@media (max-width: 640px) {
+    .service-card .service-icon { width: 56px; height: 56px; top: .9rem; right: .9rem; }
+    .service-card .service-icon svg { width: 26px; height: 26px; }
+}
+
+/* --------------------------------------------------------------------------
+   Layer 5 — content: always visible, forward of the panel/frame
+   -------------------------------------------------------------------------- */
+.service-card-content {
+    position: relative;
+    z-index: 4;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* top padding clears the icon's footprint (68px + offset) so the title
+       always sits cleanly below it, full width, at any card size */
+    padding: 5.3rem 1.4rem 1.4rem;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 1.4rem);
+    transition: transform .1s linear;
+}
+
+@media (max-width: 640px) {
+    .service-card-content { padding-top: 4.5rem; }
+}
+
+.service-card-eyebrow {
+    margin: 0 0 .5rem;
+    font-family: var(--tg-font-display, 'Sora', sans-serif);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: color-mix(in srgb, var(--sc-a) 70%, white);
+}
+
+.service-card-content h3 {
+    margin: 0 0 .55rem;
+    font-family: var(--tg-font-display, 'Sora', sans-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    color: var(--tg-text, #f2f4fa);
+}
+
+.service-card-content > p {
+    margin: 0 0 1.1rem;
+    color: var(--tg-muted, rgba(242, 244, 250, .7));
+    font-size: .89rem;
+    line-height: 1.62;
+}
+
+.service-card-list {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.service-card-list li {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: .83rem;
+    line-height: 1.5;
+    color: rgba(242, 244, 250, .85);
+}
+
+.service-card-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .42rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--sc-a); /* fallback */
+    background: linear-gradient(135deg, var(--sc-a), var(--sc-b));
+}
+
+.service-card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .7rem;
+    padding-top: .95rem;
+    border-top: 1px solid var(--tg-hairline, rgba(255, 255, 255, .055));
+}
+
+.service-card-price {
+    font-family: var(--tg-font-display, 'Sora', sans-serif);
+    font-weight: 700;
+    font-size: .98rem;
+    letter-spacing: -.01em;
+    color: var(--tg-text, #f2f4fa);
+}
+
+.service-card-price small {
+    display: block;
+    margin-top: .1rem;
+    font-family: var(--tg-font-ui, 'Inter', sans-serif);
+    font-size: .68rem;
+    font-weight: 500;
+    color: var(--tg-faint, rgba(242, 244, 250, .52));
+}
+
+.service-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: var(--tg-font-display, 'Sora', sans-serif);
+    font-size: .8rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: var(--tg-r-sm, 10px);
+    padding: .3rem .2rem;
+    transition: color .25s ease;
+}
+
+.service-card-cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
+}
+
+.service-card-cta:hover,
+.service-card-cta:focus-visible { color: var(--tg-accent, #64dedf); }
+.service-card-cta:hover svg,
+.service-card-cta:focus-visible svg { transform: translateX(3px); }
+
+.service-card-cta:focus-visible {
+    outline: 2px solid var(--tg-accent, #64dedf);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-card-cta svg { transition: none; }
+}
