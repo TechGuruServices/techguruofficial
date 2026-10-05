@@ -29,7 +29,7 @@
     <meta property="og:image" content="https://techguruofficial.us/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="TECHGURU — Websites, Branding & AI Tools for local business, Missoula Montana">
+    <meta property="og:image:alt" content="TECHGURU — Websites, Branding &amp; AI Tools for local business, Missoula Montana">
     <meta property="og:site_name" content="TECHGURU">
     <meta property="og:locale" content="en_US">
 
@@ -63,11 +63,8 @@
 
 
     <!-- Google Fonts - Optimized Loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
+    <!-- Self-hosted Inter + Poppins (see css/fonts.css) — no third-party font dependency -->
+    <link rel="stylesheet" href="css/fonts.css?v=20261004">
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/design-tokens.css">
@@ -77,13 +74,15 @@
     <script src="js/scripts.js" defer></script>
     <script src="js/cinematic.js" defer></script>
     <script src="js/story.js" defer></script>
+    <script src="js/story-full.js" defer></script>
+    <script src="js/cta-rotator.js" defer></script>
     <script src="js/service-cards.js" defer></script>
 
     <!-- ===== TECHGURU Layout System v2 =======================================
          Inlined below so index.html works even if the css/ folder is untouched.
          Prefer an external file? Delete the whole <style id="tg-layout-v2"> block
          and uncomment this line — css/layout-v2.css has identical contents:
-         <link rel="stylesheet" href="css/layout-v2.css?v=20260915">
+         <link rel="stylesheet" href="css/layout-v2.css?v=20261004">
     ========================================================================== -->
     <style id="tg-layout-v2">
 /* ==========================================================================
@@ -132,7 +131,7 @@
     --tg-muted: rgba(242, 244, 250, .7);
     --tg-faint: rgba(242, 244, 250, .52);
     --tg-font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --tg-font-display: 'Poppins', 'Inter', system-ui, sans-serif;
+    --tg-font-display: 'Sora', 'Inter', system-ui, sans-serif;
 
     /* Brand */
     --tg-accent: #64dedf;
@@ -610,25 +609,22 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
         gap: clamp(.9rem, 1.5vw, 1.3rem);
     }
 
-    .why-section .why-grid > .why-card,
-    .services .services-grid > .service-card { grid-column: span 6; }
+    .why-section .why-grid > .why-card { grid-column: span 6; }
+    /* .service-card column spans now live in css/service-cards.css (loaded
+       last) — the services grid moved from the shared bento system to its
+       own uniform 3-up grid as part of the 2026-10-04 card redesign. */
 }
 
-/* Desktop: Why = 7 + 5 / 6 + 6 / 6 + 6 · Services = 7 + 5 then 3 + 3 + 3 + 3 */
+/* Desktop: Why = 7 + 5 / 6 + 6 / 6 + 6 */
 @media (min-width: 1081px) {
     .why-section .why-grid > .why-card:nth-child(1) { grid-column: span 7; }
     .why-section .why-grid > .why-card:nth-child(2) { grid-column: span 5; }
-
-    .services .services-grid > .service-card:nth-child(1) { grid-column: span 7; }
-    .services .services-grid > .service-card:nth-child(2) { grid-column: span 5; }
-    .services .services-grid > .service-card:nth-child(n+3) { grid-column: span 3; }
 }
 
 /* --------------------------------------------------------------------------
    9. UNIFIED CARD LANGUAGE
    -------------------------------------------------------------------------- */
 .why-card,
-.service-card,
 .feature-card,
 .faq-item,
 .portfolio-card,
@@ -643,9 +639,11 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     background: linear-gradient(180deg, var(--tg-card-a), var(--tg-card-b));
     box-shadow: var(--tg-shadow);
 }
+/* .service-card intentionally removed from the shared card language above —
+   it now has its own dedicated system in css/service-cards.css (2026-10-04
+   redesign), loaded last. Every other card type here is unchanged. */
 
 .why-card,
-.service-card,
 .feature-card {
     position: relative;
     display: flex;
@@ -660,7 +658,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
 /* accent hairline that sweeps in on hover */
 .why-card::before,
-.service-card::before,
 .feature-card::before {
     content: "";
     position: absolute;
@@ -672,7 +669,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 }
 
 .why-card:hover,
-.service-card:hover,
 .feature-card:hover {
     transform: translateY(-4px);
     border-color: var(--tg-border-hi);
@@ -681,11 +677,9 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 }
 
 .why-card:hover::before,
-.service-card:hover::before,
 .feature-card:hover::before { opacity: .9; }
 
 .why-card h3,
-.service-card h3,
 .feature-card h3 {
     margin: .35rem 0 .35rem;
     font-size: clamp(1.06rem, 1rem + .35vw, 1.24rem);
@@ -694,7 +688,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 }
 
 .why-card p,
-.service-card p,
 .feature-card p {
     margin: 0;
     color: var(--tg-muted);
@@ -702,9 +695,9 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     line-height: 1.68;
 }
 
-/* icon tiles share one size/shape */
+/* icon tiles share one size/shape — .service-icon now lives in
+   css/service-cards.css, sized as the card's large "cutout" glyph */
 .glass-icon,
-.service-icon,
 .feature-icon {
     display: grid;
     place-items: center;
@@ -718,7 +711,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 }
 
 .glass-icon svg,
-.service-icon svg,
 .feature-icon svg { width: 25px; height: 25px; }
 
 /* bullet lists inside cards */
@@ -759,21 +751,9 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
 .service-list li svg,
 .step-checklist li svg { display: none; } /* replaced by the CSS check dot above */
-
-.service-price {
-    display: inline-flex;
-    align-self: flex-start;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 1rem;
-    font-family: var(--tg-font-display);
-    font-size: 1.02rem;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    color: var(--tg-accent);
-}
-
-.service-card .service-price { border-top: 1px solid var(--tg-border); width: 100%; padding-top: 1rem; }
+/* .service-price removed (2026-10-04) — the service-card price badge is now
+   .service-card-price in css/service-cards.css. .service-list above is still
+   used by .portfolio-card's secondary bullet list, so it stays as-is. */
 
 /* --------------------------------------------------------------------------
    10. FEATURES STRIP — "included in every project"
@@ -1808,11 +1788,16 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 }
     </style>
     <link rel="stylesheet" href="css/nav-glass.css?v=20260930">
+    <link rel="stylesheet" href="css/nav-overlap-guard.css?v=20261004">
     <link rel="stylesheet" href="css/story.css?v=20260930">
+    <link rel="stylesheet" href="css/story-full.css?v=20261004">
+    <link rel="stylesheet" href="css/cta-rotator.css?v=20261004">
+    <link rel="stylesheet" href="css/polish-pass.css?v=20261004">
+    <link rel="stylesheet" href="css/service-cards.css?v=20261004">
 
     <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
     <style>
-        .portfolio-section { padding: 6rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .portfolio-section { padding: var(--tg-section-y) var(--tg-gutter); max-width: calc(var(--tg-max) + 2 * var(--tg-gutter)); margin: 0 auto; }
         .portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem; }
         .portfolio-card {
             background: var(--glass-bg-light, rgba(255,255,255,0.03));
@@ -1870,260 +1855,207 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
     <!-- FAQ Schema Markup -->
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
     {
-      "@type": "Question",
-      "name": "Are you actually local to Missoula?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Montana is my home state — I spent a few years in South Florida and moved back home to Missoula. I'm happy to meet local business owners in person around Missoula, the Bitterroot Valley, and the Flathead/Kalispell area. No subcontractors, no offshore team."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you work with businesses outside Montana?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely. The work is remote-friendly by nature: a discovery call, a flat-price proposal, staged builds with review links, then launch. Out-of-state clients get the same process, the same pricing, and the same direct line to me as local Montana clients."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does a typical website project take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most local business websites launch within 2-4 weeks. Branding and AI chat widget add-ons typically add 3-7 days. Since it's just me, you're never waiting on a queue of other clients' projects."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What kind of businesses do you work with?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Mainly local and small businesses — contractors, auto shops, service businesses, and small brands that need a real website, a clean brand identity, or an AI chat widget, without agency pricing or overhead."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer ongoing support after launch?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Every project includes 30 days of post-launch support, and monthly Care Plans are available for hosting, small edits, and updates after that."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's your pricing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Websites start around $900 and typically run $2,200-$4,000 for a full custom build with branding. AI chat/FAQ widgets start around $600. Exact pricing depends on scope and is quoted after a free consultation — see the Services section above for the full breakdown."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can you build custom tools beyond a website, like a CRM?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — alongside websites I build custom internal tools when a business needs them. The Zempel Auto platform in my portfolio is a full customer & inventory management system I built for an auto parts shop. Custom app builds are quoted separately based on scope."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if I'm not sure what I need?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "That's what the free consultation is for. I'll look at what you have (or don't have yet) and recommend the highest-impact starting point. No obligation."
-      }
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does a typical website project take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most local business websites launch within 2-4 weeks. Branding and AI chat widget add-ons typically add 3-7 days. Because it's just me, you're never waiting on a queue of other clients' projects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of businesses do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mainly local and small businesses — contractors, auto shops, service businesses, and small brands that need a real website, a clean brand identity, or an AI chat widget for their site, without agency pricing or overhead."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer ongoing support after launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every project includes 30 days of post-launch support, and monthly Care Plans are available for hosting, small edits, and updates after that."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's your pricing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Websites start around $900 for a starter site and typically run $2,200-$4,000 for a full custom build with branding. AI chat/FAQ widgets start around $600. Exact pricing depends on scope and is quoted after a free consultation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you build custom tools beyond a website, like a CRM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Alongside websites I build custom internal tools when a business needs them — for example, a customer/inventory management platform for an auto parts shop. Custom app builds are quoted separately based on scope."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I'm not sure what I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That's what the free consultation is for. I'll look at what you have (or don't have yet) and recommend the highest-impact starting point — no obligation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you actually local to Missoula?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Montana is my home state — I spent a few years in South Florida and moved back home to Missoula. TECHGURU is a one-person studio based in Missoula, and I'm happy to meet local business owners in person around Missoula, the Bitterroot Valley, and the Flathead/Kalispell area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with businesses outside Montana?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Most of the work is remote-friendly by nature: discovery call, flat-price proposal, staged builds with review links, then launch. Out-of-state clients get the same process, the same pricing, and the same direct line to me as local Montana clients."
+          }
+        }
+      ]
     }
-  ]
-}
     </script>
 
-    <!-- Organization Schema -->
+    <!-- Organization & Local Business Schema -->
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "TECHGURU",
-  "url": "https://techguruofficial.us",
-  "image": "https://techguruofficial.us/images/og-image.png",
-  "logo": "https://techguruofficial.us/images/logo-dark-512.png",
-  "description": "One-person web design, branding, and AI automation studio in Missoula, Montana building custom websites, logos, and AI chat/FAQ widgets for local businesses across Missoula County, the Bitterroot Valley, and the Flathead Valley — in person locally, remote nationwide.",
-  "slogan": "Websites, Branding & AI Tools — Built by One Techguru, For Local Businesses",
-  "priceRange": "$350 - $5,000",
-  "currenciesAccepted": "USD",
-  "paymentAccepted": "Cash, Check, Credit Card, Bank Transfer",
-  "telephone": "+1-786-636-9964",
-  "email": "info@techguruofficial.us",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Missoula",
-    "addressLocality": "Missoula",
-    "addressRegion": "MT",
-    "postalCode": "59808",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 46.8721,
-    "longitude": -113.994
-  },
-  "areaServed": [
     {
-      "@type": "City",
-      "name": "Missoula"
-    },
-    {
-      "@type": "City",
-      "name": "Lolo"
-    },
-    {
-      "@type": "City",
-      "name": "Frenchtown"
-    },
-    {
-      "@type": "City",
-      "name": "Bonner-West Riverside"
-    },
-    {
-      "@type": "City",
-      "name": "Clinton"
-    },
-    {
-      "@type": "City",
-      "name": "Seeley Lake"
-    },
-    {
-      "@type": "City",
-      "name": "Hamilton"
-    },
-    {
-      "@type": "City",
-      "name": "Stevensville"
-    },
-    {
-      "@type": "City",
-      "name": "Victor"
-    },
-    {
-      "@type": "City",
-      "name": "Darby"
-    },
-    {
-      "@type": "City",
-      "name": "Kalispell"
-    },
-    {
-      "@type": "City",
-      "name": "Whitefish"
-    },
-    {
-      "@type": "City",
-      "name": "Columbia Falls"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Bitterroot Valley"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Flathead Valley"
-    },
-    {
-      "@type": "State",
-      "name": "Montana"
-    },
-    {
-      "@type": "Country",
-      "name": "United States"
-    }
-  ],
-  "knowsAbout": [
-    "Web design for local businesses",
-    "Brand identity and logo design",
-    "AI chat and FAQ widgets",
-    "Custom CRM and internal business tools",
-    "Local SEO basics for Montana small business",
-    "Website care plans and hosting"
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Web design, branding & AI services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Custom Website Design & Build",
-          "description": "Mobile-first, custom-coded websites with Missoula local SEO basics"
-        },
-        "price": "900",
-        "priceCurrency": "USD"
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "TECHGURU",
+      "url": "https://techguruofficial.us",
+      "image": "https://techguruofficial.us/images/og-image.png",
+      "logo": "https://techguruofficial.us/images/icons/nav-icon-new.webp",
+      "description": "One-person web design, branding, and AI automation studio in Missoula, Montana building custom websites, logos, and AI chat/FAQ widgets for local businesses across Missoula County, the Bitterroot Valley, and the Flathead Valley — in person locally, remote nationwide.",
+      "slogan": "Websites, Branding & AI Tools — Built by One Techguru, For Local Businesses",
+      "priceRange": "$350 - $5,000",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Check, Credit Card, Bank Transfer",
+      "telephone": "+1-406-284-5523",
+      "email": "info@techguruofficial.us",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Missoula",
+        "addressLocality": "Missoula",
+        "addressRegion": "MT",
+        "postalCode": "59808",
+        "addressCountry": "US"
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "AI Chat & FAQ Widget Integration",
-          "description": "AI assistant trained on your hours, services and pricing, answering 24/7"
-        },
-        "price": "600",
-        "priceCurrency": "USD"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 46.8721,
+        "longitude": -113.994
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Branding & Logo Design",
-          "description": "Logo, colors and fonts consistent across site, truck wraps, signage and socials"
-        },
-        "price": "350",
-        "priceCurrency": "USD"
+      "areaServed": [
+        { "@type": "City", "name": "Missoula" },
+        { "@type": "City", "name": "Lolo" },
+        { "@type": "City", "name": "Frenchtown" },
+        { "@type": "City", "name": "Bonner-West Riverside" },
+        { "@type": "City", "name": "Clinton" },
+        { "@type": "City", "name": "Seeley Lake" },
+        { "@type": "City", "name": "Hamilton" },
+        { "@type": "City", "name": "Stevensville" },
+        { "@type": "City", "name": "Victor" },
+        { "@type": "City", "name": "Darby" },
+        { "@type": "City", "name": "Kalispell" },
+        { "@type": "City", "name": "Whitefish" },
+        { "@type": "City", "name": "Columbia Falls" },
+        { "@type": "AdministrativeArea", "name": "Bitterroot Valley" },
+        { "@type": "AdministrativeArea", "name": "Flathead Valley" },
+        { "@type": "State", "name": "Montana" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "knowsAbout": [
+        "Web design for local businesses",
+        "Brand identity and logo design",
+        "AI chat and FAQ widgets",
+        "Custom CRM and internal business tools",
+        "Local SEO basics for Montana small business",
+        "Website care plans and hosting"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web design, branding & AI services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Website Design & Build",
+              "description": "Mobile-first, custom-coded websites with Missoula local SEO basics"
+            },
+            "price": "900",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Chat & FAQ Widget Integration",
+              "description": "AI assistant trained on your hours, services and pricing, answering 24/7"
+            },
+            "price": "600",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Branding & Logo Design",
+              "description": "Logo, colors and fonts consistent across site, truck wraps, signage and socials"
+            },
+            "price": "350",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom CRM & Internal Tools",
+              "description": "Inventory trackers, customer databases and workflow automation built around your shop"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Monthly Website Care Plans",
+              "description": "Hosting, uptime monitoring and fast content updates"
+            },
+            "price": "75",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hourly Consulting",
+              "description": "Tool selection, fixes and online planning advice"
+            },
+            "price": "75",
+            "priceCurrency": "USD"
+          }
+        ]
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Custom CRM & Internal Tools",
-          "description": "Inventory trackers, customer databases and workflow automation built around your shop"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Monthly Website Care Plans",
-          "description": "Hosting, uptime monitoring and fast content updates"
-        },
-        "price": "75",
-        "priceCurrency": "USD"
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Hourly Consulting",
-          "description": "Tool selection, fixes and online planning advice"
-        },
-        "price": "75",
-        "priceCurrency": "USD"
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-406-284-5523",
+        "contactType": "sales",
+        "email": "info@techguruofficial.us",
+        "areaServed": "US",
+        "availableLanguage": ["English"]
       }
-    ]
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+1-786-636-9964",
-    "contactType": "sales",
-    "email": "info@techguruofficial.us",
-    "areaServed": "US",
-    "availableLanguage": [
-      "English"
-    ]
-  }
-}
+    }
     </script>
 </head>
 
@@ -2177,33 +2109,36 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="mobile-only-phone nav-phone-mobile-item">
-                    <a href="tel:+17866369964" class="nav-phone-mobile-link">
+                    <a href="tel:+14062845523" class="nav-phone-mobile-link">
                         <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
-                        <span>Call Now: +1 786-636-9964</span>
+                        <span>Call Now: +1 (406) 284-5523</span>
                     </a>
                 </li>
             </ul>
         </nav>
 
         <div class="navbar-actions">
-            <a href="tel:+17866369964" class="nav-phone-link" title="Call +1 786-636-9964"
-                aria-label="Call TechGuru at +1 786-636-9964">
+            <a href="tel:+14062845523" class="nav-phone-link" title="Call +1 (406) 284-5523"
+                aria-label="Call TechGuru at +1 (406) 284-5523">
                 <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
                     focusable="false">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
             </a>
-            <a href="#contact" class="btn btn-primary nav-cta-btn" title="Book a Free Call">
-                <svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    aria-hidden="true" focusable="false">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                <span>Book a Free Call</span>
+            <!-- Rotating CTA: Build My Site > Launch My App > Elevate My Brand > Elevate My Logo -->
+            <a id="tg-cta" class="tg-cta" href="#contact" title="Build My Site" aria-label="Build My Site">
+                <span class="tg-cta-ring" aria-hidden="true"></span>
+                <span class="tg-cta-face">
+                    <span class="tg-cta-text">
+                        <span class="tg-cta-slot tg-cta-slot--prefix" data-cta-slot="prefix"
+                            data-words="Build|Launch|Elevate"><span class="tg-cta-word">Build</span></span>
+                        <span class="tg-cta-center" data-cta-slot="center">My</span>
+                        <span class="tg-cta-slot tg-cta-slot--suffix" data-cta-slot="suffix"
+                            data-words="Site|App|Brand|Logo"><span class="tg-cta-word">Site</span></span>
+                    </span>
+                </span>
             </a>
         </div>
     </header>
@@ -2232,7 +2167,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                     </svg>
                     Based in Missoula, Montana
                     <span class="tg-dot" aria-hidden="true"></span>
-                    In-person locally &middot; remote nationwide
+                    In-Person Locally &middot; Remote Nationwide
                 </p>
                 <h1>Websites, Branding &amp; AI Tools — Built by One Techguru, For Local Businesses</h1>
                 <p class="rotating-tagline" id="rotating-tagline" aria-live="polite">Build. Brand. Automate.</p>
@@ -2280,7 +2215,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
-                    Local Missoula service — lifetime Florida cell number. Call or text any time.
+                    Local Missoula service — local Montana number. Call or text any time.
                 </p>
                 <p class="hero-urgency"><svg class="tg-icon tg-icon-sm urgency-icon" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -2458,14 +2393,15 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             </div>
                         </div>
                         <div class="portfolio-shot">
-                            <img src="images/portfolio/creative-drywall-2.jpg"
-                                alt="Exterior of the Thompson residence after Creative Drywall's finish work"
-                                loading="lazy" decoding="async"
-                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
-                                onerror="this.style.display='none'">
+                            <video src="assets/portfolio/creative-drywall-tour.mp4"
+                                poster="images/portfolio/creative-drywall-2.jpg"
+                                autoplay muted loop playsinline preload="metadata"
+                                aria-label="Scroll-through tour of the live Creative Drywall website"
+                                onloadeddata="this.closest('.portfolio-shot').classList.add('has-media')"
+                                onerror="this.style.display='none'"></video>
                             <div class="portfolio-shot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
-                                Add screenshot: creative-drywall-2.jpg
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5.5v13l11-6.5z" stroke-linejoin="round"/></svg>
+                                Live site tour — creative-drywall.buzz
                             </div>
                         </div>
                     </div>
@@ -2513,7 +2449,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
                 <!-- Case Study 2: Zempel Auto -->
                 <article class="portfolio-card">
-                    <div class="portfolio-media single">
+                    <div class="portfolio-media">
                         <div class="portfolio-shot">
                             <img src="images/portfolio/zempel-auto-1.jpg"
                                 alt="The Clark Fork River in Missoula, Montana — home town of Zempel Auto, which runs on the platform I built"
@@ -2523,6 +2459,17 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <div class="portfolio-shot-placeholder">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
                                 Add screenshot: zempel-auto-1.jpg
+                            </div>
+                        </div>
+                        <div class="portfolio-shot">
+                            <video src="assets/portfolio/zempel-auto-showcase.mp4"
+                                autoplay muted loop playsinline preload="metadata"
+                                aria-label="Stylized showcase of the Zempel Auto CRM and inventory platform"
+                                onloadeddata="this.closest('.portfolio-shot').classList.add('has-media')"
+                                onerror="this.style.display='none'"></video>
+                            <div class="portfolio-shot-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5.5v13l11-6.5z" stroke-linejoin="round"/></svg>
+                                Platform showcase clip
                             </div>
                         </div>
                     </div>
@@ -3468,9 +3415,9 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             </svg></span>
                         <div>
                             <strong>Phone</strong>
-                            <a href="tel:+17866369964">+1 786 636-9964</a>
-                            <span class="contact-note">Yes, that's a Florida area code — leftover from before I moved
-                                back to Montana. Book a time and I'll call you instead, or text it and I'll reply.</span>
+                            <a href="tel:+14062845523">+1 (406) 284-5523</a>
+                            <span class="contact-note">Local Montana (406) number — call or text any time. Book a time and
+                                I'll call you instead, or text it and I'll reply.</span>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -3482,7 +3429,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             </svg></span>
                         <div>
                             <strong>WhatsApp</strong>
-                            <a href="https://wa.me/17866369964" target="_blank" rel="noopener">Chat on WhatsApp</a>
+                            <a href="https://wa.me/14062845523" target="_blank" rel="noopener">Chat on WhatsApp</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -3545,7 +3492,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             stroke-width="2" aria-hidden="true" focusable="false">
                             <path
                                 d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                        </svg> <a href="tel:+17866369964">+1 786 636-9964</a></p>
+                        </svg> <a href="tel:+14062845523">+1 (406) 284-5523</a></p>
                     <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -3553,7 +3500,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                         </svg> Missoula, MT 59808 &mdash; serving Montana locally &amp; the U.S.
                         remotely</p>
                     <div class="footer-social">
-                        <a href="https://wa.me/17866369964" target="_blank" rel="noopener" aria-label="WhatsApp"
+                        <a href="https://wa.me/14062845523" target="_blank" rel="noopener" aria-label="WhatsApp"
                             class="social-link"><svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <path
@@ -3581,11 +3528,11 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 </div>
             </div>
             <div class="footer-areas" role="note" aria-label="Service area">
-            <strong>Proudly serving:</strong> Missoula · Lolo · Frenchtown · Bonner · Clinton · Seeley Lake ·
-            the Bitterroot Valley (Hamilton, Stevensville, Victor, Darby) · the Flathead Valley (Kalispell, Whitefish,
-            Columbia Falls) · all of Montana remotely · nationwide from Missoula, MT
-        </div>
-        <div class="footer-bottom">
+                <strong>Proudly serving:</strong> Missoula · Lolo · Frenchtown · Bonner · Clinton · Seeley Lake ·
+                the Bitterroot Valley (Hamilton, Stevensville, Victor, Darby) · the Flathead Valley (Kalispell, Whitefish,
+                Columbia Falls) · all of Montana remotely · nationwide from Missoula, MT
+            </div>
+            <div class="footer-bottom">
                 <p>&copy; 2026 TECHGURU. All rights reserved.<span class="tg-sep">&middot;</span>Missoula,
                     Montana<span class="tg-sep">&middot;</span><a href="mailto:info@techguruofficial.us"
                         style="color:inherit;text-decoration:none">info@techguruofficial.us</a></p>
@@ -3617,7 +3564,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
         <div class="chat-widget-container" role="complementary" aria-label="Chat support widget">
             <!-- Floating CTA Buttons (hidden by default, show on interaction) -->
             <div class="chat-floating-ctas" id="chat-floating-ctas" role="group" aria-label="Quick contact options">
-                <a href="https://wa.me/17866369964?text=Hi%20TechGuru!%20I%27m%20interested%20in%20a%20website%20or%20AI%20chat%20widget%20for%20my%20business."
+                <a href="https://wa.me/14062845523?text=Hi%20TechGuru!%20I%27m%20interested%20in%20a%20website%20or%20AI%20chat%20widget%20for%20my%20business."
                     target="_blank" rel="noopener noreferrer" class="chat-cta-btn whatsapp"
                     aria-label="Chat with us on WhatsApp (opens in new tab)">
                     <span class="chat-cta-icon" aria-hidden="true"><svg class="tg-icon tg-icon-sm" viewBox="0 0 24 24"

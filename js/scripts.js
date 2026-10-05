@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (taglineEl) {
     let currentIndex = 0;
-    const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#01';
+    const SCRAMBLE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
 
     /* decode-style swap: characters scramble, then settle left-to-right */
     const scrambleTo = (el, next) => {
@@ -235,27 +235,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('nav-menu');
 
   if (navToggle && navMenu) {
-    const setMenu = (open) => {
-      navToggle.classList.toggle('active', open);
-      navMenu.classList.toggle('active', open);
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    };
-
-    navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
 
     // Close menu when clicking a link
-    navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) setMenu(false);
-    });
-
-    // Close on Escape and hand focus back to the toggle
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-        setMenu(false);
-        navToggle.focus();
+      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
       }
     });
   }

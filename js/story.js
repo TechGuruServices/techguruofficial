@@ -8,7 +8,7 @@
     try {
       root.classList.add('js-story');
       var vh = window.innerHeight, ticking = false;
-      var names = { why: 'Why', portfolio: 'Work', features: 'Features', services: 'Services', process: 'Process', about: 'About', lead: 'Guide', faq: 'Answers', contact: 'Contact' };
+      var names = { why: 'Why', portfolio: 'Work', features: 'Features', services: 'Services', process: 'Process', about: 'About', faq: 'Answers', contact: 'Contact' };
       var chapters = [];
       var n = 0;
       Array.prototype.forEach.call(document.querySelectorAll('main > section'), function (sec) {

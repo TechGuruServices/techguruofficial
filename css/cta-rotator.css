@@ -1,0 +1,100 @@
+/* ==========================================================================
+   TECHGURU — rotating navbar CTA (companion to js/cta-rotator.js)
+   Word-cycle: Build My Site > Launch My App > Elevate My Brand > Elevate My Logo
+   Animated conic border ring (purple/blue/green/red), one direction, hue-drift.
+   Reduced-motion safe; slot widths locked by the JS => zero layout shift.
+   ========================================================================== */
+.tg-cta {
+    --tg-ease: cubic-bezier(.2, .7, .2, 1);
+    --tg-out-ms: 420ms;
+    --tg-in-ms: 480ms;
+    position: relative;
+    display: inline-flex;
+    padding: 2px;                    /* the visible border-ring thickness */
+    border-radius: 999px;
+    text-decoration: none;
+    isolation: isolate;
+    box-shadow: 0 10px 32px -12px rgba(122, 92, 255, .55);
+    transition: transform .3s var(--tg-ease), box-shadow .3s var(--tg-ease);
+  }
+  .tg-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 40px -12px rgba(100, 222, 223, .45); }
+  .tg-cta:focus-visible { outline: 2px solid #64dedf; outline-offset: 4px; }
+
+  /* --- animated gradient border: one direction, slow, hue-drifting --- */
+  .tg-cta-ring {
+    position: absolute; inset: 0; z-index: 0;
+    border-radius: inherit; overflow: hidden;
+    pointer-events: none;
+  }
+@property --tg-ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.tg-cta-ring::before {
+  content: "";
+  position: absolute; inset: 0;                /* exactly the border band */
+  background: conic-gradient(from var(--tg-ring-angle),
+    #a274ff 0%, #4a6cf7 12.5%, #34d399 25%, #ef4444 37.5%,
+    #a274ff 50%, #4a6cf7 62.5%, #34d399 75%, #ef4444 87.5%, #a274ff 100%);
+  animation: tg-ring-spin 14s linear infinite;   /* one direction, slow; the multi-hue
+                                                    wheel keeps edge colour shifting */
+}
+@keyframes tg-ring-spin { to { --tg-ring-angle: 360deg; } }
+
+  /* --- button face (in flow => defines the size; sits above the ring) --- */
+  .tg-cta-face {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center;
+    border-radius: inherit;
+    padding: .72rem 1.45rem;
+    background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02)), #0b0e1c;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+    color: #f2f4fa;
+    font-size: .95rem; font-weight: 600; letter-spacing: .01em;
+    white-space: nowrap;                          /* never wrap mid-label */
+  }
+  .tg-cta-text { display: flex; align-items: center; gap: .5ch; }
+
+  /* --- rotating word slots: clipped windows, stable geometry --- */
+  .tg-cta-slot {
+    display: block;
+    text-align: center;
+    height: 1.3em;                                /* fixed window height   */
+    overflow: hidden;                             /* clip slide in/out     */
+    position: relative;
+  }
+  /* no-JS / pre-JS safety: reserve room for the widest candidate word */
+  .tg-cta-slot--prefix { min-width: 7ch; }        /* "Elevate"             */
+  .tg-cta-slot--suffix { min-width: 5.5ch; }      /* "Brand"               */
+  .tg-cta-word {
+    display: block;
+    line-height: 1.3em;
+    transition: transform var(--tg-in-ms) var(--tg-ease), opacity var(--tg-in-ms) var(--tg-ease);
+  }
+  .tg-cta-center { line-height: 1.3em; }          /* "My" — never moves    */
+
+  @media (prefers-reduced-motion: reduce) {
+    .tg-cta-ring::before { animation: none; }
+    .tg-cta-word { transition: none; }
+    .tg-cta, .tg-cta:hover { transform: none; }
+  }
+  /* ======================================================================
+
+/* --------------------------------------------------------------------------
+   Navbar context tuning (site integration)
+   -------------------------------------------------------------------------- */
+.navbar .tg-cta-face { padding: .62rem 1.15rem; font-size: .9rem; }
+@media (max-width: 480px) {
+  .navbar .tg-cta-face { padding: .55rem .85rem; font-size: .8rem; }
+}
+@media (max-width: 360px) {
+  .navbar .tg-cta-face { padding: .5rem .7rem; font-size: .74rem; }
+  .navbar .tg-cta-text { gap: .35ch; }
+}
+
+/* small screens: icon-only wordmark so the full rotating CTA + hamburger fit */
+@media (max-width: 560px) {
+  .navbar .nav-logo-link { font-size: 0; }
+  .navbar .nav-logo-link .nav-logo-icon { width: 36px; height: 36px; }
+}

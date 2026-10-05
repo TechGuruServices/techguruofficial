@@ -1,0 +1,169 @@
+/* ==========================================================================
+   TECHGURU — POLISH PASS (design-system normalization layer)
+   Load LAST (after cta-rotator.css). No redesign: this layer only normalizes
+   the existing system — one radius scale, one elevation scale, one type scale,
+   one control height, one focus ring — and fixes audit-found inconsistencies:
+
+     • two parallel token families (--tg-r* vs --radius-*, --tg-shadow* vs
+       --shadow-*) plus one-off 22px/6px radii  → single scale below
+     • 14 drifting body font sizes (.68–1.05rem) → 4-step scale
+     • card radii/borders/shadows/hover differed per section → shared card rule
+     • control heights 40/42/44/46px mixed      → 46px (44px icon circles)
+     • no consistent :focus-visible ring        → single accent ring
+     • chapter-rail label overlapped content at ≤1600px → hover-only there
+     • portfolio container (1200) misaligned with nav pill (1240) → aligned
+     • .portfolio-tag pill stretched full-width → fit-content
+     • awkward wraps → text-wrap: balance/pretty
+   Everything is opt-out-able by deleting this one file.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOKEN BRIDGE — one scale for radius / elevation / controls / focus
+   ----------------------------------------------------------------------- */
+:root {
+  --tg-r-xs: 8px;
+  --tg-r-sm: 12px;
+  --tg-r-md: 16px;
+  --tg-r-lg: 20px;                 /* every major card              */
+  --tg-r-pill: 999px;
+
+  /* align every section container with the hero content & nav pill (1240) */
+  --tg-max: 1240px;
+
+  --tg-h-ctl: 46px;                /* buttons, inputs, selects      */
+  --tg-h-ico: 44px;                /* icon-only circles             */
+
+  --tg-focus-ring: 2px solid #64dedf;
+
+  /* type scale (4 steps + display) */
+  --tg-fs-xs: .78rem;              /* captions, meta, chips         */
+  --tg-fs-sm: .85rem;              /* secondary lists, nav-adjacent */
+  --tg-fs-md: .95rem;              /* card body copy                */
+  --tg-fs-lg: 1.05rem;             /* section subtitles             */
+}
+
+/* --------------------------------------------------------------------------
+   2. TYPOGRAPHY — hierarchy, rhythm, wrap quality
+   ----------------------------------------------------------------------- */
+h1, h2, h3, .section-label, .portfolio-tag { text-wrap: balance; }
+p, li, .section-subtitle, .contact-subtitle { text-wrap: pretty; }
+
+.section-subtitle, .contact-subtitle {
+  font-size: var(--tg-fs-lg);
+  line-height: 1.65;
+}
+.section-label, .process-label { letter-spacing: .12em; }
+
+.why-card p, .feature-card p, .service-card p, .portfolio-body p,
+.step-card p, .faq-item p, .about-grid p {
+  font-size: var(--tg-fs-md);
+  line-height: 1.7;
+}
+.portfolio-meta li, .service-list li, .step-checklist li, .hero-highlights li {
+  font-size: var(--tg-fs-sm);
+  line-height: 1.55;
+}
+.portfolio-tag, .service-price, .tg-chapter-name { font-size: var(--tg-fs-xs); }
+
+/* --------------------------------------------------------------------------
+   3. CARDS — one radius, one hairline, one elevation, one hover
+   ----------------------------------------------------------------------- */
+.why-card, .service-card, .feature-card, .step-card, .faq-item,
+.portfolio-card, .contact-info, .contact-form, .about-side-card, .footer-cta {
+  border-radius: var(--tg-r-lg);
+  border: 1px solid var(--glass-border-soft);
+  transition: transform .24s cubic-bezier(.2, .7, .2, 1),
+              border-color .24s ease, box-shadow .24s ease;
+}
+body:not(.light-theme) .why-card,
+body:not(.light-theme) .service-card,
+body:not(.light-theme) .feature-card,
+body:not(.light-theme) .step-card,
+body:not(.light-theme) .faq-item,
+body:not(.light-theme) .portfolio-card,
+body:not(.light-theme) .contact-info,
+body:not(.light-theme) .contact-form,
+body:not(.light-theme) .about-side-card {
+  box-shadow: 0 14px 34px -26px rgba(0, 0, 0, .9);
+}
+.why-card:hover, .service-card:hover, .feature-card:hover, .step-card:hover,
+.faq-item:hover, .portfolio-card:hover, .about-side-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: 0 22px 48px -24px rgba(0, 0, 0, .85);
+}
+body.light-theme .why-card:hover, body.light-theme .service-card:hover,
+body.light-theme .feature-card:hover, body.light-theme .step-card:hover,
+body.light-theme .faq-item:hover, body.light-theme .portfolio-card:hover,
+body.light-theme .about-side-card:hover {
+  border-color: rgba(10, 12, 26, .18);
+  box-shadow: 0 18px 40px -22px rgba(10, 12, 26, .25);
+}
+
+/* inner tiles (icons, media cells, option rows) share the small radius */
+.feature-icon, .service-icon, .portfolio-shot, .contact-item,
+.form-option, .nav-logo-icon { border-radius: var(--tg-r-sm); }
+
+/* --------------------------------------------------------------------------
+   4. CONTROLS — one height, one focus ring, consistent press
+   ----------------------------------------------------------------------- */
+.btn { min-height: var(--tg-h-ctl); padding-inline: 1.5rem; }
+.btn:active { transform: translateY(0) scale(.99); }
+.nav-phone-link { width: var(--tg-h-ico); height: var(--tg-h-ico); }
+
+.contact-form input:not(.hidden), .contact-form select, .contact-form textarea {
+  min-height: var(--tg-h-ctl);
+  border-radius: var(--tg-r-sm);
+}
+.contact-form textarea { min-height: 120px; }
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: var(--tg-focus-ring);
+  outline-offset: 3px;
+}
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(100, 222, 223, .55);
+  box-shadow: 0 0 0 3px rgba(100, 222, 223, .14);
+}
+
+/* --------------------------------------------------------------------------
+   5. NAV / RAIL — label no longer collides with content below 1600px
+   ----------------------------------------------------------------------- */
+@media (max-width: 1600px) {
+  .tg-rail-item.is-active .tg-rail-label { opacity: 0; transform: translate3d(-6px, 0, 0); }
+  .tg-rail-item.is-active:hover .tg-rail-label,
+  .tg-rail-item.is-active:focus-visible .tg-rail-label { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   6. PORTFOLIO — align container with the nav pill; fit-content tag pill;
+      media stacks gracefully on small phones; video cells never flash white
+   ----------------------------------------------------------------------- */
+.portfolio-section {
+  /* outer box == content (var(--tg-max)) + gutters, like every other section */
+  max-width: calc(var(--tg-max) + 2 * var(--tg-gutter, 2rem));
+  padding: var(--tg-section-y, 6rem) var(--tg-gutter, 2rem);
+}
+.portfolio-tag { display: inline-flex; width: fit-content; }
+/* legacy .container wrapper (services) joins the same content width */
+.services > .container, .process-container, section > .container {
+  max-width: calc(var(--tg-max) + 2 * var(--tg-gutter, 2rem));
+}
+.portfolio-shot video { background: #0b0e1c; }
+@media (max-width: 560px) {
+  .portfolio-media { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   7. MISC REFINEMENTS
+   ----------------------------------------------------------------------- */
+::selection { background: rgba(100, 222, 223, .28); color: #fff; }
+.hero-location-badge { gap: .35rem .8rem; }
+.tg-dot { flex: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .why-card:hover, .service-card:hover, .feature-card:hover, .step-card:hover,
+  .faq-item:hover, .portfolio-card:hover, .about-side-card:hover { transform: none; }
+}
