@@ -1,7 +1,7 @@
 /**
  * TECHGURU Booking Widget — embeddable, dependency-free.
  *
- * Replaces the Cal.com embed inside the existing booking modal.
+ * Powers the booking flow inside the existing booking modal.
  * Mounts into any container (defaults to #cal-embed, the modal's
  * existing content div, so open/close logic keeps working untouched).
  *
