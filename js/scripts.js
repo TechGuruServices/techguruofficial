@@ -719,4 +719,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function initCalEmbed() { /* Cal.com embed removed; the booking modal links out to https://book.techguruofficial.us. */ });
+});
