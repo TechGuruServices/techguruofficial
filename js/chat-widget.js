@@ -54,7 +54,7 @@ CONTACT:
 - Email: info@techguruofficial.us
 - Phone: +1 (406) 284-5523
 - WhatsApp: https://wa.me/14062845523
-- Book a call: https://cal.com/techguru/strategy-call
+- Book a call: https://book.techguruofficial.us
 
 YOUR JOB:
 1. Warmly welcome visitors and learn about their business needs
@@ -123,11 +123,11 @@ RULES:
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
-    // Lazy-load the Cal.com iframe only on first open
-    if (embed && !embed.querySelector("iframe")) {
+    // Old Cal.com iframe embed removed; the modal now uses the TechGuru booking widget.
+    if (false) { // old Cal.com embed disabled
       const loading = embed.querySelector(".cal-loading");
       const iframe = document.createElement("iframe");
-      iframe.src = "https://cal.com/techguru/strategy-call?embed=true";
+      iframe.src = "https://book.techguruofficial.us?embed=true";
       iframe.title = "Book a free strategy call with TechGuru";
       iframe.style.cssText = "width:100%;height:100%;border:none;border-radius:8px;";
       iframe.setAttribute("loading", "lazy");
