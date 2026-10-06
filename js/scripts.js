@@ -236,14 +236,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+      navToggle.classList.toggle('active'); navToggle.setAttribute('aria-expanded', navToggle.classList.contains('active'));
+      navMenu.classList.toggle('active', navToggle.classList.contains('active'));
     });
 
     // Close menu when clicking a link
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
+        navToggle.classList.remove('active'); navToggle.setAttribute('aria-expanded', 'false');
         navMenu.classList.remove('active');
       });
     });
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navToggle.classList.remove('active');
+        navToggle.classList.remove('active'); navToggle.setAttribute('aria-expanded', 'false');
         navMenu.classList.remove('active');
       }
     });
