@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   // API BASE URL - Cloudflare Worker
   // ============================================
-  const API_BASE = 'https://techguru-api.lucas-a13.workers.dev';
+  const API_BASE = 'https://book.techguruofficial.us';
 
   // ============================================
   // THEME TOGGLE WITH LOCALSTORAGE
