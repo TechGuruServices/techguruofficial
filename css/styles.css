@@ -271,23 +271,6 @@ body.light-theme .hero h1 {
    dark background blends seamlessly with the rotator's dark glass. */
 video.hero-slide { object-fit: contain; }
 .hero-slide.fade-out { opacity: 0; }
-
-/* floating decorative shapes */
-.decor-icon {
-    position: absolute;
-    z-index: var(--z-decor);
-    color: var(--color-primary);
-    opacity: 0;
-    filter: blur(.2px);
-    transition: opacity 1.1s var(--ease-out);
-    pointer-events: none;
-}
-
-.decor-star { top: 16%; right: 6%; color: var(--color-secondary); animation: tg-float 7s ease-in-out infinite; }
-.decor-triangle { bottom: 14%; left: 4%; color: var(--color-accent); animation: tg-float 9s ease-in-out infinite reverse; }
-
-html.decor-loaded .decor-icon { opacity: .16; }
-
 @keyframes tg-float {
 
     0%,
