@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!res.ok) throw new Error('Network response was not ok');
 
-        showFormMessage(contactForm, '✓ Message sent successfully! We will get back to you soon.', 'success');
+        showFormMessage(contactForm, 'Thank you! Your message was sent successfully. I will get back to you within 24 hours.', 'success');
         contactForm.reset();
       } catch (err) {
         console.error(err);
@@ -599,7 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   function showFormMessage(form, message, type) {
     // Remove existing message
-    const existingMsg = form.parentElement.querySelector('.form-message');
+    
+    const existingMsg = form.querySelector('.form-message');
     if (existingMsg) existingMsg.remove();
 
     const msgEl = document.createElement('p');
@@ -616,10 +617,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     `;
     msgEl.textContent = message;
-    form.parentElement.insertBefore(msgEl, form.nextSibling);
+    form.insertBefore(msgEl, form.firstChild);
+    msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // Auto-remove after 5 seconds
-    setTimeout(() => msgEl.remove(), 5000);
+    setTimeout(() => msgEl.remove(), type === 'success' ? 10000 : 8000);
   }
 
   // ============================================
