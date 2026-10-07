@@ -5,10 +5,6 @@
  * exit intent popup, smooth interactions, and theme toggle.
  */
 
-// Fade in decorative SVG icons (star & triangle) after page load to prevent flash
-window.addEventListener('load', () => {
-  document.documentElement.classList.add('decor-loaded');
-});
 
 document.addEventListener('DOMContentLoaded', () => {
   // ============================================
