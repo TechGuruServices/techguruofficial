@@ -1,0 +1,22 @@
+name = "techguru-api"
+main = "src/index.js"
+compatibility_date = "2024-11-21"
+
+# Enable workers.dev subdomain for testing
+workers_dev = true
+
+# Routes - map worker to your domain
+routes = [
+  { pattern = "techguruofficial.us/api/*", zone_name = "techguruofficial.us" },
+  { pattern = "www.techguruofficial.us/api/*", zone_name = "techguruofficial.us" },
+  { pattern = "api.techguruofficial.us/api/*", zone_name = "techguruofficial.us" },
+  { pattern = "api.techguruofficial.us/*", zone_name = "techguruofficial.us" }
+]
+
+# Environment variables for local development
+vars = { DOMAIN = "techguruofficial.us" }
+
+# KV Namespace for rate-limiting
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "9ef4728f1f9e48519d6c6e320cc7140b"

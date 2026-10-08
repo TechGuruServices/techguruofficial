@@ -1,0 +1,17 @@
+{
+  "name": "techguru-api",
+  "version": "1.0.0",
+  "description": "TechGuru Cloudflare Workers API for chat and contact form",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "echo \"Add tests here\" && exit 0"
+  },
+  "keywords": ["cloudflare", "workers", "api"],
+  "author": "TechGuru",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.26.0"
+  }
+}
