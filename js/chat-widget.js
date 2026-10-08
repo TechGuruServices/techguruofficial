@@ -23,11 +23,11 @@
      CONFIG
   ───────────────────────────────────────────── */
   const CONFIG = {
-    // Chat goes through our own backend proxy (workers/src/chat.js),
+    // Chat goes through our own backend proxy (Cloudflare Worker),
     // which holds the Groq key server-side. Never call an LLM API
     // directly from the browser.
-    API_ENDPOINT: "/api/chat",
-    LEAD_ENDPOINT: "/api/contact",
+    API_ENDPOINT: "https://techguru-api.autumn-river-bc5e.workers.dev/api/chat",
+    LEAD_ENDPOINT: "https://techguru-api.autumn-river-bc5e.workers.dev/api/contact",
     TYPING_DELAY_MIN: 1500,
     TYPING_DELAY_MAX: 2500,
     MAX_HISTORY: 20,        // max message pairs kept in memory
