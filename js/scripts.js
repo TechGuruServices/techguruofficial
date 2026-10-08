@@ -453,17 +453,23 @@ document.addEventListener('DOMContentLoaded', () => {
       button.disabled = true;
 
       try {
-        const res = await fetch(`${API_BASE}/api/subscribe`, {
+        // Web3Forms free tier only accepts browser (client-side) submissions.
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json'
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
+            access_key: '79ea5629-dbba-4cfe-95e6-930e25f542e5',
+            subject: 'New Newsletter Signup — TechGuru',
+            from_name: 'TechGuru Website',
             email,
-            source: 'exit_popup'
+            message: 'Newsletter signup from: exit_popup'
           })
         });
-        if (!res.ok) throw new Error('Network response was not ok');
+        const subData = await res.json().catch(() => ({}));
+        if (!res.ok || subData.success === false) throw new Error(subData.message || 'Network response was not ok');
 
         showFormMessage(exitPopupFormObj, '✓ Success! Check your inbox for the starter kit.', 'success');
         exitPopupFormObj.reset();
@@ -500,17 +506,23 @@ document.addEventListener('DOMContentLoaded', () => {
       button.disabled = true;
 
       try {
-        const res = await fetch(`${API_BASE}/api/subscribe`, {
+        // Web3Forms free tier only accepts browser (client-side) submissions.
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json'
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
+            access_key: '79ea5629-dbba-4cfe-95e6-930e25f542e5',
+            subject: 'New Newsletter Signup — TechGuru',
+            from_name: 'TechGuru Website',
             email,
-            source: 'newsletter'
+            message: 'Newsletter signup from: newsletter'
           })
         });
-        if (!res.ok) throw new Error('Network response was not ok');
+        const subData = await res.json().catch(() => ({}));
+        if (!res.ok || subData.success === false) throw new Error(subData.message || 'Network response was not ok');
 
         showFormMessage(subscribeForm, '✓ Success! Check your inbox for the starter kit.', 'success');
         subscribeForm.reset();
@@ -563,20 +575,31 @@ document.addEventListener('DOMContentLoaded', () => {
       button.disabled = true;
 
       try {
-        const res = await fetch(`${API_BASE}/api/contact`, {
+        // Web3Forms free tier only accepts browser (client-side) submissions,
+        // so the form posts directly. The access key is public by design.
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json'
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: JSON.stringify({ 
-            name, email, company, phone, service,
-            message: composedMessage,
-            budget, timeline, infrastructure: infra.join('; '),
-            source: 'contact-form'
+          body: JSON.stringify({
+            access_key: '79ea5629-dbba-4cfe-95e6-930e25f542e5',
+            subject: 'New Contact Form Submission — TechGuru',
+            from_name: 'TechGuru Website',
+            name, email,
+            'Company': company || '—',
+            'Phone': phone || '—',
+            'Service Interest': service,
+            'Budget': budget,
+            'Timeline': timeline,
+            'Infrastructure': infra.join('; ') || '—',
+            message: composedMessage
           })
         });
-        
-        if (!res.ok) throw new Error('Network response was not ok');
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.success === false) throw new Error(data.message || 'Network response was not ok');
 
         showFormMessage(contactForm, 'Thank you! Your message was sent successfully. I will get back to you within 24 hours.', 'success');
         contactForm.reset();
