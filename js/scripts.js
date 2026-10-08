@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   // API BASE URL - Cloudflare Worker
   // ============================================
-  const API_BASE = 'https://book.techguruofficial.us';
+  const API_BASE = 'https://techguru-api.autumn-river-bc5e.workers.dev';
 
   // ============================================
   // THEME TOGGLE WITH LOCALSTORAGE
