@@ -23,9 +23,11 @@
      CONFIG
   ───────────────────────────────────────────── */
   const CONFIG = {
-    MODEL: "claude-sonnet-4-6",
-    MAX_TOKENS: 1024,
-    API_ENDPOINT: "https://api.anthropic.com/v1/messages",
+    // Chat goes through our own backend proxy (workers/src/chat.js),
+    // which holds the Groq key server-side. Never call an LLM API
+    // directly from the browser.
+    API_ENDPOINT: "/api/chat",
+    LEAD_ENDPOINT: "/api/contact",
     TYPING_DELAY_MIN: 1500,
     TYPING_DELAY_MAX: 2500,
     MAX_HISTORY: 20,        // max message pairs kept in memory
@@ -36,40 +38,6 @@
     },
   };
 
-  const SYSTEM_PROMPT = `You are TECHGURU's friendly and knowledgeable AI assistant embedded on the TechGuru website (techguruofficial.us).
-
-TechGuru is a premium automation and AI agency headquartered in Fort Lauderdale, FL. 
-We build enterprise-grade AI automations, web development, and tech consulting solutions for startups and growing businesses.
-
-SERVICES & PRICING:
-- Automation & Workflows: from $2,500 (Zapier, Make, n8n, custom scripts — saves clients 40+ hours/month)
-- AI Integration & Chatbots: from $3,500 (GPT-4, Claude, custom LLMs, knowledge-base training)
-- Web Development: from $2,000 (lightning-fast, SEO-optimized, mobile-first, sub-second load times)
-- Brand & UI/UX Design: from $3,000 (brand identity, design systems, micro-interactions)
-- Technical Consulting: from $500/hr (architecture review, tech stack guidance, team training)
-
-PROCESS: Discovery Call (30 min free) → Strategy & Scope (2-3 days) → Build & Iterate (2-6 weeks) → Launch & Support (30+ days included)
-
-CONTACT:
-- Email: info@techguruofficial.us
-- Phone: +1 (406) 284-5523
-- WhatsApp: https://wa.me/14062845523
-- Book a call: https://book.techguruofficial.us
-
-YOUR JOB:
-1. Warmly welcome visitors and learn about their business needs
-2. Qualify leads by understanding their goals and pain points
-3. Match their needs to the right TechGuru service
-4. Guide them toward booking a free 30-minute strategy call
-5. Collect their name and email naturally during the conversation
-
-RULES:
-- Never discuss competitors by name
-- Never make up pricing beyond what's listed above; say "we'll provide a custom quote after your free consultation"
-- Keep responses concise (2-4 sentences max unless a detailed answer is truly needed)
-- Always be professional, warm, and confident — not pushy
-- If asked something you don't know, offer to connect them with the team directly
-- When you have their email, confirm it and say the team will follow up within 24 hours`;
 
   /* ─────────────────────────────────────────────
      STATE
@@ -120,6 +88,7 @@ RULES:
     if (!modal) return;
 
     modal.hidden = false;
+    modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
@@ -144,6 +113,7 @@ RULES:
     const modal = document.getElementById("booking-modal");
     if (!modal) return;
     modal.hidden = true;
+    modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
@@ -262,29 +232,36 @@ RULES:
     // Only fire when we have at least an email
     if (!email) return;
 
-    try {
-      const formData = new FormData();
-      formData.append('access_key', 'YOUR-WEB3FORMS-KEY-HERE');
-      formData.append('subject', 'New Chat Lead — TechGuru');
-      formData.append('name', name || 'Unknown');
-      formData.append('email', email);
-      formData.append('message', 'Lead captured via chat widget.\n\nContext:\n' + context);
+    // Never treat our own bot text as a lead (it contains info@techguruofficial.us)
+    if (email.toLowerCase() === "info@techguruofficial.us") return;
 
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
+    try {
+      const res = await fetch(CONFIG.LEAD_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: (name || "Unknown").slice(0, 100),
+          email: email,
+          subject: "New Chat Lead — TechGuru",
+          message: ("Lead captured via chat widget.\n\nContext:\n" + context).slice(0, 5000),
+        }),
       });
 
-      console.log('[TechGuru Chat] Lead forwarded:', email);
+      if (!res.ok) {
+        console.error("[TechGuru Chat] Lead forward failed:", res.status);
+        return;
+      }
+
+      console.log("[TechGuru Chat] Lead forwarded:", email);
     } catch (err) {
-      console.error('[TechGuru Chat] Lead forward failed:', err);
+      console.error("[TechGuru Chat] Lead forward failed:", err);
     }
   }
 
   /* ─────────────────────────────────────────────
      API CALL
   ───────────────────────────────────────────── */
-  async function callClaudeAPI(userText) {
+  async function callChatAPI(userText) {
     // Add user message to history
     state.messages.push({ role: "user", content: userText });
 
@@ -294,39 +271,27 @@ RULES:
     }
 
     const leadContext = buildLeadContext();
-    const systemWithContext = SYSTEM_PROMPT + leadContext;
 
+    // Our backend proxy (workers/src/chat.js) owns the model, system prompt
+    // and API key. We send the message plus any lead context; it replies
+    // with { reply: string }.
     const response = await fetch(CONFIG.API_ENDPOINT, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // The Anthropic proxy in the Claude artifact environment handles auth
-        // For production deployment on your own server, add:
-        // "x-api-key": YOUR_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: CONFIG.MODEL,
-        max_tokens: CONFIG.MAX_TOKENS,
-        system: systemWithContext,
-        messages: state.messages,
+        message: leadContext ? userText + "\n" + leadContext : userText,
       }),
     });
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      throw new Error(err?.error?.message || `API error ${response.status}`);
+      throw new Error(err?.error || `API error ${response.status}`);
     }
 
     const data = await response.json();
 
-    // Extract text from content blocks
-    const assistantText = (data.content || [])
-      .filter((b) => b.type === "text")
-      .map((b) => b.text)
-      .join("\n")
-      .trim();
+    // Backend contract: { reply: string }
+    const assistantText = (data.reply || "").trim();
 
     // Add assistant reply to history
     if (assistantText) {
@@ -362,15 +327,12 @@ RULES:
 
     try {
       const [reply] = await Promise.all([
-        callClaudeAPI(trimmed),
+        callChatAPI(trimmed),
         sleep(delay),
       ]);
 
       showTyping(false);
       appendMessage("assistant", reply);
-
-      // Check if email was captured in the reply parsing
-      processLeadCapture(reply);
 
     } catch (err) {
       showTyping(false);
