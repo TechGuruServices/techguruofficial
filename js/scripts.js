@@ -524,8 +524,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const subData = await res.json().catch(() => ({}));
         if (!res.ok || subData.success === false) throw new Error(subData.message || 'Network response was not ok');
 
-        showFormMessage(subscribeForm, '✓ Success! Check your inbox for the starter kit.', 'success');
+        showFormMessage(subscribeForm, '✓ Success! Taking you to your free guides...', 'success');
         subscribeForm.reset();
+        setTimeout(() => { window.location.href = '/free-guides.html'; }, 1200);
       } catch (err) {
         console.error(err);
         showFormMessage(subscribeForm, 'Something went wrong. Please try again.', 'error');
