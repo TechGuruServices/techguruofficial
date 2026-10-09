@@ -27,7 +27,6 @@
     // which holds the Groq key server-side. Never call an LLM API
     // directly from the browser.
     API_ENDPOINT: "https://techguru-api.autumn-river-bc5e.workers.dev/api/chat",
-    LEAD_ENDPOINT: "https://techguru-api.autumn-river-bc5e.workers.dev/api/contact",
     TYPING_DELAY_MIN: 1500,
     TYPING_DELAY_MAX: 2500,
     MAX_HISTORY: 20,        // max message pairs kept in memory
@@ -193,19 +192,29 @@
     if (email.toLowerCase() === "info@techguruofficial.us") return;
 
     try {
-      const res = await fetch(CONFIG.LEAD_ENDPOINT, {
+      // Web3Forms free tier only accepts browser (client-side) submissions,
+      // so the lead posts directly — same proven pattern as the contact /
+      // newsletter / exit-popup forms in js/scripts.js. The access key is
+      // public by design (already embedded in the live site's scripts.js).
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
         body: JSON.stringify({
+          access_key: "79ea5629-dbba-4cfe-95e6-930e25f542e5",
+          subject: "New Chat Lead — TechGuru",
+          from_name: "TechGuru Website",
           name: (name || "Unknown").slice(0, 100),
           email: email,
-          subject: "New Chat Lead — TechGuru",
           message: ("Lead captured via chat widget.\n\nContext:\n" + context).slice(0, 5000),
         }),
       });
 
-      if (!res.ok) {
-        console.error("[TechGuru Chat] Lead forward failed:", res.status);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === false) {
+        console.error("[TechGuru Chat] Lead forward failed:", res.status, data.message || "");
         return;
       }
 
