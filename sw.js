@@ -117,12 +117,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // API requests - network first, cache fallback
-  if (url.pathname.startsWith('/api/')) {
-    event.respondWith(networkFirstStrategy(request));
-    return;
-  }
-
   // Images - cache first, network fallback
   if (request.destination === 'image') {
     event.respondWith(cacheFirstStrategy(request, IMAGE_CACHE));

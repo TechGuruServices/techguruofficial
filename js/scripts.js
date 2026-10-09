@@ -391,22 +391,21 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshQ();
   }
 
-  // Show popup only when user clicks outside contact form after interacting with it
+  // Show popup on true exit intent: mouse leaves the viewport through the top
+  // edge (desktop). Only after the user interacted with the contact form.
   if (exitPopup && contactSection) {
-    document.addEventListener('click', (e) => {
+    document.addEventListener('mouseout', (e) => {
       // Only trigger if:
-      // 1. User has interacted with the contact form
-      // 2. User has NOT submitted the form
-      // 3. Popup hasn't been shown yet
-      // 4. Click is outside the contact section
-      // 5. Click is not on the exit popup itself
+      // 1. The pointer left the document entirely (no related target)
+      // 2. It exited through the top edge (classic exit-intent signal)
+      // 3. User has interacted with the contact form
+      // 4. User has NOT submitted the form
+      // 5. Popup hasn't been shown yet this session
       if (
+        !e.relatedTarget && e.clientY <= 0 &&
         hasInteractedWithContactForm &&
         !hasSubmittedContactForm &&
-        !hasShownExitPopup &&
-        !contactSection.contains(e.target) &&
-        !exitPopup.contains(e.target) &&
-        !e.target.closest('.exit-popup-overlay')
+        !hasShownExitPopup
       ) {
         showExitPopup();
       }
@@ -526,7 +525,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showFormMessage(subscribeForm, '✓ Success! Taking you to your free guides...', 'success');
         subscribeForm.reset();
-        setTimeout(() => { window.location.href = '/free-guides.html'; }, 1200);
+        const subRedirect = subscribeForm.querySelector('input[name="redirect"]');
+        setTimeout(() => { window.location.href = subRedirect && subRedirect.value ? subRedirect.value : '/free-guides.html'; }, 1200);
       } catch (err) {
         console.error(err);
         showFormMessage(subscribeForm, 'Something went wrong. Please try again.', 'error');
@@ -538,7 +538,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================
-  // CONTACT FORM
+  // CONTACT FORM -> Web3Forms (canonical for this form; the Cloudflare
+  // worker in workers/src/contact.js serves chat-widget leads only)
   // ============================================
   if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -549,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const company = document.getElementById('contact-company')?.value || '';
       const phone = document.getElementById('contact-phone')?.value || '';
       const serviceRadio = contactForm.querySelector('input[name="service"]:checked');
-      const otherSel = document.getElementById('contact-service');
+      const otherSel = document.getElementById('contact-service-other');
       const service = serviceRadio
         ? (serviceRadio.value === 'other' ? (otherSel ? otherSel.value : '') : serviceRadio.value)
         : '';
@@ -602,8 +603,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json().catch(() => ({}));
         if (!res.ok || data.success === false) throw new Error(data.message || 'Network response was not ok');
 
-        showFormMessage(contactForm, 'Thank you! Your message was sent successfully. I will get back to you within 24 hours.', 'success');
+        showFormMessage(contactForm, 'Thank you! Your message was sent successfully. Taking you to the confirmation page...', 'success');
         contactForm.reset();
+        // Honor the form's redirect field (thank-you page) instead of leaving it orphaned
+        const contactRedirect = contactForm.querySelector('input[name="redirect"]');
+        if (contactRedirect && contactRedirect.value) {
+          setTimeout(() => { window.location.href = contactRedirect.value; }, 1200);
+        }
       } catch (err) {
         console.error(err);
         showFormMessage(contactForm, 'Something went wrong. Please try again or email us directly.', 'error');
@@ -691,7 +697,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================
-  // BOOKING MODAL
+  // BOOKING MODAL (single source of truth — js/chat-widget.js calls these
+  // globals; do not duplicate them elsewhere)
   // ============================================
 
   // The modal links out to the TechGuru booking platform.

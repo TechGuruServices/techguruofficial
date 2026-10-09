@@ -71,6 +71,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/styles.css?v=20251224f">
     <link rel="stylesheet" href="css/cinematic.css?v=20260925">
+    <link rel="stylesheet" href="css/chat-widget-dark-glass.css">
     <script src="js/scripts.js" defer></script>
     <script src="js/cinematic.js" defer></script>
     <script src="js/story.js" defer></script>
@@ -2097,7 +2098,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     <header class="navbar" role="banner">
         <div class="logo">
             <a href="#home" class="nav-logo-link">
-                <img src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="nav-logo-icon">
+                <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="nav-logo-icon">
                 TECHGURU
             </a>
         </div>
@@ -2155,7 +2156,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             </svg>
             <!-- Tubes Cursor Canvas Background -->
             <canvas id="tubes-canvas" aria-hidden="true"></canvas>
-            <div class="hero-content">
+            <div class="hero-content" id="home">
                 <p class="hero-location-badge">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
                         focusable="false">
@@ -2200,7 +2201,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 </div>
                 <div class="hero-proof">
                     <span class="hero-proof-avatars" aria-hidden="true">
-                        <img src="images/owner-portrait.webp" alt="">
+                        <img src="images/owner-portrait.webp" alt="Portrait of the TECHGURU founder">
                         <span class="av av-cd">CD</span>
                         <span class="av av-za">ZA</span>
                     </span>
@@ -2379,7 +2380,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <article class="portfolio-card">
                     <div class="portfolio-media">
                         <div class="portfolio-shot">
-                            <img src="images/portfolio/creative-drywall-1.jpg"
+                            <img width="1024" height="1024" src="images/portfolio/creative-drywall-1.webp"
                                 alt="Finished interior walls and vaulted ceiling — Creative Drywall finish work"
                                 loading="lazy" decoding="async"
                                 onload="this.closest('.portfolio-shot').classList.add('has-media')"
@@ -2448,7 +2449,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <article class="portfolio-card">
                     <div class="portfolio-media">
                         <div class="portfolio-shot">
-                            <img src="images/portfolio/zempel-auto-1.jpg"
+                            <img width="1600" height="1200" src="images/portfolio/zempel-auto-1.jpg"
                                 alt="The Clark Fork River in Missoula, Montana — home town of Zempel Auto, which runs on the platform I built"
                                 loading="lazy" decoding="async"
                                 onload="this.closest('.portfolio-shot').classList.add('has-media')"
@@ -3090,7 +3091,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
   aria-label="Subscribe to get free resources"
 >
   <input type="hidden" name="subject" value="New Lead Magnet Subscriber — TechGuru">
-  <input type="hidden" name="redirect" value="https://techguruofficial.us/thank-you.html">
+  <input type="hidden" name="redirect" value="https://techguruofficial.us/free-guides.html">
   <input type="checkbox" name="botcheck" class="hidden" aria-label="Bot check" title="botcheck">
 
   <div class="form-group-inline">
@@ -3279,20 +3280,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <input type="tel" id="contact-phone" name="phone" autocomplete="tel">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="contact-service" class="form-label">How can I help? <span
-                                class="required">*</span></label>
-                        <select id="contact-service" name="service" required>
-                            <option value="" disabled selected>Select a service</option>
-                            <option value="website">Website Design & Build</option>
-                            <option value="ai-widget">AI Chat & FAQ Widget</option>
-                            <option value="branding">Branding & Logo Design</option>
-                            <option value="custom-tool">Custom Business Tool (CRM, etc.)</option>
-                            <option value="care-plan">Monthly Care Plan</option>
-                            <option value="consulting">Hourly Consulting</option>
-                            <option value="other">Other / Not Sure</option>
-                        </select>
-                    </div>
                     <div class="tg-q" aria-label="Project fit questionnaire">
                         <div class="q-step" data-step="1">
                             <span class="q-num" aria-hidden="true">1</span>
@@ -3312,7 +3299,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                                                 consulting…</em></span></label>
                                 </div>
                                 <div class="q-other" id="service-other-wrap" hidden>
-                                    <select id="contact-service" name="service_other" aria-label="Which other service?">
+                                    <select id="contact-service-other" name="service_other" aria-label="Which other service?">
                                         <option value="" disabled selected>Choose a service</option>
                                         <option value="branding">Branding &amp; Logo Design</option>
                                         <option value="care-plan">Monthly Care Plan</option>
@@ -3327,7 +3314,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <div class="q-body">
                                 <label for="contact-timeline" class="form-label">Project timeline <span
                                         class="required">*</span></label>
-                                <select id="contact-timeline" name="timeline">
+                                <select id="contact-timeline" name="timeline" required>
                                     <option value="" disabled selected>Select a timeline</option>
                                     <option value="asap">As soon as possible (ready to start)</option>
                                     <option value="30-days">Within the next 30 days</option>
@@ -3357,7 +3344,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                             <div class="q-body">
                                 <label for="contact-budget" class="form-label">Budget reality check <span
                                         class="required">*</span></label>
-                                <select id="contact-budget" name="budget">
+                                <select id="contact-budget" name="budget" required>
                                     <option value="" disabled selected>Select a range</option>
                                     <option value="900-1500">$900 – $1,500 (basic local site or single tool)</option>
                                     <option value="1500-3500">$1,500 – $3,500 (contractor site + branding / optimization)</option>
@@ -3468,7 +3455,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="footer-logo-icon">
+                        <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="footer-logo-icon">
                         TECHGURU
                     </div>
                     <p>Websites, Branding &amp; AI Tools — Built by One Techguru.</p>
@@ -3549,7 +3536,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
   id="exit-popup-form"
 >
   <input type="hidden" name="subject" value="Exit Popup Lead — TechGuru">
-  <input type="hidden" name="redirect" value="https://techguruofficial.us/thank-you.html">
   <input type="checkbox" name="botcheck" class="hidden" aria-label="Bot check" title="botcheck">
 
   <input type="email" name="email" placeholder="Enter your email" required>
@@ -3588,7 +3574,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <!-- Chat Toggle Button with Avatar -->
             <button id="chat-toggle" class="chat-toggle" aria-label="Open chat assistant" aria-expanded="false"
                 aria-controls="chat-window">
-                <img src="images/chat-avatar.webp" alt="" class="chat-avatar" aria-hidden="true">
+                <img width="768" height="768" src="images/chat-avatar.webp" alt="" class="chat-avatar" aria-hidden="true">
                 <span class="visually-hidden">TechGuru AI Chat Assistant</span>
             </button>
 
@@ -3610,7 +3596,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
                 <header class="chat-header">
                     <div class="chat-header-brand">
-                        <img src="images/icons/nav-icon-new.webp" alt="" class="chat-header-logo" aria-hidden="true">
+                        <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="" class="chat-header-logo" aria-hidden="true">
                         <div class="chat-header-info">
                             <h3 id="chat-window-title">TECHGURU AI</h3>
                             <p id="chat-window-desc" class="chat-header-status">
@@ -3683,7 +3669,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
                 <!-- Typing Indicator -->
                 <div id="chat-typing" class="chat-typing-indicator chat-typing-hidden" role="status" aria-live="polite">
-                    <img src="images/icons/nav-icon-new.webp" alt="" class="typing-avatar" aria-hidden="true">
+                    <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="" class="typing-avatar" aria-hidden="true">
                     <div class="typing-dots" aria-label="Assistant is typing">
                         <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
                     </div>
@@ -3759,13 +3745,11 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                     </button>
                 </div>
                 <div class="booking-modal-body">
-                    <!-- Book via the TechGuru booking platform --><div style="text-align:center;padding:2.5rem 1.5rem;"><p>Book your free strategy call</p><a class="btn btn-primary btn-large" href="https://book.techguruofficial.us">
-                    </p>
+                    <!-- Book via the TechGuru booking platform --><div style="text-align:center;padding:2.5rem 1.5rem;"><p>Book your free strategy call</p><a class="btn btn-primary btn-large" href="https://book.techguruofficial.us">Book your free strategy call</a>
                 </div>
             </div>
         </div>
 
-        <link rel="stylesheet" href="css/chat-widget-dark-glass.css">
         <script src="js/chat-widget.js" defer></script>
 
         <!-- PWA Service Worker Registration -->

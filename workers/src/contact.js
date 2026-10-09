@@ -2,7 +2,15 @@ import { resolveCorsOrigin } from './cors.js';
 /**
  * Contact Form Endpoint Handler
  * Validates form data, applies rate-limiting, sends emails via Zoho Mail
- * 
+ *
+ * NOTE (2026-10-09 audit): this worker endpoint is NOT currently wired to the
+ * frontend. Live traffic uses:
+ *   - Contact / subscribe / exit-popup forms -> Web3Forms (see js/scripts.js)
+ *   - Chat widget leads                     -> this worker's /api/contact via
+ *                                              js/chat-widget.js LEAD_ENDPOINT
+ * Keep this file for the chat lead path. If the contact form is ever migrated
+ * off Web3Forms, point js/scripts.js at this endpoint instead of deleting it.
+ *
  * Environment variables required:
  * - ZOHO_MAIL_API_KEY: Zoho Mail API key
  * - NOTIFICATION_EMAIL: Email to receive notifications (lucas@techguruofficial.us)

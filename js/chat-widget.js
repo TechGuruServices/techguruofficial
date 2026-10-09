@@ -11,7 +11,7 @@
  *  7. aria-modal focus trap only active while window is open
  *  8. Floating CTAs have safe JS-driven show/hide
  *  9. Char count wired to live input event
- * 10. openBookingModal / closeBookingModal defined here (no defer race)
+ * 10. Booking modal open/close live in js/scripts.js (single source of truth)
  * 11. Suggestion chips remain available after first message
  * 12. autocomplete="off" enforced via JS on chat input
  */
@@ -79,54 +79,11 @@
 
   /* ─────────────────────────────────────────────
      BOOKING MODAL
-     Defined here (not in scripts.js) so it's
-     available immediately — no defer race condition
+     Single source of truth lives in js/scripts.js
+     (window.openBookingModal / window.closeBookingModal).
+     Calls below resolve to those globals; the Escape key is
+     handled there too (added on open, removed on close).
   ───────────────────────────────────────────── */
-  function openBookingModal() {
-    const modal = document.getElementById("booking-modal");
-    const embed = document.getElementById("cal-embed");
-    if (!modal) return;
-
-    modal.hidden = false;
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-
-    // Old Cal.com iframe embed removed; the modal now uses the TechGuru booking widget.
-    if (false) { // old Cal.com embed disabled
-      const loading = embed.querySelector(".cal-loading");
-      const iframe = document.createElement("iframe");
-      iframe.src = "https://book.techguruofficial.us?embed=true";
-      iframe.title = "Book a free strategy call with TechGuru";
-      iframe.style.cssText = "width:100%;height:100%;border:none;border-radius:8px;";
-      iframe.setAttribute("loading", "lazy");
-      iframe.onload = () => { if (loading) loading.style.display = "none"; };
-      embed.appendChild(iframe);
-    }
-
-    // Focus the close button for accessibility
-    const closeBtn = modal.querySelector(".booking-modal-close");
-    if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
-  }
-
-  function closeBookingModal() {
-    const modal = document.getElementById("booking-modal");
-    if (!modal) return;
-    modal.hidden = true;
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  // Expose globally for inline onclick attributes in HTML
-  window.openBookingModal = openBookingModal;
-  window.closeBookingModal = closeBookingModal;
-
-  // Close modal on Escape key
-  document.addEventListener("keydown", (e) => {
-    const modal = document.getElementById("booking-modal");
-    if (e.key === "Escape" && modal && !modal.hidden) closeBookingModal();
-  });
 
   /* ─────────────────────────────────────────────
      CHAT WINDOW OPEN / CLOSE
