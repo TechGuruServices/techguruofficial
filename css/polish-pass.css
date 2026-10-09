@@ -45,7 +45,7 @@
 /* --------------------------------------------------------------------------
    2. TYPOGRAPHY — hierarchy, rhythm, wrap quality
    ----------------------------------------------------------------------- */
-h1, h2, h3, .section-label, .portfolio-tag { text-wrap: balance; }
+h1, h2, h3, .section-label { text-wrap: balance; }
 p, li, .section-subtitle, .contact-subtitle { text-wrap: pretty; }
 
 .section-subtitle, .contact-subtitle {
@@ -54,22 +54,22 @@ p, li, .section-subtitle, .contact-subtitle { text-wrap: pretty; }
 }
 .section-label, .process-label { letter-spacing: .12em; }
 
-.why-card p, .feature-card p, .service-card p, .portfolio-body p,
+.why-card p, .feature-card p, .service-card p,
 .step-card p, .faq-item p, .about-grid p {
   font-size: var(--tg-fs-md);
   line-height: 1.7;
 }
-.portfolio-meta li, .service-list li, .step-checklist li, .hero-highlights li {
+.service-list li, .step-checklist li, .hero-highlights li {
   font-size: var(--tg-fs-sm);
   line-height: 1.55;
 }
-.portfolio-tag, .service-price, .tg-chapter-name { font-size: var(--tg-fs-xs); }
+.service-price, .tg-chapter-name { font-size: var(--tg-fs-xs); }
 
 /* --------------------------------------------------------------------------
    3. CARDS — one radius, one hairline, one elevation, one hover
    ----------------------------------------------------------------------- */
 .why-card, .service-card, .feature-card, .step-card, .faq-item,
-.portfolio-card, .contact-info, .contact-form, .about-side-card, .footer-cta {
+.contact-info, .contact-form, .about-side-card, .footer-cta {
   border-radius: var(--tg-r-lg);
   border: 1px solid var(--glass-border-soft);
   transition: transform .24s cubic-bezier(.2, .7, .2, 1),
@@ -80,28 +80,27 @@ body:not(.light-theme) .service-card,
 body:not(.light-theme) .feature-card,
 body:not(.light-theme) .step-card,
 body:not(.light-theme) .faq-item,
-body:not(.light-theme) .portfolio-card,
 body:not(.light-theme) .contact-info,
 body:not(.light-theme) .contact-form,
 body:not(.light-theme) .about-side-card {
   box-shadow: 0 14px 34px -26px rgba(0, 0, 0, .9);
 }
 .why-card:hover, .service-card:hover, .feature-card:hover, .step-card:hover,
-.faq-item:hover, .portfolio-card:hover, .about-side-card:hover {
+.faq-item:hover, .about-side-card:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 255, 255, .16);
   box-shadow: 0 22px 48px -24px rgba(0, 0, 0, .85);
 }
 body.light-theme .why-card:hover, body.light-theme .service-card:hover,
 body.light-theme .feature-card:hover, body.light-theme .step-card:hover,
-body.light-theme .faq-item:hover, body.light-theme .portfolio-card:hover,
+body.light-theme .faq-item:hover,
 body.light-theme .about-side-card:hover {
   border-color: rgba(10, 12, 26, .18);
   box-shadow: 0 18px 40px -22px rgba(10, 12, 26, .25);
 }
 
 /* inner tiles (icons, media cells, option rows) share the small radius */
-.feature-icon, .service-icon, .portfolio-shot, .contact-item,
+.feature-icon, .service-icon, .contact-item,
 .form-option, .nav-logo-icon { border-radius: var(--tg-r-sm); }
 
 /* --------------------------------------------------------------------------
@@ -138,25 +137,6 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 }
 
 /* --------------------------------------------------------------------------
-   6. PORTFOLIO — align container with the nav pill; fit-content tag pill;
-      media stacks gracefully on small phones; video cells never flash white
-   ----------------------------------------------------------------------- */
-.portfolio-section {
-  /* outer box == content (var(--tg-max)) + gutters, like every other section */
-  max-width: calc(var(--tg-max) + 2 * var(--tg-gutter, 2rem));
-  padding: var(--tg-section-y, 6rem) var(--tg-gutter, 2rem);
-}
-.portfolio-tag { display: inline-flex; width: fit-content; }
-/* legacy .container wrapper (services) joins the same content width */
-.services > .container, .process-container, section > .container {
-  max-width: calc(var(--tg-max) + 2 * var(--tg-gutter, 2rem));
-}
-.portfolio-shot video { background: #0b0e1c; }
-@media (max-width: 560px) {
-  .portfolio-media { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* --------------------------------------------------------------------------
    7. MISC REFINEMENTS
    ----------------------------------------------------------------------- */
 ::selection { background: rgba(100, 222, 223, .28); color: #fff; }
@@ -165,5 +145,5 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .why-card:hover, .service-card:hover, .feature-card:hover, .step-card:hover,
-  .faq-item:hover, .portfolio-card:hover, .about-side-card:hover { transform: none; }
+  .faq-item:hover, .about-side-card:hover { transform: none; }
 }

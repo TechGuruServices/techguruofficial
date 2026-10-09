@@ -147,11 +147,6 @@ input[name="botcheck"] {
     padding-inline: 0;
 }
 
-.portfolio-section {
-    width: 100%;
-    max-width: none;
-    padding: var(--tg-section-y) var(--tg-gutter);
-}
 
 .lead-magnet { padding-block: var(--tg-section-y); }
 
@@ -162,8 +157,6 @@ input[name="botcheck"] {
 .about-grid,
 .about-content,
 .why-grid,
-.portfolio-grid,
-.portfolio-inner,
 .features,
 .faq-grid,
 .contact-wrapper,
@@ -182,7 +175,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
 /* Alternating tint gives the eye a sense of "new chapter" without noise */
 #services,
-#portfolio,
 #faq {
     background:
         radial-gradient(1100px 420px at 50% -10%, rgba(74, 108, 247, .07), transparent 70%),
@@ -574,7 +566,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 .service-card,
 .feature-card,
 .faq-item,
-.portfolio-card,
 .step-card,
 .contact-info,
 .about-panel,
@@ -913,128 +904,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 @media (max-width: 620px) {
     .process-timeline-premium,
     .process-timeline-premium.horizontal-scroll-container { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* --------------------------------------------------------------------------
-   12. PORTFOLIO
-   -------------------------------------------------------------------------- */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(1.25rem, 2.5vw, 1.9rem);
-    margin-top: 0;
-}
-
-.portfolio-card {
-    display: grid;
-    grid-template-columns: 1.02fr 1fr;
-    overflow: hidden;
-    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease, box-shadow .35s ease;
-}
-
-.portfolio-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--tg-border-hi);
-    box-shadow: var(--tg-shadow-hi);
-}
-
-.portfolio-media {
-    min-height: 300px;
-    padding: 1.1rem;
-    gap: .9rem;
-    grid-template-columns: 1fr 1fr;
-    background: linear-gradient(135deg, rgba(74, 108, 247, .2), rgba(162, 116, 255, .14));
-}
-
-.portfolio-shot {
-    border-radius: var(--tg-r);
-    min-height: 220px;
-    border: 1px solid rgba(255, 255, 255, .14);
-    background: rgba(10, 12, 26, .45);
-}
-
-/* placeholder hides itself once real media loads (.has-media set inline) */
-.portfolio-shot.has-media .portfolio-shot-placeholder { display: none; }
-
-.portfolio-body { padding: clamp(1.5rem, 2.6vw, 2.15rem); gap: .35rem; }
-
-.portfolio-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: .45rem;
-    margin-bottom: .7rem;
-    padding: .3rem .7rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid rgba(100, 222, 223, .24);
-    background: rgba(100, 222, 223, .1);
-    color: var(--tg-accent);
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-}
-
-.portfolio-body h3 {
-    font-size: clamp(1.22rem, 1.1rem + .5vw, 1.5rem);
-    margin: 0 0 .5rem;
-}
-
-.portfolio-body .portfolio-role {
-    margin: 0 0 .9rem;
-    color: var(--tg-muted);
-    font-size: .95rem;
-    line-height: 1.7;
-}
-
-.portfolio-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem 1.1rem;
-    margin: 0 0 1rem;
-    padding: 0;
-    list-style: none;
-}
-
-.portfolio-meta li {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    font-size: .8rem;
-    color: rgba(242, 244, 250, .78);
-}
-
-.portfolio-meta svg { width: 14px; height: 14px; color: var(--tg-accent); flex: none; }
-
-.portfolio-stack { margin: auto 0 .25rem; padding-top: .5rem; }
-
-.portfolio-stack span {
-    font-size: .7rem;
-    padding: .32rem .7rem;
-    border-radius: var(--tg-r-pill);
-    background: rgba(255, 255, 255, .06);
-    border: 1px solid var(--tg-border);
-}
-
-.portfolio-note {
-    max-width: 78ch;
-    margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
-    padding: 1rem 1.25rem;
-    border-left: 2px solid rgba(100, 222, 223, .45);
-    border-radius: 0 var(--tg-r) var(--tg-r) 0;
-    background: rgba(255, 255, 255, .03);
-    color: var(--tg-muted);
-    font-size: .88rem;
-    text-align: left;
-}
-
-@media (max-width: 900px) {
-    .portfolio-card { grid-template-columns: minmax(0, 1fr); }
-    .portfolio-media { min-height: 240px; }
-}
-
-@media (max-width: 520px) {
-    .portfolio-media { grid-template-columns: minmax(0, 1fr); }
-    .portfolio-shot { min-height: 190px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1734,7 +1603,6 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     .service-card:hover,
     .feature-card:hover,
     .step-card:hover,
-    .portfolio-card:hover,
     .btn:hover { transform: none; }
 }
 

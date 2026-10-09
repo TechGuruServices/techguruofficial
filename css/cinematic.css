@@ -5,9 +5,8 @@
      2. Progress dots for the hero video CTA playlist
      3. Line-mask reveals on section headlines
      4. Scroll-linked word lighting on the About statement (.about-lead)
-     5. Clip-path wipe-in on portfolio shots
-     6. Parallax brand glow orbs (injected by js/cinematic.js)
-     7. Chapter rail — a left-edge story navigator
+     5. Parallax brand glow orbs (injected by js/cinematic.js)
+     6. Chapter rail — a left-edge story navigator
    Every effect is gated behind html.js-cine, which js/cinematic.js sets ONLY
    when prefers-reduced-motion is not set — so content is never hidden for
    reduced-motion users or when JS fails (never-stay-invisible failsafe).
@@ -101,20 +100,6 @@ body.light-theme .hero-dot.active {
 .js-cine .about-lead .tg-word.lit {
     opacity: 1;
     filter: none;
-}
-
-/* --------------------------------------------------------------------------
-   5. PORTFOLIO CLIP-WIPE — shots uncover bottom-to-top as cards land
-   -------------------------------------------------------------------------- */
-.js-cine .portfolio-card .portfolio-shot img,
-.js-cine .portfolio-card .portfolio-shot video {
-    clip-path: inset(0 0 101% 0);
-    transition: clip-path 1.15s cubic-bezier(.16, 1, .3, 1) .12s;
-}
-
-.js-cine .portfolio-card.is-in .portfolio-shot img,
-.js-cine .portfolio-card.is-in .portfolio-shot video {
-    clip-path: inset(0 0 0% 0);
 }
 
 /* --------------------------------------------------------------------------
@@ -215,8 +200,6 @@ body.light-theme .tg-rail-dot {
     .js-cine .hero-slide.active { animation: none !important; }
     .js-cine .tg-mask-inner { transform: none !important; transition: none !important; }
     .js-cine .about-lead .tg-word { opacity: 1 !important; filter: none !important; transition: none !important; }
-    .js-cine .portfolio-card .portfolio-shot img,
-    .js-cine .portfolio-card .portfolio-shot video { clip-path: none !important; transition: none !important; }
     .tg-orb { display: none !important; }
     .tg-rail-dot, .tg-rail-label { transition: none !important; }
 }

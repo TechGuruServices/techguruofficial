@@ -633,7 +633,6 @@ section.services .step-checklist li::before {
 
 /* Tech-tag translation + mono tags */
 .tech-translation { margin: .6rem 0 0; font-size: .85rem; color: var(--color-accent); font-weight: 600; }
-.portfolio-tech span { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; }
 
 /* Process connector line with scroll illumination */
 .process-timeline-premium { position: relative; }
@@ -649,38 +648,6 @@ section.services .step-checklist li::before {
 }
 @media (max-width: 900px) { .process-line { display: none; } }
 
-/* Portfolio device frames + hover overlay */
-.portfolio-card .portfolio-shot { padding-top: 32px; background: rgba(255, 255, 255, .03); }
-.portfolio-card .portfolio-shot::before {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 32px;
-    background-color: rgba(255, 255, 255, .05);
-    border-bottom: 1px solid var(--glass-border);
-    border-radius: 12px 12px 0 0;
-    background-image:
-        radial-gradient(circle at 20px 16px, #f87171 0 4px, transparent 5px),
-        radial-gradient(circle at 38px 16px, #fbbf24 0 4px, transparent 5px),
-        radial-gradient(circle at 56px 16px, #34d399 0 4px, transparent 5px);
-}
-.portfolio-card .portfolio-shot img,
-.portfolio-card .portfolio-shot video {
-    inset: 32px 0 0 0;
-    transition: filter .35s var(--ease-out), transform .35s var(--ease-out), clip-path 1.15s cubic-bezier(.16, 1, .3, 1) .12s;
-}
-.portfolio-card .portfolio-media { position: relative; }
-.portfolio-card .portfolio-media:hover img { filter: blur(3px); transform: scale(1.03); }
-.shot-overlay-btn {
-    position: absolute; inset: 0; z-index: 2;
-    display: flex; align-items: center; justify-content: center;
-    border: 0; background: rgba(4, 6, 10, .55);
-    opacity: 0; transition: opacity .3s var(--ease-out); cursor: pointer;
-}
-.portfolio-media:hover .shot-overlay-btn,
-.shot-overlay-btn:focus-visible { opacity: 1; }
-.shot-overlay-btn span {
-    padding: .6rem 1.1rem; border-radius: 999px;
-    border: 1px solid rgba(100, 222, 223, .5); background: rgba(8, 10, 15, .8);
-    color: var(--color-accent); font-weight: 700; font-size: .85rem; letter-spacing: .04em;
-}
 
 /* Included-in-every-project: 2x2 grid, oversized monochrome icons */
 section.features { grid-template-columns: repeat(2, minmax(0, 1fr)); }

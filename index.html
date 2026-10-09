@@ -78,6 +78,7 @@
     <script src="js/story-full.js" defer></script>
     <script src="js/cta-rotator.js" defer></script>
     <script src="js/service-cards.js" defer></script>
+    <script src="js/portfolio.js" defer></script>
 
     <!-- ===== TECHGURU Layout System v2 =======================================
          Inlined below so index.html works even if the css/ folder is untouched.
@@ -1795,6 +1796,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     <link rel="stylesheet" href="css/cta-rotator.css?v=20261004">
     <link rel="stylesheet" href="css/polish-pass.css?v=20261004">
     <link rel="stylesheet" href="css/service-cards.css?v=20261004">
+    <link rel="stylesheet" href="css/portfolio.css?v=20261009">
 
     <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
     <style>
@@ -2366,157 +2368,61 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
         </section>
 
         <!-- Process Steps Section - Premium -->
-        <section class="portfolio-section" id="portfolio">
-            <div class="section-header">
-                <span class="section-label"><span class="tg-num">02</span> Recent Work</span>
-                <h2>Real Projects, Built and Live</h2>
-                <p class="section-subtitle">Two of the local businesses I've built websites, branding, and custom tools
-                    for — including one right here in Missoula. Everything below is running in production, not a
-                    mockup.</p>
-            </div>
-
-            <div class="portfolio-grid">
-                <!-- Case Study 1: Creative Drywall -->
-                <article class="portfolio-card">
-                    <div class="portfolio-media">
-                        <div class="portfolio-shot">
-                            <img width="1024" height="1024" src="images/portfolio/creative-drywall-1.webp"
-                                alt="Finished interior walls and vaulted ceiling — Creative Drywall finish work"
-                                loading="lazy" decoding="async"
-                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
-                                onerror="this.style.display='none'">
-                            <div class="portfolio-shot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
-                                Add screenshot: creative-drywall-1.jpg
-                            </div>
-                        </div>
-                        <div class="portfolio-shot">
-                            <video src="assets/portfolio/creative-drywall-tour.mp4"
-                                poster="images/portfolio/creative-drywall-2.jpg"
-                                autoplay muted loop playsinline preload="metadata"
-                                aria-label="Scroll-through tour of the live Creative Drywall website"
-                                onloadeddata="this.closest('.portfolio-shot').classList.add('has-media')"
-                                onerror="this.style.display='none'"></video>
-                            <div class="portfolio-shot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5.5v13l11-6.5z" stroke-linejoin="round"/></svg>
-                                Live site tour — creative-drywall.buzz
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-body">
-                        <span class="portfolio-tag">Website Design &amp; Build</span>
-                        <h3>Creative Drywall</h3>
-                        <ul class="portfolio-meta">
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                </svg>
-                                Missoula, Montana
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
-                                </svg>
-                                Drywall contractor
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Live in production
-                            </li>
-                        </ul>
-                        <p class="portfolio-role">A full website design and rebuild for a drywall contractor right here
-                            in Missoula — moved off a generic corporate look into a warm, hometown feel with a custom
-                            copper &amp; Big Sky blue palette, so the site actually looks like the local business it
-                            belongs to.</p>
-                        <ul class="service-list">
-                            <li>Full UI/design overhaul — corporate to hometown aesthetic</li>
-                            <li>Custom color palette & typography system</li>
-                            <li>Contact form &amp; email routing wired up and tested</li>
-                        </ul>
-                        <div class="portfolio-stack">
-                            <span>React</span><span>Vite</span><span>Tailwind CSS</span><span>Cloudflare Pages</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Case Study 2: Zempel Auto -->
-                <article class="portfolio-card">
-                    <div class="portfolio-media">
-                        <div class="portfolio-shot">
-                            <img width="1600" height="1200" src="images/portfolio/zempel-auto-1.jpg"
-                                alt="The Clark Fork River in Missoula, Montana — home town of Zempel Auto, which runs on the platform I built"
-                                loading="lazy" decoding="async"
-                                onload="this.closest('.portfolio-shot').classList.add('has-media')"
-                                onerror="this.style.display='none'">
-                            <div class="portfolio-shot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg>
-                                Add screenshot: zempel-auto-1.jpg
-                            </div>
-                        </div>
-                        <div class="portfolio-shot">
-                            <video src="assets/portfolio/zempel-auto-showcase.mp4"
-                                autoplay muted loop playsinline preload="metadata"
-                                aria-label="Stylized showcase of the Zempel Auto CRM and inventory platform"
-                                onloadeddata="this.closest('.portfolio-shot').classList.add('has-media')"
-                                onerror="this.style.display='none'"></video>
-                            <div class="portfolio-shot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5.5v13l11-6.5z" stroke-linejoin="round"/></svg>
-                                Platform showcase clip
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-body">
-                        <span class="portfolio-tag">Custom Business Tool + Branding</span>
-                        <h3>Zempel Auto — CRM &amp; Inventory Platform</h3>
-                        <ul class="portfolio-meta">
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" />
-                                </svg>
-                                Auto parts shop
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                                    <path d="M8 21h8M12 17v4" />
-                                </svg>
-                                Custom CRM + inventory
-                            </li>
-                            <li>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Live in production
-                            </li>
-                        </ul>
-                        <p class="portfolio-role">A fully functional, custom-built CRM-style platform for an auto
-                            parts shop — handling customer records, inventory, and a parts-catalog integration, plus
-                            the logo and brand identity for the business itself. Built and running in production,
-                            not a demo.</p>
-                        <ul class="service-list">
-                            <li>Customer & inventory database, built around the shop's workflow</li>
-                            <li>Parts-catalog integration for day-to-day lookups</li>
-                            <li>Logo design & brand identity for the shop</li>
-                        </ul>
-                        <div class="portfolio-stack">
-                            <span>FastAPI</span><span>Cloudflare Workers</span><span>Custom CRM</span><span>Logo Design</span>
-                        </div>
-                            <p class="tech-translation">Translation: built on ultra-fast, modern web infrastructure that
-                                costs $0/month in hosting fees — no subscriptions, no surprises.</p>
-                    </div>
-                </article>
-            </div>
-            <p class="portfolio-note">More case studies added as new projects launch. Want to see a fuller demo of
-                either project? Mention it on a call and I'll walk you through it live.</p>
+        <section id="portfolio" class="pf-section" aria-labelledby="pf-title">
+          <div class="pf-wrap">
+            <span class="section-label"><span class="tg-num">02</span> Recent Work</span>
+            <h2 class="pf-title" id="pf-title">Real Projects, Built and Live</h2>
+            <p class="pf-lead">Two local-business projects, shipped and running in production. Press play for a quick walkthrough, or click through the screens.</p>
+            <article class="pf-case pf-reveal" data-project="creative-drywall">
+              <header class="pf-head">
+                <div><span class="pf-tag">Website Design & Build</span><h3 class="pf-name">Creative Drywall</h3></div>
+                <ul class="pf-meta"><li>Missoula, Montana</li><li>Drywall contractor</li><li class="pf-live">Live in production</li></ul>
+              </header>
+              <div class="pf-theatre">
+                <div class="pf-device">
+                  <div class="pf-chrome"><span class="pf-dots"><i></i><i></i><i></i></span><span class="pf-url">creative-drywall.buzz</span><span class="pf-chrome-spacer"></span></div>
+                  <div class="pf-viewport">
+                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="metadata" poster="assets/portfolio/creative-drywall/poster.jpg" aria-label="Creative Drywall website walkthrough"><source src="assets/portfolio/creative-drywall/showcase.mp4" type="video/mp4"></video>
+                    <img class="pf-layer pf-shot" data-key="hero" src="assets/portfolio/creative-drywall/hero.webp" alt="Creative Drywall website: Landing page" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="services" src="assets/portfolio/creative-drywall/services.webp" alt="Creative Drywall website: Services" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="gallery" src="assets/portfolio/creative-drywall/gallery.webp" alt="Creative Drywall website: Project gallery" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="quote" src="assets/portfolio/creative-drywall/quote.webp" alt="Creative Drywall website: Quote calculator" loading="lazy" decoding="async">
+                    <div class="pf-pulse" aria-hidden="true"></div>
+                    <div class="pf-caption" aria-live="polite"></div>
+                    <button class="pf-restore" type="button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Play video walkthrough</button>
+                  </div>
+                </div>
+                <div class="pf-stand"></div><div class="pf-foot"></div>
+                <div class="pf-thumbs" role="tablist" aria-label="Creative Drywall media"><button class="pf-thumb pf-thumb--video" role="tab" data-type="video" data-key="video" data-url="creative-drywall.buzz" aria-label="Play video walkthrough"><img src="assets/portfolio/creative-drywall/hero-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Video walkthrough</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="hero" data-label="Landing page" data-url="creative-drywall.buzz" aria-label="Landing page screenshot"><img src="assets/portfolio/creative-drywall/hero-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Landing page</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="services" data-label="Services" data-url="creative-drywall.buzz" aria-label="Services screenshot"><img src="assets/portfolio/creative-drywall/services-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Services</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="gallery" data-label="Project gallery" data-url="creative-drywall.buzz" aria-label="Project gallery screenshot"><img src="assets/portfolio/creative-drywall/gallery-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Project gallery</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="quote" data-label="Quote calculator" data-url="creative-drywall.buzz" aria-label="Quote calculator screenshot"><img src="assets/portfolio/creative-drywall/quote-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Quote calculator</span></button></div>
+              </div>
+              <div class="pf-details">
+                <div><p class="pf-desc">A family-owned drywall crew needed a website that works as hard as they do. I designed and built a fast, mobile-first site that tells their story since 1976, shows finished jobs, and turns visitors into quote requests, with an instant estimate calculator and an AI chat assistant.</p><ul class="pf-features"><li>Hero, services and project gallery built to load fast on job-site phones</li><li>Instant "ballpark number" quote calculator</li><li>Contact and quote-request flow with click-to-call</li><li>AI chat assistant running on Cloudflare Workers AI</li></ul></div>
+                <aside class="pf-side"><h4>Built with</h4><ul class="pf-stack"><li>React</li><li>Vite</li><li>Tailwind CSS</li><li>Cloudflare Pages</li><li>Workers AI</li></ul><a class="pf-link" href="https://creative-drywall.buzz" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">→</span></a></aside>
+              </div>
+            </article>
+            <article class="pf-case pf-reveal" data-project="zempel-auto">
+              <header class="pf-head">
+                <div><span class="pf-tag">Custom Business Tool + Branding</span><h3 class="pf-name">Zempel Auto: CRM & Inventory Platform</h3></div>
+                <ul class="pf-meta"><li>Auto parts shop</li><li>Custom CRM & inventory</li><li class="pf-live">Live in production</li></ul>
+              </header>
+              <div class="pf-theatre">
+                <div class="pf-device">
+                  <div class="pf-chrome"><span class="pf-dots"><i></i><i></i><i></i></span><span class="pf-url">Zempel Auto CRM</span><span class="pf-chrome-spacer"></span></div>
+                  <div class="pf-viewport">
+                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="metadata" poster="assets/portfolio/zempel-auto/poster.jpg" aria-label="Zempel Auto platform walkthrough"><source src="assets/portfolio/zempel-auto/showcase.mp4" type="video/mp4"></video>
+                    <img class="pf-layer pf-shot" data-key="dashboard" src="assets/portfolio/zempel-auto/dashboard.webp" alt="Zempel Auto CRM: Dashboard" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="inventory" src="assets/portfolio/zempel-auto/inventory.webp" alt="Zempel Auto CRM: Parts inventory" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="customers" src="assets/portfolio/zempel-auto/customers.webp" alt="Zempel Auto CRM: Customers" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="vehicles" src="assets/portfolio/zempel-auto/vehicles.webp" alt="Zempel Auto CRM: Vehicles" loading="lazy" decoding="async">
+                    <div class="pf-pulse" aria-hidden="true"></div>
+                    <div class="pf-caption" aria-live="polite"></div>
+                    <button class="pf-restore" type="button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Play video walkthrough</button>
+                  </div>
+                </div>
+                <div class="pf-stand"></div><div class="pf-foot"></div>
+                <div class="pf-thumbs" role="tablist" aria-label="Zempel Auto: CRM & Inventory Platform media"><button class="pf-thumb pf-thumb--video" role="tab" data-type="video" data-key="video" data-url="Zempel Auto CRM" aria-label="Play video walkthrough"><img src="assets/portfolio/zempel-auto/dashboard-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Video walkthrough</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="dashboard" data-label="Dashboard" data-url="Zempel Auto CRM" aria-label="Dashboard screenshot"><img src="assets/portfolio/zempel-auto/dashboard-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Dashboard</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="inventory" data-label="Parts inventory" data-url="Zempel Auto CRM" aria-label="Parts inventory screenshot"><img src="assets/portfolio/zempel-auto/inventory-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Parts inventory</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="customers" data-label="Customers" data-url="Zempel Auto CRM" aria-label="Customers screenshot"><img src="assets/portfolio/zempel-auto/customers-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Customers</span></button><button class="pf-thumb" role="tab" data-type="image" data-key="vehicles" data-label="Vehicles" data-url="Zempel Auto CRM" aria-label="Vehicles screenshot"><img src="assets/portfolio/zempel-auto/vehicles-thumb.webp" alt="" loading="lazy"><span class="pf-thumb-label">Vehicles</span></button></div>
+              </div>
+              <div class="pf-details">
+                <div><p class="pf-desc">A custom platform that runs the counter at an auto parts shop: customers, vehicles, parts stock, estimates and invoices in one fast, dark-mode dashboard. I also designed the Zempel Auto logo and brand mark.</p><ul class="pf-features"><li>Live dashboard with revenue trend and low-stock restock alerts</li><li>Searchable parts inventory with pricing, suppliers and stock status</li><li>Customer and vehicle records linked to jobs and invoices</li><li>Built on Cloudflare Pages + Workers with a Neon PostgreSQL database</li></ul></div>
+                <aside class="pf-side"><h4>Built with</h4><ul class="pf-stack"><li>Cloudflare Pages</li><li>Cloudflare Workers</li><li>Neon PostgreSQL</li><li>Custom CRM</li><li>Logo Design</li></ul><p class="pf-note">Private business tool, shown here with demo data.</p></aside>
+              </div>
+            </article>
+            <p class="pf-more pf-reveal">More case studies will be added as projects launch.</p>
+          </div>
         </section>
 
         <!-- About Section -->

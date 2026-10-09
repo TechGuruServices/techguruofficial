@@ -50,9 +50,9 @@ body.light-theme .navbar { background: linear-gradient(135deg, rgba(255,255,255,
 
 /* ---- Layout fixes found in audit ---- */
 main > section { overflow-x: clip; }                                 /* tg-orb glows no longer create sideways page scroll */
-.portfolio-grid, .about-grid, .lead-magnet-content, .contact-wrapper { grid-template-columns: minmax(0, 1fr); }
+.about-grid, .lead-magnet-content, .contact-wrapper { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 993px) { .about-grid, .lead-magnet-content, .contact-wrapper { grid-template-columns: revert-layer; } }
-.portfolio-grid > *, .about-grid > *, .lead-magnet-content > *, .contact-wrapper > * { min-width: 0; max-width: 100%; }
+.about-grid > *, .lead-magnet-content > *, .contact-wrapper > * { min-width: 0; max-width: 100%; }
 
 /* mobile panel: full pill width + solid enough to read over hero copy (nested backdrop-filter doesn't blur) */
 @media (max-width: 992px) {
