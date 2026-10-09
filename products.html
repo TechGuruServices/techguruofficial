@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Chrome Extensions & Custom Web Apps | TechGuru</title>
+<meta name="description" content="Products by TechGuru: Review Rocket and Estimate Closer Chrome extensions for contractors, plus custom Progressive Web Apps built for your business.">
+<style>
+  :root{
+    --tg-blue:#4a6cf7; --tg-violet:#a274ff; --tg-accent:#64dedf; --tg-green:#34d399;
+    --bg:#070b16; --bg2:#0b1122; --card:#101828; --text:#eef2ff; --muted:#94a3b8;
+    --hairline:rgba(148,163,184,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  .brandbar{position:sticky;top:0;z-index:50;background:rgba(7,11,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+  .brandbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:15px;text-decoration:none}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .brandbar nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  .brandbar nav a:hover{color:var(--text)}
+
+  .hero{padding:84px 0 56px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(700px 340px at 20% 10%,rgba(74,108,247,.22),transparent 60%),
+    radial-gradient(700px 340px at 85% 20%,rgba(162,116,255,.16),transparent 60%);pointer-events:none}
+  .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tg-accent);border:1px solid rgba(100,222,223,.35);border-radius:999px;padding:7px 16px;margin-bottom:22px;background:rgba(100,222,223,.06)}
+  h1{font-size:clamp(34px,5.4vw,56px);line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:22ch;margin:0 auto 18px}
+  h1 .grad{background:linear-gradient(120deg,var(--tg-blue),var(--tg-violet),var(--tg-accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:58ch;margin:0 auto}
+
+  section{padding:60px 0}
+  .kicker{color:var(--tg-accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:62ch;margin-bottom:34px}
+
+  .products{display:grid;gap:22px}
+  .product{background:var(--card);border:1px solid var(--hairline);border-radius:24px;padding:40px;display:grid;grid-template-columns:88px 1fr auto;gap:28px;align-items:start;transition:border-color .2s,transform .15s}
+  .product:hover{border-color:rgba(100,222,223,.3);transform:translateY(-3px)}
+  .product .icon{width:88px;height:88px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;background:rgba(74,108,247,.1);border:1px solid rgba(74,108,247,.25)}
+  .product:nth-child(2) .icon{background:rgba(162,116,255,.1);border-color:rgba(162,116,255,.25)}
+  .product:nth-child(3) .icon{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)}
+  .status{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:999px;margin-bottom:12px}
+  .status.soon{background:rgba(100,222,223,.1);color:var(--tg-accent);border:1px solid rgba(100,222,223,.35)}
+  .status.dev{background:rgba(162,116,255,.1);color:var(--tg-violet);border:1px solid rgba(162,116,255,.35)}
+  .status.live{background:rgba(52,211,153,.1);color:var(--tg-green);border:1px solid rgba(52,211,153,.35)}
+  .product h3{font-size:24px;margin-bottom:8px}
+  .product .tag{color:var(--muted);font-size:14px;margin-bottom:14px;max-width:60ch}
+  .product ul{list-style:none;margin:0 0 6px}
+  .product li{color:var(--muted);font-size:14px;padding:5px 0}
+  .product li::before{content:"✓";color:var(--tg-green);font-weight:800;margin-right:10px}
+  .product .cta{display:flex;flex-direction:column;gap:10px;min-width:200px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 24px;border-radius:14px;font-weight:700;font-size:14px;text-decoration:none;transition:transform .15s,box-shadow .2s;cursor:pointer;border:0;text-align:center}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));color:#fff;box-shadow:0 14px 34px -14px rgba(74,108,247,.7)}
+  .btn-ghost{background:rgba(148,163,184,.1);color:var(--text);border:1px solid var(--hairline)}
+
+  .suite{background:linear-gradient(135deg,rgba(74,108,247,.12),rgba(162,116,255,.08));border:1px solid rgba(162,116,255,.35);border-radius:24px;padding:44px;text-align:center}
+  .suite h2{margin-bottom:10px}
+  .suite p{color:var(--muted);max-width:56ch;margin:0 auto 24px}
+  .suite .flow{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px;font-weight:700;font-size:15px}
+  .suite .flow span{background:rgba(7,11,22,.6);border:1px solid var(--hairline);padding:10px 18px;border-radius:12px}
+  .suite .flow .arr{color:var(--tg-accent);border:0;background:none;padding:0}
+
+  footer{padding:44px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--hairline)}
+  footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+  footer a:hover{color:var(--text)}
+  @media(max-width:760px){.product{grid-template-columns:1fr}.product .cta{min-width:0}}
+</style>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="wrap">
+    <a class="brand" href="https://techguruofficial.us"><span class="dot">⚡</span>TECHGURU</a>
+    <nav>
+      <a href="https://techguruofficial.us">Home</a>
+      <a href="https://techguruofficial.us#services">Services</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">Products by TechGuru</span>
+    <h1>Tools built for businesses that do <span class="grad">real work.</span></h1>
+    <p class="sub">Chrome extensions for contractors and custom web apps for local businesses — designed to pay for themselves.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="products">
+
+      <div class="product">
+        <div class="icon">🚀</div>
+        <div>
+          <span class="status soon">In Chrome Web Store review</span>
+          <h3>Review Rocket</h3>
+          <p class="tag">The ultimate field utility for home service contractors, technicians, and local business owners. Stop chasing customers for reviews for days after the job — generate an optimized SMS or email review request, tailored to that customer, the instant the work is done.</p>
+          <ul>
+            <li>One-tap review request links (SMS &amp; email)</li>
+            <li>Personalized to each customer &amp; job</li>
+            <li>Built for the field — fast by design</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://techguruofficial.us#contact">Join the Waitlist</a>
+          <a class="btn btn-ghost" href="https://techguruofficial.us#contact">Ask a Question</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="icon">💰</div>
+        <div>
+          <span class="status dev">In development</span>
+          <h3>Estimate Closer</h3>
+          <p class="tag">Never lose a quoted job to silence again. Log every estimate in seconds, get reminded to follow up, and send polished SMS/email messages with one tap. One recovered job pays for 10 years.</p>
+          <ul>
+            <li>15-second estimate logging</li>
+            <li>Automatic follow-up reminders</li>
+            <li>Pipeline board + win-rate stats</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="estimate-closer-pricing.html">See Pricing</a>
+          <a class="btn btn-ghost" href="estimate-closer-pricing.html#notify">Get Notified</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="icon">📱</div>
+        <div>
+          <span class="status live">Available now</span>
+          <h3>Custom Progressive Web Apps</h3>
+          <p class="tag">We design and build installable web apps tailored to your business — like the <strong>Zempel Auto Parts CRM</strong>: inventory, customers, vehicles, sales, invoices, and live parts pricing in one app that works on any device, even offline.</p>
+          <ul>
+            <li>Installable on phone, tablet &amp; desktop — no app store needed</li>
+            <li>Works offline, syncs when reconnected</li>
+            <li>Custom features for your workflow</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://techguruofficial.us#contact">Book a Free Call</a>
+          <a class="btn btn-ghost" href="https://techguruofficial.us#services">Our Services</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="suite">
+      <p class="kicker" style="text-align:center">Coming together</p>
+      <h2>The Contractor Growth Suite</h2>
+      <div class="flow">
+        <span>Estimate Closer <em style="font-style:normal;color:var(--muted)">wins the job</em></span>
+        <span class="arr">→</span>
+        <span>PayDay <em style="font-style:normal;color:var(--muted)">collects the money</em></span>
+        <span class="arr">→</span>
+        <span>Review Rocket <em style="font-style:normal;color:var(--muted)">gets the review</em></span>
+      </div>
+      <p>Three extensions, one workflow, one bill — <strong style="color:var(--text)">$39/mo</strong>. Join the list and get the suite discount at launch.</p>
+      <a class="btn btn-primary" href="estimate-closer-pricing.html#notify">Notify Me at Launch</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 TechGuru · Products</div>
+    <div>
+      <a href="https://techguruofficial.us">techguruofficial.us</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

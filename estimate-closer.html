@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimate Closer — Never Lose a Quoted Job Again | TechGuru</title>
+<meta name="description" content="Estimate Closer is the Chrome extension for home service contractors that follows up on your quotes automatically. One recovered job pays for 10 years.">
+<style>
+  :root{
+    --tg-blue:#4a6cf7; --tg-violet:#a274ff; --tg-accent:#64dedf; --tg-green:#34d399;
+    --bg:#070b16; --bg2:#0b1122; --card:#101828; --text:#eef2ff; --muted:#94a3b8;
+    --hairline:rgba(148,163,184,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* Brand bar */
+  .brandbar{position:sticky;top:0;z-index:50;background:rgba(7,11,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+  .brandbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:15px;text-decoration:none}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .brandbar nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  .brandbar nav a:hover{color:var(--text)}
+
+  /* Hero */
+  .hero{padding:84px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(700px 340px at 20% 10%,rgba(74,108,247,.22),transparent 60%),
+    radial-gradient(700px 340px at 85% 20%,rgba(162,116,255,.16),transparent 60%);pointer-events:none}
+  .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tg-accent);border:1px solid rgba(100,222,223,.35);border-radius:999px;padding:7px 16px;margin-bottom:22px;background:rgba(100,222,223,.06)}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:20ch;margin:0 auto 18px}
+  h1 .grad{background:linear-gradient(120deg,var(--tg-blue),var(--tg-violet),var(--tg-accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:56ch;margin:0 auto 32px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .2s;cursor:pointer;border:0}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));color:#fff;box-shadow:0 14px 34px -14px rgba(74,108,247,.7)}
+  .btn-ghost{background:rgba(148,163,184,.1);color:var(--text);border:1px solid var(--hairline)}
+  .micro{margin-top:16px;font-size:13px;color:var(--muted)}
+
+  /* Sections */
+  section{padding:64px 0}
+  .kicker{color:var(--tg-accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:62ch;margin-bottom:34px}
+
+  /* Problem stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:8px}
+  .stat{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:26px}
+  .stat .n{font-size:38px;font-weight:800;background:linear-gradient(120deg,var(--tg-accent),var(--tg-blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat p{color:var(--muted);font-size:14px;margin-top:6px}
+
+  /* Features */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .feat{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:26px;transition:border-color .2s,transform .15s}
+  .feat:hover{border-color:rgba(100,222,223,.35);transform:translateY(-3px)}
+  .feat .ic{font-size:26px;margin-bottom:12px}
+  .feat h3{font-size:17px;margin-bottom:8px}
+  .feat p{color:var(--muted);font-size:14px}
+
+  /* Calculator */
+  .calc{background:linear-gradient(180deg,rgba(74,108,247,.1),rgba(162,116,255,.05));border:1px solid rgba(74,108,247,.3);border-radius:22px;padding:38px;max-width:760px;margin:0 auto}
+  .calc label{display:block;font-size:13px;color:var(--muted);margin:16px 0 6px;font-weight:600}
+  .calc input[type=range]{width:100%;accent-color:var(--tg-blue)}
+  .calc .val{font-weight:800;color:var(--tg-accent)}
+  .calc-out{margin-top:26px;padding-top:22px;border-top:1px solid var(--hairline);text-align:center}
+  .calc-out .big{font-size:44px;font-weight:800;color:var(--tg-green)}
+  .calc-out p{color:var(--muted);font-size:14px}
+
+  /* Pricing */
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;align-items:stretch;margin-top:10px}
+  .tier{background:var(--card);border:1px solid var(--hairline);border-radius:22px;padding:34px 30px;display:flex;flex-direction:column;position:relative}
+  .tier.hot{border:1px solid rgba(162,116,255,.55);box-shadow:0 24px 60px -30px rgba(162,116,255,.5);transform:scale(1.03)}
+  .tier .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));font-size:11px;font-weight:800;letter-spacing:.1em;padding:5px 16px;border-radius:999px;text-transform:uppercase}
+  .tier h3{font-size:19px;margin-bottom:4px}
+  .tier .price{font-size:44px;font-weight:800;margin:14px 0 2px}
+  .tier .price span{font-size:15px;color:var(--muted);font-weight:500}
+  .tier .per{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .tier ul{list-style:none;margin-bottom:26px;flex:1}
+  .tier li{padding:8px 0;color:var(--muted);font-size:14px;border-bottom:1px solid rgba(148,163,184,.08)}
+  .tier li::before{content:"✓";color:var(--tg-green);font-weight:800;margin-right:10px}
+  .tier li.no{opacity:.45}
+  .tier li.no::before{content:"–";color:var(--muted)}
+  .tier .btn{justify-content:center;width:100%}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:18px 22px;margin-bottom:12px}
+  summary{font-weight:700;cursor:pointer;font-size:15px}
+  details p{color:var(--muted);font-size:14px;margin-top:10px}
+
+  /* Notify */
+  .notify{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);text-align:center}
+  .notify form{display:flex;gap:10px;justify-content:center;max-width:480px;margin:26px auto 0;flex-wrap:wrap}
+  .notify input[type=email]{flex:1;min-width:220px;padding:14px 18px;border-radius:12px;border:1px solid var(--hairline);background:var(--bg);color:var(--text);font-size:15px}
+  .fine{font-size:12px;color:var(--muted);margin-top:12px}
+
+  footer{padding:44px 0;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+  footer a:hover{color:var(--text)}
+  @media(max-width:640px){.tier.hot{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="wrap">
+    <a class="brand" href="https://techguruofficial.us"><span class="dot">⚡</span>TECHGURU</a>
+    <nav>
+      <a href="https://techguruofficial.us">Home</a>
+      <a href="https://techguruofficial.us#services">Services</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">Chrome Extension · For Contractors</span>
+    <h1>Stop losing quoted jobs to <span class="grad">silence.</span></h1>
+    <p class="sub">Estimate Closer reminds you to follow up on every quote — and writes the message for you. One tap sends a polished SMS or email. One recovered job pays for 10 years.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#pricing">Get Estimate Closer</a>
+      <a class="btn btn-ghost" href="#roi">See the math</a>
+    </div>
+    <p class="micro">Free plan available · No credit card to start · Built for the field</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">The problem</p>
+    <h2>Quoting the job is only half the sale.</h2>
+    <p class="lead">You show up, you measure, you send a fair quote — then life happens. The customer forgets, a competitor follows up first, and the job quietly goes to someone else.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">1 in 3</div><p>quotes never get a single follow-up</p></div>
+      <div class="stat"><div class="n">78%</div><p>of jobs go to the contractor who responds first</p></div>
+      <div class="stat"><div class="n">$2,400</div><p>extra monthly revenue from just 2 recovered jobs at $1,200 avg.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2>Log it in 15 seconds. We handle the rest.</h2>
+    <p class="lead">Built for the truck, the jobsite, and the kitchen table — not for a desk.</p>
+    <div class="grid">
+      <div class="feat"><div class="ic">⚡</div><h3>Quick-add from anywhere</h3><p>Customer, amount, job — saved from the toolbar popup in seconds, right after you quote.</p></div>
+      <div class="feat"><div class="ic">🔔</div><h3>Follow-up reminders</h3><p>Day 1, 3, 7 — automatic nudges so no quote ever goes cold. Overdue items glow red until handled.</p></div>
+      <div class="feat"><div class="ic">💬</div><h3>One-tap messages</h3><p>Polished SMS/email templates with your customer's name and amount filled in. Tap to send.</p></div>
+      <div class="feat"><div class="ic">📊</div><h3>Pipeline board</h3><p>Every estimate in one view: Pending, Followed up, Won, Lost. Know exactly where your money is.</p></div>
+      <div class="feat"><div class="ic">🏆</div><h3>Win-rate stats</h3><p>See your close rate and won revenue per month. What gets measured gets improved.</p></div>
+      <div class="feat"><div class="ic">🔒</div><h3>Private by design</h3><p>Your customer list stays on your machine. No account required to start.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="roi">
+  <div class="wrap">
+    <p class="kicker" style="text-align:center">Do the math</p>
+    <h2 style="text-align:center">What is one recovered job worth to you?</h2>
+    <div class="calc">
+      <label>Quotes you send per month: <span class="val" id="qVal">20</span></label>
+      <input type="range" id="quotes" min="5" max="100" value="20">
+      <label>Average job value: $<span class="val" id="aVal">1,200</span></label>
+      <input type="range" id="avg" min="200" max="10000" step="100" value="1200">
+      <label>Extra jobs won per month via follow-up: <span class="val" id="jVal">2</span></label>
+      <input type="range" id="jobs" min="1" max="10" value="2">
+      <div class="calc-out">
+        <div class="big" id="roiOut">$2,400</div>
+        <p>extra revenue per month — vs. $19/mo for Estimate Closer Pro</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="kicker" style="text-align:center">Pricing</p>
+    <h2 style="text-align:center">Pays for itself with one job.</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Start free. Upgrade when the recovered jobs start rolling in.</p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Starter</h3>
+        <div class="price">$0<span>/forever</span></div>
+        <p class="per">Try it on your next 10 quotes</p>
+        <ul>
+          <li>10 active estimates</li>
+          <li>Quick-add popup</li>
+          <li>1 follow-up template</li>
+          <li class="no">Pipeline board</li>
+          <li class="no">Win-rate stats</li>
+          <li class="no">CSV export</li>
+        </ul>
+        <a class="btn btn-ghost" href="#notify">Start Free</a>
+      </div>
+      <div class="tier hot">
+        <span class="flag">Most popular</span>
+        <h3>Pro</h3>
+        <div class="price">$19<span>/month</span></div>
+        <p class="per">or $190/year (2 months free)</p>
+        <ul>
+          <li>Unlimited estimates</li>
+          <li>Pipeline board + overdue alerts</li>
+          <li>3 customizable SMS/email templates</li>
+          <li>Win-rate &amp; revenue stats</li>
+          <li>CSV export</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn btn-primary" href="#notify">Get Pro</a>
+      </div>
+      <div class="tier">
+        <h3>Contractor Suite</h3>
+        <div class="price">$39<span>/month</span></div>
+        <p class="per">The full growth stack</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li><strong>Review Rocket</strong> — review requests included</li>
+          <li><strong>PayDay</strong> — invoice chasing (coming soon)</li>
+          <li>One login, one bill</li>
+          <li>Onboarding call</li>
+        </ul>
+        <a class="btn btn-ghost" href="#notify">Get the Suite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap faq">
+    <p class="kicker" style="text-align:center">FAQ</p>
+    <h2 style="text-align:center">Questions, answered.</h2>
+    <div style="height:26px"></div>
+    <details><summary>Do I need a CRM for this to work?</summary><p>No. That's the point — Estimate Closer is for contractors who find CRMs too heavy. If you outgrow it, you can export everything to CSV.</p></details>
+    <details><summary>Does it send texts automatically?</summary><p>v1 opens your SMS/email app with the message pre-written — you tap send. Fully automated sending is on the roadmap.</p></details>
+    <details><summary>Where is my customer data stored?</summary><p>On your own machine via Chrome storage. No account needed, nothing uploaded.</p></details>
+    <details><summary>What if I already use Jobber / Housecall Pro?</summary><p>Estimate Closer is lighter and faster for pure follow-up. Many contractors run it alongside their scheduler just for the quote-chasing loop.</p></details>
+    <details><summary>Can I cancel anytime?</summary><p>Yes — monthly plans cancel in one click, and your data stays exportable.</p></details>
+  </div>
+</section>
+
+<section class="notify" id="notify">
+  <div class="wrap">
+    <p class="kicker" style="text-align:center">Launch list</p>
+    <h2>Get notified at launch.</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Estimate Closer is in final review. Drop your email and we'll send your install link + a launch discount.</p>
+    <!-- Replace YOUR_WEB3FORMS_KEY with the site's Web3Forms access key -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+      <input type="hidden" name="subject" value="Estimate Closer launch list signup">
+      <input type="email" name="email" placeholder="you@yourcompany.com" required aria-label="Email address">
+      <button class="btn btn-primary" type="submit">Notify Me</button>
+    </form>
+    <p class="fine">No spam. One email at launch, then useful contractor tips. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 TechGuru · Estimate Closer</div>
+    <div>
+      <a href="https://techguruofficial.us">techguruofficial.us</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ROI calculator
+const q=document.getElementById('quotes'),a=document.getElementById('avg'),j=document.getElementById('jobs');
+function fmt(n){return '$'+n.toLocaleString('en-US');}
+function upd(){
+  document.getElementById('qVal').textContent=q.value;
+  document.getElementById('aVal').textContent=Number(a.value).toLocaleString('en-US');
+  document.getElementById('jVal').textContent=j.value;
+  document.getElementById('roiOut').textContent=fmt(j.value*a.value);
+}
+[q,a,j].forEach(el=>el.addEventListener('input',upd));upd();
+</script>
+</body>
+</html>
