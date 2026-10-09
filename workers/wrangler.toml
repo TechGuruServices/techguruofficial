@@ -19,4 +19,4 @@ vars = { DOMAIN = "techguruofficial.us" }
 # KV Namespace for rate-limiting
 [[kv_namespaces]]
 binding = "RATE_LIMIT"
-id = "d8755efa7ea14d5885ae6950f3375a5a"
+id = "9ef4728f1f9e48519d6c6e320cc7140b"
