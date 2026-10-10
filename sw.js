@@ -17,7 +17,7 @@
  * Upload order matters: restore the missing css/ files FIRST, then this file.
  */
 
-const CACHE_VERSION = 'techguru-v1.3.0-20260930';
+const CACHE_VERSION = 'techguru-v1.3.1-20261009';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
@@ -120,6 +120,13 @@ self.addEventListener('fetch', (event) => {
   // Images - cache first, network fallback
   if (request.destination === 'image') {
     event.respondWith(cacheFirstStrategy(request, IMAGE_CACHE));
+    return;
+  }
+
+  // Videos + range requests - do NOT intercept. Browsers stream video via
+  // 206 Partial Content responses, which the Cache API refuses to store;
+  // cache.put() throws and breaks playback. Let the browser handle natively.
+  if (request.destination === 'video' || request.headers.has('range')) {
     return;
   }
 
