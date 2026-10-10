@@ -17,7 +17,7 @@
  * Upload order matters: restore the missing css/ files FIRST, then this file.
  */
 
-const CACHE_VERSION = 'techguru-v1.3.1-20261009';
+const CACHE_VERSION = 'techguru-v1.3.2-20261009';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
