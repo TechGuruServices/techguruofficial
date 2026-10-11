@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261011">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261011">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261011">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261011">
+<link rel="manifest" href="/site.webmanifest?v=20261011">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful — TechGuru</title>
+<meta name="description" content="Your TechGuru purchase was successful. Here's what happens next.">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --tg-blue:#4a6cf7; --tg-violet:#a274ff; --tg-accent:#64dedf; --tg-green:#34d399;
+    --bg:#070b16; --bg2:#0b1122; --card:#101828; --text:#eef2ff; --muted:#94a3b8;
+    --hairline:rgba(148,163,184,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px;width:100%}
+
+  .brandbar{position:sticky;top:0;z-index:50;background:rgba(7,11,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+  .brandbar .wrap{max-width:1120px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:15px;text-decoration:none}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .brandbar nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  .brandbar nav a:hover{color:var(--text)}
+
+  main{flex:1;display:flex;align-items:center;padding:70px 0}
+  .card{background:var(--card);border:1px solid var(--hairline);border-radius:26px;padding:56px 48px;text-align:center;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(500px 260px at 50% 0%,rgba(52,211,153,.14),transparent 65%);pointer-events:none}
+  .check{width:88px;height:88px;border-radius:50%;margin:0 auto 26px;display:flex;align-items:center;justify-content:center;font-size:42px;
+    background:rgba(52,211,153,.12);border:2px solid rgba(52,211,153,.5);
+    box-shadow:0 0 44px -8px rgba(52,211,153,.5);position:relative}
+  h1{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.01em;margin-bottom:12px;position:relative}
+  h1 .grad{background:linear-gradient(120deg,var(--tg-green),var(--tg-accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:16px;max-width:52ch;margin:0 auto 30px;position:relative}
+  .steps{text-align:left;margin:0 auto 32px;max-width:520px;position:relative}
+  .step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(148,163,184,.1)}
+  .step:last-child{border-bottom:0}
+  .step .n{flex:none;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .step p{font-size:14px;color:var(--muted);padding-top:5px}
+  .step p strong{color:var(--text)}
+  .ref{font-size:12px;color:var(--muted);margin-bottom:28px;position:relative;word-break:break-all}
+  .ref code{background:rgba(148,163,184,.1);padding:3px 9px;border-radius:7px;font-size:11px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s;cursor:pointer;border:0}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));color:#fff;box-shadow:0 14px 34px -14px rgba(74,108,247,.7)}
+  .btn-ghost{background:rgba(148,163,184,.1);color:var(--text);border:1px solid var(--hairline)}
+
+  footer{padding:34px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--hairline)}
+  footer .wrap{max-width:1120px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+  footer a:hover{color:var(--text)}
+  @media(max-width:640px){.card{padding:40px 26px}}
+</style>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="wrap">
+    <a class="brand" href="https://techguruofficial.us"><span class="dot">⚡</span>TECHGURU</a>
+    <nav>
+      <a href="https://techguruofficial.us">Home</a>
+      <a href="/products.html">Products</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="card">
+      <div class="check">✓</div>
+      <h1>Payment <span class="grad">successful.</span></h1>
+      <p class="sub" id="headline">You're in. Your purchase is confirmed and your delivery email is on its way.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <p><strong>Check your inbox.</strong> Your receipt from Stripe and a delivery email from TECHGURU Studio with your download + setup instructions are on the way (give it a couple of minutes, and check spam).</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <p><strong>Install the extension</strong> from the link in your delivery email, then open it and enter your business details.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <p><strong>Launch your first request.</strong> Finish a job, tap once, and watch the reviews roll in.</p>
+        </div>
+      </div>
+
+      <p class="ref" id="refRow">Order reference: <code id="refCode">—</code></p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/products.html">Back to Products</a>
+        <a class="btn btn-ghost" href="https://techguruofficial.us#contact">Need Help?</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 TechGuru</div>
+    <div>
+      <a href="https://techguruofficial.us">techguruofficial.us</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var sid = params.get('session_id');
+  if (sid) {
+    // Show a short, safe reference (never the full session id).
+    document.getElementById('refCode').textContent = '…' + sid.slice(-8);
+  } else {
+    // Landed here without a checkout session — keep it graceful.
+    document.getElementById('refRow').style.display = 'none';
+    document.getElementById('headline').textContent =
+      'If you just completed a purchase, your delivery email is on its way. Otherwise, browse our products to get started.';
+  }
+})();
+</script>
+</body>
+</html>
