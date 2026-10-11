@@ -6,3 +6,4 @@ backup_before_cleanup/
 Thumbs.db
 *.swp
 *.bak
+workers/.wrangler/
