@@ -9,25 +9,25 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png?v=20261011",
+      "src": "/android-chrome-192x192.png?v=20261014",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/apple-touch-icon.png?v=20261011",
+      "src": "/apple-touch-icon.png?v=20261014",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/android-chrome-512x512.png?v=20261011",
+      "src": "/android-chrome-512x512.png?v=20261014",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/android-chrome-512x512.png?v=20261011",
+      "src": "/android-chrome-512x512.png?v=20261014",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
