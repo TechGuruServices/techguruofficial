@@ -579,15 +579,18 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         // Web3Forms free tier only accepts browser (client-side) submissions,
         // so the form posts directly. The access key is public by design.
+        // NOTE: Web3Forms answers successful JSON submissions with a 303
+        // redirect (it ignores the `redirect` field on JSON payloads), so we
+        // intercept the redirect and treat it as the success signal.
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
+          redirect: 'manual',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
           body: JSON.stringify({
             access_key: '79ea5629-dbba-4cfe-95e6-930e25f542e5',
-            redirect: 'https://techguruofficial.us/thank-you.html',
             subject: 'New Contact Form Submission — TechGuru',
             from_name: 'TechGuru Website',
             name, email,
@@ -601,15 +604,17 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         });
 
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || data.success === false) throw new Error(data.message || 'Network response was not ok');
+        if (res.type === 'opaqueredirect') {
+          // 303 received: Web3Forms accepted the submission and sent the email.
+          showFormMessage(contactForm, 'Thank you! Your message was sent successfully. Taking you to the confirmation page...', 'success');
+          contactForm.reset();
+          setTimeout(() => { window.location.href = 'https://techguruofficial.us/thank-you.html'; }, 1200);
+        } else {
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || data.success === false) throw new Error(data.message || 'Network response was not ok');
 
-        showFormMessage(contactForm, 'Thank you! Your message was sent successfully. Taking you to the confirmation page...', 'success');
-        contactForm.reset();
-        // Honor the form's redirect field (thank-you page) instead of leaving it orphaned
-        const contactRedirect = contactForm.querySelector('input[name="redirect"]');
-        if (contactRedirect && contactRedirect.value) {
-          setTimeout(() => { window.location.href = contactRedirect.value; }, 1200);
+          showFormMessage(contactForm, 'Thank you! Your message was sent successfully.', 'success');
+          contactForm.reset();
         }
       } catch (err) {
         console.error(err);
