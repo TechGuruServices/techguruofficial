@@ -1,353 +1,92 @@
-/* ==========================================================================
-   TECHGURU — SERVICE CARDS v2  (2026-10-04)
-   Scope:   .service-card only. Nothing here touches .why-card, .feature-card,
-            .step-card, .portfolio-card, or any other card type — those keep
-            their existing look.
-   Loaded:  last (see index.html <head>), so it wins the cascade cleanly over
-            design-tokens.css / components.css / styles.css / layout-v2.css
-            without a single !important.
-   Concept: a layered "frame + cutout" card — a blurred colour glow sits
-            behind a subtle dot-grid panel; the service icon pops forward as
-            a large "cutout" glyph in the top-right corner; a slim gradient
-            frame wraps the card with its top-right corner intentionally
-            left open, so the icon reads as if it's breaking through the
-            frame. On pointer-fine devices the whole stack tilts gently
-            toward the cursor (see js/service-cards.js); everywhere else
-            (touch, prefers-reduced-motion) it simply renders flat and
-            fully readable — content is never hidden behind a hover state.
-   Fonts:   headings/price/CTA use var(--tg-font-display) → Sora (see
-            css/fonts.css); body copy uses the page's normal Inter stack.
-   ========================================================================== */
+/* TECHGURU — SERVICE CARDS v3 (2026-10-11)
+   Story cards: each card draws its own icon on scroll-in, then unfolds a
+   3-beat story (problem -> build -> result). Bento layout, pointer-follow glow
+   (no tilt, no idle rAF loop). Fails visible: without JS (.sc-ready absent)
+   everything renders open, static and readable. */
+.services-grid{--e:cubic-bezier(.2,.7,.2,1);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem);align-items:start}
+.services .service-card.is-wide{grid-column:span 2}
+@media(max-width:980px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.services .service-card.is-wide{grid-column:auto}.services .service-card.is-flag{grid-column:1/-1}}
+@media(max-width:640px){.services-grid{grid-template-columns:minmax(0,1fr)}.services .service-card.is-flag{grid-column:auto}}
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
 
-/* --------------------------------------------------------------------------
-   Grid — uniform 3-up, replaces the old bento spans for this section only
-   -------------------------------------------------------------------------- */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.1rem, 2.2vw, 1.6rem);
-}
+.services .service-card{--sc-a:#4a6cf7;--sc-b:#a274ff;--dl:0ms;position:relative;display:block;min-height:0;padding:1.5rem;border-radius:var(--tg-r-lg,22px);overflow:hidden;isolation:isolate;
+  background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),var(--tg-card-a,rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.1);
+  transition:opacity .8s var(--e) var(--dl),transform .8s var(--e) var(--dl),border-color .4s,box-shadow .4s}
+.sc-ready .service-card:not(.is-in){opacity:0;transform:translateY(32px) scale(.97)}
+.services .service-card:hover,.services .service-card.is-open{box-shadow:0 24px 60px -28px color-mix(in srgb,var(--sc-a) 70%,transparent)}
+.service-card::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;opacity:.5;transition:opacity .5s;
+  background:radial-gradient(380px circle at var(--mx,85%) var(--my,0%),color-mix(in srgb,var(--sc-a) 34%,transparent),transparent 62%)}
+.service-card:hover::before,.service-card.is-open::before{opacity:1}
+.service-card::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;padding:1.5px;opacity:.35;transition:opacity .4s;
+  background:conic-gradient(from var(--ang),var(--sc-a),var(--sc-b),transparent 35%,transparent 65%,var(--sc-a));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.service-card:hover::after,.service-card.is-open::after,.service-card.is-flag::after{opacity:.9}
+.service-card.is-in.is-flag::after,.service-card.is-in:hover::after,.service-card.is-in.is-open::after{animation:sc-spin 7s linear infinite}
+@keyframes sc-spin{to{--ang:360deg}}
+.service-card>*{position:relative;z-index:1}
 
-@media (max-width: 980px) {
-    .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+.sc-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.service-card .service-icon{position:static;flex:none;width:76px;height:76px;display:grid;place-items:center;border-radius:20px;color:#fff;
+  background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--sc-a) 40%,transparent),color-mix(in srgb,var(--sc-b) 14%,transparent));
+  border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 30px -12px var(--sc-a);transition:transform .5s var(--e)}
+.service-card:hover .service-icon{transform:translateY(-3px) rotate(-3deg)}
+.service-icon svg{width:46px;height:46px;overflow:visible}
+.sc-ico .ia,.sc-ico .ib,.sc-ico .teeth,.sc-ico .pl{fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sc-ico .ia{stroke:color-mix(in srgb,var(--sc-a) 50%,#fff)}.sc-ico .ib{stroke:color-mix(in srgb,var(--sc-b) 55%,#fff)}
+.sc-ico .if{fill:color-mix(in srgb,var(--sc-a) 30%,transparent);stroke:none}
+.sc-ico .teeth{stroke:color-mix(in srgb,var(--sc-b) 55%,#fff);stroke-width:3}
+.sc-ico .pl{stroke:#fff;stroke-dasharray:.28 .72}.sc-ico .dot{fill:#fff}
+.sc-ico .spin,.sc-ico .cur,.sc-ico .nib,.sc-ico .brush,.sc-ico .blob{transform-box:fill-box;transform-origin:center}
+.sc-ready .sc-ico .ia,.sc-ready .sc-ico .ib{stroke-dasharray:1;stroke-dashoffset:1}
+.sc-ready .sc-ico .if{opacity:0;transition:opacity .9s .5s}.sc-ready .is-in .sc-ico .if{opacity:1}
+.sc-ready .sc-ico .dot,.sc-ready .sc-ico .pl,.sc-ready .sc-ico .teeth,.sc-ready .sc-ico .blob{opacity:0;transition:opacity .6s 1s}.sc-ready .is-in .sc-ico .dot,.sc-ready .is-in .sc-ico .pl,.sc-ready .is-in .sc-ico .teeth,.sc-ready .is-in .sc-ico .blob{opacity:1}
+.is-in .sc-ico .ia,.is-in .sc-ico .ib{animation:sc-draw 1.1s var(--e) forwards;animation-delay:calc(var(--dl) + .25s)}
+.is-in .sc-ico .ib{animation-delay:calc(var(--dl) + .6s)}
+@keyframes sc-draw{to{stroke-dashoffset:0}}
+.is-in .spin{animation:sc-rot 9s linear 1.2s infinite}@keyframes sc-rot{to{transform:rotate(360deg)}}
+.is-in .cur{animation:sc-cur 3.6s ease-in-out 1.8s infinite}@keyframes sc-cur{0%,100%{transform:translate(0,0)}40%{transform:translate(-9px,-5px)}70%{transform:translate(-3px,3px)}}
+.is-in .nib{animation:sc-nib 3s ease-in-out 1.6s infinite}@keyframes sc-nib{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+.is-in .dot{animation:sc-dot 1.3s ease-in-out 1.5s infinite}.dot.d2{animation-delay:1.7s!important}.dot.d3{animation-delay:1.9s!important}
+@keyframes sc-dot{0%,100%{opacity:.25}50%{opacity:1}}
+.is-in .pl{animation:sc-flow 2.2s linear 1.4s infinite}@keyframes sc-flow{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.is-in .brush{animation:sc-dip 3.2s ease-in-out 1.8s infinite}@keyframes sc-dip{0%,100%{transform:translateY(-6px)}40%,58%{transform:translateY(1.5px)}}
+.is-in .blob{animation:sc-blob 3.2s ease-in-out 1.8s infinite}.blob.b2{animation-delay:2.1s!important}.blob.b3{animation-delay:2.4s!important}@keyframes sc-blob{0%,100%{transform:scale(1)}45%{transform:scale(1.35)}}
+.is-in .rays{animation:sc-rays 2.6s ease-in-out 1.6s infinite}@keyframes sc-rays{0%,100%{opacity:.3}50%{opacity:1}}
 
-@media (max-width: 640px) {
-    .services-grid { grid-template-columns: minmax(0, 1fr); }
-}
+.service-card-eyebrow{display:inline-flex;align-items:center;gap:.45rem;margin:0;padding:.3rem .75rem;border-radius:999px;font:600 .74rem/1 var(--tg-font-display,'Sora',sans-serif);letter-spacing:.02em;
+  color:color-mix(in srgb,var(--sc-a) 55%,#fff);background:color-mix(in srgb,var(--sc-a) 14%,transparent);border:1px solid color-mix(in srgb,var(--sc-a) 40%,transparent)}
+.service-card-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sc-a);box-shadow:0 0 0 0 var(--sc-a);animation:sc-ping 2.4s infinite}
+@keyframes sc-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--sc-a) 70%,transparent)}80%,100%{box-shadow:0 0 0 8px transparent}}
+.service-card h3{margin:0 0 .5rem;font:700 1.35rem/1.25 var(--tg-font-display,'Sora',sans-serif);letter-spacing:-.015em;color:var(--tg-text,#f2f4fa)}
+.service-card .sc-hook{margin:0 0 1rem;font-size:.97rem;line-height:1.6;color:var(--tg-muted,rgba(242,244,250,.74))}
+.sc-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.1rem;padding:0;list-style:none}
+.sc-tags li{padding:.28rem .7rem;font-size:.76rem;border-radius:999px;color:rgba(242,244,250,.86);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09)}
 
-/* --------------------------------------------------------------------------
-   Card shell
-   -------------------------------------------------------------------------- */
-.service-card {
-    --rx: 0deg;             /* set by js/service-cards.js on pointer-fine devices */
-    --ry: 0deg;
-    --sc-a: var(--tg-blue, #4a6cf7);   /* per-card gradient pair, set inline per card */
-    --sc-b: var(--tg-violet, #a274ff);
-    position: relative;
-    display: block;
-    min-height: 25rem;
-    border-radius: var(--tg-r-lg, 22px);
-    perspective: 70rem;
-    isolation: isolate;
-}
+.sc-toggle{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .1rem;background:none;border:0;cursor:pointer;font:600 .85rem var(--tg-font-display,'Sora',sans-serif);color:color-mix(in srgb,var(--sc-a) 50%,#fff)}
+.sc-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--e)}
+.sc-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
+.sc-toggle:focus-visible,.service-card-cta:focus-visible{outline:2px solid var(--tg-accent,#64dedf);outline-offset:3px;border-radius:10px}
+.sc-story{display:grid;grid-template-rows:1fr}
+.sc-ready .sc-story{grid-template-rows:0fr;transition:grid-template-rows .65s var(--e)}
+.sc-ready .is-open .sc-story{grid-template-rows:1fr}
+.sc-story-inner{min-height:0;overflow:hidden}
+.sc-ready .sc-story-inner{visibility:hidden;transition:visibility 0s .65s}.sc-ready .is-open .sc-story-inner{visibility:visible;transition-delay:0s}
+.sc-story ol{list-style:none;margin:.4rem 0 .6rem;padding:0 0 0 2.1rem;position:relative;display:grid;gap:1rem}
+.sc-story ol::before{content:"";position:absolute;left:.7rem;top:.5rem;bottom:.5rem;width:2px;border-radius:2px;background:linear-gradient(var(--sc-a),var(--sc-b));transform-origin:top;opacity:.6}
+.sc-ready .sc-story ol::before{transform:scaleY(0);transition:transform .9s var(--e) .1s}.sc-ready .is-open .sc-story ol::before{transform:scaleY(1)}
+.sc-story li{position:relative}
+.sc-story li::before{content:attr(data-n);position:absolute;left:-2.1rem;top:0;width:1.45rem;height:1.45rem;display:grid;place-items:center;border-radius:50%;font:700 .7rem var(--tg-font-display,'Sora',sans-serif);color:#06101c;background:linear-gradient(135deg,var(--sc-a),var(--sc-b))}
+.sc-story li b{display:block;margin-bottom:.15rem;font:600 .78rem var(--tg-font-display,'Sora',sans-serif);letter-spacing:.04em;text-transform:uppercase;color:color-mix(in srgb,var(--sc-a) 50%,#fff)}
+.sc-story li span{font-size:.9rem;line-height:1.55;color:rgba(242,244,250,.82)}
+.sc-ready .sc-story li{opacity:0;transform:translateX(-16px);transition:opacity .6s var(--e),transform .6s var(--e)}
+.sc-ready .is-open .sc-story li{opacity:1;transform:none;transition-delay:calc(.2s + var(--i)*.16s)}
 
-@media (max-width: 640px) { .service-card { min-height: 0; } }
-
-.service-card::before {
-    /* the actual visible shell — kept separate from .service-card itself so
-       border-radius/overflow clipping never fights the absolutely
-       positioned layers inside */
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    background: linear-gradient(165deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)),
-        var(--tg-card-a, rgba(255, 255, 255, .055));
-    border: 1px solid var(--tg-border, rgba(255, 255, 255, .09));
-    transition: border-color .4s ease, transform .4s cubic-bezier(.2, .7, .3, 1);
-}
-
-.service-card:hover::before,
-.service-card:focus-within::before {
-    border-color: rgba(255, 255, 255, .18);
-    transform: translateY(-4px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .service-card::before { transition: border-color .4s ease; }
-    .service-card:hover::before, .service-card:focus-within::before { transform: none; }
-}
-
-/* --------------------------------------------------------------------------
-   Layer 1 — ambient colour glow (tight, low-opacity; not a generic halo)
-   -------------------------------------------------------------------------- */
-.service-card-shadow {
-    position: absolute;
-    inset: -18%;
-    z-index: 1;
-    border-radius: inherit;
-    background: rgba(74, 108, 247, .22); /* fallback for browsers without color-mix() */
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--sc-a) 55%, transparent), transparent 72%);
-    filter: blur(2.2rem);
-    opacity: .22;
-    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 1rem, -3rem);
-    transition: opacity .4s ease;
-    pointer-events: none;
-}
-
-.service-card:hover .service-card-shadow,
-.service-card:focus-within .service-card-shadow { opacity: .38; }
-
-/* --------------------------------------------------------------------------
-   Layer 2 — dot-grid backing panel, faded toward the bottom
-   -------------------------------------------------------------------------- */
-.service-card-panel {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    overflow: hidden;
-    pointer-events: none;
-    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 0);
-    transition: transform .1s linear;
-}
-
-.service-card-panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .1) 1px, transparent 0);
-    background-size: 18px 18px;
-    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .85), transparent 75%);
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, .85), transparent 75%);
-}
-
-.service-card-panel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(74, 108, 247, .14); /* fallback */
-    background: linear-gradient(150deg, color-mix(in srgb, var(--sc-a) 22%, transparent), transparent 55%);
-}
-
-/* --------------------------------------------------------------------------
-   Layer 3 — gradient frame, open at the top-right so the icon can "break"
-   through it. Crisp 1.5px stroke via the mask trick, no blur.
-   -------------------------------------------------------------------------- */
-.service-card-frame {
-    position: absolute;
-    inset: .8rem;
-    z-index: 3;
-    border-radius: 14px;
-    pointer-events: none;
-    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 2.1rem);
-    transition: transform .1s linear;
-}
-
-.service-card-frame::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: var(--sc-a); /* fallback */
-    background: linear-gradient(135deg, var(--sc-a), var(--sc-b));
-    opacity: .5;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    transition: opacity .4s ease;
-}
-
-.service-card:hover .service-card-frame::before,
-.service-card:focus-within .service-card-frame::before { opacity: .9; }
-
-/* the open corner — the frame ring is clipped (no patch, no seam) so the
-   icon reads as breaking through it; notch matches the icon's footprint */
-.service-card-frame {
-    -webkit-clip-path: polygon(0 0, calc(100% - 64px) 0, calc(100% - 64px) 64px, 100% 64px, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, calc(100% - 64px) 0, calc(100% - 64px) 64px, 100% 64px, 100% 100%, 0 100%);
-}
-
-@media (max-width: 640px) {
-    .service-card-frame {
-        -webkit-clip-path: polygon(0 0, calc(100% - 52px) 0, calc(100% - 52px) 52px, 100% 52px, 100% 100%, 0 100%);
-        clip-path: polygon(0 0, calc(100% - 52px) 0, calc(100% - 52px) 52px, 100% 52px, 100% 100%, 0 100%);
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Layer 4 — the icon "cutout": pops furthest forward, top-right corner
-   -------------------------------------------------------------------------- */
-.service-card .service-icon {
-    position: absolute;
-    top: 1.1rem;
-    right: 1rem;
-    z-index: 5;
-    width: 68px;
-    height: 68px;
-    display: grid;
-    place-items: center;
-    border-radius: 16px;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--sc-a) 32%, transparent), color-mix(in srgb, var(--sc-b) 22%, transparent));
-    border: 1px solid rgba(255, 255, 255, .16);
-    color: #fff;
-    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 3.6rem);
-    transition: transform .1s linear;
-}
-
-.service-card .service-icon svg {
-    width: 32px;
-    height: 32px;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-@media (max-width: 640px) {
-    .service-card .service-icon { width: 56px; height: 56px; top: .9rem; right: .9rem; }
-    .service-card .service-icon svg { width: 26px; height: 26px; }
-}
-
-/* --------------------------------------------------------------------------
-   Layer 5 — content: always visible, forward of the panel/frame
-   -------------------------------------------------------------------------- */
-.service-card-content {
-    position: relative;
-    z-index: 4;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* top padding clears the icon's footprint (68px + offset) so the title
-       always sits cleanly below it, full width, at any card size */
-    padding: 5.3rem 1.4rem 1.4rem;
-    transform: rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, 0, 1.4rem);
-    transition: transform .1s linear;
-}
-
-@media (max-width: 640px) {
-    .service-card-content { padding-top: 4.5rem; }
-}
-
-.service-card-eyebrow {
-    margin: 0 0 .5rem;
-    font-family: var(--tg-font-display, 'Sora', sans-serif);
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .03em;
-    color: color-mix(in srgb, var(--sc-a) 70%, white);
-}
-
-.service-card-content h3 {
-    margin: 0 0 .55rem;
-    font-family: var(--tg-font-display, 'Sora', sans-serif);
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -.01em;
-    color: var(--tg-text, #f2f4fa);
-}
-
-.service-card-content > p {
-    margin: 0 0 1.1rem;
-    color: var(--tg-muted, rgba(242, 244, 250, .7));
-    font-size: .89rem;
-    line-height: 1.62;
-}
-
-.service-card-list {
-    list-style: none;
-    margin: 0 0 1.25rem;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-}
-
-.service-card-list li {
-    position: relative;
-    padding-left: 1.15rem;
-    font-size: .83rem;
-    line-height: 1.5;
-    color: rgba(242, 244, 250, .85);
-}
-
-.service-card-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: .42rem;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--sc-a); /* fallback */
-    background: linear-gradient(135deg, var(--sc-a), var(--sc-b));
-}
-
-.service-card-footer {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .7rem;
-    padding-top: .95rem;
-    border-top: 1px solid var(--tg-hairline, rgba(255, 255, 255, .055));
-}
-
-.service-card-price {
-    font-family: var(--tg-font-display, 'Sora', sans-serif);
-    font-weight: 700;
-    font-size: .98rem;
-    letter-spacing: -.01em;
-    color: var(--tg-text, #f2f4fa);
-}
-
-.service-card-price small {
-    display: block;
-    margin-top: .1rem;
-    font-family: var(--tg-font-ui, 'Inter', sans-serif);
-    font-size: .68rem;
-    font-weight: 500;
-    color: var(--tg-faint, rgba(242, 244, 250, .52));
-}
-
-.service-card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    font-family: var(--tg-font-display, 'Sora', sans-serif);
-    font-size: .8rem;
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-    border-radius: var(--tg-r-sm, 10px);
-    padding: .3rem .2rem;
-    transition: color .25s ease;
-}
-
-.service-card-cta svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
-}
-
-.service-card-cta:hover,
-.service-card-cta:focus-visible { color: var(--tg-accent, #64dedf); }
-.service-card-cta:hover svg,
-.service-card-cta:focus-visible svg { transform: translateX(3px); }
-
-.service-card-cta:focus-visible {
-    outline: 2px solid var(--tg-accent, #64dedf);
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .service-card-cta svg { transition: none; }
-}
+.service-card-footer{display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,.08)}
+.service-card-price{font:700 1.4rem/1.1 var(--tg-font-display,'Sora',sans-serif);letter-spacing:-.02em;color:var(--tg-text,#f2f4fa)}
+.service-card-price small{display:block;margin-top:.2rem;font:500 .74rem var(--tg-font-ui,'Inter',sans-serif);letter-spacing:0;color:var(--tg-faint,rgba(242,244,250,.55))}
+.service-card-cta{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:999px;font:600 .85rem var(--tg-font-display,'Sora',sans-serif);color:#fff;text-decoration:none;white-space:nowrap;
+  background:color-mix(in srgb,var(--sc-a) 24%,transparent);border:1px solid color-mix(in srgb,var(--sc-a) 55%,transparent);transition:background .3s,box-shadow .3s,transform .3s var(--e)}
+.service-card-cta:hover{background:color-mix(in srgb,var(--sc-a) 45%,transparent);box-shadow:0 8px 28px -8px var(--sc-a);transform:translateY(-1px)}
+.service-card-cta svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .3s var(--e)}.service-card-cta:hover svg{transform:translateX(4px)}
+@media(max-width:640px){.service-card-footer{flex-direction:column;align-items:stretch}.service-card-cta{width:calc(100% - 4.5rem)}} /* leaves room for the chat launcher */
+@media(prefers-reduced-motion:reduce){.services .service-card,.sc-story,.sc-story li,.sc-story ol::before,.service-icon{transition:none!important}.service-card *,.service-card::after{animation:none!important}.sc-ready .sc-ico .ia,.sc-ready .sc-ico .ib{stroke-dashoffset:0}}
