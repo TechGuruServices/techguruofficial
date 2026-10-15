@@ -393,10 +393,6 @@ main > section { position: relative; }
 
 .contact-wrapper { display: grid; gap: 1.4rem; }
 
-.contact-item strong { color: var(--color-text-faint); }
-.contact-item a, .contact-item span { color: var(--color-text); }
-.contact-item a:hover { color: var(--color-accent); }
-
 .booking-section h3 { color: var(--color-text); }
 .booking-section p { color: var(--color-text-muted); }
 
