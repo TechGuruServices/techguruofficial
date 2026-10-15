@@ -1,60 +1,46 @@
-/* TECHGURU — Service card tilt (companion to css/service-cards.css).
-   Vanilla, rAF-throttled, reduced-motion safe, fails visible: every card is
-   fully static, readable HTML/CSS on its own — this script only adds a
-   pointer-tracked 3D tilt on devices with a precise pointer. If it never
-   runs (touch, prefers-reduced-motion, or an error), the cards still work. */
+/* TECHGURU — Service cards v3: scroll-in reveal (staggered), icon draw, price count-up,
+   unfoldable stories, pointer-follow glow. Event-driven only — no idle rAF loop. */
 (function () {
   'use strict';
-
-  function boot(fn) { document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn(); }
-
+  function boot(f) { document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', f) : f(); }
   boot(function () {
     try {
-      var canTilt = window.matchMedia &&
-        window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
-        !(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      var grid = document.querySelector('.services-grid'); if (!grid) return;
+      var cards = [].slice.call(grid.querySelectorAll('.service-card'));
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      grid.classList.add('sc-ready');
 
-      if (!canTilt) return; // cards stay flat — content is already fully visible
-
-      var cards = document.querySelectorAll('.service-card');
-      if (!cards.length) return;
-
-      var MAX_ANGLE = 8; // degrees — subtle on purpose, not a showy gimmick
-      var EASE = 0.1;
-
-      var lerp = function (a, b, t) { return (1 - t) * a + t * b; };
-      var clamp = function (v, max) { return Math.max(Math.min(v, max), -max); };
-
-      var state = [];
-      Array.prototype.forEach.call(cards, function (card) {
-        var s = { card: card, tx: 0, ty: 0, cx: 0, cy: 0 };
-        state.push(s);
-
-        card.addEventListener('pointermove', function (e) {
-          if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
-          var r = card.getBoundingClientRect();
-          var px = e.clientX - (r.left + r.width / 2);
-          var py = e.clientY - (r.top + r.height / 2);
-          s.tx = clamp((px / (r.width / 2)) * MAX_ANGLE, MAX_ANGLE);
-          s.ty = clamp((-py / (r.height / 2)) * MAX_ANGLE, MAX_ANGLE);
+      cards.forEach(function (c) {
+        var b = c.querySelector('.sc-toggle'), l = b && b.querySelector('.sc-toggle-label');
+        if (b) b.addEventListener('click', function () {
+          var open = c.classList.toggle('is-open');
+          b.setAttribute('aria-expanded', open); l.textContent = open ? 'Hide the story' : 'See how it works';
         });
-
-        card.addEventListener('pointerleave', function () { s.tx = 0; s.ty = 0; });
+        c.addEventListener('pointermove', function (e) {
+          if (e.pointerType === 'touch') return;
+          var r = c.getBoundingClientRect();
+          c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
       });
 
-      var tick = function () {
-        for (var i = 0; i < state.length; i++) {
-          var s = state[i];
-          s.cx = lerp(s.cx, s.tx, EASE);
-          s.cy = lerp(s.cy, s.ty, EASE);
-          s.card.style.setProperty('--ry', s.cx.toFixed(2) + 'deg');
-          s.card.style.setProperty('--rx', s.cy.toFixed(2) + 'deg');
-        }
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    } catch (err) {
-      /* fails visible: a broken tilt should never break the cards themselves */
-    }
+      function count(c) {
+        if (reduce) return;
+        [].forEach.call(c.querySelectorAll('.sc-num'), function (el) {
+          var to = +el.getAttribute('data-to'), t0 = null;
+          (function step(t) { t0 = t0 || t; var p = Math.min((t - t0) / 1000, 1);
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(performance.now());
+        });
+      }
+      if (!('IntersectionObserver' in window) || reduce) { cards.forEach(function (c) { c.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        var n = 0;
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.style.setProperty('--dl', (n++ * 120) + 'ms');
+          e.target.classList.add('is-in'); count(e.target); io.unobserve(e.target);
+        });
+      }, { threshold: 0.2 });
+      cards.forEach(function (c) { io.observe(c); });
+    } catch (err) { /* fail visible */ }
   });
 })();
