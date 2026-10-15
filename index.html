@@ -251,8 +251,7 @@ input[name="botcheck"] {
 .portfolio-inner,
 .features,
 .faq-grid,
-.contact-wrapper,
-.footer-content {
+.contact-wrapper {
     width: 100%;
     max-width: var(--tg-max);
     margin-inline: auto;
@@ -1539,134 +1538,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
 @media (max-width: 600px) { .contact-form .form-row { grid-template-columns: minmax(0, 1fr); } }
 
-/* --------------------------------------------------------------------------
-   17. FOOTER
-   -------------------------------------------------------------------------- */
-.footer { border-top: 1px solid var(--tg-hairline); }
-
-.footer-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, .85fr) minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: clamp(1.75rem, 3.4vw, 2.75rem);
-    align-items: start;
-    max-width: var(--tg-max);
-    margin-inline: auto;
-    padding: clamp(2.75rem, 5vw, 4rem) var(--tg-gutter) clamp(2rem, 4vw, 2.75rem);
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    font-family: var(--tg-font-display);
-    font-weight: 700;
-    letter-spacing: .06em;
-    margin-bottom: .8rem;
-}
-
-.footer-brand p { margin: 0 0 1rem; color: var(--tg-muted); font-size: .92rem; line-height: 1.7; max-width: 34ch; }
-
-.footer-loc {
-    display: inline-flex;
-    align-items: center;
-    gap: .45rem;
-    padding: .38rem .8rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid rgba(100, 222, 223, .24);
-    background: rgba(100, 222, 223, .08);
-    color: rgba(242, 244, 250, .88);
-    font-size: .78rem;
-    font-weight: 600;
-}
-
-.footer-loc svg { width: 14px; height: 14px; color: var(--tg-accent); flex: none; }
-
-.footer-content h4 {
-    margin: 0 0 1rem;
-    font-size: .74rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--tg-faint);
-}
-
-.footer-links ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .6rem; }
-
-.footer-links a {
-    color: var(--tg-muted);
-    font-size: .9rem;
-    text-decoration: none;
-    transition: color .25s ease, transform .25s ease;
-    display: inline-block;
-}
-
-.footer-links a:hover { color: var(--tg-accent); transform: translateX(3px); }
-
-.footer-contact p {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    margin: 0 0 .7rem;
-    color: var(--tg-muted);
-    font-size: .9rem;
-}
-
-.footer-contact a { color: var(--tg-muted); text-decoration: none; }
-.footer-contact a:hover { color: var(--tg-accent); }
-.footer-icon { width: 16px; height: 16px; flex: none; color: var(--tg-accent); }
-
-.footer-social { display: flex; gap: .6rem; margin-top: 1.1rem; }
-
-.social-link {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--tg-r-sm);
-    border: 1px solid var(--tg-border);
-    background: rgba(255, 255, 255, .04);
-    color: rgba(242, 244, 250, .8);
-    transition: transform .28s ease, border-color .28s ease, color .28s ease, background .28s ease;
-}
-
-.social-link:hover {
-    transform: translateY(-3px);
-    border-color: var(--tg-border-hi);
-    background: rgba(100, 222, 223, .12);
-    color: #fff;
-}
-
-.footer-cta {
-    padding: 1.35rem;
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-lg);
-    background: linear-gradient(135deg, rgba(74, 108, 247, .14), rgba(162, 116, 255, .1));
-}
-
-.footer-cta h4 { color: #fff; letter-spacing: .02em; text-transform: none; font-size: 1.05rem; }
-.footer-cta p { margin: 0 0 1rem; color: rgba(242, 244, 250, .78); font-size: .9rem; line-height: 1.6; }
-.footer-cta .btn { width: 100%; }
-
-.footer-bottom {
-    border-top: 1px solid var(--tg-hairline);
-    padding: 1.25rem var(--tg-gutter);
-    text-align: center;
-}
-
-.footer-bottom p { margin: 0; font-size: .82rem; color: var(--tg-faint); }
-.footer-bottom .tg-sep { opacity: .45; margin-inline: .5rem; }
-
-@media (max-width: 1040px) {
-    .footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 620px) {
-    .footer-content { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
-    .footer-brand p { max-width: none; }
-}
-
-/* --------------------------------------------------------------------------
-   18. BUTTONS
+18. BUTTONS
    -------------------------------------------------------------------------- */
 .btn {
     display: inline-flex;
@@ -1793,6 +1665,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     <link rel="stylesheet" href="css/polish-pass.css?v=20261004">
     <link rel="stylesheet" href="css/service-cards.css?v=20261011">
     <link rel="stylesheet" href="css/portfolio.css?v=20261009">
+    <link rel="stylesheet" href="css/footer.css?v=20261014">
 
     <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
     <style>
@@ -3241,81 +3114,52 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
         </section>
     </main>
 
-    <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="footer-logo-icon">
-                        TECHGURU
-                    </div>
-                    <p>Websites, Branding &amp; AI Tools — Built by One Techguru.</p>
-                    <span class="footer-loc">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
-                            focusable="false">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        Missoula, Montana
-                    </span>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="/products">Products</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#process">Process</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true" focusable="false">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
-                        </svg> <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a></p>
-                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true" focusable="false">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                        </svg> <a href="tel:+14062845523">+1 (406) 284-5523</a></p>
-                    <p><svg class="tg-icon tg-icon-sm footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true" focusable="false">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg> Missoula, MT 59808 &mdash; serving Montana locally &amp; the U.S.
-                        remotely</p>
-                    <div class="footer-social">
-                        <a href="https://wa.me/14062845523" target="_blank" rel="noopener" aria-label="WhatsApp"
-                            class="social-link"><svg class="tg-icon tg-icon-md" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                                <path
-                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                            </svg></a>
-                    </div>
-                </div>
-                <div class="footer-cta">
-                    <h4>Ready to Start?</h4>
-                    <p>Let's build a site your business actually deserves.</p>
-                    <a href="#contact" class="btn btn-primary">Get Free Consultation</a>
-                </div>
-            </div>
-            <div class="footer-areas" role="note" aria-label="Service area">
-                <strong>Proudly serving:</strong> Missoula · Lolo · Frenchtown · Bonner · Clinton · Seeley Lake ·
-                the Bitterroot Valley (Hamilton, Stevensville, Victor, Darby) · the Flathead Valley (Kalispell, Whitefish,
-                Columbia Falls) · all of Montana remotely · nationwide from Missoula, MT
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 TECHGURU. All rights reserved.<span class="tg-sep">&middot;</span>Missoula,
-                    Montana<span class="tg-sep">&middot;</span><a href="mailto:info@techguruofficial.us"
-                        style="color:inherit;text-decoration:none">info@techguruofficial.us</a></p>
-            </div>
-        </footer>
+    <!-- TECHGURU footer v3 — replaces the entire existing <footer class="footer">…</footer> block -->
+<footer class="tgf">
+  <div class="tgf-edge"></div>
+  <div class="tgf-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="tgf-wrap">
+
+    <div class="tgf-grid">
+      <div class="tgf-brand tgf-rv" style="--tgf-d:200ms">
+        <a class="tgf-logo" href="#home" aria-label="TechGuru home">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="tgf-lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#64dedf"/><stop offset=".5" stop-color="#4a6cf7"/><stop offset="1" stop-color="#a274ff"/></linearGradient></defs><path class="tgf-hx" pathLength="1" d="M20 2l15 8.5v19L20 38 5 29.5v-19z" fill="none" stroke="url(#tgf-lg)" stroke-width="2.4" stroke-linejoin="round"/><path class="tgf-hx" pathLength="1" d="M13 15h14M20 15v13" stroke="url(#tgf-lg)" stroke-width="2.6" stroke-linecap="round"/></svg>
+        </a>
+        <p class="tgf-story"><span class="tgf-w" style="--tgf-w:0">Custom code.</span> <span class="tgf-w tgf-grad" style="--tgf-w:1">Simple AI.</span> <span class="tgf-w" style="--tgf-w:2">Built for local business.</span></p>
+      </div>
+
+      <nav class="tgf-links tgf-rv" style="--tgf-d:700ms" aria-label="Footer">
+        <h4>Explore</h4>
+        <button class="tgf-top" type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+        <ul>
+          <li><a href="#services">Services</a></li><li><a href="#process">Process</a></li>
+          <li><a href="products.html">Products</a></li><li><a href="#faq">FAQ</a></li>
+          <li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="tgf-contact tgf-rv" style="--tgf-d:1200ms">
+        <h4>Connect</h4>
+        <a class="tgf-row" href="mailto:info@techguruofficial.us"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></span>info@techguruofficial.us</a>
+        <a class="tgf-row" href="tel:+14062845523"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></span>+1 (406) 284-5523</a>
+        <a class="tgf-row" href="https://wa.me/14062845523" target="_blank" rel="noopener"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span>Message on WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="tgf-areas tgf-rv" style="--tgf-d:500ms" role="note" aria-label="Service area">
+      <strong>Proudly serving</strong>
+      <div class="tgf-marquee"><div class="tgf-track">
+        <ul><li>Missoula</li><li>Lolo</li><li>Frenchtown</li><li>Bonner</li><li>Clinton</li><li>Seeley Lake</li><li>Hamilton</li><li>Stevensville</li><li>Victor</li><li>Darby</li><li>Kalispell</li><li>Whitefish</li><li>Columbia Falls</li><li>All of Montana, remotely</li><li>Nationwide</li></ul>
+        <ul aria-hidden="true"><li>Missoula</li><li>Lolo</li><li>Frenchtown</li><li>Bonner</li><li>Clinton</li><li>Seeley Lake</li><li>Hamilton</li><li>Stevensville</li><li>Victor</li><li>Darby</li><li>Kalispell</li><li>Whitefish</li><li>Columbia Falls</li><li>All of Montana, remotely</li><li>Nationwide</li></ul>
+      </div></div>
+    </div>
+
+    <div class="tgf-bottom tgf-rv" style="--tgf-d:300ms">
+      <p style="margin:0">&copy; 2026 TECHGURU. Built in Missoula.</p>
+    </div>
+  </div>
+</footer>
+
 
         <!-- Exit Intent Popup -->
         <div class="exit-popup-overlay" id="exit-popup">
@@ -3543,6 +3387,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
         </div>
 
         <script src="js/chat-widget.js" defer></script>
+        <script src="js/footer.js?v=20261014" defer></script>
 
         <!-- PWA Service Worker Registration -->
         <script>

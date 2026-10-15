@@ -401,36 +401,6 @@ main > section { position: relative; }
 .booking-section p { color: var(--color-text-muted); }
 
 /* --------------------------------------------------------------------------
-   Footer
-   -------------------------------------------------------------------------- */
-.footer {
-    margin-top: clamp(2rem, 5vw, 4rem);
-    background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(0, 0, 0, .25));
-    border-top: 1px solid var(--glass-border-soft);
-}
-
-.footer-logo { color: var(--color-text); }
-
-.footer-logo-icon { width: 30px; height: 30px; border-radius: 8px; }
-
-.footer-brand p { color: var(--color-text-muted); }
-
-.footer-content h4 { color: var(--color-text); }
-
-.footer-links a,
-.footer-contact p,
-.footer-contact a { color: var(--color-text-muted); }
-
-.footer-links a:hover,
-.footer-contact a:hover { color: var(--color-accent); }
-
-.footer-cta h4 { color: var(--color-text); }
-.footer-cta p { color: var(--color-text-muted); }
-
-.footer-bottom p { color: var(--color-text-faint); }
-.footer-bottom a:hover { color: var(--color-accent); }
-
-/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
@@ -712,14 +682,3 @@ section.features .feature-icon svg { width: 46px; height: 46px; stroke-width: 1.
 /* Secondary CTA: elegant outline */
 .btn.btn-secondary { background: transparent; border-color: rgba(255, 255, 255, .22); }
 .btn.btn-secondary:hover { border-color: rgba(255, 255, 255, .55); background: rgba(255, 255, 255, .06); }
-
-/* Service-area strip (local SEO, visible to crawlers & customers) */
-.footer-areas {
-    padding: 1.1rem var(--gutter);
-    text-align: center;
-    font-size: .82rem;
-    line-height: 1.7;
-    color: var(--color-text-faint);
-    border-top: 1px solid var(--glass-border-soft);
-}
-.footer-areas strong { color: var(--color-text-muted); font-weight: 600; }

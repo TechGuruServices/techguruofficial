@@ -140,8 +140,7 @@ input[name="botcheck"] {
 .faq-item,
 .contact-info,
 .contact-form,
-.about-side-card,
-.footer-cta {
+.about-side-card {
     background: var(--gradient-glass);
     border: 1px solid var(--glass-border-soft);
     backdrop-filter: var(--glass-blur);
