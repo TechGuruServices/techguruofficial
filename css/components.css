@@ -8,15 +8,48 @@
 /* --------------------------------------------------------------------------
    Buttons
    -------------------------------------------------------------------------- */
+/* ==========================================================================
+   LOCKED — Approved TECHGURU button base (2026-10-15).
+   The properties below are REQUIRED. Without border-radius, text-decoration,
+   and inline-flex, .btn renders as a flat box with underlined link text.
+   Do not remove or weaken them without Lucas's explicit approval.
+   ========================================================================== */
 .btn {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
     isolation: isolate;
     overflow: hidden;
     border: 1px solid transparent;
+    border-radius: var(--radius-pill);
     background: var(--gradient-primary);
     color: #fff;
-    
-    font-family: var(--font-body); cursor: pointer; -webkit-tap-highlight-color: transparent; } .btn::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%); opacity: 0; transition: opacity var(--dur-med) var(--ease-out); } .btn:hover::after { opacity: 1; } .btn-primary { box-shadow: var(--shadow-glow-primary); } .btn-secondary { background: var(--glass-bg); border-color: var(--glass-border); color: var(--color-text); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); box-shadow: none; } .btn-secondary:hover { border-color: rgba(100, 222, 223, .4); } .btn-ghost {
+    padding: .9rem 1.9rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; }
+
+/* ==========================================================================
+   LOCKED — Button underline guard (2026-10-15).
+   .btn declares text-decoration:none, but buttons in .process-cta and
+   .services-cta rendered with link underlines on hover via an unidentified
+   higher-specificity contextual override. This guard wins in all interactive
+   states. Do not remove without Lucas's explicit approval.
+   ========================================================================== */
+a.btn:hover,
+a.btn:focus,
+a.btn:active,
+a.btn:focus-visible {
+    text-decoration: none !important;
+}
+.btn::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%); opacity: 0; transition: opacity var(--dur-med) var(--ease-out); } .btn:hover::after { opacity: 1; } .btn-primary { box-shadow: var(--shadow-glow-primary); } .btn-secondary { background: var(--glass-bg); border-color: var(--glass-border); color: var(--color-text); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); box-shadow: none; } .btn-secondary:hover { border-color: rgba(100, 222, 223, .4); } .btn-ghost {
     background: transparent;
     border-color: transparent;
     color: var(--color-text-muted);
