@@ -1,19 +1,11 @@
 /**
- * TECHGURU AI Chat Widget
- * Production-ready implementation
- * Fixes applied:
- *  1. System prompt injected into every API call
- *  2. Full conversation history maintained per session
- *  3. File upload UI removed / disabled safely
- *  4. Voice button removed / disabled safely
- *  5. Typing delay set to 1.5–2.5s (natural feel)
- *  6. Lead capture (name → email) built into conversation flow
- *  7. aria-modal focus trap only active while window is open
- *  8. Floating CTAs have safe JS-driven show/hide
- *  9. Char count wired to live input event
- * 10. Booking modal open/close live in js/scripts.js (single source of truth)
- * 11. Suggestion chips remain available after first message
- * 12. autocomplete="off" enforced via JS on chat input
+ * TECHGURU Chat Widget — Automated Responder Edition
+ * No AI API, no backend dependency, no keys. All replies are generated
+ * locally by intent matching, so the widget answers instantly and can
+ * never "lose connection".
+ *
+ * Lead capture (name → email → Web3Forms) is unchanged from the AI edition.
+ * UI, typing indicator, suggestion chips, focus trap: all unchanged.
  */
 
 (function () {
@@ -23,12 +15,8 @@
      CONFIG
   ───────────────────────────────────────────── */
   const CONFIG = {
-    // Chat goes through our own backend proxy (Cloudflare Worker),
-    // which holds the Groq key server-side. Never call an LLM API
-    // directly from the browser.
-    API_ENDPOINT: "https://techguru-api.autumn-river-bc5e.workers.dev/api/chat",
-    TYPING_DELAY_MIN: 1500,
-    TYPING_DELAY_MAX: 2500,
+    TYPING_DELAY_MIN: 900,
+    TYPING_DELAY_MAX: 1600,
     MAX_HISTORY: 20,        // max message pairs kept in memory
     CHAR_LIMIT: 500,
     LEAD_CAPTURE: {
@@ -37,18 +25,137 @@
     },
   };
 
+  const CONTACT = {
+    email: "info@techguruofficial.us",
+    phone: "+1 (406) 284-5523",
+    phoneHref: "+14062845523",
+    booking: "https://book.techguruofficial.us",
+  };
+
+  /* ─────────────────────────────────────────────
+     AUTOMATED RESPONSES
+     Intent → keywords → reply. First match wins, so order
+     matters: specific intents before general ones.
+  ───────────────────────────────────────────── */
+  const INTENTS = [
+    {
+      id: "booking",
+      keys: ["book", "schedule", "appointment", "call", "talk to", "speak with", "meeting", "consult", "demo"],
+      reply: () =>
+        `You can book a call directly at **${CONTACT.booking}** — pick whatever time works for you. Prefer to just talk? Call or text **${CONTACT.phone}**.`,
+    },
+    {
+      id: "pricing",
+      keys: ["price", "pricing", "cost", "how much", "quote", "estimate", "charge", "fee", "rates"],
+      reply: () =>
+        `Starting prices: custom websites **$900+**, AI chat & FAQ widgets **$600+**, branding & logo **$350+**, monthly care plans **$75/mo**. Custom tools and CRMs are quoted per project. For an exact number, tell me a bit about your project — or book a call at **${CONTACT.booking}**.`,
+    },
+    {
+      id: "timeline",
+      keys: ["how long", "timeline", "turnaround", "how fast", "deadline", "when can", "delivery", "weeks", "days"],
+      reply: () =>
+        `Most websites land in **2–4 weeks** from kickoff. Smaller jobs like widgets or branding are often faster. Got a deadline? Mention it when you reach out and we'll plan around it.`,
+    },
+    {
+      id: "services",
+      keys: ["service", "what do you do", "offer", "what can you"],
+      reply: () =>
+        `Here's what we do:\n\n• **Custom websites** — from $900\n• **AI chat & FAQ widgets** — from $600\n• **Branding & logo design** — from $350\n• **Custom business tools / CRMs** — custom quote\n• **Monthly care plans** — from $75/mo\n\nWant details on any of these?`,
+    },
+    {
+      id: "website",
+      keys: ["website", "web design", "site", "redesign", "rebuild", "landing page"],
+      reply: () =>
+        `Custom websites start at **$900** — designed around your business, fast, and built to convert visitors into calls. Most are done in 2–4 weeks. Want to talk through your project? **${CONTACT.booking}**`,
+    },
+    {
+      id: "ai_widget",
+      keys: ["ai", "chatbot", "chat bot", "widget", "chat widget", "faq", "automation", "automate"],
+      reply: () =>
+        `Our AI chat & FAQ widgets start at **$600** — they answer your customers' questions 24/7 and capture leads while you work. (This chat is a live demo of the concept, minus the AI brain.) Interested? **${CONTACT.booking}**`,
+    },
+    {
+      id: "branding",
+      keys: ["brand", "logo", "identity"],
+      reply: () =>
+        `Branding & logo design starts at **$350** — logo, colors, and the visual identity your business runs on. Often bundled with a website rebuild.`,
+    },
+    {
+      id: "care_plan",
+      keys: ["care plan", "maintenance", "maintain", "support plan", "monthly", "retainer", "updates"],
+      reply: () =>
+        `Care plans start at **$75/mo** — updates, backups, small changes, and direct support, so your site stays sharp without you thinking about it.`,
+    },
+    {
+      id: "portfolio",
+      keys: ["portfolio", "work", "examples", "clients", "previous", "past projects", "show me"],
+      reply: () =>
+        `Recent work includes the **Creative Drywall** website and the **Zempel Auto** platform (CRM, invoicing, inventory). Happy to walk you through them on a call: **${CONTACT.booking}**`,
+    },
+    {
+      id: "location",
+      keys: ["where", "located", "location", "missoula", "montana", "area", "serve", "based"],
+      reply: () =>
+        `We're based in **Missoula, Montana** — and work with businesses locally and nationwide, fully remote.`,
+    },
+    {
+      id: "hours",
+      keys: ["hours", "open", "when are you", "available", "weekend", "sunday", "saturday"],
+      reply: () =>
+        `We're around **Mon–Fri 8am–5pm** and **Sat 10am–3pm** (Mountain). Message anytime — we reply within 24 hours, usually same day.`,
+    },
+    {
+      id: "contact",
+      keys: ["contact", "email", "phone", "number", "reach you", "get in touch", "human", "person", "someone real", "real person"],
+      reply: () =>
+        `Reach us at **${CONTACT.email}** or **${CONTACT.phone}** — we respond within 24 hours, usually same day. Or book a call: **${CONTACT.booking}**`,
+    },
+    {
+      id: "thanks",
+      keys: ["thank", "thanks", "thx", "appreciated"],
+      reply: () => `Anytime! Anything else I can help with?`,
+    },
+    {
+      id: "bye",
+      keys: ["bye", "goodbye", "see you", "later"],
+      reply: () =>
+        `Thanks for stopping by! Reach out anytime at **${CONTACT.email}**. 👋`,
+    },
+    {
+      id: "greeting",
+      keys: ["hi", "hello", "hey", "howdy", "good morning", "good afternoon", "good evening", "yo"],
+      reply: () =>
+        `Hey! 👋 I can answer questions about our **services**, **pricing**, **timelines**, and **booking**. What's on your mind?`,
+    },
+  ];
+
+  const FALLBACK_REPLY =
+    `I want to make sure you get the right answer — I can help with **services**, **pricing**, **timelines**, and **booking**. ` +
+    `Or reach Lucas directly at **${CONTACT.email}** / **${CONTACT.phone}**.`;
+
+  function getAutoReply(userText) {
+    const text = userText.toLowerCase();
+
+    for (const intent of INTENTS) {
+      for (const key of intent.keys) {
+        if (text.includes(key)) return intent.reply();
+      }
+    }
+    return FALLBACK_REPLY;
+  }
 
   /* ─────────────────────────────────────────────
      STATE
   ───────────────────────────────────────────── */
   const state = {
-    messages: [],           // full conversation history for API
+    messages: [],           // conversation history (local only now)
     isOpen: false,
     isTyping: false,
     userMessageCount: 0,
     leadData: { name: null, email: null },
     leadStage: "none",      // none | asked_name | has_name | asked_email | has_email
     previouslyFocused: null,
+    greetedName: false,
   };
 
   /* ─────────────────────────────────────────────
@@ -77,14 +184,6 @@
   }
 
   /* ─────────────────────────────────────────────
-     BOOKING MODAL
-     Single source of truth lives in js/scripts.js
-     (window.openBookingModal / window.closeBookingModal).
-     Calls below resolve to those globals; the Escape key is
-     handled there too (added on open, removed on close).
-  ───────────────────────────────────────────── */
-
-  /* ─────────────────────────────────────────────
      CHAT WINDOW OPEN / CLOSE
   ───────────────────────────────────────────── */
   function openChat() {
@@ -95,16 +194,12 @@
     els.toggle.setAttribute("aria-expanded", "true");
     els.toggle.setAttribute("aria-label", "Close chat assistant");
 
-    // aria-modal only while open (fix: was always true)
     els.window.setAttribute("aria-modal", "true");
 
-    // Show floating CTAs
     showFloatingCTAs(true);
 
-    // Focus the input
     setTimeout(() => els.input && els.input.focus(), 200);
 
-    // Send greeting on first open
     if (state.messages.length === 0) {
       sendBotGreeting();
     }
@@ -119,7 +214,6 @@
 
     showFloatingCTAs(false);
 
-    // Return focus to the element that opened the chat
     if (state.previouslyFocused) {
       state.previouslyFocused.focus();
       state.previouslyFocused = null;
@@ -135,67 +229,56 @@
      GREETING
   ───────────────────────────────────────────── */
   function sendBotGreeting() {
-    const greeting = "Hey there! 👋 I'm the TechGuru AI assistant. I'm here to help you explore how we can automate and elevate your business.\n\n⚡ Solo shop = fast answers: most replies land the same day, 7 days a week.\n\nTo get started — what's your name?";
+    const greeting = "Hey there! 👋 I'm the TechGuru assistant. I can answer questions about our services, pricing, timelines, and booking — instantly.\n\nTo get started — what's your name?";
     appendMessage("assistant", greeting);
-
-    // Record that we've asked for their name
     state.leadStage = "asked_name";
   }
 
   /* ─────────────────────────────────────────────
-     LEAD CAPTURE LOGIC
+     LEAD CAPTURE LOGIC (unchanged)
   ───────────────────────────────────────────── */
   function processLeadCapture(userText) {
     const text = userText.trim();
+    let justGotName = false;
 
     if (state.leadStage === "asked_name") {
-      // Heuristic: if the reply is short (1-3 words) treat it as a name
       const wordCount = text.split(/\s+/).filter(Boolean).length;
       if (wordCount <= 4 && text.length < 50) {
         state.leadData.name = text;
         state.leadStage = "has_name";
+        justGotName = true;
       }
     }
 
-    // Check if this message contains an email
     const emailMatch = text.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/);
     if (emailMatch && !state.leadData.email) {
       state.leadData.email = emailMatch[0];
       state.leadStage = "has_email";
 
-      // Forward the lead when we first capture an email
       const conversationSummary = state.messages
-        .slice(-6)  // last 3 exchanges
+        .slice(-6)
         .map(m => m.role.toUpperCase() + ': ' + m.content)
         .join('\n\n');
 
       sendLeadToEmail(state.leadData.name, state.leadData.email, conversationSummary);
     }
-  }
 
-  function buildLeadContext() {
-    let ctx = "";
-    if (state.leadData.name) ctx += `\n[LEAD INFO] Visitor name: ${state.leadData.name}`;
-    if (state.leadData.email) ctx += `\n[LEAD INFO] Visitor email: ${state.leadData.email}`;
-    if (state.userMessageCount === CONFIG.LEAD_CAPTURE.askEmailAfter && state.leadStage === "has_name" && !state.leadData.email) {
-      ctx += `\n[INSTRUCTION] Naturally ask for their email address so the team can follow up.`;
+    // Nudge for email after 2 user messages
+    let askEmail = false;
+    if (state.userMessageCount === CONFIG.LEAD_CAPTURE.askEmailAfter &&
+        state.leadStage === "has_name" && !state.leadData.email) {
       state.leadStage = "asked_email";
+      askEmail = true;
     }
-    return ctx;
+
+    return { justGotName, askEmail };
   }
 
   async function sendLeadToEmail(name, email, context) {
-    // Only fire when we have at least an email
     if (!email) return;
-
-    // Never treat our own bot text as a lead (it contains info@techguruofficial.us)
     if (email.toLowerCase() === "info@techguruofficial.us") return;
 
     try {
-      // Web3Forms free tier only accepts browser (client-side) submissions,
-      // so the lead posts directly — same proven pattern as the contact /
-      // newsletter / exit-popup forms in js/scripts.js. The access key is
-      // public by design (already embedded in the live site's scripts.js).
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -215,60 +298,14 @@
       const data = await res.json().catch(() => ({}));
       if (!res.ok || data.success === false) {
         console.error("[TechGuru Chat] Lead forward failed:", res.status, data.message || "");
-        return;
       }
-
-      console.log("[TechGuru Chat] Lead forwarded:", email);
     } catch (err) {
       console.error("[TechGuru Chat] Lead forward failed:", err);
     }
   }
 
   /* ─────────────────────────────────────────────
-     API CALL
-  ───────────────────────────────────────────── */
-  async function callChatAPI(userText) {
-    // Add user message to history
-    state.messages.push({ role: "user", content: userText });
-
-    // Trim history to max length (keep pairs)
-    if (state.messages.length > CONFIG.MAX_HISTORY) {
-      state.messages = state.messages.slice(state.messages.length - CONFIG.MAX_HISTORY);
-    }
-
-    const leadContext = buildLeadContext();
-
-    // Our backend proxy (workers/src/chat.js) owns the model, system prompt
-    // and API key. We send the message plus any lead context; it replies
-    // with { reply: string }.
-    const response = await fetch(CONFIG.API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: leadContext ? userText + "\n" + leadContext : userText,
-      }),
-    });
-
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err?.error || `API error ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    // Backend contract: { reply: string }
-    const assistantText = (data.reply || "").trim();
-
-    // Add assistant reply to history
-    if (assistantText) {
-      state.messages.push({ role: "assistant", content: assistantText });
-    }
-
-    return assistantText || "I'm sorry, I didn't get a response. Please try again.";
-  }
-
-  /* ─────────────────────────────────────────────
-     SEND MESSAGE FLOW
+     SEND MESSAGE FLOW (no API — local auto-reply)
   ───────────────────────────────────────────── */
   async function sendMessage(text) {
     if (!text || state.isTyping) return;
@@ -276,42 +313,36 @@
     const trimmed = text.trim();
     if (!trimmed) return;
 
-    // Process lead capture heuristics before API call
     state.userMessageCount++;
-    processLeadCapture(trimmed);
+    const { justGotName, askEmail } = processLeadCapture(trimmed);
 
-    // Render user bubble
     appendMessage("user", trimmed);
-
-    // Clear input
     resetInput();
 
-    // Show typing indicator with natural delay
-    showTyping(true);
-
-    const delay = randomBetween(CONFIG.TYPING_DELAY_MIN, CONFIG.TYPING_DELAY_MAX);
-
-    try {
-      const [reply] = await Promise.all([
-        callChatAPI(trimmed),
-        sleep(delay),
-      ]);
-
-      showTyping(false);
-      appendMessage("assistant", reply);
-
-    } catch (err) {
-      showTyping(false);
-      console.error("[TechGuru Chat] API error:", err);
-      appendMessage(
-        "assistant",
-        "I'm having a bit of trouble connecting right now. You can reach us directly at **info@techguruofficial.us** or call **+1 (406) 284-5523** — we respond within 24 hours! 🚀"
-      );
+    state.messages.push({ role: "user", content: trimmed });
+    if (state.messages.length > CONFIG.MAX_HISTORY) {
+      state.messages = state.messages.slice(state.messages.length - CONFIG.MAX_HISTORY);
     }
+
+    showTyping(true);
+    await sleep(randomBetween(CONFIG.TYPING_DELAY_MIN, CONFIG.TYPING_DELAY_MAX));
+    showTyping(false);
+
+    let reply = getAutoReply(trimmed);
+
+    if (justGotName && state.leadData.name) {
+      reply = `Nice to meet you, ${state.leadData.name}! ` + reply;
+    }
+    if (askEmail) {
+      reply += `\n\nIf you'd like, drop your email here and Lucas will follow up personally.`;
+    }
+
+    state.messages.push({ role: "assistant", content: reply });
+    appendMessage("assistant", reply);
   }
 
   /* ─────────────────────────────────────────────
-     DOM HELPERS
+     DOM HELPERS (unchanged)
   ───────────────────────────────────────────── */
   function appendMessage(role, text) {
     const wrapper = document.createElement("div");
@@ -322,7 +353,6 @@
     bubble.className = "chat-bubble";
     bubble.innerHTML = formatText(text);
 
-    // Timestamp
     const time = document.createElement("span");
     time.className = "chat-timestamp";
     time.textContent = formatTime(new Date());
@@ -336,7 +366,6 @@
   }
 
   function formatText(text) {
-    // Convert **bold**, *italic*, newlines → HTML
     return text
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
@@ -388,14 +417,11 @@
     state.leadData = { name: null, email: null };
     state.leadStage = "none";
     if (els.messages) els.messages.innerHTML = "";
-    // Re-send greeting
     sendBotGreeting();
   }
 
   /* ─────────────────────────────────────────────
-     SUGGESTION CHIPS
-     Chips stay visible; clicking one sends the
-     message but keeps the chip row available
+     SUGGESTION CHIPS (unchanged)
   ───────────────────────────────────────────── */
   function initSuggestionChips() {
     if (!els.suggestions) return;
@@ -413,18 +439,12 @@
     });
   }
 
-  /* ─────────────────────────────────────────────
-     DISABLE UNIMPLEMENTED BUTTONS SAFELY
-  ───────────────────────────────────────────── */
   function disableUnimplementedButtons() {
-    // Voice button — Web Speech API not implemented; hide gracefully
     if (els.voiceBtn) {
       els.voiceBtn.style.display = "none";
       els.voiceBtn.setAttribute("aria-hidden", "true");
       els.voiceBtn.setAttribute("tabindex", "-1");
     }
-
-    // File upload — no backend handler; hide gracefully
     if (els.uploadBtn) {
       els.uploadBtn.style.display = "none";
       els.uploadBtn.setAttribute("aria-hidden", "true");
@@ -438,20 +458,13 @@
     }
   }
 
-  /* ─────────────────────────────────────────────
-     TEXTAREA AUTO-RESIZE + CHAR COUNT
-  ───────────────────────────────────────────── */
   function initInput() {
     if (!els.input) return;
-
-    // Fix: enforce autocomplete off
     els.input.setAttribute("autocomplete", "off");
 
     els.input.addEventListener("input", () => {
       const len = els.input.value.length;
       updateCharCount(len);
-
-      // Auto-resize
       els.input.style.height = "auto";
       els.input.style.height = Math.min(els.input.scrollHeight, 120) + "px";
     });
@@ -470,9 +483,6 @@
     if (text && !state.isTyping) sendMessage(text);
   }
 
-  /* ─────────────────────────────────────────────
-     KEYBOARD TRAP (only while chat is open)
-  ───────────────────────────────────────────── */
   function handleFocusTrap(e) {
     if (!state.isOpen || e.key !== "Tab") return;
 
@@ -495,17 +505,10 @@
     }
   }
 
-  /* ─────────────────────────────────────────────
-     FLOATING CTAs — safe initialisation
-  ───────────────────────────────────────────── */
   function initFloatingCTAs() {
-    // Hidden by default via JS (not relying on CSS alone)
     showFloatingCTAs(false);
   }
 
-  /* ─────────────────────────────────────────────
-     UTILITY
-  ───────────────────────────────────────────── */
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -514,9 +517,6 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  /* ─────────────────────────────────────────────
-     INIT
-  ───────────────────────────────────────────── */
   function init() {
     resolveEls();
 
@@ -525,30 +525,25 @@
       return;
     }
 
-    // Safe defaults
     initFloatingCTAs();
     disableUnimplementedButtons();
     initInput();
     initSuggestionChips();
 
-    // Toggle open/close
     els.toggle.addEventListener("click", () => {
       state.isOpen ? closeChat() : openChat();
     });
 
-    // Close button inside window
     if (els.closeBtn) {
       els.closeBtn.addEventListener("click", closeChat);
     }
 
-    // Clear button
     if (els.clearBtn) {
       els.clearBtn.addEventListener("click", () => {
         if (confirm("Clear conversation history?")) clearConversation();
       });
     }
 
-    // Form submit
     if (els.form) {
       els.form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -556,17 +551,14 @@
       });
     }
 
-    // Focus trap when open
     document.addEventListener("keydown", handleFocusTrap);
 
-    // Escape closes chat (but not if booking modal is open)
     document.addEventListener("keydown", (e) => {
       const modal = document.getElementById("booking-modal");
       const modalOpen = modal && !modal.hidden;
       if (e.key === "Escape" && state.isOpen && !modalOpen) closeChat();
     });
 
-    // Close if user clicks outside the chat window
     document.addEventListener("click", (e) => {
       if (
         state.isOpen &&
@@ -577,12 +569,9 @@
       }
     });
 
-    console.log("[TechGuru Chat] Widget initialised ✓");
+    console.log("[TechGuru Chat] Widget initialised (automated responder) ✓");
   }
 
-  /* ─────────────────────────────────────────────
-     BOOT
-  ───────────────────────────────────────────── */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
