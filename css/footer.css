@@ -1,0 +1,101 @@
+/* TECHGURU — Footer v3 (storytelling). Fully scoped: every class is .tgf-*, every variable --tgf-*. No dependency on the old .footer* CSS. */
+.tgf{--tgf-bg:var(--color-bg,#080a0f);--tgf-text:var(--color-text,#f2f4fa);--tgf-muted:var(--color-text-muted,rgba(242,244,250,.68));--tgf-faint:var(--color-text-faint,rgba(242,244,250,.5));
+--tgf-a:var(--color-primary,#4a6cf7);--tgf-b:var(--color-secondary,#a274ff);--tgf-c:var(--color-accent,#64dedf);--tgf-hair:rgba(255,255,255,.08);--tgf-e:cubic-bezier(.2,.7,.2,1);
+--tgf-display:var(--font-display,'Sora',system-ui,sans-serif);--tgf-body:var(--font-body,'Inter',system-ui,sans-serif);
+color:var(--tgf-text);font-family:var(--tgf-body)}
+.tgf,.tgf *,.tgf *::before,.tgf *::after{box-sizing:border-box}
+.tgf a{color:inherit;text-decoration:none}
+.tgf button{font-family:inherit}
+/* ---------- FOOTER ---------- */
+
+.tgf{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,var(--tgf-bg),#0b0e16 40%,#090b12);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tgf-edge{position:absolute;inset:0 0 auto;height:2px;z-index:3;background:linear-gradient(90deg,var(--tgf-c),var(--tgf-a),var(--tgf-b),var(--tgf-c),var(--tgf-a));background-size:300% 100%;animation:tgf-flow 16s linear infinite;box-shadow:0 0 24px 2px rgba(100,222,223,.35)}
+@keyframes tgf-flow{to{background-position:-300% 0}}
+.tgf-aurora{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.tgf-aurora i{position:absolute;width:46vw;max-width:640px;aspect-ratio:1;border-radius:50%;filter:blur(90px);opacity:.34;will-change:transform}
+.tgf-aurora i:nth-child(1){background:var(--tgf-a);left:-8%;top:-10%;animation:tgf-d1 34s ease-in-out infinite alternate}
+.tgf-aurora i:nth-child(2){background:var(--tgf-b);right:-10%;top:12%;animation:tgf-d2 40s ease-in-out infinite alternate}
+.tgf-aurora i:nth-child(3){background:var(--tgf-c);left:34%;bottom:-24%;opacity:.2;animation:tgf-d3 46s ease-in-out infinite alternate}
+@keyframes tgf-d1{to{transform:translate(18vw,10vh) scale(1.2)}}@keyframes tgf-d2{to{transform:translate(-16vw,14vh) scale(.9)}}@keyframes tgf-d3{to{transform:translate(-14vw,-8vh) scale(1.25)}}
+.tgf-wrap{max-width:1100px;margin:0 auto;padding:clamp(3.2rem,7vw,5rem) clamp(1.1rem,4vw,2rem) 0}
+
+/* CTA band */
+.tgf-grad{background:linear-gradient(90deg,var(--tgf-c),var(--tgf-a),var(--tgf-b),var(--tgf-c));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tgf-flow 20s linear infinite}
+
+/* grid */
+.tgf-grid{display:grid;grid-template-columns:1.3fr 1.1fr 1.1fr;gap:2.5rem clamp(1.5rem,5vw,4rem);padding:0 0 clamp(2.2rem,5vw,3.2rem)}
+.tgf-logo{display:inline-flex;align-items:center;gap:.7rem;font:700 1.25rem var(--tgf-display);letter-spacing:.06em}
+.tgf-logo svg{width:48px;height:48px}
+.tgf-brand p{margin:1rem 0 1.1rem;color:var(--tgf-muted);line-height:1.6;max-width:28ch;font-size:.95rem;font-weight:300}
+@keyframes tgf-ping{0%{box-shadow:0 0 0 0 rgba(52,211,153,.6)}80%,100%{box-shadow:0 0 0 9px transparent}}
+.tgf h4{margin:0 0 1.2rem;font:600 .78rem var(--tgf-display);letter-spacing:.14em;text-transform:uppercase;color:var(--tgf-faint)}
+.tgf-links ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1.5rem}
+.tgf-links a{position:relative;display:inline-flex;align-items:center;padding:.35rem 0;color:var(--tgf-muted);font-size:.9rem;font-weight:300;transition:color .3s,transform .35s var(--tgf-e)}
+.tgf-links a::after{content:"";position:absolute;left:0;bottom:.15rem;height:1.5px;width:100%;background:linear-gradient(90deg,var(--tgf-c),var(--tgf-b));transform:scaleX(0);transform-origin:left;transition:transform .45s var(--tgf-e)}
+.tgf-links a:hover{color:#fff;transform:translateX(3px)}.tgf-links a:hover::after{transform:scaleX(1)}
+.tgf-contact{display:grid;gap:.7rem}
+.tgf-row{display:flex;align-items:center;gap:.8rem;padding:.65rem .8rem;border-radius:14px;color:var(--tgf-muted);font-size:.92rem;border:1px solid transparent;transition:background .3s,border-color .3s,color .3s,transform .35s var(--tgf-e)}
+.tgf-row:hover{background:rgba(255,255,255,.05);border-color:var(--tgf-hair);color:#fff;transform:translateX(3px)}
+.tgf-ico{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,rgba(74,108,247,.3),rgba(162,116,255,.2));border:1px solid rgba(255,255,255,.12)}
+.tgf-ico svg{width:17px;height:17px;fill:none;stroke:var(--tgf-c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* service-area marquee */
+.tgf-areas{display:flex;align-items:center;gap:1.2rem;padding:1rem 0;border-block:1px solid var(--tgf-hair)}
+.tgf-areas strong{flex:none;font:600 .78rem var(--tgf-display);letter-spacing:.12em;text-transform:uppercase;color:var(--tgf-faint)}
+.tgf-marquee{flex:1;min-width:0;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tgf-track{display:flex;width:max-content;animation:tgf-marq 85s linear infinite}
+.tgf-marquee:hover .tgf-track{animation-play-state:paused}
+.tgf-track ul{display:flex;margin:0;padding:0;list-style:none}
+.tgf-track li{display:flex;align-items:center;white-space:nowrap;color:var(--tgf-muted);font-size:.92rem}
+.tgf-track li::after{content:"";width:5px;height:5px;margin:0 1.1rem;border-radius:50%;background:linear-gradient(135deg,var(--tgf-c),var(--tgf-b))}
+@keyframes tgf-marq{to{transform:translateX(-50%)}}
+
+/* bottom */
+.tgf-bottom{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.6rem 0 2.4rem;color:var(--tgf-faint);font-size:.85rem}
+.tgf-bottom a:hover{color:#fff}.tgf-bottom .tgf-sep{margin:0 .6rem;opacity:.5}
+.tgf-top{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:999px;border:1px solid var(--tgf-hair);background:rgba(255,255,255,.04);color:var(--tgf-muted);font:500 .82rem var(--tgf-body);cursor:pointer;transition:background .3s,transform .35s var(--tgf-e),color .3s}
+.tgf-top:hover{background:rgba(255,255,255,.1);color:#fff;transform:translateY(-3px)}
+.tgf-top svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+
+/* Explore: a little journey. Heading line draws, then each link slides in and lights its marker, one by one */
+.tgf-links h4{position:relative;padding-bottom:.9rem}
+.tgf-links h4::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:56px;border-radius:2px;background:linear-gradient(90deg,var(--tgf-c),var(--tgf-b));transform-origin:left;transition:transform 1.8s var(--tgf-e) .6s}
+.tgf-ready .tgf-links h4::after{transform:scaleX(0)}.tgf-ready .tgf-links.tgf-in h4::after{transform:scaleX(1)}
+.tgf-links a::before{content:"";flex:none;width:6px;height:6px;margin-right:.75rem;border-radius:50%;background:linear-gradient(135deg,var(--tgf-c),var(--tgf-b));box-shadow:0 0 10px rgba(100,222,223,.55);transition:transform 1.2s var(--tgf-e),opacity 1.2s var(--tgf-e);transition-delay:calc(var(--tgf-d0,1100ms) + var(--tgf-i,0)*420ms + 500ms)}
+.tgf-ready .tgf-links a::before{transform:scale(0);opacity:0}.tgf-ready .tgf-links.tgf-in a::before{transform:scale(1);opacity:1}
+.tgf-ready .tgf-links li{opacity:0;transform:translateX(-22px);filter:blur(5px);transition:opacity 1.4s var(--tgf-e),transform 1.4s var(--tgf-e),filter 1.4s var(--tgf-e);transition-delay:calc(var(--tgf-d0,1100ms) + var(--tgf-i,0)*420ms)}
+.tgf-ready .tgf-links.tgf-in li{opacity:1;transform:none;filter:none}
+.tgf-links li:nth-child(1){--tgf-i:0}.tgf-links li:nth-child(2){--tgf-i:1}.tgf-links li:nth-child(3){--tgf-i:2}.tgf-links li:nth-child(4){--tgf-i:3}.tgf-links li:nth-child(5){--tgf-i:4}.tgf-links li:nth-child(6){--tgf-i:5}
+/* Back to top lives in the Explore header, top-right */
+.tgf-links{position:relative}
+.tgf-links .tgf-top{position:absolute;top:-.5rem;right:0;padding:.42rem .8rem;font-size:.78rem}
+.tgf-top svg{animation:tgf-bob 3.6s ease-in-out infinite}
+@keyframes tgf-bob{0%,100%{transform:translateY(1px)}50%{transform:translateY(-3px)}}
+.tgf-top:hover svg{animation-duration:1.4s}
+/* STORY CHOREOGRAPHY: edge draws -> logo traces -> tagline unfolds -> Explore path lights up -> Connect rows arrive -> areas -> baseline */
+.tgf-edge{transform-origin:left}.tgf-ready .tgf-edge{transform:scaleX(0);transition:transform 3s var(--tgf-e)}.tgf-ready .tgf-edge.tgf-in{transform:none}
+.tgf-logo{position:relative}
+.tgf-logo::before{content:"";position:absolute;left:-14px;top:-14px;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle,rgba(100,222,223,.35),transparent 65%);filter:blur(6px);z-index:-1;animation:tgf-halo 6.5s ease-in-out infinite}
+@keyframes tgf-halo{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+.tgf-logo svg{animation:tgf-float 8s ease-in-out infinite}@keyframes tgf-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.tgf-ready .tgf-hx{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.8s var(--tgf-e) .4s}
+.tgf-ready .tgf-brand.tgf-in .tgf-hx{stroke-dashoffset:0}.tgf-ready .tgf-brand.tgf-in .tgf-hx:nth-of-type(2){transition-delay:2s}
+.tgf-w{display:inline-block}
+.tgf-ready .tgf-story .tgf-w{opacity:0;transform:translateY(14px);filter:blur(6px);transition:opacity 1.8s var(--tgf-e),transform 1.8s var(--tgf-e),filter 1.8s var(--tgf-e);transition-delay:calc(2.4s + var(--tgf-w)*1s)}
+.tgf-ready .tgf-brand.tgf-in .tgf-story .tgf-w{opacity:1;transform:none;filter:none}
+@keyframes tgf-beat{0%,24%,100%{transform:scale(1);box-shadow:0 0 10px rgba(100,222,223,.55)}12%{transform:scale(1.9);box-shadow:0 0 20px rgba(100,222,223,.95)}}
+.tgf-ready .tgf-links.tgf-in a::before{animation:tgf-beat 8s ease-in-out infinite;animation-delay:calc(var(--tgf-i,0)*1.3s + 7s)}
+.tgf-contact a:nth-of-type(1){--tgf-i:0}.tgf-contact a:nth-of-type(2){--tgf-i:1}.tgf-contact a:nth-of-type(3){--tgf-i:2}
+.tgf-ready .tgf-contact:not(.tgf-in) .tgf-row{opacity:0}
+.tgf-ready .tgf-contact.tgf-in .tgf-row{animation:tgf-rowin 1.6s var(--tgf-e) backwards;animation-delay:calc(1.5s + var(--tgf-i)*.5s)}
+@keyframes tgf-rowin{from{opacity:0;transform:translateX(-24px);filter:blur(5px)}}
+.tgf-ready .tgf-contact.tgf-in .tgf-ico{animation:tgf-pop 1.6s var(--tgf-e) backwards;animation-delay:calc(1.9s + var(--tgf-i)*.5s)}
+@keyframes tgf-pop{from{opacity:0;transform:scale(.3) rotate(-25deg)}}
+/* reveal (fails visible without JS) */
+.tgf-ready .tgf-rv{opacity:0;transform:translateY(34px);transition:opacity 1.7s var(--tgf-e),transform 1.7s var(--tgf-e);transition-delay:var(--tgf-d,0ms)}
+.tgf-ready .tgf-rv.tgf-in{opacity:1;transform:none}
+
+@media(max-width:900px){.tgf-grid{grid-template-columns:1fr 1fr}.tgf-brand{grid-column:1/-1}}
+@media(max-width:600px){.tgf-grid{grid-template-columns:1fr}.tgf-areas{flex-direction:column;align-items:flex-start;gap:.7rem}.tgf-marquee{width:100%}.tgf-bottom{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.tgf *,.tgf::before,.tgf::after{animation:none!important;transition:none!important}.tgf-marquee{overflow-x:auto}.tgf-ready .tgf-rv{opacity:1;transform:none}}
