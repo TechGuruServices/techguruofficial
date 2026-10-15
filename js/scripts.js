@@ -587,6 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           body: JSON.stringify({
             access_key: '79ea5629-dbba-4cfe-95e6-930e25f542e5',
+            redirect: 'https://techguruofficial.us/thank-you.html',
             subject: 'New Contact Form Submission — TechGuru',
             from_name: 'TechGuru Website',
             name, email,
