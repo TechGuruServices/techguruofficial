@@ -1,7 +1,7 @@
 /* ==========================================================================
    TECHGURU — rotating navbar CTA (companion to js/cta-rotator.js)
    Word-cycle: Build My Site > Launch My App > Elevate My Brand > Elevate My Logo
-   Animated conic border ring (purple/blue/green/red), one direction, hue-drift.
+   Animated conic border ring (blue/green/purple/radiant pink), one direction, smooth.
    Reduced-motion safe; slot widths locked by the JS => zero layout shift.
    ========================================================================== */
 .tg-cta {
@@ -14,10 +14,9 @@
     border-radius: 999px;
     text-decoration: none;
     isolation: isolate;
-    box-shadow: 0 10px 32px -12px rgba(122, 92, 255, .55);
-    transition: transform .3s var(--tg-ease), box-shadow .3s var(--tg-ease);
+    transition: transform .3s var(--tg-ease);
   }
-  .tg-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 40px -12px rgba(100, 222, 223, .45); }
+  .tg-cta:hover { transform: translateY(-1px); }
   .tg-cta:focus-visible { outline: 2px solid #64dedf; outline-offset: 4px; }
 
   /* --- animated gradient border: one direction, slow, hue-drifting --- */
@@ -35,10 +34,8 @@
   content: "";
   position: absolute; inset: 0;                /* exactly the border band */
   background: conic-gradient(from var(--tg-ring-angle),
-    #a274ff 0%, #4a6cf7 12.5%, #34d399 25%, #ef4444 37.5%,
-    #a274ff 50%, #4a6cf7 62.5%, #34d399 75%, #ef4444 87.5%, #a274ff 100%);
-  animation: tg-ring-spin 14s linear infinite;   /* one direction, slow; the multi-hue
-                                                    wheel keeps edge colour shifting */
+    #4a6cf7, #34d399, #a274ff, #ec4899, #4a6cf7);
+  animation: tg-ring-spin 7s linear infinite;   /* one direction, smooth — matches products page */
 }
 @keyframes tg-ring-spin { to { --tg-ring-angle: 360deg; } }
 
