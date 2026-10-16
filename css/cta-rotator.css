@@ -10,7 +10,7 @@
     --tg-in-ms: 480ms;
     position: relative;
     display: inline-flex;
-    padding: 2px;                    /* the visible border-ring thickness */
+    padding: 1px;                    /* the visible border-ring thickness */
     border-radius: 999px;
     text-decoration: none;
     isolation: isolate;
