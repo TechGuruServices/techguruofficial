@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>TerraScope — Live Demo</title>
 <!-- PWA / Add to Home Screen -->
 <link rel="manifest" href="manifest.json">
@@ -696,12 +696,16 @@ h3:first-child { margin-top: 0; }
 #app-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 12px; background: var(--bg2);
+  /* iOS standalone: keep header below the status bar / Dynamic Island */
+  padding-top: calc(10px + constant(safe-area-inset-top));
+  padding-top: calc(10px + env(safe-area-inset-top));
+	
   border-bottom: 2px solid var(--primary);
   flex: 0 0 auto;
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .brand-mark { color: var(--primary); display: inline-flex; flex: 0 0 auto; }
-.brand-text h1 { font-size: 14px; margin: 0; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand-text h1 { font-size: 14px; font-weight: 800; margin: 0; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .brand-text p { font-size: 10px; margin: 2px 0 0; color: var(--muted); letter-spacing: 0.06em; }
 .header-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
 .badge {
@@ -880,7 +884,6 @@ body[data-theme="rugged"] #mode-label { color: var(--accent2); }
 /* TECHGURU violet-blue touches: links, focus rings (solid brand text for crisp iOS rendering) */
 body[data-theme="rugged"] .brand-text h1 {
   color: var(--primary);
-  -webkit-font-smoothing: antialiased;
 }
 body[data-theme="rugged"] .btn-secondary { border-color: var(--accent); color: var(--accent); }
 body[data-theme="rugged"] .mat-btn.active { border-color: var(--primary); color: var(--primary); }
@@ -1081,7 +1084,7 @@ chrome.storage.local = {
   set: async (obj) => { for (const k of Object.keys(obj)) localStorage.setItem("demo:" + k, JSON.stringify(obj[k])); }
 };
 chrome.tabs = chrome.tabs || { create: ({ url }) => window.open(url, "_blank") };
-window.__THEME_CSS = { rugged: "/* RUGGED theme (default) — sunlight-readable field design.\n   Primary: amber. Secondary accent: TECHGURU violet-to-blue. */\nbody[data-theme=\"rugged\"], :root {\n  --bg: #14110b;\n  --bg2: #1d1811;\n  --panel: #221c12;\n  --ink: #f6f0e2;\n  --muted: #a89a7e;\n  --primary: #f5a623;\n  --primary-ink: #1c1204;\n  --accent: #7c6cff;\n  --accent2: #3fa9f5;\n  --line: #3a3122;\n  --good: #58b368;\n  --warn: #e0533d;\n}\nbody[data-theme=\"rugged\"] .brand-mark { color: var(--primary); }\nbody[data-theme=\"rugged\"] #mode-label { color: var(--accent2); }\n/* TECHGURU violet-blue touches: links, focus rings (solid brand text for crisp iOS rendering) */\nbody[data-theme=\"rugged\"] .brand-text h1 {\n  color: var(--primary);\n  -webkit-font-smoothing: antialiased;\n}\nbody[data-theme=\"rugged\"] .btn-secondary { border-color: var(--accent); color: var(--accent); }\nbody[data-theme=\"rugged\"] .mat-btn.active { border-color: var(--primary); color: var(--primary); }\nbody[data-theme=\"rugged\"] #offline-badge { box-shadow: 0 0 8px rgba(124,108,255,0.35); }\n", modern: "/* MODERN theme (variant release) — dark premium TECHGURU.\n   Primary: violet-to-blue gradient. */\nbody[data-theme=\"modern\"] {\n  --bg: #0a0d1c;\n  --bg2: #0f1430;\n  --panel: #131a38;\n  --ink: #eef1ff;\n  --muted: #98a1c9;\n  --primary: #7c6cff;\n  --primary-ink: #ffffff;\n  --accent: #3fa9f5;\n  --accent2: #3fa9f5;\n  --line: #242c55;\n  --good: #34d17b;\n  --warn: #ff6b5e;\n}\nbody[data-theme=\"modern\"] .brand-mark { color: var(--primary); }\nbody[data-theme=\"modern\"] #mode-label { color: var(--accent); }\nbody[data-theme=\"modern\"] .brand-text h1 {\n  color: #b9a8ff;\n  -webkit-font-smoothing: antialiased;\n}\nbody[data-theme=\"modern\"] .btn-primary,\nbody[data-theme=\"modern\"] .stepper-ctl button,\nbody[data-theme=\"modern\"] #cache-progress-fill {\n  background: linear-gradient(90deg, #7c6cff, #3fa9f5);\n}\nbody[data-theme=\"modern\"] #app-header { border-bottom: 2px solid transparent; border-image: linear-gradient(90deg,#7c6cff,#3fa9f5) 1; }\nbody[data-theme=\"modern\"] .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }\nbody[data-theme=\"modern\"] .result-row.total { border-top-color: var(--accent); }\nbody[data-theme=\"modern\"] .result-row.total .result-value { color: var(--accent); }\nbody[data-theme=\"modern\"] .mat-btn.active { border-color: var(--accent); color: var(--accent); }\nbody[data-theme=\"modern\"] #draw-toolbar button.armed { background: linear-gradient(90deg,#7c6cff,#3fa9f5); border-color: transparent; }\n" };
+window.__THEME_CSS = { rugged: "/* RUGGED theme (default) — sunlight-readable field design.\n   Primary: amber. Secondary accent: TECHGURU violet-to-blue. */\nbody[data-theme=\"rugged\"], :root {\n  --bg: #14110b;\n  --bg2: #1d1811;\n  --panel: #221c12;\n  --ink: #f6f0e2;\n  --muted: #a89a7e;\n  --primary: #f5a623;\n  --primary-ink: #1c1204;\n  --accent: #7c6cff;\n  --accent2: #3fa9f5;\n  --line: #3a3122;\n  --good: #58b368;\n  --warn: #e0533d;\n}\nbody[data-theme=\"rugged\"] .brand-mark { color: var(--primary); }\nbody[data-theme=\"rugged\"] #mode-label { color: var(--accent2); }\n/* TECHGURU violet-blue touches: links, focus rings (solid brand text for crisp iOS rendering) */\nbody[data-theme=\"rugged\"] .brand-text h1 {\n  color: var(--primary);\\n}\nbody[data-theme=\"rugged\"] .btn-secondary { border-color: var(--accent); color: var(--accent); }\nbody[data-theme=\"rugged\"] .mat-btn.active { border-color: var(--primary); color: var(--primary); }\nbody[data-theme=\"rugged\"] #offline-badge { box-shadow: 0 0 8px rgba(124,108,255,0.35); }\n", modern: "/* MODERN theme (variant release) — dark premium TECHGURU.\n   Primary: violet-to-blue gradient. */\nbody[data-theme=\"modern\"] {\n  --bg: #0a0d1c;\n  --bg2: #0f1430;\n  --panel: #131a38;\n  --ink: #eef1ff;\n  --muted: #98a1c9;\n  --primary: #7c6cff;\n  --primary-ink: #ffffff;\n  --accent: #3fa9f5;\n  --accent2: #3fa9f5;\n  --line: #242c55;\n  --good: #34d17b;\n  --warn: #ff6b5e;\n}\nbody[data-theme=\"modern\"] .brand-mark { color: var(--primary); }\nbody[data-theme=\"modern\"] #mode-label { color: var(--accent); }\nbody[data-theme=\"modern\"] .brand-text h1 {\n  color: #b9a8ff;\\n}\nbody[data-theme=\"modern\"] .btn-primary,\nbody[data-theme=\"modern\"] .stepper-ctl button,\nbody[data-theme=\"modern\"] #cache-progress-fill {\n  background: linear-gradient(90deg, #7c6cff, #3fa9f5);\n}\nbody[data-theme=\"modern\"] #app-header { border-bottom: 2px solid transparent; border-image: linear-gradient(90deg,#7c6cff,#3fa9f5) 1; }\nbody[data-theme=\"modern\"] .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }\nbody[data-theme=\"modern\"] .result-row.total { border-top-color: var(--accent); }\nbody[data-theme=\"modern\"] .result-row.total .result-value { color: var(--accent); }\nbody[data-theme=\"modern\"] .mat-btn.active { border-color: var(--accent); color: var(--accent); }\nbody[data-theme=\"modern\"] #draw-toolbar button.armed { background: linear-gradient(90deg,#7c6cff,#3fa9f5); border-color: transparent; }\n" };
 </script>
 <script>/* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
