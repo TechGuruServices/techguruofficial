@@ -1596,11 +1596,12 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     <link rel="stylesheet" href="css/nav-overlap-guard.css?v=20261004">
     <link rel="stylesheet" href="css/story.css?v=20261009">
     <link rel="stylesheet" href="css/story-full.css?v=20261004">
-    <link rel="stylesheet" href="css/cta-rotator.css?v=20261004">
+    <link rel="stylesheet" href="css/cta-rotator.css?v=20261016">
     <link rel="stylesheet" href="css/polish-pass.css?v=20261004">
     <link rel="stylesheet" href="css/service-cards.css?v=20261011">
     <link rel="stylesheet" href="css/portfolio.css?v=20261009">
     <link rel="stylesheet" href="css/footer.css?v=20261014">
+    <link rel="stylesheet" href="css/about-card.css?v=20261016">
 
     <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
     <style>
@@ -2559,102 +2560,37 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head">
                 <span class="section-label"><span class="tg-num">06</span> About Me</span>
                 <h2>Montana Born. Montana Based.</h2>
-                <p class="section-subtitle">A one-person studio you can actually meet — not an anonymous agency inbox,
-                    not an out-of-state call center.</p>
+                <p class="section-subtitle">One person. Every project designed and built by me.</p>
             </div>
 
-            <div class="about-grid">
-                <div class="about-main">
-                    <p class="about-lead">I'm the person behind TECHGURU. I believe local businesses deserve the same
-                        quality of website, branding, and technology that big companies pay agencies tens of thousands
-                        for — without the agency price tag or the runaround.</p>
-
-                    <div class="about-story">
-                        <h3>My Story</h3>
-                        <p>I'm a full-stack developer and designer, and Montana is my home state. I spent a few years
-                            down in South Florida, then moved back home to <strong>Missoula</strong> — so TECHGURU is now
-                            a one-person studio in the Garden City, not a front for a team you'll never meet. I build
-                            every website, every chat widget, and every custom tool myself, from the projects in my
-                            portfolio above to whatever your business needs next.</p>
-                        <p>I started TECHGURU because too many local businesses either overpay an agency or get stuck
-                            with a generic template site that doesn't represent them. Coming home changed the way I
-                            work: I'd rather sit across a table from a business owner in Missoula than trade emails with
-                            a stranger, and I'd rather my work show up on a local contractor's truck than sit in a
-                            portfolio nobody visits.</p>
-                        <p class="about-callout"><strong>Local, and easy to verify.</strong> If you're in the Missoula
-                            area I'm glad to meet in person — coffee, your shop, or a job site. If you're elsewhere in
-                            Montana or out of state, the work runs exactly the same way over a call: same flat pricing,
-                            same timeline, same direct line to me.</p>
+            <div class="about-card-wrap">
+                <a class="about-card" href="#contact" aria-label="Meet Lucas Thompson, owner-developer. Book a free 30-minute strategy call.">
+                    <div class="about-card-photo">
+                        <picture>
+                            <source type="image/webp" media="(max-width: 760px)" srcset="images/about-lucas-photo-540.webp">
+                            <img src="images/about-lucas-photo-770.webp" width="930" height="1500" loading="lazy" decoding="async"
+                                alt="Lucas Thompson, owner-developer of TECHGURU, arms crossed in a black blazer">
+                        </picture>
                     </div>
-                </div>
-
-                <aside class="about-side">
-                    <div class="about-side-card">
-                        <h3>Where I Work</h3>
-                        <dl class="about-facts">
-                            <div>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                </svg>
-                                <div>
-                                    <dt>Based in</dt>
-                                    <dd>Missoula, Montana 59808</dd>
-                                </div>
-                            </div>
-                            <div>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                <div>
-                                    <dt>In person</dt>
-                                    <dd>Missoula, the Bitterroot Valley, Flathead &amp; Kalispell</dd>
-                                </div>
-                            </div>
-                            <div>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z" />
-                                </svg>
-                                <div>
-                                    <dt>Remote</dt>
-                                    <dd>Anywhere in the U.S. — same process, same price</dd>
-                                </div>
-                            </div>
-                            <div>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true" focusable="false">
-                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                                </svg>
-                                <div>
-                                    <dt>Studio size</dt>
-                                    <dd>One person. Every project designed and built by me.</dd>
-                                </div>
-                            </div>
-                        </dl>
-                        <p class="about-signature">
-                            <strong data-owner-name>TECHGURU</strong>
-                            Founder &amp; Developer &middot; Missoula, MT
-                        </p>
+                    <div class="about-card-body">
+                        <div class="about-card-brand"><img src="images/techguru-logo.png" alt="" width="38" height="38">TECHGURU</div>
+                        <p class="about-card-eyebrow">Missoula &middot; Montana</p>
+                        <h3>Meet your developer.</h3>
+                        <p class="about-card-name">Lucas Thompson<span>.</span></p>
+                        <div class="about-card-rule" aria-hidden="true"></div>
+                        <p class="about-card-pitch">No account managers. No agency overhead. Direct line to the owner-developer &mdash; from first call to launch + 30 days of support.</p>
+                        <blockquote class="about-card-quote">
+                            <p>&ldquo;If your site is hard to use, you lose sales. I create hyper-intuitive layouts that maximize clicks and minimize headaches.&rdquo;</p>
+                            <cite>&mdash; Lucas Thompson</cite>
+                        </blockquote>
                     </div>
-                </aside>
-            </div>
+                    <span class="about-card-hint" aria-hidden="true">Free 30-min strategy call &rarr;</span>
+                </a>
 
-            <div class="about-approach">
-                <h3>How I Approach Every Project</h3>
-                <ul class="approach-list">
-                    <li><strong>Built for Your Business:</strong> No copy-paste templates — every site is designed
-                        around how your customers actually find and use it.</li>
-                    <li><strong>Design Matters:</strong> Every visual element is intentional, aligned with your brand's
-                        identity, not a stock theme.</li>
-                    <li><strong>AI as a Tool, Not a Gimmick:</strong> Chat and FAQ widgets that genuinely save you time
-                        answering the same questions over and over.</li>
-                    <li><strong>Straight Talk:</strong> You'll know the price and timeline upfront, and you're talking
-                        to me directly at every step — no account managers in between.</li>
+                <ul class="about-chips">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Meet in person around Missoula</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z"/></svg>Remote anywhere in the U.S.</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Flat pricing, upfront timeline</li>
                 </ul>
             </div>
         </section>
