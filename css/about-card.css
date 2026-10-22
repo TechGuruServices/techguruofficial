@@ -41,9 +41,6 @@
     background: linear-gradient(180deg, var(--color-primary, #4a6cf7), var(--color-secondary, #a274ff)); }
 .about-card-quote p { margin: 0; font-style: italic; font-size: .98rem; line-height: 1.5; }
 .about-card-quote cite { display: block; margin-top: .5rem; text-align: right; font-style: normal; font-size: .82rem; color: var(--color-accent, #64dedf); }
-.about-card-cta { align-self: flex-start; margin-top: .35rem; padding: .68rem 1.35rem; border-radius: var(--radius-pill, 999px);
-    border: 1.5px solid rgba(162, 116, 255, .65); background: rgba(74, 108, 247, .08);
-    font: 700 .8rem/1 var(--font-body, system-ui); letter-spacing: .13em; text-transform: uppercase; color: #fff; }
 
 /* ---- photo column: fades into the card so there is no hard edge ---- */
 .about-card-photo { position: absolute; inset: 0 0 0 auto; width: 60%; z-index: 1; overflow: hidden; transform: translateX(48px); }
