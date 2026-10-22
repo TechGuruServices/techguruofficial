@@ -17,7 +17,7 @@
  * Upload order matters: restore the missing css/ files FIRST, then this file.
  */
 
-const CACHE_VERSION = 'techguru-v1.4.0-20261014';
+const CACHE_VERSION = 'techguru-v1.5.0-20261022';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
@@ -28,15 +28,7 @@ const IMAGE_CACHE = `${CACHE_VERSION}-images`;
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/css/design-tokens.css',
-  '/css/components.css',
-  '/css/styles.css',
-  '/css/layout-v2.css',
-  '/css/cinematic.css',
-  '/css/nav-glass.css',
-  '/css/story.css',
-  '/css/chat-widget-dark-glass.css',
-  '/css/footer.css',
+  '/css/head-bundle.css',
   '/js/scripts.js',
   '/js/cinematic.js',
   '/js/story.js',

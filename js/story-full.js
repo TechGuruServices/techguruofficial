@@ -111,6 +111,8 @@
       var wordBlocks = [];
       each('.section-subtitle, .contact-subtitle', function (block) {
         if (block.querySelector('.tg-word')) { return; }           // already handled elsewhere
+        var preSplit = block.querySelectorAll('.tg-wl');           // pre-split in HTML (perf pass 2026-10-22): reuse the spans,
+        if (preSplit.length) { wordBlocks.push({ el: block, words: Array.prototype.slice.call(preSplit), lit: -1 }); return; }  // no runtime re-wrap -> no layout shift
         var raw = block.textContent.replace(/\s+/g, ' ').trim();
         if (!raw || raw.split(' ').length < 6) { return; }         // only real statements
         block.textContent = '';

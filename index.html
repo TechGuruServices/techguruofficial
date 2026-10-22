@@ -42,15 +42,15 @@
     <meta name="twitter:image" content="https://techguruofficial.us/images/og-image.png">
 
     <!-- Favicons - Optimized for Google Search Results -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261021">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261021">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261022">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261022">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261022">
 
     <!-- Apple Touch Icon (180x180 is iOS standard for crisp display) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261021">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261022">
 
     <!-- Web App Manifest (contains all icon definitions) -->
-    <link rel="manifest" href="/site.webmanifest?v=20261021">
+    <link rel="manifest" href="/site.webmanifest?v=20261022">
 
     <!-- PWA Theme Customization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -60,14 +60,20 @@
 
     <!-- Google Fonts - Optimized Loading -->
     <!-- Self-hosted Inter + Poppins (see css/fonts.css) — no third-party font dependency -->
-    <link rel="stylesheet" href="css/fonts.css?v=20261004">
+    
+
+    <link rel="preload" as="font" type="font/woff2" href="css/fonts/inter-var.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="css/fonts/poppins-700.woff2" crossorigin>
+    <!-- All head CSS in one bundled file (perf pass 2026-10-22). Order inside the bundle
+         matches the previous 17 separate <link>/<style> blocks exactly. -->
+    <link rel="stylesheet" href="css/head-bundle.css?v=20261022">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/design-tokens.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/styles.css?v=20251224f">
-    <link rel="stylesheet" href="css/cinematic.css?v=20260925">
-    <link rel="stylesheet" href="css/chat-widget-dark-glass.css">
+    
+    
+    
+    
+    
     <script src="js/scripts.js" defer></script>
     <script src="js/cinematic.js" defer></script>
     <script src="js/story.js" defer></script>
@@ -76,1590 +82,21 @@
     <script src="js/service-cards.js?v=20261011" defer></script>
     <script src="js/portfolio.js" defer></script>
 
-    <!-- ===== TECHGURU Layout System v2 =======================================
-         Inlined below so index.html works even if the css/ folder is untouched.
-         Prefer an external file? Delete the whole <style id="tg-layout-v2"> block
-         and uncomment this line — css/layout-v2.css has identical contents:
-         <link rel="stylesheet" href="css/layout-v2.css?v=20261004">
-    ========================================================================== -->
-    <style id="tg-layout-v2">
-/* ==========================================================================
-   TECHGURU — LAYOUT SYSTEM v2
-   Purpose: one consistent grid + spacing + card + section-header system so
-            every section of the page reads as part of the same page.
-   Notes:   Loaded LAST so it wins the cascade over design-tokens.css,
-            components.css and styles.css without needing !important.
-            Every var() has a fallback, so it works even if a token is missing.
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. TOKENS
-   -------------------------------------------------------------------------- */
-:root {
-    /* Layout */
-    --tg-max: 1200px;                 /* page content width            */
-    --tg-max-wide: 1320px;            /* hero / full-bleed content     */
-    --tg-gutter: clamp(1.15rem, 3.6vw, 2.5rem);
-    --tg-section-y: clamp(4rem, 7.5vw, 6.75rem);
-    --tg-nav-h: 88px;                 /* used for anchor scroll offset */
-
-    /* Spacing scale */
-    --tg-s1: .375rem;
-    --tg-s2: .625rem;
-    --tg-s3: 1rem;
-    --tg-s4: 1.5rem;
-    --tg-s5: 2.25rem;
-    --tg-s6: 3.25rem;
-
-    /* Radius scale */
-    --tg-r-sm: 10px;
-    --tg-r: 16px;
-    --tg-r-lg: 22px;
-    --tg-r-pill: 999px;
-
-    /* Surfaces */
-    --tg-card-a: rgba(255, 255, 255, .055);
-    --tg-card-b: rgba(255, 255, 255, .018);
-    --tg-border: rgba(255, 255, 255, .09);
-    --tg-border-hi: rgba(100, 222, 223, .3);
-    --tg-hairline: rgba(255, 255, 255, .055);
-
-    /* Type */
-    --tg-text: #f2f4fa;
-    --tg-muted: rgba(242, 244, 250, .7);
-    --tg-faint: rgba(242, 244, 250, .52);
-    --tg-font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --tg-font-display: 'Sora', 'Inter', system-ui, sans-serif;
-
-    /* Brand */
-    --tg-accent: #64dedf;
-    --tg-blue: #4a6cf7;
-    --tg-violet: #a274ff;
-    --tg-copper: #d98b5f;
-
-    /* Elevation */
-    --tg-shadow: 0 18px 44px -30px rgba(0, 0, 0, .95);
-    --tg-shadow-hi: 0 30px 60px -32px rgba(0, 0, 0, 1);
-    --tg-glow: 0 0 0 1px rgba(100, 222, 223, .14), 0 22px 48px -30px rgba(74, 108, 247, .8);
-}
-
-/* --------------------------------------------------------------------------
-   2. BASE / PAGE SHELL
-   -------------------------------------------------------------------------- */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: calc(var(--tg-nav-h) + 18px);
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    overflow-x: hidden;
-    font-family: var(--tg-font-ui);
-    color: var(--tg-text);
-    line-height: 1.6;
-}
-
-img, video, svg, canvas { max-width: 100%; }
-
-/* Every anchor target clears the sticky/fixed nav */
-main > section,
-main > [id] {
-    scroll-margin-top: calc(var(--tg-nav-h) + 18px);
-}
-
-/* Consistent type rhythm across the whole page */
-h1, h2, h3, h4 {
-    font-family: var(--tg-font-display);
-    text-wrap: balance;
-    line-height: 1.16;
-}
-
-p { text-wrap: pretty; }
-
-a { color: inherit; }
-
-/* Accessible focus ring everywhere */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[tabindex]:focus-visible {
-    outline: 2px solid rgba(100, 222, 223, .8);
-    outline-offset: 3px;
-    border-radius: 6px;
-}
-
-::selection { background: rgba(100, 222, 223, .28); }
-
-/* Spam honeypot: keep it out of the layout entirely.
-   (A generic width:100% input rule will otherwise stretch it to the viewport.) */
-.hidden,
-input[name="botcheck"] {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    border: 0 !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
-    clip: rect(0 0 0 0) !important;
-    white-space: nowrap !important;
-    pointer-events: none !important;
-}
-
-/* --------------------------------------------------------------------------
-   3. SECTION SHELL — same width, same rhythm, same dividers everywhere
-   -------------------------------------------------------------------------- */
-.why-section,
-.about-section,
-.features,
-.faq-section,
-.contact-section {
-    width: 100%;
-    padding: var(--tg-section-y) var(--tg-gutter);
-}
-
-.services,
-.process-section-premium {
-    width: 100%;
-    padding-block: var(--tg-section-y);
-    padding-inline: 0;
-}
-
-.portfolio-section {
-    width: 100%;
-    max-width: none;
-    padding: var(--tg-section-y) var(--tg-gutter);
-}
-
-.lead-magnet { padding-block: var(--tg-section-y); }
-
-/* Inner containers all share one width */
-.services > .container,
-.process-container,
-.lead-magnet-content,
-.about-grid,
-.about-content,
-.why-grid,
-.portfolio-grid,
-.portfolio-inner,
-.features,
-.faq-grid,
-.contact-wrapper {
-    width: 100%;
-    max-width: var(--tg-max);
-    margin-inline: auto;
-}
-
-.services > .container,
-.process-container,
-.lead-magnet-content { padding-inline: var(--tg-gutter); }
-
-/* Section rhythm: a hairline between each block so the page reads as one flow */
-main > section + section { border-top: 1px solid var(--tg-hairline); }
-
-/* Alternating tint gives the eye a sense of "new chapter" without noise */
-#services,
-#portfolio,
-#faq {
-    background:
-        radial-gradient(1100px 420px at 50% -10%, rgba(74, 108, 247, .07), transparent 70%),
-        linear-gradient(180deg, rgba(255, 255, 255, .016), rgba(255, 255, 255, 0) 45%);
-}
-
-#about,
-#lead {
-    background:
-        radial-gradient(900px 380px at 12% 0%, rgba(162, 116, 255, .07), transparent 72%);
-}
-
-/* --------------------------------------------------------------------------
-   4. SECTION HEADERS — one component, used by every section
-   -------------------------------------------------------------------------- */
-.section-header,
-.process-header,
-.tg-head {
-    max-width: 780px;
-    margin: 0 auto clamp(2.25rem, 4.5vw, 3.5rem);
-    text-align: center;
-}
-
-.section-label,
-.process-label {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    margin-bottom: 1.05rem;
-    padding: .42rem .95rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid rgba(100, 222, 223, .24);
-    background: linear-gradient(90deg, rgba(100, 222, 223, .13), rgba(74, 108, 247, .11));
-    color: var(--tg-accent);
-    font-family: var(--tg-font-ui);
-    font-size: .7rem;
-    font-weight: 700;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    line-height: 1.4;
-    white-space: nowrap;
-}
-
-/* numeric prefix chip inside the eyebrow: <span class="tg-num">01</span> */
-.section-label .tg-num,
-.process-label .tg-num {
-    display: inline-grid;
-    place-items: center;
-    min-width: 1.45rem;
-    height: 1.45rem;
-    padding: 0 .3rem;
-    border-radius: var(--tg-r-pill);
-    background: linear-gradient(135deg, var(--tg-blue), var(--tg-violet));
-    color: #fff;
-    font-size: .66rem;
-    font-weight: 700;
-    letter-spacing: .04em;
-}
-
-.section-header h2,
-.process-header h2,
-.tg-head h2,
-.why-section > h2,
-.faq-section > h2,
-.contact-section > h2,
-.about-content > h2 {
-    margin: 0 0 .9rem;
-    font-size: clamp(1.8rem, 1.3rem + 1.9vw, 2.7rem);
-    font-weight: 700;
-    letter-spacing: -.022em;
-}
-
-.section-subtitle {
-    margin: 0 auto;
-    max-width: 64ch;
-    color: var(--tg-muted);
-    font-size: clamp(.98rem, .94rem + .22vw, 1.075rem);
-    line-height: 1.7;
-}
-
-.section-subtitle code {
-    padding: .1rem .4rem;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, .07);
-    border: 1px solid var(--tg-border);
-    font-size: .86em;
-}
-
-/* --------------------------------------------------------------------------
-   5. NAV — sticky polish, location chip, scroll-spy underline, progress bar
-   -------------------------------------------------------------------------- */
-.navbar {
-    z-index: 1200;
-    backdrop-filter: blur(16px) saturate(150%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    transition: padding .28s ease, background-color .28s ease, box-shadow .28s ease,
-        border-color .28s ease;
-}
-
-.navbar.is-scrolled {
-    border-bottom: 1px solid rgba(255, 255, 255, .08);
-    box-shadow: 0 14px 34px -26px rgba(0, 0, 0, 1);
-    background-color: rgba(8, 10, 22, .82);
-}
-
-.nav-logo-link {
-    display: inline-flex;
-    align-items: center;
-    gap: .6rem;
-    font-family: var(--tg-font-display);
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-decoration: none;
-}
-
-.navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: clamp(.5rem, 1.4vw, 1rem);
-}
-
-/* the extra nav link drops out before the bar gets crowded */
-@media (max-width: 1180px) { .nav-hide-md { display: none; } }
-
-/* belt & braces: if the bar runs out of room it wraps rather than
-   pushing the page into horizontal scroll */
-@media (max-width: 1180px) {
-    .navbar { flex-wrap: wrap; }
-    .nav-menu { min-width: 0; }
-    .navbar-actions { flex-wrap: wrap; justify-content: flex-end; min-width: 0; }
-}
-
-.nav-phone-link {
-    display: inline-flex;
-    align-items: center;
-    gap: .45rem;
-    text-decoration: none;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-/* active-page underline */
-.nav-menu ul li a { position: relative; }
-
-.nav-menu ul li a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -.45rem;
-    height: 2px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--tg-accent), var(--tg-violet));
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
-}
-
-.nav-menu ul li a:hover::after,
-.nav-menu ul li a.is-active::after { transform: scaleX(1); }
-
-.nav-menu ul li a.is-active { color: #fff; }
-
-/* Reading progress bar */
-.tg-scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2000;
-    height: 2px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    background: linear-gradient(90deg, var(--tg-accent), var(--tg-blue) 55%, var(--tg-violet));
-    pointer-events: none;
-    opacity: .95;
-}
-
-/* --------------------------------------------------------------------------
-   6. HERO
-   -------------------------------------------------------------------------- */
-.hero h1 {
-    font-size: clamp(2rem, 1.42rem + 2.5vw, 3.4rem);
-    line-height: 1.08;
-    letter-spacing: -.028em;
-    margin-bottom: 1rem;
-}
-
-.hero-location-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    margin: 0 0 1.1rem;
-    padding: .45rem 1rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid rgba(100, 222, 223, .26);
-    background: linear-gradient(90deg, rgba(100, 222, 223, .14), rgba(74, 108, 247, .1));
-    color: rgba(242, 244, 250, .92);
-    font-size: .8rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-}
-
-.hero-location-badge svg { width: 15px; height: 15px; color: var(--tg-accent); flex: none; }
-.hero-location-badge .tg-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--tg-accent);
-    box-shadow: 0 0 0 4px rgba(100, 222, 223, .18);
-}
-
-.hero-description {
-    max-width: 62ch;
-    color: var(--tg-muted);
-    font-size: clamp(1rem, .95rem + .3vw, 1.14rem);
-    line-height: 1.72;
-}
-
-.hero-highlights {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-    gap: .6rem .9rem;
-    margin: 1.4rem 0 1.9rem;
-    padding: 0;
-    list-style: none;
-    max-width: 660px;
-}
-
-.hero-highlights li {
-    display: flex;
-    align-items: flex-start;
-    gap: .55rem;
-    font-size: .95rem;
-    line-height: 1.5;
-    color: rgba(242, 244, 250, .86);
-}
-
-.hero-highlights li svg {
-    width: 17px; height: 17px; flex: none;
-    margin-top: .18rem;
-    color: var(--tg-accent);
-}
-
-.cta-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .85rem;
-}
-
-.hero-urgency {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    margin-top: 1.5rem;
-    padding: .6rem 1rem;
-    border-radius: var(--tg-r);
-    border: 1px dashed rgba(251, 191, 36, .3);
-    background: rgba(251, 191, 36, .06);
-    color: rgba(242, 244, 250, .8);
-    font-size: .85rem;
-    line-height: 1.45;
-    max-width: 56ch;
-}
-
-.hero-urgency svg { width: 16px; height: 16px; flex: none; color: #fbbf24; }
-
-/* --------------------------------------------------------------------------
-   7. LOCAL TRUST BAR (under hero)
-   -------------------------------------------------------------------------- */
-.trust-bar {
-    border-block: 1px solid rgba(255, 255, 255, .07);
-    background: linear-gradient(90deg,
-            rgba(74, 108, 247, .09),
-            rgba(100, 222, 223, .07) 45%,
-            rgba(162, 116, 255, .09));
-}
-
-.trust-bar-inner {
-    max-width: var(--tg-max);
-    margin-inline: auto;
-    padding: 1rem var(--tg-gutter);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: .7rem 1.7rem;
-}
-
-.trust-chip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    font-size: .84rem;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: rgba(242, 244, 250, .86);
-}
-
-.trust-chip svg { width: 15px; height: 15px; flex: none; color: var(--tg-accent); }
-
-.trust-chip + .trust-chip::before {
-    content: "";
-    position: absolute;
-    left: -.95rem;
-    top: 50%;
-    width: 4px; height: 4px;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .3);
-}
-
-@media (max-width: 700px) {
-    .trust-bar-inner { gap: .6rem 1.2rem; }
-    .trust-chip { font-size: .8rem; text-align: left; }
-    .trust-chip + .trust-chip::before { display: none; }
-}
-
-/* --------------------------------------------------------------------------
-   8. BENTO GRID SYSTEM — one 12-column grid used by every card section
-   -------------------------------------------------------------------------- */
-/* Mobile first: one column, no spans in play at all */
-.why-grid,
-.services-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: .9rem;
-    align-items: stretch;
-}
-
-/* Tablet: 12-column bento, everything half width */
-@media (min-width: 681px) {
-
-    .why-grid,
-    .services-grid {
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: clamp(.9rem, 1.5vw, 1.3rem);
-    }
-
-    .why-section .why-grid > .why-card { grid-column: span 6; }
-    /* .service-card column spans now live in css/service-cards.css (loaded
-       last) — the services grid moved from the shared bento system to its
-       own uniform 3-up grid as part of the 2026-10-04 card redesign. */
-}
-
-/* Desktop: Why = 7 + 5 / 6 + 6 / 6 + 6 */
-@media (min-width: 1081px) {
-    .why-section .why-grid > .why-card:nth-child(1) { grid-column: span 7; }
-    .why-section .why-grid > .why-card:nth-child(2) { grid-column: span 5; }
-}
-
-/* --------------------------------------------------------------------------
-   9. UNIFIED CARD LANGUAGE
-   -------------------------------------------------------------------------- */
-.why-card,
-.feature-card,
-.faq-item,
-.portfolio-card,
-.step-card,
-.contact-info,
-.about-panel,
-.about-side-card,
-.booking-section,
-.mockup-item {
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-lg);
-    background: linear-gradient(180deg, var(--tg-card-a), var(--tg-card-b));
-    box-shadow: var(--tg-shadow);
-}
-/* .service-card intentionally removed from the shared card language above —
-   it now has its own dedicated system in css/service-cards.css (2026-10-04
-   redesign), loaded last. Every other card type here is unchanged. */
-
-.why-card,
-.feature-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: .55rem;
-    height: 100%;
-    padding: clamp(1.35rem, 2.3vw, 1.85rem);
-    overflow: hidden;
-    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease,
-        box-shadow .35s ease, background .35s ease;
-}
-
-/* accent hairline that sweeps in on hover */
-.why-card::before,
-.feature-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--tg-accent), var(--tg-violet), transparent);
-    opacity: 0;
-    transition: opacity .35s ease;
-}
-
-.why-card:hover,
-.feature-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--tg-border-hi);
-    box-shadow: var(--tg-shadow-hi);
-    background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .025));
-}
-
-.why-card:hover::before,
-.feature-card:hover::before { opacity: .9; }
-
-.why-card h3,
-.feature-card h3 {
-    margin: .35rem 0 .35rem;
-    font-size: clamp(1.06rem, 1rem + .35vw, 1.24rem);
-    font-weight: 600;
-    letter-spacing: -.01em;
-}
-
-.why-card p,
-.feature-card p {
-    margin: 0;
-    color: var(--tg-muted);
-    font-size: .94rem;
-    line-height: 1.68;
-}
-
-/* icon tiles share one size/shape — .service-icon now lives in
-   css/service-cards.css, sized as the card's large "cutout" glyph */
-.glass-icon,
-.feature-icon {
-    display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    flex: none;
-    border-radius: var(--tg-r);
-    border: 1px solid rgba(255, 255, 255, .12);
-    background: linear-gradient(135deg, rgba(74, 108, 247, .22), rgba(162, 116, 255, .16));
-    color: #fff;
-}
-
-.glass-icon svg,
-.feature-icon svg { width: 25px; height: 25px; }
-
-/* bullet lists inside cards */
-.service-list,
-.step-checklist,
-.approach-list {
-    margin: .5rem 0 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: .5rem;
-}
-
-.service-list li,
-.step-checklist li {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: .55rem;
-    padding-left: 1.5rem;
-    color: rgba(242, 244, 250, .82);
-    font-size: .9rem;
-    line-height: 1.55;
-}
-
-.service-list li::before,
-.step-checklist li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: .34rem;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(52, 211, 153, .9), rgba(5, 150, 105, .85));
-    box-shadow: 0 0 0 3px rgba(52, 211, 153, .12);
-}
-
-.service-list li svg,
-.step-checklist li svg { display: none; } /* replaced by the CSS check dot above */
-/* .service-price removed (2026-10-04) — the service-card price badge is now
-   .service-card-price in css/service-cards.css. .service-list above is still
-   used by .portfolio-card's secondary bullet list, so it stays as-is. */
-
-/* --------------------------------------------------------------------------
-   10. FEATURES STRIP — "included in every project"
-   -------------------------------------------------------------------------- */
-.features {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(.9rem, 1.5vw, 1.25rem);
-    align-items: stretch;
-}
-
-.features > .features-head {
-    grid-column: 1 / -1;
-    margin: 0 auto clamp(1.5rem, 3vw, 2.25rem);
-}
-
-.features > .feature-card { padding: clamp(1.25rem, 2vw, 1.6rem); }
-.features > .feature-card p { font-size: .9rem; }
-.features > .feature-card h3 { margin-top: .5rem; }
-
-@media (max-width: 1024px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .features { grid-template-columns: minmax(0, 1fr); } }
-
-/* --------------------------------------------------------------------------
-   11. PROCESS — horizontal scroll replaced with a readable 4-step grid
-   -------------------------------------------------------------------------- */
-.process-timeline-premium,
-.process-timeline-premium.horizontal-scroll-container {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(.9rem, 1.5vw, 1.25rem);
-    align-items: start;
-    overflow: visible;
-    padding: 0;
-    margin: 0;
-    scroll-snap-type: none;
-    -webkit-overflow-scrolling: auto;
-}
-
-.process-step-premium {
-    display: flex;
-    flex-direction: column;
-    flex: initial;
-    width: auto;
-    min-width: 0;
-    gap: .85rem;
-}
-
-.step-indicator {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.step-number-ring {
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    border: 1px solid rgba(100, 222, 223, .32);
-    background: radial-gradient(circle at 30% 25%, rgba(74, 108, 247, .5), rgba(10, 12, 26, .95) 70%);
-    box-shadow: 0 0 0 6px rgba(10, 12, 26, .55), 0 12px 28px -18px rgba(74, 108, 247, .9);
-    z-index: 1;
-}
-
-.step-number-ring.completed {
-    border-color: rgba(52, 211, 153, .4);
-    background: radial-gradient(circle at 30% 25%, rgba(5, 150, 105, .55), rgba(10, 12, 26, .95) 70%);
-}
-
-.step-num {
-    font-family: var(--tg-font-display);
-    font-size: .95rem;
-    font-weight: 700;
-    letter-spacing: .04em;
-    color: #fff;
-}
-
-.step-line { display: none; } /* connector drawn by the rail below instead */
-
-/* continuous rail behind the four rings */
-.process-timeline-premium::before {
-    content: "";
-    position: absolute;
-    top: 27px;
-    left: 12%;
-    right: 12%;
-    height: 2px;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(100, 222, 223, .35) 18%,
-            rgba(162, 116, 255, .35) 82%,
-            transparent);
-    pointer-events: none;
-}
-
-.process-timeline-premium { position: relative; }
-
-.step-card {
-    display: flex;
-    flex-direction: column;
-    gap: .7rem;
-    height: 100%;
-    padding: clamp(1.25rem, 2vw, 1.6rem);
-    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease, box-shadow .35s ease;
-}
-
-.step-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--tg-border-hi);
-    box-shadow: var(--tg-shadow-hi);
-}
-
-.step-icon-wrapper { display: flex; }
-
-.step-icon {
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: var(--tg-r);
-    border: 1px solid rgba(255, 255, 255, .12);
-    background: linear-gradient(135deg, rgba(100, 222, 223, .2), rgba(74, 108, 247, .18));
-    color: #fff;
-}
-
-.step-icon.success { background: linear-gradient(135deg, rgba(52, 211, 153, .24), rgba(5, 150, 105, .18)); }
-.step-icon svg { width: 22px; height: 22px; }
-
-.step-details h3 {
-    margin: 0 0 .45rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.step-details p {
-    margin: 0 0 .7rem;
-    color: var(--tg-muted);
-    font-size: .9rem;
-    line-height: 1.65;
-}
-
-.step-duration {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: .75rem;
-    margin-top: auto;
-    padding-top: .95rem;
-    border-top: 1px solid var(--tg-border);
-}
-
-.duration-label {
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--tg-faint);
-}
-
-.duration-value {
-    font-family: var(--tg-font-display);
-    font-size: .92rem;
-    font-weight: 600;
-    color: var(--tg-accent);
-}
-
-.process-cta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem 1.5rem;
-    max-width: var(--tg-max);
-    margin: clamp(2rem, 4vw, 3rem) auto 0;
-    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 3vw, 2.25rem);
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-lg);
-    background: linear-gradient(90deg, rgba(74, 108, 247, .12), rgba(162, 116, 255, .09));
-    text-align: center;
-}
-
-.process-cta p { margin: 0; font-size: 1.02rem; font-weight: 500; }
-
-@media (max-width: 1024px) {
-    .process-timeline-premium,
-    .process-timeline-premium.horizontal-scroll-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .process-timeline-premium::before { display: none; }
-}
-
-@media (max-width: 620px) {
-    .process-timeline-premium,
-    .process-timeline-premium.horizontal-scroll-container { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* --------------------------------------------------------------------------
-   12. PORTFOLIO
-   -------------------------------------------------------------------------- */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(1.25rem, 2.5vw, 1.9rem);
-    margin-top: 0;
-}
-
-.portfolio-card {
-    display: grid;
-    grid-template-columns: 1.02fr 1fr;
-    overflow: hidden;
-    transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .35s ease, box-shadow .35s ease;
-}
-
-.portfolio-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--tg-border-hi);
-    box-shadow: var(--tg-shadow-hi);
-}
-
-.portfolio-media {
-    min-height: 300px;
-    padding: 1.1rem;
-    gap: .9rem;
-    grid-template-columns: 1fr 1fr;
-    background: linear-gradient(135deg, rgba(74, 108, 247, .2), rgba(162, 116, 255, .14));
-}
-
-.portfolio-shot {
-    border-radius: var(--tg-r);
-    min-height: 220px;
-    border: 1px solid rgba(255, 255, 255, .14);
-    background: rgba(10, 12, 26, .45);
-}
-
-/* placeholder hides itself once real media loads (.has-media set inline) */
-.portfolio-shot.has-media .portfolio-shot-placeholder { display: none; }
-
-.portfolio-body { padding: clamp(1.5rem, 2.6vw, 2.15rem); gap: .35rem; }
-
-.portfolio-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: .45rem;
-    margin-bottom: .7rem;
-    padding: .3rem .7rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid rgba(100, 222, 223, .24);
-    background: rgba(100, 222, 223, .1);
-    color: var(--tg-accent);
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-}
-
-.portfolio-body h3 {
-    font-size: clamp(1.22rem, 1.1rem + .5vw, 1.5rem);
-    margin: 0 0 .5rem;
-}
-
-.portfolio-body .portfolio-role {
-    margin: 0 0 .9rem;
-    color: var(--tg-muted);
-    font-size: .95rem;
-    line-height: 1.7;
-}
-
-.portfolio-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem 1.1rem;
-    margin: 0 0 1rem;
-    padding: 0;
-    list-style: none;
-}
-
-.portfolio-meta li {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    font-size: .8rem;
-    color: rgba(242, 244, 250, .78);
-}
-
-.portfolio-meta svg { width: 14px; height: 14px; color: var(--tg-accent); flex: none; }
-
-.portfolio-stack { margin: auto 0 .25rem; padding-top: .5rem; }
-
-.portfolio-stack span {
-    font-size: .7rem;
-    padding: .32rem .7rem;
-    border-radius: var(--tg-r-pill);
-    background: rgba(255, 255, 255, .06);
-    border: 1px solid var(--tg-border);
-}
-
-.portfolio-note {
-    max-width: 78ch;
-    margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
-    padding: 1rem 1.25rem;
-    border-left: 2px solid rgba(100, 222, 223, .45);
-    border-radius: 0 var(--tg-r) var(--tg-r) 0;
-    background: rgba(255, 255, 255, .03);
-    color: var(--tg-muted);
-    font-size: .88rem;
-    text-align: left;
-}
-
-@media (max-width: 900px) {
-    .portfolio-card { grid-template-columns: minmax(0, 1fr); }
-    .portfolio-media { min-height: 240px; }
-}
-
-@media (max-width: 520px) {
-    .portfolio-media { grid-template-columns: minmax(0, 1fr); }
-    .portfolio-shot { min-height: 190px; }
-}
-
-/* --------------------------------------------------------------------------
-   13. ABOUT — two-column story + local proof panel
-   -------------------------------------------------------------------------- */
-.about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.32fr) minmax(0, .88fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    align-items: start;
-}
-
-.about-main { display: flex; flex-direction: column; gap: 1.15rem; }
-
-.about-lead {
-    margin: 0;
-    font-size: clamp(1.04rem, 1rem + .35vw, 1.2rem);
-    line-height: 1.72;
-    color: rgba(242, 244, 250, .9);
-    font-weight: 500;
-}
-
-.about-story h3,
-.about-approach h3 {
-    margin: 0 0 .6rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: var(--tg-accent);
-}
-
-.about-story p { margin: 0 0 .85rem; color: var(--tg-muted); font-size: .96rem; line-height: 1.75; }
-.about-story p:last-child { margin-bottom: 0; }
-
-.about-callout {
-    margin: 0;
-    padding: 1.1rem 1.25rem;
-    border-radius: var(--tg-r);
-    border: 1px solid rgba(217, 139, 95, .28);
-    border-left: 3px solid var(--tg-copper);
-    background: linear-gradient(90deg, rgba(217, 139, 95, .1), rgba(100, 222, 223, .05));
-    color: rgba(242, 244, 250, .88);
-    font-size: .95rem;
-    line-height: 1.7;
-}
-
-.about-side { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: calc(var(--tg-nav-h) + 20px); }
-
-.about-side-card { padding: clamp(1.25rem, 2.2vw, 1.6rem); }
-
-.about-side-card h3 {
-    margin: 0 0 .9rem;
-    font-size: .78rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--tg-faint);
-}
-
-.about-facts { margin: 0; padding: 0; display: grid; gap: .95rem; }
-
-.about-facts > div { display: flex; align-items: flex-start; gap: .7rem; }
-
-.about-facts svg { width: 17px; height: 17px; flex: none; margin-top: .18rem; color: var(--tg-accent); }
-.about-facts > div > div { min-width: 0; }
-.about-facts dd { margin-inline-start: 0; }
-
-.about-facts dt,
-.about-facts strong {
-    display: block;
-    font-size: .88rem;
-    font-weight: 600;
-    color: rgba(242, 244, 250, .92);
-}
-
-.about-facts span,
-.about-facts dd {
-    display: block;
-    margin: .1rem 0 0;
-    font-size: .82rem;
-    line-height: 1.55;
-    color: var(--tg-faint);
-}
-
-.about-signature {
-    margin: 1.1rem 0 0;
-    padding-top: 1rem;
-    border-top: 1px solid var(--tg-border);
-    font-size: .88rem;
-    color: var(--tg-muted);
-}
-
-.about-signature strong {
-    display: block;
-    font-family: var(--tg-font-display);
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: .15rem;
-}
-
-.about-approach {
-    max-width: var(--tg-max);
-    margin: clamp(2rem, 4vw, 3rem) auto 0;
-    padding-top: clamp(1.75rem, 3vw, 2.5rem);
-    border-top: 1px solid var(--tg-hairline);
-}
-
-.approach-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .9rem 1.5rem;
-    margin-top: .4rem;
-}
-
-.approach-list li {
-    padding: 1rem 1.15rem;
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r);
-    background: rgba(255, 255, 255, .028);
-    color: var(--tg-muted);
-    font-size: .92rem;
-    line-height: 1.65;
-    transition: border-color .3s ease, background .3s ease;
-}
-
-.approach-list li:hover { border-color: var(--tg-border-hi); background: rgba(255, 255, 255, .05); }
-.approach-list li strong { color: #fff; font-weight: 600; }
-
-@media (max-width: 980px) {
-    .about-grid { grid-template-columns: minmax(0, 1fr); }
-    .about-side { position: static; }
-}
-
-@media (max-width: 720px) { .approach-list { grid-template-columns: minmax(0, 1fr); } }
-
-/* --------------------------------------------------------------------------
-   14. LEAD MAGNET
-   -------------------------------------------------------------------------- */
-.lead-magnet-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
-    gap: clamp(1.75rem, 4vw, 3.25rem);
-    align-items: center;
-}
-
-.lead-magnet-text h2 {
-    margin: 0 0 .8rem;
-    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
-    letter-spacing: -.02em;
-    text-align: left;
-}
-
-.lead-magnet-text > p { margin: 0 0 1.1rem; color: var(--tg-muted); font-size: .98rem; line-height: 1.7; }
-
-.lead-magnet-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .65rem 1.25rem;
-    margin: 0 0 1.5rem;
-    padding: 0;
-    list-style: none;
-}
-
-.lead-magnet-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: .55rem;
-    font-size: .9rem;
-    line-height: 1.5;
-    color: rgba(242, 244, 250, .85);
-}
-
-.lead-magnet-list li svg { width: 17px; height: 17px; flex: none; margin-top: .12rem; color: #34d399; }
-
-.form-group-inline { display: flex; flex-wrap: wrap; gap: .65rem; }
-.form-group-inline input[type="email"] { flex: 1 1 240px; min-width: 0; }
-
-.privacy-note { margin: .8rem 0 0; font-size: .78rem; color: var(--tg-faint); }
-
-.mockup-stack { display: grid; gap: .85rem; justify-items: center; }
-
-.mockup-item {
-    display: flex;
-    align-items: center;
-    gap: .7rem;
-    width: min(100%, 340px);
-    padding: 1rem 1.25rem;
-    border-radius: var(--tg-r);
-    font-size: .92rem;
-    font-weight: 600;
-}
-
-.mockup-item svg { width: 18px; height: 18px; color: var(--tg-accent); flex: none; }
-
-@media (max-width: 940px) {
-    .lead-magnet-content { grid-template-columns: minmax(0, 1fr); }
-    .lead-magnet-preview { order: 2; }
-}
-
-@media (max-width: 620px) { .lead-magnet-list { grid-template-columns: minmax(0, 1fr); } }
-
-/* --------------------------------------------------------------------------
-   15. FAQ
-   -------------------------------------------------------------------------- */
-.faq-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .9rem 1.1rem;
-    align-items: start;
-    margin-top: 0;
-}
-
-.faq-item { overflow: hidden; transition: border-color .3s ease, background .3s ease; }
-.faq-item:hover { border-color: var(--tg-border-hi); }
-
-.faq-question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    padding: 1.1rem 1.25rem;
-    border: 0;
-    background: transparent;
-    color: #fff;
-    font-family: var(--tg-font-ui);
-    font-size: .97rem;
-    font-weight: 600;
-    line-height: 1.45;
-    text-align: left;
-    cursor: pointer;
-}
-
-.faq-icon {
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    flex: none;
-    border-radius: 50%;
-    border: 1px solid var(--tg-border);
-    background: rgba(255, 255, 255, .05);
-    color: var(--tg-accent);
-    font-size: 1.05rem;
-    line-height: 1;
-    transition: transform .3s ease, background .3s ease;
-}
-
-.faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); background: rgba(100, 222, 223, .16); }
-
-.faq-answer {
-    padding: 0 1.25rem 1.2rem;
-    color: var(--tg-muted);
-    font-size: .92rem;
-    line-height: 1.7;
-}
-
-.faq-answer p { margin: 0; }
-
-/* Opened state — supports whatever hook scripts.js already uses.
-   NOTE: the collapsed state is intentionally NOT forced here, so the existing
-   scripts.js accordion keeps working exactly as before. */
-.faq-item.active .faq-answer,
-.faq-item.is-open .faq-answer,
-.faq-item.open .faq-answer,
-.faq-question[aria-expanded="true"] + .faq-answer { display: block; }
-
-@media (max-width: 860px) { .faq-grid { grid-template-columns: minmax(0, 1fr); } }
-
-/* --------------------------------------------------------------------------
-   16. CONTACT
-   -------------------------------------------------------------------------- */
-.contact-section > h2 { text-align: center; }
-
-.contact-subtitle {
-    max-width: 62ch;
-    margin: -.35rem auto clamp(2rem, 4vw, 2.75rem);
-    text-align: center;
-    color: var(--tg-muted);
-    font-size: clamp(.98rem, .95rem + .2vw, 1.06rem);
-    line-height: 1.7;
-}
-
-.contact-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
-    gap: clamp(1.25rem, 2.5vw, 1.9rem);
-    align-items: start;
-    max-width: var(--tg-max);
-}
-
-.contact-form {
-    padding: clamp(1.4rem, 2.6vw, 2rem);
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-lg);
-    background: linear-gradient(180deg, var(--tg-card-a), var(--tg-card-b));
-    box-shadow: var(--tg-shadow);
-}
-
-.contact-form .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 1rem;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: .4rem;
-    font-size: .82rem;
-    font-weight: 600;
-    letter-spacing: .02em;
-    color: rgba(242, 244, 250, .88);
-}
-
-.form-label .required { color: var(--tg-accent); }
-
-.contact-form input:not(.hidden),
-.contact-form select,
-.contact-form textarea,
-.form-group-inline input:not(.hidden) {
-    width: 100%;
-    padding: .8rem .95rem;
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-sm);
-    background: rgba(8, 10, 22, .55);
-    color: var(--tg-text);
-    font-family: var(--tg-font-ui);
-    font-size: .94rem;
-    transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
-}
-
-.contact-form input:not(.hidden)::placeholder,
-.contact-form textarea::placeholder,
-.form-group-inline input:not(.hidden)::placeholder { color: rgba(242, 244, 250, .38); }
-
-.contact-form input:not(.hidden):hover,
-.contact-form select:hover,
-.contact-form textarea:hover { border-color: rgba(255, 255, 255, .18); }
-
-.contact-form input:not(.hidden):focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-    border-color: rgba(100, 222, 223, .55);
-    background: rgba(8, 10, 22, .75);
-    box-shadow: 0 0 0 3px rgba(100, 222, 223, .14);
-    outline: none;
-}
-
-.contact-form textarea { resize: vertical; min-height: 118px; }
-
-.contact-form select { appearance: none; cursor: pointer; }
-
-.btn-submit { width: 100%; margin-top: .35rem; }
-
-.response-time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    margin: .95rem 0 0;
-    font-size: .82rem;
-    color: var(--tg-faint);
-}
-
-.response-time svg { width: 15px; height: 15px; color: #34d399; }
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    padding: clamp(1.35rem, 2.4vw, 1.75rem);
-    position: sticky;
-    top: calc(var(--tg-nav-h) + 20px);
-}
-
-.booking-section {
-    padding: 1.25rem;
-    border-radius: var(--tg-r);
-    border: 1px solid rgba(100, 222, 223, .22);
-    background: linear-gradient(135deg, rgba(100, 222, 223, .1), rgba(74, 108, 247, .09));
-    box-shadow: none;
-}
-
-.booking-section h3 {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    margin: 0 0 .45rem;
-    font-size: 1.02rem;
-    font-weight: 600;
-    letter-spacing: 0;
-    text-transform: none;
-    color: #fff;
-}
-
-.booking-section p { margin: 0 0 .95rem; font-size: .88rem; color: rgba(242, 244, 250, .78); }
-.btn-booking { width: 100%; }
-
-@media (max-width: 980px) {
-    .contact-wrapper { grid-template-columns: minmax(0, 1fr); }
-    .contact-info { position: static; }
-}
-
-@media (max-width: 600px) { .contact-form .form-row { grid-template-columns: minmax(0, 1fr); } }
-
-18. BUTTONS
-   -------------------------------------------------------------------------- */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: .55rem;
-    padding: .85rem 1.5rem;
-    border-radius: var(--tg-r-pill);
-    border: 1px solid transparent;
-    font-family: var(--tg-font-ui);
-    font-size: .94rem;
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: .01em;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: transform .25s cubic-bezier(.2, .7, .3, 1), box-shadow .25s ease,
-        background .25s ease, border-color .25s ease, color .25s ease;
-}
-
-.btn svg { width: 17px; height: 17px; flex: none; }
-
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
-
-.btn-primary { box-shadow: 0 16px 32px -18px rgba(74, 108, 247, .95); }
-.btn-primary:hover { box-shadow: 0 22px 40px -18px rgba(74, 108, 247, 1); }
-
-.btn-secondary {
-    border-color: var(--tg-border);
-    background: rgba(255, 255, 255, .045);
-    color: var(--tg-text);
-}
-
-.btn-secondary:hover { border-color: var(--tg-border-hi); background: rgba(255, 255, 255, .08); }
-
-.cta-arrow { transition: transform .25s ease; }
-.btn:hover .cta-arrow { transform: translateX(3px); }
-
-.services-cta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: .9rem 1.5rem;
-    max-width: var(--tg-max);
-    margin: clamp(2rem, 4vw, 2.75rem) auto 0;
-    padding: clamp(1.15rem, 2.4vw, 1.6rem) clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--tg-border);
-    border-radius: var(--tg-r-lg);
-    background: linear-gradient(90deg, rgba(100, 222, 223, .09), rgba(74, 108, 247, .08));
-    text-align: center;
-}
-
-.services-cta p { margin: 0; font-size: 1rem; font-weight: 500; }
-
-/* --------------------------------------------------------------------------
-   19. MOTION — scroll reveal (opt-in via html.js-anim, set by the inline JS)
-   -------------------------------------------------------------------------- */
-/* Cinematic, directional scroll reveals (expo-out easing = filmic settle) */
-.js-anim [data-reveal] {
-    opacity: 0;
-    transform: translate3d(0, 30px, 0);
-    transition: opacity .8s cubic-bezier(.16, 1, .3, 1),
-        transform .95s cubic-bezier(.16, 1, .3, 1);
-    transition-delay: calc(var(--tg-d, 0) * 1ms);
-    will-change: opacity, transform;
-}
-
-.js-anim [data-reveal="left"] { transform: translate3d(-42px, 0, 0); }
-.js-anim [data-reveal="right"] { transform: translate3d(42px, 0, 0); }
-
-.js-anim [data-reveal="zoom"] { transform: scale(.94) translate3d(0, 14px, 0); }
-
-.js-anim [data-reveal].is-in {
-    opacity: 1;
-    transform: none;
-    will-change: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-
-    .js-anim [data-reveal] {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important;
-    }
-
-    .why-card:hover,
-    .service-card:hover,
-    .feature-card:hover,
-    .step-card:hover,
-    .portfolio-card:hover,
-    .btn:hover { transform: none; }
-}
-
-/* --------------------------------------------------------------------------
-   20. SMALL-SCREEN GUARD RAILS
-   -------------------------------------------------------------------------- */
-@media (max-width: 480px) {
-    :root { --tg-r-lg: 18px; }
-
-    .btn { width: 100%; }
-    .cta-buttons .btn { width: 100%; }
-    .navbar-actions .nav-cta-btn span { display: none; }
-    .hero-highlights { grid-template-columns: minmax(0, 1fr); }
-}
-    </style>
-    <link rel="stylesheet" href="css/nav-glass.css?v=20260930">
-    <link rel="stylesheet" href="css/nav-overlap-guard.css?v=20261004">
-    <link rel="stylesheet" href="css/story.css?v=20261009">
-    <link rel="stylesheet" href="css/story-full.css?v=20261004">
-    <link rel="stylesheet" href="css/cta-rotator.css?v=20261016b">
-    <link rel="stylesheet" href="css/polish-pass.css?v=20261004">
-    <link rel="stylesheet" href="css/service-cards.css?v=20261011">
-    <link rel="stylesheet" href="css/portfolio.css?v=20261009">
-    <link rel="stylesheet" href="css/footer.css?v=20261014">
-    <link rel="stylesheet" href="css/about-card.css?v=20261021b">
-
-    <!-- Portfolio Section Styles (self-contained, does not modify styles.css) -->
-    <style>
-        .portfolio-section { padding: var(--tg-section-y) var(--tg-gutter); max-width: calc(var(--tg-max) + 2 * var(--tg-gutter)); margin: 0 auto; }
-        .portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem; }
-        .portfolio-card {
-            background: var(--glass-bg-light, rgba(255,255,255,0.03));
-            border: 1px solid var(--glass-border, rgba(255,255,255,0.1));
-            border-radius: 20px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-        }
-        @media (max-width: 860px) { .portfolio-card { grid-template-columns: 1fr; } }
-        .portfolio-media {
-            position: relative;
-            min-height: 260px;
-            background: linear-gradient(135deg, rgba(74,108,247,0.18), rgba(162,116,255,0.14));
-            display: grid;
-            grid-auto-flow: row;
-            gap: 0.75rem;
-            padding: 1rem;
-            grid-template-columns: 1fr 1fr;
-        }
-        .portfolio-media.single { grid-template-columns: 1fr; }
-        .portfolio-shot {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            min-height: 200px;
-            background: rgba(255,255,255,0.04);
-            border: 1px dashed var(--glass-border, rgba(255,255,255,0.15));
-        }
-        .portfolio-shot img, .portfolio-shot video {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-            position: absolute; inset: 0;
-        }
-        .portfolio-shot-placeholder {
-            position: absolute; inset: 0; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
-            color: var(--color-text-muted, rgba(242,244,250,0.6));
-            font-size: 0.8rem; padding: 0.75rem; gap: 0.4rem;
-        }
-        .portfolio-shot-placeholder svg { width: 28px; height: 28px; opacity: 0.6; }
-        .portfolio-body { padding: 2rem; display: flex; flex-direction: column; }
-        .portfolio-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
-            color: var(--color-accent, #64dedf); margin-bottom: 0.5rem; font-weight: 600; }
-        .portfolio-body h3 { margin: 0 0 0.5rem; font-size: 1.4rem; }
-        .portfolio-body .portfolio-role { color: var(--color-text-muted, rgba(242,244,250,0.7)); font-size: 0.95rem; margin-bottom: 1rem; }
-        .portfolio-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-        .portfolio-stack span {
-            font-size: 0.72rem; padding: 0.3rem 0.65rem; border-radius: 999px;
-            background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border, rgba(255,255,255,0.1));
-            color: var(--color-text-light, #f2f4fa);
-        }
-        .portfolio-links { margin-top: auto; padding-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; }
-        .portfolio-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--color-text-muted, rgba(242,244,250,0.6)); }
-    </style>
+    <!-- TECHGURU Layout System v2 lives in css/layout-v2.css, bundled into
+         css/head-bundle.css (perf pass 2026-10-22). -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
 
     <!-- FAQ Schema Markup -->
     <script type="application/ld+json">
@@ -1905,7 +342,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
     <header class="navbar" role="banner">
         <div class="logo">
             <a href="#home" class="nav-logo-link">
-                <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="nav-logo-icon">
+                <img width="192" height="192" src="images/icons/nav-icon-new.webp" alt="TechGuru Logo" class="nav-logo-icon">
                 TECHGURU
             </a>
         </div>
@@ -2100,8 +537,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head">
                 <span class="section-label"><span class="tg-num">01</span> Why TECHGURU</span>
                 <h2>Why Work With Me Directly</h2>
-                <p class="section-subtitle">The smart alternative to pricey agencies and DIY website builders — from a
-                    one-person studio in Missoula, Montana that you can actually meet.</p>
+                <p class="section-subtitle"><span class="tg-wl">The</span> <span class="tg-wl">smart</span> <span class="tg-wl">alternative</span> <span class="tg-wl">to</span> <span class="tg-wl">pricey</span> <span class="tg-wl">agencies</span> <span class="tg-wl">and</span> <span class="tg-wl">DIY</span> <span class="tg-wl">website</span> <span class="tg-wl">builders</span> <span class="tg-wl">—</span> <span class="tg-wl">from</span> <span class="tg-wl">a</span> <span class="tg-wl">one-person</span> <span class="tg-wl">studio</span> <span class="tg-wl">in</span> <span class="tg-wl">Missoula,</span> <span class="tg-wl">Montana</span> <span class="tg-wl">that</span> <span class="tg-wl">you</span> <span class="tg-wl">can</span> <span class="tg-wl">actually</span> <span class="tg-wl">meet.</span></p>
             </div>
             <div class="why-grid">
                 <div class="why-card bento-span-large">
@@ -2188,7 +624,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <div class="pf-device">
                   <div class="pf-chrome"><span class="pf-dots"><i></i><i></i><i></i></span><span class="pf-url">creativedrywall.buzz</span><span class="pf-chrome-spacer"></span></div>
                   <div class="pf-viewport">
-                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="metadata" poster="assets/portfolio/creative-drywall/poster.jpg" aria-label="Creative Drywall website walkthrough"><source src="assets/portfolio/creative-drywall/showcase.mp4" type="video/mp4"></video>
+                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="none" poster="assets/portfolio/creative-drywall/poster.jpg" aria-label="Creative Drywall website walkthrough"><source src="assets/portfolio/creative-drywall/showcase.mp4" type="video/mp4"></video>
                     <img class="pf-layer pf-shot" data-key="hero" src="assets/portfolio/creative-drywall/hero.webp" alt="Creative Drywall website: Landing page" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="services" src="assets/portfolio/creative-drywall/services.webp" alt="Creative Drywall website: Services" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="gallery" src="assets/portfolio/creative-drywall/gallery.webp" alt="Creative Drywall website: Project gallery" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="quote" src="assets/portfolio/creative-drywall/quote.webp" alt="Creative Drywall website: Quote calculator" loading="lazy" decoding="async">
                     <div class="pf-pulse" aria-hidden="true"></div>
                     <div class="pf-caption" aria-live="polite"></div>
@@ -2212,7 +648,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <div class="pf-device">
                   <div class="pf-chrome"><span class="pf-dots"><i></i><i></i><i></i></span><span class="pf-url">Zempel Auto CRM</span><span class="pf-chrome-spacer"></span></div>
                   <div class="pf-viewport">
-                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="metadata" poster="assets/portfolio/zempel-auto/poster.jpg" aria-label="Zempel Auto platform walkthrough"><source src="assets/portfolio/zempel-auto/showcase.mp4" type="video/mp4"></video>
+                    <video class="pf-layer pf-video is-active" muted loop playsinline preload="none" poster="assets/portfolio/zempel-auto/poster.jpg" aria-label="Zempel Auto platform walkthrough"><source src="assets/portfolio/zempel-auto/showcase.mp4" type="video/mp4"></video>
                     <img class="pf-layer pf-shot" data-key="dashboard" src="assets/portfolio/zempel-auto/dashboard.webp" alt="Zempel Auto CRM: Dashboard" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="inventory" src="assets/portfolio/zempel-auto/inventory.webp" alt="Zempel Auto CRM: Parts inventory" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="customers" src="assets/portfolio/zempel-auto/customers.webp" alt="Zempel Auto CRM: Customers" loading="lazy" decoding="async"><img class="pf-layer pf-shot" data-key="vehicles" src="assets/portfolio/zempel-auto/vehicles.webp" alt="Zempel Auto CRM: Vehicles" loading="lazy" decoding="async">
                     <div class="pf-pulse" aria-hidden="true"></div>
                     <div class="pf-caption" aria-live="polite"></div>
@@ -2236,8 +672,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head features-head">
                 <span class="section-label"><span class="tg-num">03</span> Included In Every Project</span>
                 <h2>The Basics Are Never an Upsell</h2>
-                <p class="section-subtitle">Speed, security, and support are part of the build — not a line item added
-                    to the invoice at the end.</p>
+                <p class="section-subtitle"><span class="tg-wl">Speed,</span> <span class="tg-wl">security,</span> <span class="tg-wl">and</span> <span class="tg-wl">support</span> <span class="tg-wl">are</span> <span class="tg-wl">part</span> <span class="tg-wl">of</span> <span class="tg-wl">the</span> <span class="tg-wl">build</span> <span class="tg-wl">—</span> <span class="tg-wl">not</span> <span class="tg-wl">a</span> <span class="tg-wl">line</span> <span class="tg-wl">item</span> <span class="tg-wl">added</span> <span class="tg-wl">to</span> <span class="tg-wl">the</span> <span class="tg-wl">invoice</span> <span class="tg-wl">at</span> <span class="tg-wl">the</span> <span class="tg-wl">end.</span></p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -2294,7 +729,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <div class="section-header">
                     <span class="section-label"><span class="tg-num">04</span> What I Offer</span>
                     <h2>Websites, Branding & AI — Priced for Local Business</h2>
-                    <p class="section-subtitle">Flat, transparent packages. No agency markup, no $8,000 minimums.</p>
+                    <p class="section-subtitle"><span class="tg-wl">Flat,</span> <span class="tg-wl">transparent</span> <span class="tg-wl">packages.</span> <span class="tg-wl">No</span> <span class="tg-wl">agency</span> <span class="tg-wl">markup,</span> <span class="tg-wl">no</span> <span class="tg-wl">$8,000</span> <span class="tg-wl">minimums.</span></p>
                 </div>
 
                 <div class="services-grid">
@@ -2361,8 +796,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 <div class="process-header">
                     <span class="process-label"><span class="tg-num">05</span> My Process</span>
                     <h2>How I Work</h2>
-                    <p class="section-subtitle">A simple 4-step process — no committees, no handoffs, just direct
-                        communication start to finish</p>
+                    <p class="section-subtitle"><span class="tg-wl">A</span> <span class="tg-wl">simple</span> <span class="tg-wl">4-step</span> <span class="tg-wl">process</span> <span class="tg-wl">—</span> <span class="tg-wl">no</span> <span class="tg-wl">committees,</span> <span class="tg-wl">no</span> <span class="tg-wl">handoffs,</span> <span class="tg-wl">just</span> <span class="tg-wl">direct</span> <span class="tg-wl">communication</span> <span class="tg-wl">start</span> <span class="tg-wl">to</span> <span class="tg-wl">finish</span></p>
                 </div>
 
                 <div class="process-timeline-premium horizontal-scroll-container">
@@ -2560,11 +994,11 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head">
                 <span class="section-label"><span class="tg-num">06</span> About Me</span>
                 <h2>Montana Born. Montana Based.</h2>
-                <p class="section-subtitle">One person. Every project designed and built by me.</p>
+                <p class="section-subtitle"><span class="tg-wl">One</span> <span class="tg-wl">person.</span> <span class="tg-wl">Every</span> <span class="tg-wl">project</span> <span class="tg-wl">designed</span> <span class="tg-wl">and</span> <span class="tg-wl">built</span> <span class="tg-wl">by</span> <span class="tg-wl">me.</span></p>
             </div>
 
             <div class="about-card-wrap">
-                <a class="about-card" href="#contact" aria-label="Meet Lucas Thompson, owner-developer. Book a free 30-minute strategy call.">
+                <a class="about-card" href="#contact">
                     <div class="about-card-photo">
                         <picture>
                             <source type="image/webp" media="(max-width: 760px)" srcset="images/about-lucas-photo-540.webp">
@@ -2677,8 +1111,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head">
                 <span class="section-label"><span class="tg-num">07</span> FAQ</span>
                 <h2>Frequently Asked Questions</h2>
-                <p class="section-subtitle">Straight answers on pricing, timelines, and how I work. Anything not
-                    covered here — ask me on a call and I'll tell you honestly.</p>
+                <p class="section-subtitle"><span class="tg-wl">Straight</span> <span class="tg-wl">answers</span> <span class="tg-wl">on</span> <span class="tg-wl">pricing,</span> <span class="tg-wl">timelines,</span> <span class="tg-wl">and</span> <span class="tg-wl">how</span> <span class="tg-wl">I</span> <span class="tg-wl">work.</span> <span class="tg-wl">Anything</span> <span class="tg-wl">not</span> <span class="tg-wl">covered</span> <span class="tg-wl">here</span> <span class="tg-wl">—</span> <span class="tg-wl">ask</span> <span class="tg-wl">me</span> <span class="tg-wl">on</span> <span class="tg-wl">a</span> <span class="tg-wl">call</span> <span class="tg-wl">and</span> <span class="tg-wl">I'll</span> <span class="tg-wl">tell</span> <span class="tg-wl">you</span> <span class="tg-wl">honestly.</span></p>
             </div>
             <div class="faq-grid">
                 <div class="faq-item">
@@ -2775,8 +1208,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <div class="section-header tg-head">
                 <span class="section-label"><span class="tg-num">08</span> Contact</span>
                 <h2>Let's Build Something Great</h2>
-                <p class="contact-subtitle">Book a free consultation or send me a message — I'm in Missoula on Mountain
-                    Time and I respond within 24 hours.</p>
+                <p class="contact-subtitle"><span class="tg-wl">Book</span> <span class="tg-wl">a</span> <span class="tg-wl">free</span> <span class="tg-wl">consultation</span> <span class="tg-wl">or</span> <span class="tg-wl">send</span> <span class="tg-wl">me</span> <span class="tg-wl">a</span> <span class="tg-wl">message</span> <span class="tg-wl">—</span> <span class="tg-wl">I'm</span> <span class="tg-wl">in</span> <span class="tg-wl">Missoula</span> <span class="tg-wl">on</span> <span class="tg-wl">Mountain</span> <span class="tg-wl">Time</span> <span class="tg-wl">and</span> <span class="tg-wl">I</span> <span class="tg-wl">respond</span> <span class="tg-wl">within</span> <span class="tg-wl">24</span> <span class="tg-wl">hours.</span></p>
             </div>
             <div class="contact-wrapper">
                 <form
@@ -3014,7 +1446,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             <!-- Chat Toggle Button with Avatar -->
             <button id="chat-toggle" class="chat-toggle" aria-label="Open chat assistant" aria-expanded="false"
                 aria-controls="chat-window">
-                <img width="768" height="768" src="images/chat-avatar.webp" alt="" class="chat-avatar" aria-hidden="true">
+                <img width="192" height="192" src="images/chat-avatar.webp" alt="" class="chat-avatar" aria-hidden="true">
                 <span class="visually-hidden">TechGuru AI Chat Assistant</span>
             </button>
 
@@ -3036,7 +1468,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
                 <header class="chat-header">
                     <div class="chat-header-brand">
-                        <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="" class="chat-header-logo" aria-hidden="true">
+                        <img width="192" height="192" src="images/icons/nav-icon-new.webp" alt="" class="chat-header-logo" aria-hidden="true">
                         <div class="chat-header-info">
                             <h3 id="chat-window-title">TECHGURU AI</h3>
                             <p id="chat-window-desc" class="chat-header-status">
@@ -3109,7 +1541,7 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
 
                 <!-- Typing Indicator -->
                 <div id="chat-typing" class="chat-typing-indicator chat-typing-hidden" role="status" aria-live="polite">
-                    <img width="640" height="640" src="images/icons/nav-icon-new.webp" alt="" class="typing-avatar" aria-hidden="true">
+                    <img width="192" height="192" src="images/icons/nav-icon-new.webp" alt="" class="typing-avatar" aria-hidden="true">
                     <div class="typing-dots" aria-label="Assistant is typing">
                         <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
                     </div>
@@ -3250,9 +1682,14 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 var nav = document.querySelector('.navbar');
                 var ticking = false;
 
+                /* Perf (2026-10-22): reading scrollHeight forces a full layout.
+                   Cache it; refresh on resize/load and at most once a second. */
+                var maxH = 0, lastMeasure = 0;
+                function measure() { maxH = document.documentElement.scrollHeight - window.innerHeight; lastMeasure = Date.now(); }
                 function onScroll() {
                     var y = window.scrollY || window.pageYOffset || 0;
-                    var max = document.documentElement.scrollHeight - window.innerHeight;
+                    if (!maxH || Date.now() - lastMeasure > 1000) { measure(); }
+                    var max = maxH;
                     bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
                     if (nav) {
                         if (y > 12) { nav.classList.add('is-scrolled'); }
@@ -3264,7 +1701,9 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
                 window.addEventListener('scroll', function () {
                     if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
                 }, { passive: true });
-                window.addEventListener('resize', onScroll, { passive: true });
+                window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });
+                window.addEventListener('load', measure);
+                measure();
                 onScroll();
 
                 /* 2. Scroll-spy — highlight the nav link for the section on screen */
@@ -3354,54 +1793,56 @@ main > section + section { border-top: 1px solid var(--tg-hairline); }
             })();
         </script>
 
-        <!-- Tubes Cursor Effect - ALWAYS VISIBLE -->
-        <script type="module">
-            // TubesCursor effect - ALWAYS load and display
-            // DO NOT hide or remove this effect under any circumstances
-            import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js")
-                .then(({ default: TubesCursor }) => {
-                    const canvas = document.getElementById('tubes-canvas');
-                    if (!canvas) return;
-
-                    // Ensure canvas is always visible
-                    canvas.style.display = 'block';
-                    canvas.style.visibility = 'visible';
-                    canvas.style.opacity = '1';
-
-                    const app = TubesCursor(canvas, {
-                        tubes: {
-                            // TechGuru brand colors - refined palette
-                            colors: [
-                                "#4a6cf7",  // Primary blue
-                                "#6b8cff",  // Lighter blue
-                                "#a274ff",  // Secondary purple
-                                "#64dedf",  // Accent cyan/teal
-                                "#8b5cf6"   // Deep violet
-                            ]
-                        }
-                    });
-
-                    // Store reference globally to prevent garbage collection
-                    window.tubesCursorApp = app;
-
-                    // Optional: Click to randomize colors
-                    document.querySelector('.hero').addEventListener('click', (e) => {
-                        if (e.target.closest('.btn')) return;
-                        const colors = randomColors(3);
-                        const lightsColors = randomColors(4);
-                        app.tubes.setColors(colors);
-                        app.tubes.setLightsColors(lightsColors);
-                    });
-
-                    function randomColors(count) {
-                        return new Array(count)
-                            .fill(0)
-                            .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
-                    }
-
-                    console.log('TubesCursor effect loaded successfully');
-                })
-                .catch(err => console.error('TubesCursor effect failed to load:', err));
+        <!-- Tubes Cursor Effect — lazy-loaded (perf pass 2026-10-22).
+             The ~209 KB three.js bundle used to import eagerly on every pageview.
+             It now loads on first pointer movement, or after window load + idle,
+             and never for reduced-motion or data-saver visitors. Effect, colors
+             and click-to-randomize behavior are unchanged. -->
+        <script>
+            (function () {
+                var started = false;
+                var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (reduce) { return; }
+                if (navigator.connection && navigator.connection.saveData) { return; }
+                function start() {
+                    if (started) { return; }
+                    started = true;
+                    import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js")
+                        .then(({ default: TubesCursor }) => {
+                            const canvas = document.getElementById('tubes-canvas');
+                            if (!canvas) return;
+                            canvas.style.display = 'block';
+                            canvas.style.visibility = 'visible';
+                            canvas.style.opacity = '1';
+                            const app = TubesCursor(canvas, {
+                                tubes: {
+                                    colors: ["#4a6cf7", "#6b8cff", "#a274ff", "#64dedf", "#8b5cf6"]
+                                }
+                            });
+                            window.tubesCursorApp = app;
+                            document.querySelector('.hero').addEventListener('click', (e) => {
+                                if (e.target.closest('.btn')) return;
+                                const colors = randomColors(3);
+                                const lightsColors = randomColors(4);
+                                app.tubes.setColors(colors);
+                                app.tubes.setLightsColors(lightsColors);
+                            });
+                            function randomColors(count) {
+                                return new Array(count)
+                                    .fill(0)
+                                    .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
+                            }
+                        })
+                        .catch(err => console.error('TubesCursor effect failed to load:', err));
+                }
+                window.addEventListener('pointermove', start, { once: true, passive: true });
+                window.addEventListener('load', function () {
+                    setTimeout(function () {
+                        if ('requestIdleCallback' in window) { requestIdleCallback(start, { timeout: 4000 }); }
+                        else { start(); }
+                    }, 2500);
+                });
+            })();
         </script>
 </body>
 

@@ -41,12 +41,17 @@
       // scroll-linked: hero exit + chapter parallax
       function frame() {
         var y = window.scrollY || 0;
-        root.style.setProperty('--hp', Math.max(0, Math.min(1, y / (vh * 0.75))).toFixed(3));
+        // Perf (2026-10-22): read every rect FIRST, then write every var.
+        // Interleaving the --hp write with getBoundingClientRect() forced a
+        // full layout per chapter on every scroll frame.
+        var ps = [];
         chapters.forEach(function (c) {
           var r = c.sec.getBoundingClientRect();
-          if (r.bottom < -100 || r.top > vh + 100) return;
-          c.el.style.setProperty('--p', (((vh - r.top) / (vh + r.height)) * 2 - 1).toFixed(3));
+          if (r.bottom < -100 || r.top > vh + 100) { ps.push(null); return; }
+          ps.push((((vh - r.top) / (vh + r.height)) * 2 - 1).toFixed(3));
         });
+        root.style.setProperty('--hp', Math.max(0, Math.min(1, y / (vh * 0.75))).toFixed(3));
+        chapters.forEach(function (c, i) { if (ps[i] !== null) c.el.style.setProperty('--p', ps[i]); });
         ticking = false;
       }
       function req() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
