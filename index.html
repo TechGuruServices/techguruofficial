@@ -75,12 +75,6 @@
     
     
     <script src="js/scripts.js" defer></script>
-    <script src="js/cinematic.js" defer></script>
-    <script src="js/story.js" defer></script>
-    <script src="js/story-full.js" defer></script>
-    <script src="js/cta-rotator.js" defer></script>
-    <script src="js/service-cards.js?v=20261011" defer></script>
-    <script src="js/portfolio.js" defer></script>
 
     <!-- TECHGURU Layout System v2 lives in css/layout-v2.css, bundled into
          css/head-bundle.css (perf pass 2026-10-22). -->
@@ -1793,6 +1787,33 @@
             })();
         </script>
 
+        <!-- Enhancement scripts: loaded after the window load event (perf round 2,
+             2026-10-22). Cinematic/story/CTA-rotation/portfolio layers are visual
+             enhancements only — nothing above the fold depends on them — so they
+             no longer compete with first paint. Original order preserved. -->
+        <script>
+            (function () {
+                var files = ['js/cinematic.js', 'js/story.js', 'js/story-full.js', 'js/cta-rotator.js', 'js/service-cards.js?v=20261011', 'js/portfolio.js'];
+                var started = false;
+                function loadAll() {
+                    if (started) { return; }
+                    started = true;
+                    files.forEach(function (src) {
+                        var s = document.createElement('script');
+                        s.src = src;
+                        s.async = false;
+                        document.head.appendChild(s);
+                    });
+                }
+                function schedule() {
+                    if ('requestIdleCallback' in window) { requestIdleCallback(loadAll, { timeout: 1200 }); }
+                    else { setTimeout(loadAll, 50); }
+                }
+                if (document.readyState === 'complete') { schedule(); }
+                else { window.addEventListener('load', schedule); }
+            })();
+        </script>
+
         <!-- Tubes Cursor Effect — lazy-loaded (perf pass 2026-10-22).
              The ~209 KB three.js bundle used to import eagerly on every pageview.
              It now loads on first pointer movement, or after window load + idle,
@@ -1835,8 +1856,10 @@
                         })
                         .catch(err => console.error('TubesCursor effect failed to load:', err));
                 }
-                window.addEventListener('pointermove', start, { once: true, passive: true });
+                var pageLoaded = false;
+                window.addEventListener('pointermove', function () { if (pageLoaded) { start(); } }, { passive: true });
                 window.addEventListener('load', function () {
+                    pageLoaded = true;
                     setTimeout(function () {
                         if ('requestIdleCallback' in window) { requestIdleCallback(start, { timeout: 4000 }); }
                         else { start(); }

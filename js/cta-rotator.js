@@ -83,13 +83,22 @@ boot(() => {
   };
 
   /* ---- boot ---- */
-  lockSlotWidths();
+  // Perf (2026-10-22): measuring synchronously at boot forces layout before
+  // first paint — and measures wrong until the webfont arrives. Queue the
+  // first measure for fonts.ready on the next animation frame instead.
+  var lockQueued = false;
+  function lockSoon() {
+    if (lockQueued) { return; }
+    lockQueued = true;
+    requestAnimationFrame(function () { lockQueued = false; lockSlotWidths(); });
+  }
+  setTimeout(lockSoon, 1500); // fallback if the fonts promise stalls
   let resizeTimer;
   window.addEventListener('resize', () => {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(lockSlotWidths, 150);
   });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSlotWidths);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSoon);
 
   let index = 0;
   window.setInterval(() => {
