@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Estimate Closer</title>
+<meta name="description" content="Privacy policy for the Estimate Closer Chrome extension.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261021">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261021">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261021">
+<link rel="manifest" href="/site.webmanifest?v=20261021">
+<style>
+:root { color-scheme: dark; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0d0d14; color: #e8e8f0; line-height: 1.7; margin: 0; padding: 2rem 1.25rem; }
+main { max-width: 720px; margin: 0 auto; }
+h1 { font-size: 1.9rem; margin-bottom: 0.25rem; }
+.updated { color: #9a9ab0; font-size: 0.9rem; margin-bottom: 2rem; }
+h2 { font-size: 1.25rem; margin-top: 2rem; color: #c9b8ff; }
+ul { padding-left: 1.25rem; }
+li { margin-bottom: 0.4rem; }
+a { color: #a78bfa; }
+.brand-header { max-width: 720px; margin: 0 auto 2.5rem; }
+.brand-header a { display: inline-flex; align-items: center; gap: 0.65rem; text-decoration: none; color: #fff; font-weight: 800; letter-spacing: 0.1em; font-size: 1.05rem; }
+.brand-header img { border-radius: 10px; display: block; }
+footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #2a2a3a; color: #9a9ab0; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<header class="brand-header">
+<a href="https://techguruofficial.us" aria-label="TECHGURU — home">
+<img src="images/icons/nav-icon-new.webp" alt="TECHGURU logo" width="44" height="44">
+<span>TECHGURU</span>
+</a>
+</header>
+<main>
+<h1>Privacy Policy — Estimate Closer</h1>
+<p class="updated">Effective date: October 25, 2026 &middot; Extension version covered: 2.0.1 (balanced split)</p>
+
+<p>TECHGURU Studio ("we", "us") built the <strong>Estimate Closer</strong> Chrome extension ("the extension") as a pipeline tracker for contractors and service professionals. This policy explains what data the extension handles, in plain language, and it matches what the code in version 2.0.1 actually does.</p>
+
+<h2>What the extension does</h2>
+<p>Estimate Closer lets you log estimates, track their status (Sent, Follow-up, Won, Lost), add notes and categories, copy a follow-up "Nudge" message, search and filter your pipeline, and export your data as JSON. Analytics, CSV export, and automated reminders are locked in the free version and are included in EC Pro / Contractor Growth Suite at launch. There is no purchase, price, or payment inside the extension in version 2.0.1.</p>
+
+<h2>Data stored only on your device</h2>
+<p>The extension stores the following <strong>only in your browser's local extension storage</strong> (Chrome's <code>storage</code> API, key <code>estimates_v2</code>), so you do not have to re-enter it each time:</p>
+<ul>
+<li>Customer names and project names you enter</li>
+<li>Estimate amounts, statuses, follow-up dates, and categories you enter</li>
+<li>Notes you add to an estimate, with timestamps</li>
+<li>Creation and update timestamps for each estimate</li>
+<li>A temporary prefill, only if you use the right-click menu: the text you selected is stored briefly as <code>_prefill</code> so the popup can prefill the customer name, and it is removed after use or after 60 seconds</li>
+</ul>
+<p>This data never leaves your device from the extension. We do not operate any server that receives extension data, and the extension does not transmit your estimates, notes, or customer information anywhere.</p>
+
+<h2>Data we do <em>not</em> collect</h2>
+<ul>
+<li>No account information or sign-in data — the extension has no account, no sign-in, and no user profile</li>
+<li>No browsing history, no website content, and no tab data — except the exact text you yourself select and choose to log via the right-click menu, which is stored locally only as described above</li>
+<li>No location data</li>
+<li>No analytics, cookies, or tracking of any kind inside the extension</li>
+<li>No data sold to or shared with third parties for marketing or advertising</li>
+</ul>
+<p>Uninstalling the extension deletes all locally stored extension data. The "Clear all" button inside the extension deletes all logged estimates from local storage. Exporting as JSON saves a file on your device where you choose — it does not upload anything.</p>
+
+<h2>Permissions, and why each one is requested</h2>
+<ul>
+<li><code>storage</code> — Save your estimates, notes, and categories locally, as described above.</li>
+<li><code>contextMenus</code> — Add two right-click items you choose to use: "Log estimate for: [your selected text]" and "Open Estimate Closer". The extension does not read pages or selections unless you invoke one of these menu items.</li>
+<li><code>clipboardWrite</code> — Copy the Nudge follow-up message to your clipboard when you click Nudge, using the browser clipboard write API. The extension does not read your clipboard.</li>
+<li><code>alarms</code> — Declared for future Pro reminders. In the free version 2.0.1, automated reminders are locked: no reminder alarm is scheduled, and any reminder alarm left from an earlier build is cleared on install. Alarms are used in this version only to manage/clear alarms, not to schedule reminders.</li>
+<li><code>notifications</code> — Declared for future Pro reminders. In the free version 2.0.1, automated reminders are locked and no reminder notification is sent. Notifications will only be used for follow-up reminders if and when Pro / Suite unlock ships, and this policy will be updated before that ships.</li>
+</ul>
+<p>The extension does not request <code>tabs</code>, <code>history</code>, <code>webNavigation</code>, or any host permission, and it makes no network requests, no remote fetches, and no calls to external APIs from the extension itself.</p>
+
+<h2>Third-party services</h2>
+<p>The extension itself uses no third-party services, SDKs, or analytics providers. Stripe is used only on the TECHGURU website for website purchases, not inside the extension, and the extension does not send payment or customer data to Stripe. If you later buy a Pro / Suite product on the website, that purchase is handled by Stripe on the website under Stripe's own privacy policy, and we receive only the subscription information Stripe provides for that purchase — not your card details.</p>
+
+<h2>Children's privacy</h2>
+<p>The extension is a business tool for contractors and service professionals and is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+<h2>Changes to this policy</h2>
+<p>If this policy changes — for example, when Pro reminders, CSV export, or Analytics unlock — we will update the effective date above and publish the new version at this URL before the change ships in the extension.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy? Contact TECHGURU Studio at <a href="mailto:info@techguruofficial.us">info@techguruofficial.us</a> or visit <a href="https://techguruofficial.us">techguruofficial.us</a>.</p>
+</main>
+<footer>
+<p>TECHGURU &middot; Missoula, MT &middot; Estimate Closer privacy policy, version 2.0.1.</p>
+</footer>
+</body>
+</html>
