@@ -579,6 +579,17 @@ color:var(--tgf-text);font-family:var(--tgf-body)}
 
 html{padding-top:env(safe-area-inset-top,0px)}
 
+
+/* Launch offer line + TINKL showcase (added Oct 23, 2026) */
+.pc-offer{margin:.35rem 0 0;font-size:.86rem;font-weight:600;color:#fbbf24}
+.tk-grid{display:grid;gap:1.1rem;align-items:center}
+@media(min-width:860px){.tk-grid{grid-template-columns:1.2fr .8fr}}
+.tk-points{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.5rem}
+.tk-points li{padding-left:1.4rem;position:relative;color:var(--pg-dim)}
+.tk-points li::before{content:"";position:absolute;left:0;top:.42em;width:.55rem;height:.55rem;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f472b6)}
+.tk-promo{border:1px solid rgba(245,158,11,.45);background:rgba(245,158,11,.08);border-radius:14px;padding:1rem 1.1rem}
+.tk-promo h3{margin:0 0 .4rem;font-size:1.02rem}
+.tk-promo p{margin:0;color:var(--pg-dim);font-size:.94rem}
 </style>
 <!-- Favicons - Optimized for Google Search Results -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
@@ -704,13 +715,14 @@ html{padding-top:env(safe-area-inset-top,0px)}
                 </svg>
               </div>
               <div>
-                <span class="pc-status dev"><i></i>In development</span>
+                <span class="pc-status live"><i></i>Live on the Chrome Web Store</span>
                 <span class="pc-kind">Chrome extension · Sales follow-up</span>
               </div>
               <span class="pc-num" aria-hidden="true">02</span>
             </header>
             <h3 class="pc-title" id="ec-h">Estimate Closer</h3>
             <p class="pc-punch">Never lose a quoted job to silence again.</p>
+            <p class="pc-offer">Launch offer — the first 10 contractors in get a free 1:1 setup call and the founding rate locked for good.</p>
             <p class="pc-desc">Log every estimate in seconds, get reminded to follow up, and send polished SMS/email messages with one tap. <strong>One recovered job pays for 10 years.</strong></p>
             <ul class="pc-steps">
               <li>15-second estimate logging</li>
@@ -721,7 +733,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
           <aside class="pc-buy" aria-label="Estimate Closer pricing">
             <p class="pc-buy-h">Pricing</p>
             <p class="pc-big">$9.99<span style="font-size:.95rem;font-weight:600;color:var(--pg-faint)">/mo</span><small>or $99/yr — one price, no per-job fees</small></p>
-            <a class="pg-btn pg-btn-ghost" href="https://techguruofficial.us/estimate-closer.html#notify">Get notified at launch <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="pg-btn pg-btn-primary" href="%%EC_STORE_URL%%">Install Free <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <div class="pc-rows">
               <p class="pc-buy-h">Learn more</p>
               <a class="pc-row" href="https://techguruofficial.us/estimate-closer.html"><span>See pricing details</span><b>→</b></a>
@@ -837,6 +849,34 @@ html{padding-top:env(safe-area-inset-top,0px)}
 </section>
 
 <!-- CLOSING CTA -->
+<!-- TINKL SHOWCASE -->
+<section class="pg-section" id="tinkl">
+  <div class="pg-wrap">
+    <div class="pg-suite rv" style="--a:#f59e0b;--b:#f472b6" aria-labelledby="tk-h">
+      <p class="pg-kicker"><i></i>Also from TechGuru</p>
+      <h2 class="pg-h2" id="tk-h">TINKL — <span class="pg-grad">pet health, handled.</span></h2>
+      <div class="tk-grid">
+        <div>
+          <p class="pg-lead" style="margin-top:.4rem">The pet health tracker I built for my own dog, Honey. Log medications, vet visits, weights, and daily routines, keep every record in one place — and hand your vet a clean, one-click PDF instead of a shoebox of paperwork.</p>
+          <ul class="tk-points">
+            <li>Daily meds, vet records, weights &amp; potty patterns — logged in seconds</li>
+            <li>One-click PDF health report, ready for any vet visit</li>
+            <li>Free to use, works on any phone — no app store needed</li>
+          </ul>
+          <p style="margin:1.1rem 0 0;display:flex;gap:.6rem;flex-wrap:wrap">
+            <a class="pg-btn pg-btn-primary" href="https://tinkl.techguruofficial.us">Open TINKL — free &amp; live <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="pg-btn pg-btn-ghost" href="https://techguruofficial.us/#contact">Vet clinics: book a 20-min demo</a>
+          </p>
+        </div>
+        <aside class="tk-promo" aria-label="Founding Clinics offer">
+          <h3>🏥 Founding Clinics — first 10</h3>
+          <p>The first 10 clinics to join the founding list get a <strong>free 90-day pilot</strong> when the TINKL clinic portal launches, <strong>founding-rate pricing locked</strong>, and a direct line to shape the features your front desk actually needs.</p>
+          <p style="margin-top:.5rem">No payment now. Just your name on the list — and a 20-minute demo when you're ready.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="pg-final pg-center rv">
   <div class="pg-wrap">
     <h2 class="pg-h2">Need something <span class="pg-grad">that doesn't exist yet?</span></h2>
