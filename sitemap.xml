@@ -7,9 +7,33 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://techguruofficial.us/products</loc>
-    <lastmod>2026-10-15</lastmod>
+    <loc>https://techguruofficial.us/products.html</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://techguruofficial.us/estimate-closer.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://techguruofficial.us/terrascope-privacy.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://techguruofficial.us/demo-capture-privacy.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://techguruofficial.us/terrascope-demo/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
