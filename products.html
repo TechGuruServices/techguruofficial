@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#080a0f">
-<title>Products — Chrome Extensions & Custom Web Apps | TECHGURU</title>
-<meta name="description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer Chrome extensions for contractors, plus custom Progressive Web Apps built for your business.">
+<title>Products — Browser Extensions & Custom Web Apps | TECHGURU</title>
+<meta name="description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer browser extensions for contractors, plus custom Progressive Web Apps built for your business.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://techguruofficial.us/products.html">
-<meta property="og:title" content="Products — Chrome Extensions & Custom Web Apps | TechGuru">
-<meta property="og:description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer Chrome extensions for contractors, plus custom Progressive Web Apps built for your business.">
+<meta property="og:title" content="Products — Browser Extensions & Custom Web Apps | TECHGURU">
+<meta property="og:description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer browser extensions for contractors, plus custom Progressive Web Apps built for your business.">
 <meta property="og:image" content="https://techguruofficial.us/images/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,8 +18,8 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://techguruofficial.us/products.html">
-<meta name="twitter:title" content="Products — Chrome Extensions & Custom Web Apps | TechGuru">
-<meta name="twitter:description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer Chrome extensions for contractors, plus custom Progressive Web Apps built for your business.">
+<meta name="twitter:title" content="Products — Browser Extensions & Custom Web Apps | TECHGURU">
+<meta name="twitter:description" content="Products by TECHGURU: TerraScope, Review Rocket and Estimate Closer browser extensions for contractors, plus custom Progressive Web Apps built for your business.">
 <meta name="twitter:image" content="https://techguruofficial.us/images/og-image.png">
 <script>
 /* Motion-allowed flag, set before first paint so reveals never flash. Removed after 4s if products.js never reports in. */
@@ -333,7 +333,7 @@ h1,h2,h3,p,ul{margin:0}
   border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 14px 34px -14px rgba(0,0,0,.6);transition:transform .6s var(--pg-e)}
 .pc:hover .pc-icon{transform:translateY(-3px) rotate(-3deg)}
 .pc-icon svg{width:48px;height:48px;overflow:visible}
-.pc-icon img{width:54px;height:54px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.2),0 8px 20px -6px rgba(0,0,0,.7)}
+.pc-icon img{width:54px;height:54px;border-radius:14px;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.2),0 8px 20px -6px rgba(0,0,0,.7)}
 .pc-icon--scan::after{content:"";position:absolute;left:0;right:0;top:0;height:46%;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--a) 55%,transparent),transparent);transform:translateY(-110%);animation:pc-scan 4.2s ease-in-out infinite}
 @keyframes pc-scan{0%{transform:translateY(-110%)}55%,100%{transform:translateY(230%)}}
 .pc-status{display:inline-flex;align-items:center;gap:.5rem;font:700 .68rem var(--pg-display);letter-spacing:.12em;text-transform:uppercase;padding:.4rem .85rem;border-radius:999px;border:1px solid;line-height:1.2}
@@ -634,12 +634,33 @@ html{padding-top:env(safe-area-inset-top,0px)}
       <span class="pg-w" style="--w:5">do</span>
       <span class="pg-w pg-grad" style="--w:6">real work.</span>
     </h1>
-    <p class="pg-sub rv" style="--dl:900ms">Chrome extensions for contractors and custom web apps for local businesses — designed to pay for themselves.</p>
-    <nav class="pg-chips rv" style="--dl:1200ms" aria-label="Jump to a product">
-      <a class="pg-chip" href="#review-rocket">Review Rocket</a>
-      <a class="pg-chip" href="#estimate-closer">Estimate Closer</a>
-      <a class="pg-chip" href="#custom-pwa">Custom Web Apps</a>
-      <a class="pg-chip" href="#terrascope">TerraScope</a>
+    <p class="pg-sub rv" style="--dl:900ms">Browser extensions for contractors and custom web apps for local businesses — designed to pay for themselves.</p>
+    <style>
+      /* Hero chips — Mockup B (icons + taglines), applied Oct 26, 2026. Real published icons; no embedded base64. */
+      .pg-chips-a{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+      .pg-chips-a .chip{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.35rem;padding:.8rem 1.1rem;border-radius:20px;border:1px solid rgba(255,255,255,.12);text-decoration:none;text-align:left;max-width:270px;transition:transform .3s}
+      .pg-chips-a .chip:hover{transform:translateY(-3px)}
+      .pg-chips-a .chip-top{display:inline-flex;align-items:center;gap:.6rem;font-size:.92rem;font-weight:600;color:#fff}
+      .pg-chips-a .chip img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none}
+      .pg-chips-a .chip.ec img{border-radius:9px}
+      .pg-chips-a .chip-tag{font-size:.78rem;line-height:1.45;color:#aebfb8;padding-left:34px}
+      .pg-chips-a .rr{background:rgba(52,211,153,.10);border-color:rgba(52,211,153,.45)}
+      .pg-chips-a .ec{background:rgba(96,165,250,.10);border-color:rgba(96,165,250,.45)}
+      .pg-chips-a .cp{background:rgba(45,212,191,.10);border-color:rgba(45,212,191,.45)}
+      .pg-chips-a .ts{background:rgba(163,230,53,.10);border-color:rgba(163,230,53,.45)}
+      @property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+      .pg-chips-a .tinkl{position:relative;padding:2px;border:none;background:conic-gradient(from var(--ang),#f472b6,#facc15,#34d399,#60a5fa,#a78bfa,#f472b6);animation:spin 10s linear infinite;border-radius:22px;text-decoration:none}
+      .pg-chips-a .tinkl .tinkl-inner{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.35rem;background:#0b100e;border-radius:20px;padding:.75rem 1.05rem;max-width:266px;text-align:left}
+      .pg-chips-a .tinkl img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none}
+      .pg-chips-a .tinkl .chip-tag{color:#c8d6d0;letter-spacing:.02em}
+      @keyframes spin{to{--ang:360deg}}
+    </style>
+    <nav class="pg-chips-a rv" style="--dl:1200ms" aria-label="Jump to a product">
+      <a class="chip rr" href="#review-rocket"><span class="chip-top"><img src="images/icons/review-rocket-icon.png" alt="" width="28" height="28">Review Rocket</span><span class="chip-tag">Get the review the moment the job is done.</span></a>
+      <a class="chip ec" href="#estimate-closer"><span class="chip-top"><img src="images/icons/estimate-closer-icon.png" alt="" width="28" height="28">Estimate Closer</span><span class="chip-tag">Quote it. Follow up. Close it.</span></a>
+      <a class="chip cp" href="#custom-pwa"><span class="chip-top"><img src="images/icons/nav-icon-new.webp" alt="" width="28" height="28">Custom Web Apps</span><span class="chip-tag">Software shaped like your business, not the other way around.</span></a>
+      <a class="chip ts" href="#terrascope"><span class="chip-top"><img src="images/icons/terrascope-icon.png" alt="" width="28" height="28">TerraScope</span><span class="chip-tag">Price the job from the truck, not the office.</span></a>
+      <a class="tinkl" href="#tinkl"><span class="tinkl-inner"><span class="chip-top"><img src="images/icons/tinkl-icon.png" alt="" width="28" height="28">TINKL.</span><span class="chip-tag">EVERY POTTY, PERFECTLY TRACKED.</span></span></a>
     </nav>
   </div>
 </section>
@@ -649,7 +670,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
   <div class="pg-wrap">
     <div class="pg-lineup-head rv">
       <p class="pg-kicker"><i></i>The lineup</p>
-      <h2 class="pg-h2" id="lineup-h">Four ways we put your <span class="pg-grad">time back.</span></h2>
+      <h2 class="pg-h2" id="lineup-h">Four ways to put your <span class="pg-grad">time back.</span></h2>
       <p class="pg-lead">Each one starts with a real problem on a real job site — and ends with something you can use the same day.</p>
     </div>
 
@@ -662,18 +683,10 @@ html{padding-top:env(safe-area-inset-top,0px)}
         <article class="pc rv is-flag" style="--a:#34d399;--b:#64dedf" aria-labelledby="rr-h">
           <div>
             <header class="pc-head">
-              <div class="pc-icon" aria-hidden="true">
-                <svg class="pc-ico" viewBox="0 0 48 48"><g class="rk">
-                  <path class="if" d="M24 5c5 4 8 10 8 17l-3 8H19l-3-8c0-7 3-13 8-17Z"/>
-                  <path class="ia" pathLength="1" d="M24 5c5 4 8 10 8 17l-3 8H19l-3-8c0-7 3-13 8-17Z"/>
-                  <circle class="ib" pathLength="1" cx="24" cy="17" r="3"/>
-                  <path class="ib" pathLength="1" d="M16 22l-5 7 6-1M32 22l5 7-6-1"/>
-                  <path class="fl" d="M21.5 33c0 3 2.5 7 2.5 7s2.5-4 2.5-7z"/>
-                </g></svg>
-              </div>
+              <div class="pc-icon" aria-hidden="true"><img src="images/icons/review-rocket-icon.png" alt="" width="54" height="54" loading="lazy"></div>
               <div>
-                <span class="pc-status live"><i></i>Live on the Chrome Web Store</span>
-                <span class="pc-kind">Chrome extension · Reputation</span>
+                <span class="pc-status live"><i></i>Live on Chrome &amp; Edge</span>
+                <span class="pc-kind">Browser extension · Reputation</span>
               </div>
               <span class="pc-num" aria-hidden="true">01</span>
             </header>
@@ -688,8 +701,9 @@ html{padding-top:env(safe-area-inset-top,0px)}
           </div>
           <aside class="pc-buy" aria-label="Review Rocket pricing">
             <p class="pc-buy-h">Start free</p>
-            <p class="pc-big">Free<small>Install in seconds from the Chrome Web Store</small></p>
-            <a class="pg-btn pg-btn-primary" href="https://chromewebstore.google.com/detail/eogbcfofncfdmnechefebffdemjapcla">Install Free <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p class="pc-big">Free<small>Install in seconds from Chrome or Edge</small></p>
+            <a class="pg-btn pg-btn-primary" href="https://chromewebstore.google.com/detail/eogbcfofncfdmnechefebffdemjapcla">Install Free — Chrome <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="pg-btn pg-btn-primary" href="https://microsoftedge.microsoft.com/addons/detail/ifjncgbfngalbclnpiiefodjmplodhkg" style="margin-top:.5rem">Install Free — Edge <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <div class="pc-rows">
               <p class="pc-buy-h">Go Pro</p>
               <a class="pc-row" href="https://buy.stripe.com/aFaaEXddufT34z695z4sE00"><span>Pro monthly</span><b>$9.99/mo</b></a>
@@ -705,35 +719,28 @@ html{padding-top:env(safe-area-inset-top,0px)}
         <article class="pc rv" style="--a:#64dedf;--b:#4a6cf7" aria-labelledby="ec-h">
           <div>
             <header class="pc-head">
-              <div class="pc-icon" aria-hidden="true">
-                <svg class="pc-ico" viewBox="0 0 48 48">
-                  <path class="if" d="M13 6h17l7 7v29H13Z"/>
-                  <path class="ia" pathLength="1" d="M13 6h17l7 7v29H13Z"/>
-                  <path class="ib" pathLength="1" d="M30 6v7h7M19 20h12"/>
-                  <path class="ia" pathLength="1" d="M19 31l5 5 9-11"/>
-                  <circle class="pulse" cx="33" cy="25" r="2"/>
-                </svg>
-              </div>
+              <div class="pc-icon" aria-hidden="true"><img src="images/icons/estimate-closer-icon.png" alt="" width="54" height="54" loading="lazy"></div>
               <div>
-                <span class="pc-status live"><i></i>Live on the Chrome Web Store</span>
-                <span class="pc-kind">Chrome extension · Sales follow-up</span>
+                <span class="pc-status live"><i></i>Live on Microsoft Edge Add-ons</span>
+                <span class="pc-kind">Edge extension · Sales follow-up</span>
               </div>
               <span class="pc-num" aria-hidden="true">02</span>
             </header>
             <h3 class="pc-title" id="ec-h">Estimate Closer</h3>
             <p class="pc-punch">Never lose a quoted job to silence again.</p>
             <p class="pc-offer">Launch offer — the first 10 contractors in get a free 1:1 setup call and the founding rate locked for good.</p>
-            <p class="pc-desc">Log every estimate in seconds, get reminded to follow up, and send polished SMS/email messages with one tap. <strong>One recovered job pays for 10 years.</strong></p>
+            <p class="pc-desc">Log every estimate in seconds, track it through the pipeline, and send a polished follow-up message with one tap. <strong>One recovered job pays for years.</strong></p>
             <ul class="pc-steps">
               <li>15-second estimate logging</li>
-              <li>Automatic follow-up reminders</li>
-              <li>Pipeline board + win-rate stats</li>
+              <li>Pipeline board with status filters and search</li>
+              <li>Notes and categories on every estimate, plus JSON export</li>
             </ul>
           </div>
           <aside class="pc-buy" aria-label="Estimate Closer pricing">
             <p class="pc-buy-h">Pricing</p>
             <p class="pc-big">$9.99<span style="font-size:.95rem;font-weight:600;color:var(--pg-faint)">/mo</span><small>or $99/yr — one price, no per-job fees</small></p>
-            <a class="pg-btn pg-btn-primary" href="%%EC_STORE_URL%%">Install Free <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="pg-btn pg-btn-primary" href="https://microsoftedge.microsoft.com/addons/detail/hgdejojgpndmkhfgiaolmionhjpagnee">Install Free <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p style="margin:.6rem 0 0;font-size:.9rem;color:var(--pg-faint)">Free to install. Pro ($9.99/mo or $99/yr) unlocks automated reminders, Analytics, and CSV export.</p>
             <div class="pc-rows">
               <p class="pc-buy-h">Learn more</p>
               <a class="pc-row" href="https://techguruofficial.us/estimate-closer.html"><span>See pricing details</span><b>→</b></a>
@@ -748,16 +755,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
         <article class="pc rv" style="--a:#34d399;--b:#a274ff" aria-labelledby="pwa-h">
           <div>
             <header class="pc-head">
-              <div class="pc-icon" aria-hidden="true">
-                <svg class="pc-ico" viewBox="0 0 48 48">
-                  <rect class="if" x="14" y="5" width="20" height="38" rx="4"/>
-                  <rect class="ia" pathLength="1" x="14" y="5" width="20" height="38" rx="4"/>
-                  <path class="ib" pathLength="1" d="M21 9h6"/>
-                  <rect class="ib" pathLength="1" x="19" y="15" width="10" height="8" rx="1.5"/>
-                  <rect class="ib" pathLength="1" x="19" y="26" width="10" height="8" rx="1.5"/>
-                  <circle class="pulse" cx="24" cy="39" r="1.6"/>
-                </svg>
-              </div>
+              <div class="pc-icon" aria-hidden="true"><img src="images/icons/nav-icon-new.webp" alt="" width="54" height="54" loading="lazy"></div>
               <div>
                 <span class="pc-status live"><i></i>Available now</span>
                 <span class="pc-kind">Custom build · Any device</span>
@@ -766,7 +764,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
             </header>
             <h3 class="pc-title" id="pwa-h">Custom Progressive Web Apps</h3>
             <p class="pc-punch">Software shaped like your business, not the other way around.</p>
-            <p class="pc-desc">We design and build installable web apps tailored to your business — like the <strong>Zempel Auto Parts CRM</strong>: inventory, customers, vehicles, sales, invoices, and live parts pricing in one app that works on any device, even offline.</p>
+            <p class="pc-desc">I design and build installable web apps tailored to your business — like the <strong>Zempel Auto Parts CRM</strong>: inventory, customers, vehicles, sales, invoices, and live parts pricing in one app that works on any device, even offline.</p>
             <ul class="pc-steps">
               <li>Installable on phone, tablet &amp; desktop — no app store needed</li>
               <li>Works offline, syncs when reconnected</li>
@@ -779,7 +777,7 @@ html{padding-top:env(safe-area-inset-top,0px)}
             <a class="pg-btn pg-btn-primary" href="https://techguruofficial.us#contact">Book a Free Call <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <div class="pc-rows">
               <p class="pc-buy-h">Learn more</p>
-              <a class="pc-row" href="https://techguruofficial.us#services"><span>Our Services</span><b>→</b></a>
+              <a class="pc-row" href="https://techguruofficial.us#services"><span>Services</span><b>→</b></a>
               <a class="pc-row" href="https://techguruofficial.us/#starting-a-project"><span>Starting a project — deposits</span><b>→</b></a>
             </div>
           </aside>
@@ -825,6 +823,35 @@ html{padding-top:env(safe-area-inset-top,0px)}
   </div>
 </section>
 
+<!-- 60-SECOND INSTALL GUIDE -->
+<section class="pg-section" id="install-guide">
+  <div class="pg-wrap">
+    <div class="pg-suite rv" aria-labelledby="install-h">
+      <p class="pg-kicker"><i></i>New to browser extensions?</p>
+      <h2 class="pg-h2" id="install-h">You're <span class="pg-grad">60 seconds away.</span></h2>
+      <p class="pg-lead">TECHGURU extensions are lightweight add-ons for your computer's Chrome or Edge browser (Windows, Mac, or Chromebook). Three steps, no new system to learn:</p>
+      <div class="pg-flow">
+        <div class="pg-node"><span class="pg-node-n">1</span><b>Add it</b><em>from its store</em></div>
+        <span class="pg-link" aria-hidden="true" style="--dl:0s"></span>
+        <div class="pg-node"><span class="pg-node-n">2</span><b>Pin it</b><em>so it's always one tap away</em></div>
+        <span class="pg-link" aria-hidden="true" style="--dl:2.4s"></span>
+        <div class="pg-node"><span class="pg-node-n">3</span><b>Use it</b><em>on the job</em></div>
+      </div>
+      <div>
+        <p><strong>1. Add it.</strong> On Review Rocket above, click Install Free — Chrome, then Add to Chrome, or Install Free — Edge, then Get in Microsoft Edge. On TerraScope, click Install Free, then Add to Chrome. For Estimate Closer, click Install Free above, then Get in Microsoft Edge. Done.</p>
+        <p><strong>2. Pin it.</strong> Click the puzzle-piece Extensions icon in your browser's top-right (Chrome or Edge), find the tool, click Pin. It lives in your toolbar from then on.</p>
+        <p><strong>3. Use it.</strong> Review Rocket: tap the pinned icon after the job and send the review request on the spot. TerraScope: draw your boundary on its satellite map — area, volume, and cost update as you draw.</p>
+        <p><strong>Heads up:</strong> these run in desktop Chrome or Edge only — not on phones or tablets. (Your customers' review links open anywhere.)</p>
+        <p><em>Stuck? Text me at <strong>(406) 284-5523</strong> — I'm Lucas, I built these, and I'm in Missoula.</em></p>
+      </div>
+      <aside class="tk-promo" aria-label="Estimate Closer status">
+        <h3>Estimate Closer — live on Microsoft Edge</h3>
+        <p>Estimate Closer is live now — install it free from Microsoft Edge Add-ons using the Install Free button on its card above. The Chrome Web Store version is not live yet.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- SUITE -->
 <section class="pg-section">
   <div class="pg-wrap">
@@ -854,7 +881,8 @@ html{padding-top:env(safe-area-inset-top,0px)}
   <div class="pg-wrap">
     <div class="pg-suite rv" style="--a:#f59e0b;--b:#f472b6" aria-labelledby="tk-h">
       <p class="pg-kicker"><i></i>Also from TechGuru</p>
-      <h2 class="pg-h2" id="tk-h">TINKL — <span class="pg-grad">pet health, handled.</span></h2>
+      <img src="images/icons/tinkl-icon.png" alt="TINKL. paw logo" width="72" height="72" loading="lazy" style="border-radius:16px;margin-bottom:.8rem">
+          <h2 class="pg-h2" id="tk-h">TINKL. — <span class="pg-grad">pet health, handled.</span></h2>
       <div class="tk-grid">
         <div>
           <p class="pg-lead" style="margin-top:.4rem">The pet health tracker I built for my own dog, Honey. Log medications, vet visits, weights, and daily routines, keep every record in one place — and hand your vet a clean, one-click PDF instead of a shoebox of paperwork.</p>
@@ -864,23 +892,24 @@ html{padding-top:env(safe-area-inset-top,0px)}
             <li>Free to use, works on any phone — no app store needed</li>
           </ul>
           <p style="margin:1.1rem 0 0;display:flex;gap:.6rem;flex-wrap:wrap">
-            <a class="pg-btn pg-btn-primary" href="https://tinkl.techguruofficial.us">Open TINKL — free &amp; live <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="pg-btn pg-btn-primary" href="https://tinkl.techguruofficial.us">Open TINKL. — free &amp; live <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="pg-btn pg-btn-ghost" href="https://techguruofficial.us/#contact">Vet clinics: book a 20-min demo</a>
           </p>
         </div>
         <aside class="tk-promo" aria-label="Founding Clinics offer">
           <h3>🏥 Founding Clinics — first 10</h3>
-          <p>The first 10 clinics to join the founding list get a <strong>free 90-day pilot</strong> when the TINKL clinic portal launches, <strong>founding-rate pricing locked</strong>, and a direct line to shape the features your front desk actually needs.</p>
+          <p>The first 10 clinics to join the founding list get a <strong>free 90-day pilot</strong> when the TINKL. clinic portal launches, <strong>founding-rate pricing locked</strong>, and a direct line to shape the features your front desk actually needs.</p>
           <p style="margin-top:.5rem">No payment now. Just your name on the list — and a 20-minute demo when you're ready.</p>
         </aside>
       </div>
     </div>
   </div>
 </section>
+
 <section class="pg-final pg-center rv">
   <div class="pg-wrap">
     <h2 class="pg-h2">Need something <span class="pg-grad">that doesn't exist yet?</span></h2>
-    <p class="pg-lead">Tell us how your business actually runs. We'll design and build the tool around it.</p>
+    <p class="pg-lead">Let's discuss how your business actually runs. I'll design and build the tool around it.</p>
     <a class="pg-btn pg-btn-primary" href="https://techguruofficial.us#contact">Book a Free Call <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
 </section>
