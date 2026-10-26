@@ -26,16 +26,6 @@
         footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #2a2a3a;
                  color: #9a9ab0; font-size: 0.9rem; }
     </style>
-    <!-- Favicons - Optimized for Google Search Results -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261021">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261021">
-
-    <!-- Apple Touch Icon (180x180 is iOS standard for crisp display) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261021">
-
-    <!-- Web App Manifest (contains all icon definitions) -->
-    <link rel="manifest" href="/site.webmanifest?v=20261021">
 </head>
 <body>
 <header class="brand-header">
@@ -46,7 +36,7 @@
 </header>
 <main>
     <h1>Privacy Policy — DemoGlide by TECHGURU</h1>
-    <p class="updated">Effective date: October 15, 2026</p>
+    <p class="updated">Effective date: October 19, 2026</p>
 
     <p>TECHGURU Studio is a solo web design studio run by its owner and developer.
     I built the <strong>DemoGlide by TECHGURU</strong> Chrome extension
@@ -62,16 +52,27 @@
     and saves it to your device using the browser's download API.
     <strong>Every step runs locally in your browser.</strong></p>
 
+    <h2>License verification (DemoGlide Pro)</h2>
+    <p>The free tier of the extension works entirely offline in your browser and
+    makes no network calls. If you choose to upgrade to DemoGlide Pro, you buy
+    a one-time license on my website (handled by Stripe — I never see your card
+    details) and enter the license key in the extension popup. The extension
+    then sends <strong>only that key</strong> to my license server (a Cloudflare Worker) to
+    check it is valid, and re-checks at most once a day. The server stores each
+    issued key and whether it is active; it receives nothing else — no browsing
+    history, no page content, no account data. If the server is unreachable, the
+    extension keeps working as you left it.</p>
+
     <h2>Data I do <em>not</em> collect</h2>
     <ul>
         <li>No account information or sign-in data</li>
         <li>No browsing history — nothing is captured on tabs you don't explicitly start a tour on</li>
         <li>No analytics, cookies, or tracking of any kind</li>
-        <li>No data stored remotely — I operate no server that receives extension data</li>
+        <li>No data stored remotely by the free tier — the only server involved is the Pro license check described below, which receives just your license key</li>
         <li>No data sold to or shared with third parties</li>
     </ul>
     <p>The finished <code>.zip</code> is saved only to your own device. Nothing the extension
-    handles is transmitted anywhere.</p>
+    handles is transmitted anywhere, except the Pro license key check described below.</p>
 
     <h2>Permissions and why they are needed</h2>
     <ul>
@@ -82,12 +83,16 @@
         <li><code>offscreen</code> — run a hidden processing document that encodes the tour video.
         The browser's video encoder is only available in document contexts, so this step cannot
         run in the extension's background service worker.</li>
+        <li><code>storage</code> — remember your license status and your free-tour count for the
+        current month. This stays on your own device; it is never transmitted anywhere.</li>
     </ul>
 
     <h2>Third-party services</h2>
-    <p>The extension does not use any third-party services, SDKs, or analytics providers.
+    <p>The free tier of the extension does not use any third-party services, SDKs, or analytics providers.
     Its video and zip libraries (<code>mp4-muxer</code>, <code>fflate</code>) are bundled
-    inside the extension itself — it makes no network calls at runtime.</p>
+    inside the extension itself — it makes no network calls at runtime. DemoGlide Pro
+    buyers are served by Stripe for checkout (subject to Stripe's privacy policy) and a
+    Cloudflare Worker for license verification (key only, as described above).</p>
 
     <h2>Children's privacy</h2>
     <p>The extension is a business tool and is not directed at children under 13. I do not knowingly
