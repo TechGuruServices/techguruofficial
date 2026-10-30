@@ -591,6 +591,9 @@ html{padding-top:env(safe-area-inset-top,0px)}
 .tk-promo{border:1px solid rgba(245,158,11,.45);background:rgba(245,158,11,.08);border-radius:14px;padding:1rem 1.1rem}
 .tk-promo h3{margin:0 0 .4rem;font-size:1.02rem}
 .tk-promo p{margin:0;color:var(--pg-dim);font-size:.94rem}
+.tk-visual{display:flex;flex-direction:column;align-items:center;gap:.55rem}
+.tk-loader-vid{width:min(100%,270px);aspect-ratio:390/844;border-radius:30px;border:1px solid rgba(244,114,182,.4);box-shadow:0 24px 60px -18px rgba(244,114,182,.4);background:#05060b}
+.tk-vid-cap{font-size:.82rem;color:var(--pg-dim);text-align:center;max-width:270px}
 </style>
 <!-- Favicons - Optimized for Google Search Results -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
@@ -923,19 +926,23 @@ html{padding-top:env(safe-area-inset-top,0px)}
           <ul class="tk-points">
             <li>Daily meds, vet records, weights &amp; potty patterns — logged in seconds</li>
             <li>One-click PDF health report, ready for any vet visit</li>
-            <li>Free to use, works on any phone — no app store needed</li>
+            <li>Free to use — web, any phone, and now on the Microsoft Store</li>
           </ul>
           <p style="margin:1.1rem 0 0;display:flex;gap:.6rem;flex-wrap:wrap">
             <a class="pg-btn pg-btn-primary" href="https://tinkl.techguruofficial.us">Open TINKL. — free &amp; live <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="pg-btn pg-btn-ghost" href="https://book.techguruofficial.us/?demo=tinkl" target="_blank" rel="noopener">Vet clinics: book a 20-min demo</a>
           </p>
         </div>
-        <aside class="tk-promo" aria-label="Founding Clinics offer">
-          <h3>🏥 Founding Clinics — first 10</h3>
-          <p>The first 10 clinics to join the founding list get a <strong>free 90-day pilot</strong> when the TINKL. clinic portal launches, <strong>founding-rate pricing locked</strong>, and a direct line to shape the features your front desk actually needs.</p>
-          <p style="margin-top:.5rem">No payment now. Just your name on the list — and a 20-minute demo when you're ready.</p>
-        </aside>
+        <div class="tk-visual">
+          <video class="tk-loader-vid" src="images/tinkl-loader-preview.mp4" autoplay muted loop playsinline aria-label="TINKL. official loader preview"></video>
+          <p class="tk-vid-cap">The official loader — paw fades into Honey on first launch</p>
+        </div>
       </div>
+      <aside class="tk-promo" aria-label="Founding Clinics offer" style="margin-top:1.1rem">
+        <h3>🏥 Founding Clinics — first 10</h3>
+        <p>The first 10 clinics to join the founding list get a <strong>free 90-day pilot</strong> when the TINKL. clinic portal launches, <strong>founding-rate pricing locked</strong>, and a direct line to shape the features your front desk actually needs.</p>
+        <p style="margin-top:.5rem">No payment now. Just your name on the list — and a 20-minute demo when you're ready.</p>
+      </aside>
     </div>
   </div>
 </section>
