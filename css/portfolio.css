@@ -147,7 +147,17 @@
 .pf-more { margin: clamp(48px, 7vw, 80px) 0 0; text-align: center; color: var(--pf-dim); }
 
 /* ---------- scroll reveal ---------- */
-.pf-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+/* Failsafe added 2026-10-31 (AH-MUSE-ME): if portfolio.js never runs or
+   fails to load, this CSS-only animation still reveals the cases after
+   5s, so the section can never sit blank again. Once portfolio.js arms
+   its IntersectionObserver reveal it adds .pf-js to <html>, which
+   cancels this animation and leaves the normal reveal in charge.
+   NOTE: the live homepage loads css/head-bundle.css, not this file —
+   mirror this block into the bundle's portfolio.css section on the
+   next bundle rebuild. */
+.pf-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); animation: pfRevealFailsafe .01s 5s forwards; }
+html.pf-js .pf-reveal { animation: none; }
+@keyframes pfRevealFailsafe { to { opacity: 1; transform: none; } }
 .pf-reveal.is-in { opacity: 1; transform: none; }
 
 /* ---------- responsive ---------- */
