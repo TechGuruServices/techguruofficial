@@ -66,6 +66,7 @@
     <!-- All head CSS in one bundled file (perf pass 2026-10-22). Order inside the bundle
          matches the previous 17 separate <link>/<style> blocks exactly. -->
     <link rel="stylesheet" href="css/head-bundle.css?v=20261022">
+    <link rel="stylesheet" href="css/booking-widget.css?v=20261031">
 
     <!-- Main Stylesheet -->
     
@@ -1346,16 +1347,28 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="booking-section" id="booking">
-            <div class="section-header tg-head">
-                <span class="section-label"><span class="tg-num">08</span> Book a call</span>
-                <h2>Book a Free Call</h2>
-                <p class="section-subtitle">Pick a time that works for you — you'll talk to me, not a sales team. Prefer to just talk? Call or text (406) 284-5523.</p>
-            </div>
-            <div class="booking-wrapper">
-                <iframe src="https://book.techguruofficial.us/" title="Book a call with TECHGURU" style="width:100%;min-height:640px;border:0;border-radius:12px" loading="lazy"></iframe>
-                <p class="booking-fallback"><a class="va-link" href="https://book.techguruofficial.us/" target="_blank" rel="noopener">Open booking in a new tab →</a></p>
+        <!-- Booking widget — premium embed of the TECHGURU Studio booking platform (2026-10-31).
+             Replaces the legacy contact form. The iframe never causes page-level
+             horizontal overflow; see css/booking-widget.css for the responsive rules. -->
+        <section class="bw" id="booking" aria-labelledby="bw-title">
+            <div class="bw-card">
+                <div class="section-header tg-head bw-head">
+                    <span class="section-label"><span class="tg-num">08</span> Book a call</span>
+                    <span class="bw-badge"><span class="bw-dot" aria-hidden="true"></span>Live booking</span>
+                    <h2 id="bw-title">Book a Free Call</h2>
+                    <p class="section-subtitle bw-sub">Pick a time that works for you &mdash; you&rsquo;ll talk to me, not a sales team. Free 30-minute call with email confirmation. Prefer to just talk? Call or text <a href="tel:+14062845523">(406) 284-5523</a>.</p>
+                </div>
+                <div class="bw-frame-wrap">
+                    <div class="bw-skeleton" aria-hidden="true">
+                        <div class="bw-skel-line short"></div>
+                        <div class="bw-skel-line mid"></div>
+                        <div class="bw-skel-cal"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <div class="bw-skel-line"></div>
+                        <p class="bw-skel-note">Loading booking calendar&hellip;</p>
+                    </div>
+                    <iframe class="bw-frame" src="https://book.techguruofficial.us/" title="Book a call with TECHGURU Studio" loading="lazy" onload="this.closest('.bw').classList.add('bw-loaded')"></iframe>
+                </div>
+                <p class="bw-fallback">Booking not loading? <a class="va-link" href="https://book.techguruofficial.us/" target="_blank" rel="noopener">Open it in a new tab &rarr;</a></p>
             </div>
         </section>
     </main>
