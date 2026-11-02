@@ -114,7 +114,16 @@ const validateContactRequest = (body) => {
 /**
  * Check rate-limiting using Cloudflare KV
  * Limit: 5 submissions per IP per hour
+ *
+ * KV-WRITE EFFICIENT (Nov 2026): the old version did 1 KV PUT per
+ * request and burned the 1,000/day free tier. This version counts in
+ * worker memory (per isolate) and touches KV sparingly — one cheap GET
+ * to hydrate a cold isolate, and a PUT only on block or every 10th hit.
+ * All KV writes are fail-open: a KV outage or spent quota must never
+ * 500 the endpoint; the in-memory count still enforces the limit.
  */
+const memLimits = new Map();
+
 const checkRateLimit = async (kv, clientIp) => {
   if (!kv) {
     // If KV is not configured, allow the request but log a warning
@@ -122,26 +131,37 @@ const checkRateLimit = async (kv, clientIp) => {
     return { allowed: true, remaining: 5 };
   }
   const key = `ratelimit:contact:${clientIp}`;
-  const current = await kv.get(key, 'json') || { count: 0, timestamp: Date.now() };
-  
-  const oneHourAgo = Date.now() - 3600000;
-  
-  // Reset counter if outside 1-hour window
-  if (current.timestamp < oneHourAgo) {
-    await kv.put(key, JSON.stringify({ count: 1, timestamp: Date.now() }), { expirationTtl: 3600 });
-    return { allowed: true, remaining: 4 };
+  const now = Date.now();
+  const oneHourAgo = now - 3600000;
+
+  let entry = memLimits.get(key);
+  if (!entry || entry.timestamp < oneHourAgo) {
+    let stored = null;
+    try { stored = await kv.get(key, 'json'); } catch { stored = null; }
+    entry = (stored && typeof stored.count === 'number' && stored.timestamp >= oneHourAgo)
+      ? { count: stored.count, timestamp: stored.timestamp }
+      : { count: 0, timestamp: now };
+    memLimits.set(key, entry);
   }
 
   // Check if limit exceeded
-  if (current.count >= 5) {
-    return { allowed: false, remaining: 0, retryAfter: Math.ceil((current.timestamp + 3600000 - Date.now()) / 1000) };
+  if (entry.count >= 5) {
+    return { allowed: false, remaining: 0, retryAfter: Math.ceil((entry.timestamp + 3600000 - now) / 1000) };
   }
 
-  // Increment counter
-  current.count++;
-  await kv.put(key, JSON.stringify(current), { expirationTtl: 3600 });
-  
-  return { allowed: true, remaining: 5 - current.count };
+  entry.count += 1;
+
+  // Persist sparingly: on block, or every 10th hit so an evicted
+  // isolate doesn't lose the window.
+  if (entry.count >= 5 || entry.count % 10 === 0) {
+    try {
+      await kv.put(key, JSON.stringify(entry), { expirationTtl: 3600 });
+    } catch (e) {
+      console.warn('contact rate-limit KV put failed (fail-open):', e && e.message);
+    }
+  }
+
+  return { allowed: true, remaining: 5 - entry.count };
 };
 
 /**
