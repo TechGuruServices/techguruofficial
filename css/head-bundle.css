@@ -4210,6 +4210,14 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 @media(prefers-reduced-motion:reduce){.services .service-card,.sc-story,.sc-story li,.sc-story ol::before,.service-icon{transition:none!important}.service-card *,.service-card::after{animation:none!important}.sc-ready .sc-ico .ia,.sc-ready .sc-ico .ib{stroke-dashoffset:0}}
 
 /* ===== css/portfolio.css ===== */
+/* ============================================================
+/* PROTECTED — PORTFOLIO (rule set by Lucas, 2026-11-03)
+/* Do NOT remove, hide, rename, or materially edit the portfolio
+/* section (#portfolio in index.html), js/portfolio.js, or
+/* css/portfolio.css (incl. its copy inside css/head-bundle.css)
+/* without Lucas's explicit approval in chat first. A recurring
+/* automated check verifies this section stays live and visible.
+/* ============================================================ */
 /* ==========================================================
    TechGuru — Portfolio section ("Interactive Mockup Theatre")
    Drop-in: link this file, paste the <section id="portfolio">,
@@ -4359,7 +4367,12 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .pf-more { margin: clamp(48px, 7vw, 80px) 0 0; text-align: center; color: var(--pf-dim); }
 
 /* ---------- scroll reveal ---------- */
-.pf-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+/* Failsafe mirrored from css/portfolio.css on 2026-11-03 (AH-MUSE-ME) — see the
+   note in that file. If portfolio.js never runs, this CSS-only animation still
+   reveals the cases after 5s; html.pf-js (set by portfolio.js) cancels it. */
+.pf-reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); animation: pfRevealFailsafe .01s 5s forwards; }
+html.pf-js .pf-reveal { animation: none; }
+@keyframes pfRevealFailsafe { to { opacity: 1; transform: none; } }
 .pf-reveal.is-in { opacity: 1; transform: none; }
 
 /* ---------- responsive ---------- */

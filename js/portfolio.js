@@ -1,3 +1,11 @@
+/* ============================================================
+/* PROTECTED — PORTFOLIO (rule set by Lucas, 2026-11-03)
+/* Do NOT remove, hide, rename, or materially edit the portfolio
+/* section (#portfolio in index.html), js/portfolio.js, or
+/* css/portfolio.css (incl. its copy inside css/head-bundle.css)
+/* without Lucas's explicit approval in chat first. A recurring
+/* automated check verifies this section stays live and visible.
+/* ============================================================ */
 /* TechGuru portfolio — Interactive Mockup Theatre
    Video is the default view; thumbnails swap screenshots into the device
    frame with a cross-fade. The <video> element is kept alive (never
