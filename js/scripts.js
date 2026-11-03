@@ -177,13 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ROTATING TAGLINES
   // ============================================
   const taglines = [
-    "Build. Brand. Automate.",
-    "Stop losing jobs to a worse business with a better website.",
-    "One person builds your site, start to finish. Me.",
-    "The chat widget on this page? I can put one on yours.",
-    "Built by hand, not dragged and dropped.",
-    "I answer my own phone.",
-    "Everything in my portfolio is live right now. Go click it."
+    "Website, branding, and systems—engineered by one tech expert to scale your local business.",
+    "Your service is better than theirs. Your website should be too."
   ];
 
   const taglineEl = document.getElementById('rotating-tagline');
@@ -755,3 +750,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
