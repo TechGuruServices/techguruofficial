@@ -185,34 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (taglineEl) {
     let currentIndex = 0;
-    const SCRAMBLE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
 
-    /* decode-style swap: characters scramble, then settle left-to-right */
-    const scrambleTo = (el, next) => {
-      const duration = 560;
-      const startTs = performance.now();
-      const step = (now) => {
-        const p = Math.min((now - startTs) / duration, 1);
-        const revealed = p * next.length * 1.12;
-        let out = '';
-        for (let i = 0; i < next.length; i++) {
-          const ch = next[i];
-          if (ch === ' ') { out += ' '; continue; }
-          out += i < revealed ? ch : SCRAMBLE_CHARS[(Math.random() * SCRAMBLE_CHARS.length) | 0];
-        }
-        el.textContent = out;
-        if (p < 1) { requestAnimationFrame(step); } else { el.textContent = next; }
-      };
-      requestAnimationFrame(step);
-    };
-
+    /* clean fade swap — no scramble/decode effect (it read as typos/garble) */
     const rotateTagline = () => {
       currentIndex = (currentIndex + 1) % taglines.length;
       if (reduceMotion) { taglineEl.textContent = taglines[currentIndex]; return; }
       taglineEl.classList.add('fade');
       setTimeout(() => {
+        taglineEl.textContent = taglines[currentIndex];
         taglineEl.classList.remove('fade');
-        scrambleTo(taglineEl, taglines[currentIndex]);
       }, 320);
     };
 
