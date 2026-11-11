@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261021">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20261021">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20261021">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261021">
+<link rel="manifest" href="/site.webmanifest?v=20261021">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Rocket — Get the Review the Moment the Job Is Done | TECHGURU Studio</title>
+<meta name="description" content="Review Rocket is the Chrome extension for home service contractors that turns a finished job into a Google review in one click. Free to install — Pro $9.99/mo or $99/yr.">
+<meta property="og:type" content="website">
+    <link rel="canonical" href="https://techguruofficial.us/review-rocket.html">
+<meta property="og:url" content="https://techguruofficial.us/review-rocket.html">
+<meta property="og:title" content="Review Rocket — Get the Review the Moment the Job Is Done | TECHGURU Studio">
+<meta property="og:description" content="Review Rocket is the Chrome extension for home service contractors that turns a finished job into a Google review in one click. Free to install — Pro $9.99/mo or $99/yr.">
+<meta property="og:image" content="https://techguruofficial.us/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TECHGURU Studio — Build. Brand. Automate. Websites, branding and AI tools from Missoula, Montana, remote across the USA.">
+<meta property="og:site_name" content="TECHGURU Studio">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://techguruofficial.us/review-rocket.html">
+<meta name="twitter:title" content="Review Rocket — Get the Review the Moment the Job Is Done | TECHGURU Studio">
+<meta name="twitter:description" content="Review Rocket is the Chrome extension for home service contractors that turns a finished job into a Google review in one click. Free to install — Pro $9.99/mo or $99/yr.">
+<meta name="twitter:image" content="https://techguruofficial.us/images/og-image.png">
+<style>
+  :root{
+    --tg-blue:#4a6cf7; --tg-violet:#a274ff; --tg-accent:#64dedf; --tg-green:#34d399;
+    --bg:#070b16; --bg2:#0b1122; --card:#101828; --text:#eef2ff; --muted:#94a3b8;
+    --hairline:rgba(148,163,184,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* Brand bar */
+  .brandbar{position:sticky;top:0;z-index:50;background:rgba(7,11,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+  .brandbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:15px;text-decoration:none}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .brandbar nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  .brandbar nav a:hover{color:var(--text)}
+
+  /* Hero */
+  .hero{padding:84px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(700px 340px at 20% 10%,rgba(74,108,247,.22),transparent 60%),
+    radial-gradient(700px 340px at 85% 20%,rgba(162,116,255,.16),transparent 60%);pointer-events:none}
+  .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tg-accent);border:1px solid rgba(100,222,223,.35);border-radius:999px;padding:7px 16px;margin-bottom:22px;background:rgba(100,222,223,.06)}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:20ch;margin:0 auto 18px}
+  h1 .grad{background:linear-gradient(120deg,var(--tg-blue),var(--tg-violet),var(--tg-accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:clamp(16px,2vw,19px);max-width:56ch;margin:0 auto 32px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .2s;cursor:pointer;border:0}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));color:#fff;box-shadow:0 14px 34px -14px rgba(74,108,247,.7)}
+  .btn-ghost{background:rgba(148,163,184,.1);color:var(--text);border:1px solid var(--hairline)}
+  .micro{margin-top:16px;font-size:13px;color:var(--muted)}
+
+  /* Sections */
+  section{padding:64px 0}
+  .kicker{color:var(--tg-accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:62ch;margin-bottom:34px}
+
+  /* Problem stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:8px}
+  .stat{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:26px}
+  .stat .n{font-size:38px;font-weight:800;background:linear-gradient(120deg,var(--tg-accent),var(--tg-blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat p{color:var(--muted);font-size:14px;margin-top:6px}
+
+  /* Features */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .feat{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:26px;transition:border-color .2s,transform .15s}
+  .feat:hover{border-color:rgba(100,222,223,.35);transform:translateY(-3px)}
+  .feat .ic{font-size:26px;margin-bottom:12px}
+  .feat h3{font-size:17px;margin-bottom:8px}
+  .feat p{color:var(--muted);font-size:14px}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:step}
+  .step{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:26px}
+  .step .num{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--tg-accent);text-transform:uppercase;margin-bottom:10px}
+  .step h3{font-size:17px;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* Pricing */
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;align-items:stretch;margin-top:10px}
+  .tier{background:var(--card);border:1px solid var(--hairline);border-radius:22px;padding:34px 30px;display:flex;flex-direction:column;position:relative}
+  .tier.hot{border:1px solid rgba(162,116,255,.55);box-shadow:0 24px 60px -30px rgba(162,116,255,.5);transform:scale(1.03)}
+  .tier .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--tg-blue),var(--tg-violet));font-size:11px;font-weight:800;letter-spacing:.1em;padding:5px 16px;border-radius:999px;text-transform:uppercase}
+  .tier h3{font-size:19px;margin-bottom:4px}
+  .tier .price{font-size:44px;font-weight:800;margin:14px 0 2px}
+  .tier .price span{font-size:15px;color:var(--muted);font-weight:500}
+  .tier .per{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .tier ul{list-style:none;margin-bottom:26px;flex:1}
+  .tier li{padding:8px 0;color:var(--muted);font-size:14px;border-bottom:1px solid rgba(148,163,184,.08)}
+  .tier li::before{content:"✓";color:var(--tg-green);font-weight:800;margin-right:10px}
+  .tier .btn{justify-content:center;width:100%}
+  .tier .btn + .btn{margin-top:10px}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:18px 22px;margin-bottom:12px}
+  summary{font-weight:700;cursor:pointer;font-size:15px}
+  details p{color:var(--muted);font-size:14px;margin-top:10px}
+
+  /* Notify */
+  .notify{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);text-align:center}
+  .notify form{display:flex;gap:10px;justify-content:center;max-width:480px;margin:26px auto 0;flex-wrap:wrap}
+  .notify input[type=email]{flex:1;min-width:220px;padding:14px 18px;border-radius:12px;border:1px solid var(--hairline);background:var(--bg);color:var(--text);font-size:15px}
+  .fine{font-size:12px;color:var(--muted);margin-top:12px}
+
+  footer{padding:44px 0;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+  footer a:hover{color:var(--text)}
+  @media(max-width:640px){.tier.hot{transform:none}}
+</style>
+    <link rel="stylesheet" href="css/footer.css?v=20261014">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+{
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Review Rocket",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows, macOS, ChromeOS (Chrome or Edge browser)",
+      "description": "One-click local review request and text generator for field contractors.",
+      "url": "https://techguruofficial.us/review-rocket.html",
+      "author": {
+        "@type": "Organization",
+        "name": "TECHGURU Studio",
+        "url": "https://techguruofficial.us/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free plan available \u2014 no credit card to start."
+      }
+    }
+    </script>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="wrap">
+    <a class="brand" href="https://techguruofficial.us"><span class="dot">⚡</span>TECHGURU Studio</a>
+    <nav>
+      <a href="https://techguruofficial.us">Home</a>
+      <a href="https://techguruofficial.us#services">Services</a>
+      <a href="https://techguruofficial.us#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">Chrome Extension · Reputation</span>
+    <h1>Get the review the moment the job is <span class="grad">done.</span></h1>
+    <p class="sub">The field utility for home service contractors, technicians, and local business owners. Stop chasing customers for reviews for days after the job — generate an optimized SMS or email review request, tailored to that customer, the instant the work is done.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/eogbcfofncfdmnechefebffdemjapcla" target="_blank" rel="noopener">Install Free — Chrome</a>
+      <a class="btn btn-ghost" href="#pricing">Go Pro — $9.99/mo</a>
+    </div>
+    <p class="micro">Free · Install in seconds from the Chrome Web Store · v1.0.3</p>
+    <p class="micro">Microsoft Edge version in review — the Chrome install above works today.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">The problem</p>
+    <h2>Homeowners pick the contractor with the most Google reviews.</h2>
+    <p class="lead">One missed call because your review count looked thin can cost you a $2,500+ job — not once, but over and over. Review Rocket is the contractor review tool built to fix that in one click, right from the job site.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">$2,500+</div><p>what one missed job can cost when your review count looks thin next to a competitor's</p></div>
+      <div class="stat"><div class="n">10 sec</div><p>from finished job to sent text — the request goes out before you leave the driveway</p></div>
+      <div class="stat"><div class="n">1 click</div><p>generates a personalized Google review link plus a pre-written SMS — no copying, no typing from scratch</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2>Finish the job. Send the text. Get back to work.</h2>
+    <p class="lead">No clunky dashboards. No forgotten follow-ups. If your crew can send a text, they can use Review Rocket.</p>
+    <div class="steps">
+      <div class="step"><div class="num">Step 1</div><h3>Finish the job</h3><p>Wrap up, shake hands, do your normal walkthrough.</p></div>
+      <div class="step"><div class="num">Step 2</div><h3>Click Review Rocket</h3><p>Open the extension, pick the customer, and generate their review link instantly.</p></div>
+      <div class="step"><div class="num">Step 3</div><h3>Send the text</h3><p>Fire off the ready-made SMS before you leave the curb. Takes 10 seconds.</p></div>
+      <div class="step"><div class="num">Step 4</div><h3>Watch reviews roll in</h3><p>Follow up once if needed, then get back to work while your Google profile builds itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">What it does</p>
+    <h2>Built for the field, not the office.</h2>
+    <p class="lead">Every workflow assumes you're on a roof, in a crawlspace, or in the truck.</p>
+    <div class="grid">
+      <div class="feat"><div class="ic">🚀</div><h3>1-Click Review Requests</h3><p>Generate a personalized Google review link + pre-written SMS in seconds. No copying, no typing from scratch.</p></div>
+      <div class="feat"><div class="ic">💬</div><h3>Field-Ready SMS Templates</h3><p>Short, friendly texts written for contractors — tested tone that gets opened and answered.</p></div>
+      <div class="feat"><div class="ic">🗂️</div><h3>Customer &amp; Job Tracking</h3><p>Save who you sent it to, when, and for which job, so no lead slips through.</p></div>
+      <div class="feat"><div class="ic">🔔</div><h3>Follow-Up Reminders</h3><p>Gentle nudges for customers who didn't leave a review the first time.</p></div>
+      <div class="feat"><div class="ic">🔧</div><h3>Built for Contractors</h3><p>Designed around how field service marketing actually happens — on phones, between jobs, with gloves half-off.</p></div>
+      <div class="feat"><div class="ic">🔒</div><h3>Privacy-First</h3><p>Your customer list stays yours. No selling data, no spammy blasts.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="kicker" style="text-align:center">Pricing</p>
+    <h2 style="text-align:center">One new job pays for it many times over.</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Start free. Go Pro when the reviews start rolling in.</p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Free</h3>
+        <div class="price">$0<span>/forever</span></div>
+        <p class="per">Install in seconds from the Chrome Web Store</p>
+        <ul>
+          <li>1-click review requests</li>
+          <li>Personalized Google review link + pre-written SMS</li>
+          <li>Field-ready SMS templates</li>
+          <li>Customer &amp; job tracking</li>
+          <li>Follow-up reminders</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://chromewebstore.google.com/detail/eogbcfofncfdmnechefebffdemjapcla" target="_blank" rel="noopener">Install Free</a>
+      </div>
+      <div class="tier hot">
+        <span class="flag">Most popular</span>
+        <h3>Pro</h3>
+        <div class="price">$9.99<span>/month</span></div>
+        <p class="per">or $99/year (2 months free)</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Pro plan for Review Rocket</li>
+          <li>Monthly or yearly billing — cancel anytime</li>
+        </ul>
+        <a class="btn btn-primary" href="https://buy.stripe.com/aFaaEXddufT34z695z4sE00">$9.99/mo</a>
+        <a class="btn btn-ghost" href="https://buy.stripe.com/eVqfZh5L222d4z681v4sE01">$99/yr</a>
+      </div>
+    </div>
+    <p class="fine" style="text-align:center;margin-top:26px">Also included in the <a href="https://techguruofficial.us/estimate-closer.html#pricing">Contractor Suite — Estimate Closer Pro + Review Rocket for $14.99/mo</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap faq">
+    <p class="kicker" style="text-align:center">FAQ</p>
+    <h2 style="text-align:center">Questions, answered.</h2>
+    <div style="height:26px"></div>
+    <details><summary>Do my customers need to install anything?</summary><p>No. They tap the link in your text and land straight on your Google review page — no app, no account, nothing to learn.</p></details>
+    <details><summary>Does it work on Microsoft Edge?</summary><p>The Edge version is in review — the Chrome install above works today.</p></details>
+    <details><summary>Where does my customer list live?</summary><p>With you. Review Rocket is privacy-first: your customer list stays yours, with no selling data and no spammy blasts. The developer discloses that it will not collect or use your data.</p></details>
+    <details><summary>How long does it take per job?</summary><p>About 10 seconds — finish the job, generate the link, send the text before you leave the curb.</p></details>
+    <details><summary>Can I cancel Pro anytime?</summary><p>Yes — monthly plans cancel in one click.</p></details>
+  </div>
+</section>
+
+<section class="notify" id="notify">
+  <div class="wrap">
+    <p class="kicker" style="text-align:center">Available now</p>
+    <h2>Review Rocket is live.</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Install it free from the Chrome Web Store — turn today's finished job into tomorrow's booked calendar. Version 1.0.3, updated October 25, 2026.</p>
+    <p style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px">
+      <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/eogbcfofncfdmnechefebffdemjapcla" target="_blank" rel="noopener">Install Free</a>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/aFaaEXddufT34z695z4sE00">Pro $9.99/mo</a>
+    </p>
+    <p class="fine"><a href="https://techguruofficial.us/review-rocket-privacy.html">Privacy policy</a></p>
+  </div>
+</section>
+
+<!-- TECHGURU footer v3 — replaces the entire existing <footer class="footer">…</footer> block -->
+<footer class="tgf">
+  <div class="tgf-edge"></div>
+  <div class="tgf-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="tgf-wrap">
+
+    <div class="tgf-grid">
+      <div class="tgf-brand tgf-rv" style="--tgf-d:200ms">
+        <a class="tgf-logo" href="/" aria-label="TECHGURU Studio home">
+          <img src="images/icons/nav-icon-new.webp" alt="TechGuru logo" width="48" height="48" class="tgf-logo-img">
+        </a>
+        <p class="tgf-story"><span class="tgf-w" style="--tgf-w:0">Custom code.</span> <span class="tgf-w tgf-grad" style="--tgf-w:1">Simple AI.</span> <span class="tgf-w" style="--tgf-w:2">Built for local business.</span></p>
+      </div>
+
+      <div class="tgf-contact tgf-rv" style="--tgf-d:1200ms">
+        <h4>Connect</h4>
+        <a class="tgf-row" href="mailto:info@techguruofficial.us"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></span>info@techguruofficial.us</a>
+        <a class="tgf-row" href="tel:+14062845523"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></span>+1 (406) 284-5523</a>
+        <a class="tgf-row" href="https://wa.me/14062845523" target="_blank" rel="noopener"><span class="tgf-ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span>Message on WhatsApp</a>
+        </div>
+
+      <nav class="tgf-links tgf-rv" style="--tgf-d:700ms" aria-label="Footer">
+        <h4>Explore</h4>
+        <button class="tgf-top" type="button" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+        <ul>
+          <li><a href="/#services">Services</a></li><li><a href="/#process">Process</a></li>
+          <li><a href="/products.html">Products</a></li><li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#portfolio">Portfolio</a></li><li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="tgf-areas tgf-rv" style="--tgf-d:500ms" role="note" aria-label="Service area">
+      <strong>Proudly serving</strong>
+      <div class="tgf-marquee"><div class="tgf-track">
+        <ul><li>Missoula</li><li>Lolo</li><li>Frenchtown</li><li>Bonner</li><li>Clinton</li><li>Seeley Lake</li><li>Hamilton</li><li>Stevensville</li><li>Victor</li><li>Darby</li><li>Kalispell</li><li>Whitefish</li><li>Columbia Falls</li><li>All of Montana, remotely</li><li>Nationwide</li></ul>
+        <ul aria-hidden="true"><li>Missoula</li><li>Lolo</li><li>Frenchtown</li><li>Bonner</li><li>Clinton</li><li>Seeley Lake</li><li>Hamilton</li><li>Stevensville</li><li>Victor</li><li>Darby</li><li>Kalispell</li><li>Whitefish</li><li>Columbia Falls</li><li>All of Montana, remotely</li><li>Nationwide</li></ul>
+      </div></div>
+    </div>
+
+    <div class="tgf-bottom tgf-rv" style="--tgf-d:300ms">
+      <p style="margin:0">&copy; 2026 TECHGURU Studio. Built in Missoula.</p>
+    </div>
+  </div>
+</footer>
+
+    <script src="js/footer.js?v=20261014" defer></script>
+</body>
+</html>
